@@ -1,0 +1,6 @@
+* [VS Code 插件发开文档](/)
+* [插件授权](extension-authoring/)
+    * [生成插件](extension-authoring/extension-generator)
+    * [示例:Hello-World](extension-authoring/example-hello-world)
+* [快速入门](extension-authoring)
+* [扩展性参考](extensibility-reference)
