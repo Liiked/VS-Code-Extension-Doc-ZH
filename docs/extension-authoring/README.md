@@ -8,7 +8,7 @@
 
 ![调用示意图](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/overview/extensibility-architecture.png)
 
-## 插件
+## 插件 {docsify-ignore}
 
 当插件激活时，会运行在我们的`共享插件进程(shared extension host process)`中，这种分离插件进程的设计确保vscode能在繁杂的任务中不会宕机。
 
@@ -24,7 +24,7 @@
 2. [Word Count]() - 根据特定的文件类型更新状态栏，响应编辑器的文本操作，学习文件被删除时该如何处理。
 
 另外，建议你首先阅读一下[扩展原则和模式]()部分，能帮助你了解贯穿整个`extensibility API`的编程模式。
-## 更多
+## 更多 {docsify-ignore}
 - **语言服务器**
 
 专有的语言服务器避免了高开销CPU任务和IO密集型任务对其他插件造成的影响，如linters。

@@ -1,2 +1,4 @@
-# VS-Code-Extension-Doc-ZH
-the localization of VS Code Extensions documentation part
+# VS Code 插件开发文档
+
+为巨硬填坑😆
+
