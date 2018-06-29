@@ -18,6 +18,8 @@ yo code
 ```
 ![run yo code](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/yocode/yocode.png)
 
+!> 注意：yo code会根据最新的vscode版本生成发开目录，如果遇到运行失败的问题，请检查`package.json`中`engines.vscode`的版本号是否与您当前的vscode一致
+
 ## 生成器选项
 ---
 > Yeoman生成器能帮你创建一个新插件的骨架，也可以基于已有的TetMate配置文件创建一个开箱即用的语言、主题或者片段。
