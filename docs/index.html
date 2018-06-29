@@ -13,11 +13,20 @@
   <script>
     window.$docsify = {
       name: '',
-      repo: '/Liiked/VS-Code-Extension-Doc-ZH',
+      repo: 'https://github.com/Liiked/VS-Code-Extension-Doc-ZH',
       loadSidebar: true,
+      search: {
+        paths: 'auto',
+        placeholder: '开始搜索',
+        depth: 4
+      },
       subMaxLevel: 2
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-typescript.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
 </body>
 </html>
