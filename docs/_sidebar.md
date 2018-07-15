@@ -4,6 +4,7 @@
     * [插件生成器](extension-authoring/extension-generator)
     * [示例:Hello-World](extension-authoring/example-hello-world)
     * [示例:Word-Count](extension-authoring/example-word-count)
+    * [示例:语言服务器](extension-authoring/example-language-server)
     * [主题，代码片段和着色器](extension-authoring/themes-snippets-colorizers)
 * [扩展性参考](extensibility-reference)
     * [扩展性原则和模式](extensibility-reference/principles-patterns)
