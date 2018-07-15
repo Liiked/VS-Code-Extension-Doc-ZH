@@ -36,7 +36,7 @@ docsify serve docs
 
 **第一期计划** - 翻译*插件创作*内的所有章节
 
-- ☑️ [示例：语言服务器](https://code.visualstudio.com/docs/extensions/example-language-server)
+- ✅ [示例：语言服务器](https://code.visualstudio.com/docs/extensions/example-language-server)
 - ☑️ [调试适配器](https://code.visualstudio.com/docs/extensions/example-debuggers)
 - ☑️ [Webview API](https://code.visualstudio.com/docs/extensions/webview)
 - ☑️ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
