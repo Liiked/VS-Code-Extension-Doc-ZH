@@ -19,7 +19,7 @@ docsify serve docs
 
 ## 翻译指南
 
-因为本项目是国内唯一一个，虽然不是首次翻译，目前也不是全部章节翻译的项目，但是我们首次帮助巨硬引入了众多概念的解释，因此在翻译术语时尤其需要注意。所有遇到的术语都需要提交到术语表中，以便读者和译者查阅、参考。
+我们首次帮助巨硬引入了众多概念的解释，因此在翻译术语时尤其需要注意。所有遇到的术语都需要提交到术语表中，以便读者和译者查阅、参考。
 
 #### 翻译风格
 
@@ -37,7 +37,7 @@ docsify serve docs
 **第一期计划** - 翻译*插件创作*内的所有章节
 
 - ✅ [示例：语言服务器](https://code.visualstudio.com/docs/extensions/example-language-server)
-- ☑️ [调试适配器](https://code.visualstudio.com/docs/extensions/example-debuggers)
+- ✅ [调试适配器](https://code.visualstudio.com/docs/extensions/example-debuggers)
 - ☑️ [Webview API](https://code.visualstudio.com/docs/extensions/webview)
 - ☑️ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
 - ☑️ [开发插件](https://code.visualstudio.com/docs/extensions/developing-extensions)
@@ -57,9 +57,9 @@ docsify serve docs
 
 - [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件
 - [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点
+- [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器
 - [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单
 - Extensibility 扩展性
 - [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机
 - [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器
-- [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器
