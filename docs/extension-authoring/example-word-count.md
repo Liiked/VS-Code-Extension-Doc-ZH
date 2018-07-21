@@ -189,6 +189,7 @@ context.subscriptions.push(wordCounter);
 ## 自定义状态栏
 
 vscode允许你定制状态栏的颜色、图标、提示文本等额外样式。用IntelliSense，你会看到各种`StatusBarItem`字段。你也可以通过`vscode.d.ts`学习vscode扩展性API，这个文件就在你生成的项目文件夹里。在编辑器中打开`node_modules\vscode\vscode.d.ts`，你能看到完整的扩展性 API和注释。
+
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/vscode-d-ts.png)
 
 更新StatusBarItem接口的代码
@@ -204,11 +205,11 @@ this._statusBarItem.show();
 ## 释放插件资源
 现在，我们来深入了解一下vscode是怎么通过[Disposables]()控制资源的。
 
-当一个插件被激活，它会传入一个`ExtensionContext`对象， 这个对象有一组Disposables的`subscriptions`。插件能将他们的Disposable对象添加到这个组中，vscode则会在插件关闭的时候释放这些对象。
+当一个插件被激活，它会传入一个`ExtensionContext`对象， 这个对象有一个用于订阅释放器（Disposable）的`subscriptions`方法。插件能将他们的释放器添加到这个订阅列表中，vscode则会在插件关闭的时候释放这些对象。
 
-很多生成工作区或者UI对象的API（比如：`registerCommand`）会返回一个Disposable，这样插件就能在vscode直接调用他们的dispose方法时，移除这些元素。
+很多能生成工作区（workspace）或者UI对象的VS Code API（比如：`registerCommand`）会自动返回一个释放器，我们可以直接调用他们的dispose方法移除这些元素。
 
-事件则有所不同，比如`onDid*`这类事件订阅器会返回一个Disposable。插件通过取消订阅事件，disposing事件的Disposable。在我们的例子里，`WordCountController`处理了事件订阅Disposables。
+事件则有所不同，比如`onDid*`这类事件订阅器会返回一个释放器。插件通过释放事件的释放器（Disposable）来取消已经订阅的事件。在我们的例子里，`WordCountController`把事件订阅的释放器直接保存到自己的释放器列表中，在插件关闭时释放。
 ```typescript
 // 订阅选区变动事件和编辑器激活事件
 let subscriptions: Disposable[] = [];
@@ -219,7 +220,7 @@ window.onDidChangeActiveTextEditor(this._onEvent, this, subscriptions);
 this._disposable = Disposable.from(...subscriptions);
 ```
 ##  在本地安装你的插件
-到目前为止，你的插件都还跑在插件开发模式中，要想让你的插件在所有vscode中运行起来，吧你的插件复制到`.vscode/extensions`目录下。
+到目前为止，你的插件都还跑在插件开发模式中，要想让你的插件在所有vscode中运行起来，将你的插件复制到`.vscode/extensions`目录下。
 
 ## 发布插件
 阅读关于[分享插件]()的有关内容
