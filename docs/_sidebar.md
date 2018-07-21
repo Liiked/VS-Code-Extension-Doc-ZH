@@ -7,5 +7,6 @@
     * [示例:语言服务器](extension-authoring/example-language-server)
     * [示例:调试适配器](extension-authoring/example-debug-adapter)
     * [主题，代码片段和着色器](extension-authoring/themes-snippets-colorizers)
+    * [Webview API](extension-authoring/webview-api)
 * [扩展性参考](extensibility-reference)
     * [扩展性原则和模式](extensibility-reference/principles-patterns)
