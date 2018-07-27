@@ -14,8 +14,8 @@
     - ✅ [示例：语言服务器](https://code.visualstudio.com/docs/extensions/example-language-server)
     - ✅ [调试适配器](https://code.visualstudio.com/docs/extensions/example-debuggers)
     - ✅ [Webview API](https://code.visualstudio.com/docs/extensions/webview)
-    - ☑️ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
-    - ☑️ [开发插件](https://code.visualstudio.com/docs/extensions/developing-extensions)
+    - ✅ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
+    - ✅ [开发插件](https://code.visualstudio.com/docs/extensions/developing-extensions)
     - ☑️ [发布插件](https://code.visualstudio.com/docs/extensions/publish-extension)
     - ☑️ [测试插件](https://code.visualstudio.com/docs/extensions/testing-extensions)
 
