@@ -16,10 +16,22 @@
     - ✅ [Webview API](https://code.visualstudio.com/docs/extensions/webview)
     - ✅ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
     - ✅ [开发插件](https://code.visualstudio.com/docs/extensions/developing-extensions)
-    - ☑️ [发布插件](https://code.visualstudio.com/docs/extensions/publish-extension)
-    - ☑️ [测试插件](https://code.visualstudio.com/docs/extensions/testing-extensions)
+    - ✅ [发布插件](https://code.visualstudio.com/docs/extensions/publish-extension)
+    - ✅ [测试插件](https://code.visualstudio.com/docs/extensions/testing-extensions)
 
 - **第二期计划** - 翻译*扩展性参阅*内的所有章节
+    - ☑️ [扩展性参阅](https://code.visualstudio.com/docs/extensionAPI/overview)
+    - ✅ [扩展性原则和模式](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles)
+    - ☑️ [语言插件指引](https://code.visualstudio.com/docs/extensionAPI/language-support)
+    - ☑️ [插件清单](https://code.visualstudio.com/docs/extensionAPI/extension-manifest)
+    - ☑️ [发布内容配置](https://code.visualstudio.com/docs/extensionAPI/extension-points)
+    - ☑️ [激活事件](https://code.visualstudio.com/docs/extensionAPI/activation-events)
+    - ☑️ [文本选择](https://code.visualstudio.com/docs/extensionAPI/document-selectors)
+    - ☑️ [vscode 命名空间API](https://code.visualstudio.com/docs/extensionAPI/vscode-api)
+    - ☑️ [复杂命令](https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)
+    - ☑️ [调试器API](https://code.visualstudio.com/docs/extensionAPI/api-debugging)
+    - ☑️ [源控制](https://code.visualstudio.com/docs/extensionAPI/api-scm)
+    - ☑️ [Markdown插件](https://code.visualstudio.com/docs/extensionAPI/api-markdown)
 
 - **第三期计划** - 审阅文档中的链接和内容
 
