@@ -16,7 +16,7 @@
     - ✅ [Webview API](https://code.visualstudio.com/docs/extensions/webview)
     - ✅ [更多例子](https://code.visualstudio.com/docs/extensions/samples)
     - ✅ [开发插件](https://code.visualstudio.com/docs/extensions/developing-extensions)
-    - ☑️ [发布插件](https://code.visualstudio.com/docs/extensions/publish-extension)
+    - ✅ [发布插件](https://code.visualstudio.com/docs/extensions/publish-extension)
     - ☑️ [测试插件](https://code.visualstudio.com/docs/extensions/testing-extensions)
 
 - **第二期计划** - 翻译*扩展性参阅*内的所有章节
