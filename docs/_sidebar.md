@@ -19,3 +19,4 @@
         * [Webview API](extension-authoring/webview-api)
 * 扩展性参考
     * [扩展性原则和模式](extensibility-reference/principles-patterns)
+    * [语言插件指引](extensibility-reference/language-extension-guidelines)

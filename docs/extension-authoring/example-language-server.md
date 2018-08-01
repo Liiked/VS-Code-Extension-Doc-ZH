@@ -199,12 +199,12 @@ import {
 	TextDocumentPositionParams
 } from 'vscode-languageserver';
 
-// Create a connection for the server. The connection uses Node's IPC as a transport.
-// Also include all preview / proposed LSP features.
+// 创建一个服务器连接。使用Node的IPC作为传输方式。
+// 也包含所有的预览、建议等LSP特性
 let connection = createConnection(ProposedFeatures.all);
 
-// Create a simple text document manager. The text document manager
-// supports full document sync only
+// 创建一个简单的文本管理器。
+// 文本管理器只支持全文本同步。
 let documents: TextDocuments = new TextDocuments();
 
 let hasConfigurationCapability: boolean = false;
@@ -214,8 +214,8 @@ let hasDiagnosticRelatedInformationCapability: boolean = false;
 connection.onInitialize((params: InitializeParams) => {
 	let capabilities = params.capabilities;
 
-	// Does the client support the `workspace/configuration` request?
-	// If not, we will fall back using global settings
+	// 客户端是否支持`workspace/configuration`请求?
+	// 如果不是的话，降级到使用全局设置
 	hasConfigurationCapability =
 		capabilities.workspace && !!capabilities.workspace.configuration;
 	hasWorkspaceFolderCapability =
@@ -228,7 +228,7 @@ connection.onInitialize((params: InitializeParams) => {
 	return {
 		capabilities: {
 			textDocumentSync: documents.syncKind,
-			// Tell the client that the server supports code completion
+			// 告诉客户端，服务器支持代码补全
 			completionProvider: {
 				resolveProvider: true
 		}
@@ -238,7 +238,7 @@ connection.onInitialize((params: InitializeParams) => {
 
 connection.onInitialized(() => {
 	if (hasConfigurationCapability) {
-		// Register for all configuration changes.
+		// 为所有配置Register for all configuration changes.
 		connection.client.register(
 			DidChangeConfigurationNotification.type,
 			undefined
@@ -251,23 +251,22 @@ connection.onInitialized(() => {
 	}
 });
 
-// The example settings
+// 配置示例
 interface ExampleSettings {
 	maxNumberOfProblems: number;
 }
 
-// The global settings, used when the `workspace/configuration` request is not supported by the client.
-// Please note that this is not the case when using this server with the client provided in this example
-// but could happen with other clients.
+// 当客户端不支持`workspace/configuration`请求时，使用global settings
+// 请注意，在这个例子中服务器使用的客户端并不是问题所在，而是这种情况还可能发生在其他客户端身上。
 const defaultSettings: ExampleSettings = { maxNumberOfProblems: 1000 };
 let globalSettings: ExampleSettings = defaultSettings;
 
-// Cache the settings of all open documents
+// 对所有打开的文档配置进行缓存
 let documentSettings: Map<string, Thenable<ExampleSettings>> = new Map();
 
 connection.onDidChangeConfiguration(change => {
 	if (hasConfigurationCapability) {
-		// Reset all cached document settings
+		// 重置所有已缓存的文档配置
 		documentSettings.clear();
 	} else {
 		globalSettings = <ExampleSettings>(
@@ -275,7 +274,7 @@ connection.onDidChangeConfiguration(change => {
 		);
 	}
 
-	// Revalidate all open text documents
+	// 重新验证所有打开的文本文档
 	documents.all().forEach(validateTextDocument);
 });
 
@@ -294,22 +293,22 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 	return result;
 }
 
-// Only keep settings for open documents
+// 只对打开的文档保留设置
 documents.onDidClose(e => {
 	documentSettings.delete(e.document.uri);
 });
 
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
+// 文档的文本内容发生了改变。
+// 这个事件在文档第一次打开或者内容变动时才会触发。
 documents.onDidChangeContent(change => {
 	validateTextDocument(change.document);
 });
 
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
-	// In this simple example we get the settings for every validate run.
+	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
 	let settings = await getDocumentSettings(textDocument.uri);
 
-	// The validator creates diagnostics for all uppercase words length 2 and more
+	// 校验器如果检测到连续超过2个以上的大写字母则会报错
 	let text = textDocument.getText();
 	let pattern = /\b[A-Z]{2,}\b/g;
 	let m: RegExpExecArray;
@@ -347,21 +346,20 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 		}
 		diagnostics.push(diagnosic);
 	}
-    // Send the computed diagnostics to VSCode.
+    // 将错误处理结果发送给VS Code
 	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
 }
 
 connection.onDidChangeWatchedFiles(_change => {
-	// Monitored files have change in VSCode
+	// 监测VS Code中的文件变动
 	connection.console.log('We received an file change event');
 });
 
-// This handler provides the initial list of the completion items.
+// 这个处理函数提供了初始补全项列表
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-	// The pass parameter contains the position of the text document in
-	// which code complete got requested. For the example we ignore this
-	// info and always provide the same completion items.
+	// 传入的变量包含了文本请求代码补全的位置。
+	// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
 	return [
 		{
 			label: 'TypeScript',
@@ -377,8 +375,7 @@ connection.onCompletion(
 	}
 );
 
-// This handler resolves additional information for the item selected in
-// the completion list.
+// 这个函数为补全列表的选中项提供了更多信息
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
 		if (item.data === 1) {
@@ -412,11 +409,10 @@ connection.onDidCloseTextDocument((params) => {
 });
 */
 
-// Make the text document manager listen on the connection
-// for open, change and close text document events
+// 让文档管理器监听文档的打开，变动和关闭事件。
 documents.listen(connection);
 
-// Listen on the connection
+// 连接后启动监听
 connection.listen();
 
 ```
@@ -426,13 +422,12 @@ connection.listen();
 为了给服务器添加文本校验，我们为text document manager添加一个在文本内动变动时调用的listener。接下来就交给服务器去判断什么时候是调用校验器的最佳时机了。在我们实现的示例中，服务器校验纯文本然后给所有用全大写的单词进行标记。对应的代码片段：
 
 ```typescript
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
+// 事件在文档第一次打开，或者内容变动时触发。
 documents.onDidChangeContent(async (change) => {
-	// In this simple example we get the settings for every validate run.
+	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
 	let settings = await getDocumentSettings(textDocument.uri);
 
-	// The validator creates diagnostics for all uppercase words length 2 and more
+	// 校验器如果检测到连续超过2个以上的大写字母则会报错
 	let text = textDocument.getText();
 	let pattern = /\b[A-Z]{2,}\b/g;
 	let m: RegExpExecArray;
@@ -471,7 +466,7 @@ documents.onDidChangeContent(async (change) => {
 		diagnostics.push(diagnosic);
 	}
 
-	// Send the computed diagnostics to VSCode.
+	// 将错误处理结果发送给VS Code
 	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
 }
 ```
@@ -483,7 +478,7 @@ documents.onDidChangeContent(async (change) => {
 
 运行语言服务器步骤：
 1. 启动build任务。这个任务会把客户端和服务器端都编译掉。
-2. 其速度debug侧边栏，选择`启动客户端`加载配置，然后按`开始调试`按钮启动`插件开发主机`。
+2. 其速度debug侧边栏，选择`启动客户端`加载配置，然后按`开始调试`按钮启动`扩展开发主机`。
 3. 在根目录下新建一个'test.txt'文件，然后粘贴下述内容：
 
 ```
@@ -492,7 +487,7 @@ TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
 ANY browser. ANY host. ANY OS. Open Source.
 ```
 
-`插件开发主机`实例看起来像是这样：
+`扩展开发主机`实例看起来像是这样：
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/validation.png)
 
@@ -502,7 +497,7 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/debugging-client.png)
 
-因为服务器是由`LanguageClient`启动的，我们需要附加一个*调试器*给运行中的服务器。为了做到这一点，切换到调试视图，选择加载配置`Attach to Server`然后启动调试，看起来会像这样：
+因为服务器是由`LanguageClient`启动的，我们需要附加一个*调试器*给运行中的服务器。为了做到这一点，切换到**调试**侧边栏，选择加载配置`Attach to Server`然后启动调试（要保证server已经启动哦，也就是上面一步），看起来会像这样：
 
 ![调试语言服务器](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/debugging-server.png)
 
@@ -543,10 +538,10 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 
 ```typescript
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
-	// In this simple example we get the settings for every validate run.
+	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
 	let settings = await getDocumentSettings(textDocument.uri);
 
-	// The validator creates diagnostics for all uppercase words length 2 and more
+	// 校验器如果检测到连续超过2个以上的大写字母则会报错
 	let text = textDocument.getText();
 	let pattern = /\b[A-Z]{2,}\b/g;
 	let m: RegExpExecArray;
@@ -585,7 +580,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 		diagnostics.push(diagnosic);
 	}
 
-	// Send the computed diagnostics to VSCode.
+	// 将错误处理结果发送给VS Code
 	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
 }
 ```
@@ -603,7 +598,7 @@ connection.onDidChangeConfiguration(change => {
 		);
 	}
 
-	// Revalidate all open text documents
+	// 重新验证所有打开的文本文档
 	documents.all().forEach(validateTextDocument);
 });
 ```
@@ -617,12 +612,11 @@ connection.onDidChangeConfiguration(change => {
 第一个有趣的东西是，语言服务器通常会实现成文档校验器，从这个点来说，即使一个linter也算一个语言服务器，所以VS Code中的linter通常都是作为语言服务器实现的（参照[eslint](https://github.com/Microsoft/vscode-eslint)和[jslint](https://github.com/Microsoft/vscode-jshint)）。但是语言服务器还能做得更多，他们能提供代码不全，查找所有匹配项或者转跳到定义。下面的代码展示了为服务器添加代码补全的功能，它提供了2个建议单词"TypeScript"和"JavaScript"。
 
 ```typescript
-// This handler provides the initial list of the completion items.
+// 这个处理函数提供了初始补全项列表
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-		// The pass parameter contains the position of the text document in
-		// which code complete got requested. For the example we ignore this
-		// info and always provide the same completion items.
+		// 传入的变量包含了文本请求代码补全的位置。
+		// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
 		return [
 			{
 				label: 'TypeScript',
@@ -638,8 +632,7 @@ connection.onCompletion(
 	}
 );
 
-// This handler resolve additional information for the item selected in
-// the completion list.
+// 这个函数为补全列表的选中项提供了更多信息
 connection.onCompletionResolve(
 	(item: CompletionItem): CompletionItem => {
 		if (item.data === 1) {
@@ -664,7 +657,7 @@ connection.onInitialize((params): InitializeResult => {
 	return {
 		capabilities: {
 			...
-			// Tell the client that the server supports code completion
+			// 告诉客户端，服务器支持代码补全
 			completionProvider: {
 				resolveProvider: true
 			}
@@ -732,7 +725,7 @@ async function testCompletion(
 ) {
 	await activate(docUri);
 
-	// Executing the command `vscode.executeCompletionItemProvider` to simulate triggering completion
+	// 执行 `vscode.executeCompletionItemProvider` 命令，模拟激活代码补全功能
 	const actualCompletionList = (await vscode.commands.executeCommand(
 		'vscode.executeCompletionItemProvider',
 		docUri,
@@ -764,16 +757,16 @@ export let documentEol: string;
 export let platformEol: string;
 
 /**
- * Activates the vscode.lsp-sample extension
+ * 激活 vscode.lsp-sample 插件
  */
 export async function activate(docUri: vscode.Uri) {
-	// The extensionId is `publisher.name` from package.json
+	// extensionId来自于package.json中的`publisher.name`
 	const ext = vscode.extensions.getExtension('vscode.lsp-sample');
 	await ext.activate();
 	try {
 		doc = await vscode.workspace.openTextDocument(docUri);
 		editor = await vscode.window.showTextDocument(doc);
-		await sleep(2000); // Wait for server activation
+		await sleep(2000); // 等待服务器激活
 	} catch (e) {
 		console.error(e);
 	}
@@ -842,7 +835,7 @@ connection.onInitialize((params): InitializeResult => {
 	...
 	return {
 		capabilities: {
-			// Enable incremental document sync
+			// 启用文档增量更新同步
 			textDocumentSync: TextDocumentSyncKind.Incremental,
 			...
 		}
@@ -850,20 +843,19 @@ connection.onInitialize((params): InitializeResult => {
 });
 
 connection.onDidOpenTextDocument((params) => {
-	// A text document was opened in VS Code.
-	// params.uri uniquely identifies the document. For documents stored on disk, this is a file URI.
-	// params.text the initial full content of the document.
+	// 当文档打开后触发，params.uri提供了文档的唯一地址。如果文档储存在硬盘上，那么就会是一个file类型的URI
+	// params.text——提供了文档一开始的内容
 });
 
 connection.onDidChangeTextDocument((params) => {
-	// The content of a text document has change in VS Code.
-	// params.uri uniquely identifies the document.
-	// params.contentChanges describe the content changes to the document.
+	// 文档的文本内容发生了改变时触发。
+	// params.uri提供了文档的唯一地址。
+	// params.contentChanges 包含文档的变动内容
 });
 
 connection.onDidCloseTextDocument((params) => {
-	// A text document was closed in VS Code.
-	// params.uri uniquely identifies the document.
+	// 文档关闭后触发。
+	// params.uri提供了文档的唯一地址。
 });
 ```
 
