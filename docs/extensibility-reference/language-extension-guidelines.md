@@ -330,10 +330,608 @@ function onChange() {
 ![signature-help](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/signature-help.gif)
 
 #### 通过语言服务器实现
-
-
+首先响应`initialize`方法，声明提供*特征值*支持，然后还要响应`textDocument/signatureHelp`请求
+```json
+{
+    ...
+    "capabilities" : {
+        "signatureHelpProvider" : {
+            "triggerCharacters": [ '(' ]
+        }
+        ...
+    }
+}
+```
 
 #### 直接实现
 
+```typescript
+class GoSignatureHelpProvider implements SignatureHelpProvider {
+    public provideSignatureHelp(
+        document: TextDocument, position: Position, token: CancellationToken):
+        Promise<SignatureHelp> {
+    ...
+    }
+}
 
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerSignatureHelpProvider(
+            GO_MODE, new GoSignatureHelpProvider(), '(', ','));
+    ...
+}
+```
 
+>**基础**
+>
+> 确保signature help函数中包含了函数或方法的文档说明。
+
+>**进阶**
+>
+> 无
+
+## 显示符号定义
+---
+
+允许用户查看变量、函数、方法的定义。
+![goto-definition](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/goto-definition.gif)
+
+#### 通过语言服务器实现
+
+除了响应`initialize`方法外，语言服务器还要声明提供转跳到定义位置的特性。当然你的语言服务器还需要响应`textDocument/definition`请求。
+
+```json
+{
+    ...
+    "capabilities" : {
+        "definitionProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoDefinitionProvider implements vscode.DefinitionProvider {
+    public provideDefinition(
+        document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
+        Thenable<vscode.Location> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerDefinitionProvider(
+            GO_MODE, new GoDefinitionProvider()));
+    ...
+}
+```
+
+>**基础**
+>
+> 如果符号的含义模棱两可，你把多个定义都显示出来。
+
+>**进阶**
+>
+> 无
+
+## 查找符号的所有引用
+
+允许用户查看某个变量/函数/方法/符号的所有源代码的位置。
+
+![find-references](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/find-references.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*定位符号引用*的特性。当然你的语言服务器还需要响应`textDocument/references`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "definitionProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoReferenceProvider implements vscode.ReferenceProvider {
+    public provideReferences(
+        document: vscode.TextDocument, position: vscode.Position,
+        options: { includeDeclaration: boolean }, token: vscode.CancellationToken):
+        Thenable<vscode.Location[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerReferenceProvider(
+            GO_MODE, new GoReferenceProvider()));
+    ...
+}
+```
+
+>**基础**
+>
+> 返回所有引用的位置（资源的URI和范围）。
+
+>**进阶**
+>
+> 无
+
+## 高亮文档中所有匹配的符号
+
+允许用户查看打开的编辑器中所有匹配的符号。
+
+![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/document-highlights.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*文档符号定位*的特性。当然你的语言服务器还需要响应`textDocument/documentHighlight`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "documentHighlightProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoDocumentHighlightProvider implements vscode.DocumentHighlightProvider {
+    public provideDocumentHighlights(
+        document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
+        vscode.DocumentHighlight[] | Thenable<vscode.DocumentHighlight[]>;
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerDocumentHighlightProvider(
+            GO_MODE, new GoDocumentHighlightProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 你需要返回文档中找到的所有引用。
+
+>**进阶**
+>
+> 无
+
+## 显示文档中所有符号定义
+---
+允许用户快速跳转到编辑器中的任何符号定义。
+
+![document-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/document-symbols.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*文档符号定位*的特性。当然你的语言服务器还需要响应`textDocument/documentSymbol`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "documentSymbolProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoDocumentSymbolProvider implements vscode.DocumentSymbolProvider {
+    public provideDocumentSymbols(
+        document: vscode.TextDocument, token: vscode.CancellationToken):
+        Thenable<vscode.SymbolInformation[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerDocumentSymbolProvider(
+            GO_MODE, new GoDocumentSymbolProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 返回文档中的所有符号。定义的符号类型诸如：变量、函数、类、方法等。
+
+>**进阶**
+>
+> 无
+
+## 显示文档中所有符号定义
+---
+允许用户快速跳转到打开的文件夹（工作区）中的任何符号定义。
+
+![workspace-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/workspace-symbols.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*全局符号定位*的特性。当然你的语言服务器还需要响应`workspace/symbol`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "workspaceSymbolProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoWorkspaceSymbolProvider implements vscode.WorkspaceSymbolProvider {
+    public provideWorkspaceSymbols(
+        query: string, token: vscode.CancellationToken):
+        Thenable<vscode.SymbolInformation[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerWorkspaceSymbolProvider(
+            new GoWorkspaceSymbolProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 返回打开文件中的所有符号。定义的符号类型诸如：变量、函数、类、方法等。
+
+>**进阶**
+>
+> 无
+
+## 修正错误和警告
+---
+允许用户对错误或者警告进行更正。如果有可用的操作，就会有个灯泡💡出现在错误/警告旁边。当用户点击灯泡的时候，会出现可用的*代码操作*。
+
+![quick-fixes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/quick-fixes.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*代码操作*的特性。当然你的语言服务器还需要响应`textDocument/codeAction`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "codeActionProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoCodeActionProvider implements vscode.CodeActionProvider {
+    public provideCodeActions(
+        document: vscode.TextDocument, range: vscode.Range,
+        context: vscode.CodeActionContext, token: vscode.CancellationToken):
+        Thenable<vscode.Command[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerCodeActionsProvider(
+            GO_MODE, new GoCodeActionProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 为更正错误/警告提供*代码操作*。
+
+>**进阶**
+>
+> 提供重构级别的源代码修改，如**提取方法**
+
+## CodeLens —— 为上下文提供源代码信息
+---
+在横屏弹出框中为用户提供可操作的、上下文级别的源代码。
+
+![code-lens](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/code-lens.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*CodeLens*的特性，将`textDocument/codeAction`绑定到*CodeLens*命令上。当然你的语言服务器还需要响应`textDocument/codeLens`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "codeLensProvider" : {
+            "resolveProvider": "true"
+        }
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoRCodeLensProvider implements vscode.CodeLensProvider {
+    public provideCodeLenses(document: TextDocument, token: CancellationToken):
+        CodeLens[] | Thenable<CodeLens[]> {
+    ...
+    }
+
+    public resolveCodeLens?(codeLens: CodeLens, token: CancellationToken):
+         CodeLens | Thenable<CodeLens> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerCodeLensProvider(
+            GO_MODE, new GoCodeLensProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 定义当前文档可用的CodeLens结果
+
+>**进阶**
+>
+> 将CodeLens结果绑定到`codeLens/resolve`上
+
+## 符号重命名
+---
+运行用户重命名符号，更新所有引用的符号。
+
+![rename](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/rename.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*重命名*特性。当然你的语言服务器还需要响应`textDocument/rename`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "renameProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoRenameProvider implements vscode.RenameProvider {
+    public provideRenameEdits(
+        document: vscode.TextDocument, position: vscode.Position,
+        newName: string, token: vscode.CancellationToken):
+        Thenable<vscode.WorkspaceEdit> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerRenameProvider(
+            GO_MODE, new GoRenameProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 不提供重命名支持。
+
+>**进阶**
+>
+> 返回工作区所有需要执行更改的编辑区，例如：跨文件查找引用了相关符号的编辑区。
+
+## 在编辑器中格式化源代码
+---
+为用户提供整个文档的格式化特性。
+
+![format-document](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-document.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*格式化*特性。当然你的语言服务器还需要响应`textDocument/formatting`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "documentFormattingProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoDocumentFormatter implements vscode.DocumentFormattingEditProvider {
+    public formatDocument(document: vscode.TextDocument):
+        Thenable<vscode.TextEdit[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerDocumentFormattingEditProvider(
+            GO_MODE, new GoDocumentFormatter()));
+    ...
+}
+```
+>**基础**
+>
+> 不提供格式化支持。
+
+>**进阶**
+>
+> 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
+
+## 对选中行进行格式化
+---
+为用户提供选中片段的格式化特性。
+
+![format-document-range](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-document-range.gif)
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*选中片段格式化*特性。当然你的语言服务器还需要响应`textDocument/rangeFormatting`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "documentRangeFormattingProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoDocumentRangeFormatter implements vscode.DocumentRangeFormattingEditProvider{
+    public provideDocumentRangeFormattingEdits(
+        document: vscode.TextDocument, range: vscode.Range,
+        options: vscode.FormattingOptions, token: vscode.CancellationToken):
+        Thenable<vscode.TextEdit[]>;
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerDocumentRangeFormattingEditProvider(
+            GO_MODE, new GoDocumentRangeFormatter()));
+    ...
+}
+```
+>**基础**
+>
+> 不提供格式化支持。
+
+>**进阶**
+>
+> 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
+
+## 对用户输入自动格式化
+---
+为用户提供输入时的实时格式化特性。
+
+![format-document-type](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-on-type.gif)
+
+!> **注意**：用户[设置]()中的`editor.formatOnType`控制着这项功能。
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/onTypeFormatting`请求。你还需要告诉客户端哪些字符可以触发这个特性，`moreTriggerCharacters`是个可选项。
+```json
+{
+    ...
+    "capabilities" : {
+        "documentOnTypeFormattingProvider" : {
+            "firstTriggerCharacter": "}",
+            "moreTriggerCharacter": [";", ","]
+        }
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoOnTypingFormatter implements vscode.OnTypeFormattingEditProvider{
+    public provideOnTypeFormattingEdits(
+        document: vscode.TextDocument, position: vscode.Position,
+        ch: string, options: vscode.FormattingOptions, token: vscode.CancellationToken):
+        Thenable<vscode.TextEdit[]>;
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerOnTypeFormattingEditProvider(
+            GO_MODE, new GoOnTypingFormatter()));
+    ...
+}
+```
+>**基础**
+>
+> 不提供格式化支持。
+
+>**进阶**
+>
+> 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
+
+## 显示取色器
+---
+允许用户预览和修改文档中的颜色。
+
+![color-decorators](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/color-decorators.png)
+
+!> **注意**：用户[设置]()中的`editor.formatOnType`控制着这项功能。
+
+#### 通过语言服务器实现
+除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/documentColor`和`textDocument/colorPresentation`请求。
+```json
+{
+    ...
+    "capabilities" : {
+        "colorProvider" : "true"
+        ...
+    }
+}
+```
+
+#### 直接实现
+
+```typescript
+class GoColorProvider implements vscode.DocumentColorProvider {
+    public provideDocumentColors(
+        document: vscode.TextDocument, token: vscode.CancellationToken):
+        Thenable<vscode.ColorInformation[]> {
+    ...
+    }
+    public provideColorPresentations(
+        color: Color, context: { document: TextDocument, range: Range }, token: vscode.CancellationToken):
+        Thenable<vscode.ColorPresentation[]> {
+    ...
+    }
+}
+
+export function activate(ctx: vscode.ExtensionContext): void {
+    ...
+    ctx.subscriptions.push(
+        vscode.languages.registerColorProvider(
+            GO_MODE, new GoColorProvider()));
+    ...
+}
+```
+>**基础**
+>
+> 返回文档中的色彩引用值。提供色彩格式和展示（如：rgb(...)，hsl(...)）
+
+>**进阶**
+>
+> 无
