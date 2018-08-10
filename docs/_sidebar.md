@@ -20,3 +20,4 @@
 * [扩展性参考](extensibility-reference/)
     * [扩展性原则和模式](extensibility-reference/principles-patterns)
     * [语言插件指引](extensibility-reference/language-extension-guidelines)
+    * [插件清单](extensibility-reference/extension-manifest)
