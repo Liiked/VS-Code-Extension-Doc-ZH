@@ -2,20 +2,20 @@
 
 本篇会介绍`pacakge.json`[插件清单]()中各种不同的发布内容配置点。
 
-* [`configuration`](/docs/extensionAPI/contribution-points.md#contributesconfiguration)
-* [`commands`](/docs/extensionAPI/contribution-points.md#contributescommands)
-* [`menus`](/docs/extensionAPI/contribution-points.md#contributesmenus)
-* [`keybindings`](/docs/extensionAPI/contribution-points.md#contributeskeybindings)
-* [`languages`](/docs/extensionAPI/contribution-points.md#contributeslanguages)
-* [`debuggers`](/docs/extensionAPI/contribution-points.md#contributesdebuggers)
-* [`breakpoints`](/docs/extensionAPI/contribution-points.md#contributesbreakpoints)
-* [`grammars`](/docs/extensionAPI/contribution-points.md#contributesgrammars)
-* [`themes`](/docs/extensionAPI/contribution-points.md#contributesthemes)
-* [`snippets`](/docs/extensionAPI/contribution-points.md#contributessnippets)
-* [`jsonValidation`](/docs/extensionAPI/contribution-points.md#contributesjsonvalidation)
-* [`views`](/docs/extensionAPI/contribution-points.md#contributesviews)
-* [`problemMatchers`](/docs/extensionAPI/contribution-points.md#contributesproblemmatchers)
-* [`problemPatterns`](/docs/extensionAPI/contribution-points.md#contributesproblempatterns)
+* [`configuration`](extensibility-reference/contribution-points.md#contributesconfiguration)
+* [`commands`](extensibility-reference/contribution-points.md#contributescommands)
+* [`menus`](extensibility-reference/contribution-points.md#contributesmenus)
+* [`keybindings`](extensibility-reference/contribution-points.md#contributeskeybindings)
+* [`languages`](extensibility-reference/contribution-points.md#contributeslanguages)
+* [`debuggers`](extensibility-reference/contribution-points.md#contributesdebuggers)
+* [`breakpoints`](extensibility-reference/contribution-points.md#contributesbreakpoints)
+* [`grammars`](extensibility-reference/contribution-points.md#contributesgrammars)
+* [`themes`](extensibility-reference/contribution-points.md#contributesthemes)
+* [`snippets`](extensibility-reference/contribution-points.md#contributessnippets)
+* [`jsonValidation`](extensibility-reference/contribution-points.md#contributesjsonvalidation)
+* [`views`](extensibility-reference/contribution-points.md#contributesviews)
+* [`problemMatchers`](extensibility-reference/contribution-points.md#contributesproblemmatchers)
+* [`problemPatterns`](extensibility-reference/contribution-points.md#contributesproblempatterns)
 
 ## contributes.configuration
 ---
@@ -210,8 +210,423 @@ configuration是JSON格式的键值对，VS Code为用户提供了良好的设�
 ?>**注意**因为VS Code支持Windows，macOS和Linux平台，而
 
 #### 示例
+Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayHello"`命令：
+```json
+"contributes": {
+    "keybindings": [{
+        "command": "extension.sayHello",
+        "key": "ctrl+f1",
+        "mac": "cmd+f1",
+        "when": "editorTextFocus"
+    }]
+}
+```
+![keybindings](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/keybindings.png)
+
+## contributes.languages
+---
+
+配置一门语言，引入一门新的语言或者加强VS Code已有的语言支持。
+
+在这部分内容中，一个语言必须要有一个标识符（identifier）关联到文件上（查看 `TextDocument.getLanguageId()`）。
+
+VS Code提供三种文件应该关联哪种语言的方式。每种方式都可以可以“单独”加强：
+
+1. 插件的文件名
+2. 文件名
+3. 文件内的首行
+
+用户打开文件后，三种规则都会使用，然后确定语言。接着VS Code就会触发激活事件`onLanguage:${language}`（比如：下面的`onLanguage:python`例子）
+
+`aliases`属性包含着这门语言的可读性名称。这个列表的第一项会作为语言标签（在VS Code右下角状态栏显示）。
+
+`configuration`属性确定了语言配置文件的路径。路径是指相对插件文件夹的路径，通常是`./language-configuration.json`，这个文件是JSON格式的，包含着下列可配置属性：
+
+* `comments` - 定义了注释的符号
+  * `blockComment` - 用于标识块注释的起始和结束token。被'Toggle Block Comment'使用
+  * `lineComment` - 用于标识行注释的起始token。被'Add Line Comment'使用
+* `brackets` - 定义括号，同时也会影响括号内的代码缩进。进入新的一行时，被编辑器用来确定或是更正新的缩进距离
+* `autoClosingPairs` - 为*自动闭合功能*定义某个符号的开闭符（open and close symbols）。*开符号*输入后，编辑器会自动插入*闭符号*。使用`notIn`参数，关闭字符串或者注释中的*符号对*
+* `surroundingPairs` - 定义选中文本的开闭符号
+* `folding` - 定义编辑器中的代码应何时、应怎么样折叠
+  * `offSide` - 和一下个缩进块之间的代码块尾部的空行（用于基于缩进的语言，如Python or F#）
+  * `markers` - 使用正则自定义代码中的折叠区域标识符
+* `wordPattern` - 使用正则匹配编程语言中哪些词应该是单个词
+
+如果你的语言配置文件是`language-configuration.json`，或者以这样的字符串结尾的，VS Code就会提供校验和编辑支持。
+
+#### 示例
+```json
+...
+"contributes": {
+    "languages": [{
+        "id": "python",
+        "extensions": [ ".py" ],
+        "aliases": [ "Python", "py" ],
+        "filenames": [ ... ],
+        "firstLine": "^#!/.*\\bpython[0-9.-]*\\b",
+        "configuration": "./language-configuration.json"
+    }]
+}
+```
+
+language-configuration.json
+```json
+{
+    "comments": {
+        "lineComment": "//",
+        "blockComment": [ "/*", "*/" ]
+    },
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+        { "open": "/**", "close": " */", "notIn": ["string"] }
+    ],
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["<", ">"],
+        ["'", "'"]
+    ],
+    "folding": {
+        "offSide": true,
+        "markers": {
+            "start": "^\\s*//#region",
+            "end": "^\\s*//#endregion"
+        }
+    },
+    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)"
+}
+```
+
+## contributes.debuggers
+---
+
+配置VS Code的调试器，调试器配置有下列属性：
+
+* `type` 用于加载配置的调试器唯一标识——ID。
+* `label` 会在UI中显示的调试器名称。
+* `program` 调试适配的路径，调试适配通过VS Code debug protocol连接到真正的调试器或者运行时。
+* `runtime` 如果调试适配器的路径不是可执行程序，那么就会用到这个运行时。
+* `configurationAttributes` 调试器的启动配置参数。
+* `initialConfigurations` 列出了初始化launch.json需要的加载配置。
+* `configurationSnippets` 列出了编辑launch.json文件时可以提供的加载配置智能提示。
+* `variables` 引入替代变量，并绑定到调试器插件实现的命令上。
+* `languages` 调试插件会使用“默认调试器”的语言
+* `adapterExecutableCommand` 调试适配器执行路径和参数动态计算的命令。命令返回的格式如下：
+  ```json
+  command: "<executable>",
+  args: [ "<argument1>", "<argument2>", ... ]
+  ```
+  `command`属性必须是一个可执行程序的**绝对路径**，或者是通过PATH环境变量可以查找到可执行程序的名称。使用特殊值`node`，则会映射到VS Code内建的node运行时，而不会在PATH中查找。
+
+#### 示例
+```json
+"contributes": {
+    "debuggers": [{
+        "type": "node",
+        "label": "Node Debug",
+
+        "program": "./out/node/nodeDebug.js",
+        "runtime": "node",
+
+        "languages": ["javascript", "typescript", "javascriptreact", "typescriptreact"],
+
+        "configurationAttributes": {
+            "launch": {
+                "required": [ "program" ],
+                "properties": {
+                    "program": {
+                        "type": "string",
+                        "description": "The program to debug."
+                    }
+                }
+            }
+        },
+
+        "initialConfigurations": [{
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/app.js"
+        }],
+
+        "configurationSnippets": [
+            {
+                "label": "Node.js: Attach Configuration",
+                "description": "A new configuration for attaching to a running node program.",
+                "body": {
+                    "type": "node",
+                    "request": "attach",
+                    "name": "${2:Attach to Port}",
+                    "port": 9229
+                }
+            }
+        ],
+
+        "variables": {
+            "PickProcess": "extension.node-debug.pickNodeProcess"
+        }
+    }]
+}
+```
+想要完整地学习`debugger`，移步至[调试器]()
+
+## contributes.breakpoints
+---
+
+通常调试器插件会有`contributes.breakpoints`入口，插件可以在这里面设置哪些语言可以设置断点。
 
 ```json
-
+"contributes": {
+    "breakpoints": [
+        {
+            "language": "javascript"
+        },
+        {
+            "language": "javascriptreact"
+        }
+    ]
+}
 ```
-![]()
+
+## contributes.grammars
+---
+为一门语言配置TextMate语法。你必须提供应用语法的`language`，TextMate的`scopeName`确定了语法和文件路径。
+
+!>**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+
+#### 示例
+
+```json
+"contributes": {
+    "grammars": [{
+        "language": "markdown",
+        "scopeName": "text.html.markdown",
+        "path": "./syntaxes/markdown.tmLanguage.json",
+        "embeddedLanguages": {
+            "meta.embedded.block.frontmatter": "yaml",
+            ...
+        }
+    }]
+}
+```
+
+查看[添加语言着色器]()学习使用[yo code插件生成器]()将TextMate.tmLanguage文件快速打包成VS Code插件。
+
+![grammars](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/grammars.png)
+
+## contributes.themes
+---
+为VS Code添加TextMate主题。你必须添加一个label，指定这个主题是dark还是light的（以便VS Code根据你的主题调整界面），当然还需要加上目标文件路径（XML plist 格式）。
+
+!>**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+
+#### 示例
+
+```json
+"contributes": {
+    "themes": [{
+        "label": "Monokai",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Monokai.tmTheme"
+    }]
+}
+```
+![themes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/themes.png)
+
+查看[改变色彩主题]()学习使用[yo code插件生成器]()将TextMate.tmTheme文件快速打包成VS Code插件。
+
+## contributes.snippets
+---
+为语言添加代码片段。`language`属性必须是[语言标识符]()而`path`则必须是使用[VS Code代码片段格式]()的代码片段文件的相对路径。
+
+#### 示例
+下面是一个Go语言的代码片段：
+```json
+"contributes": {
+    "snippets": [{
+        "language": "go",
+        "path": "./snippets/go.json"
+    }]
+}
+```
+## contributes.jsonValidation
+---
+为`json`文件添加校验器。`url`值可以是本地路径也可以是插件中的模式文件（schema file），或者是远程服务器的URL比如：[json schema](http://schemastore.org/json)
+
+#### 示例
+```json
+"contributes": {
+    "jsonValidation": [{
+        "fileMatch": ".jshintrc",
+        "url": "http://json.schemastore.org/jshintrc"
+    }]
+}
+```
+
+## contributes.views
+---
+为VS Code 添加视图。你需要为视图指定唯一标识和名称。可以配置的属性如下：
+
+* `explorer`: 活动栏中的资源管理视图容器。
+* `scm`: 活动栏中的源代码管理(SCM) 视图容器。
+* `debug`: 活动栏中的调试视图容器。
+* `test`: 活动栏中的测试视图容器。
+* [Custom view containers](#contributesviewscontainers) 由插件提供的自定义视图容器。
+
+当用户打开视图，VS Code会触发`onView:${viewId}`激活事件（比如：下面示例中的`onView:nodeDependencies`）。你也可以用`when`控制视图的可见性。
+
+#### 示例
+```json
+"contributes": {
+    "views": {
+        "explorer": [
+            {
+                "id": "nodeDependencies",
+                "name": "Node Dependencies",
+                "when": "workspaceHasPackageJSON"
+            }
+        ]
+    }
+}
+```
+
+![views](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/views.png)
+
+插件创作者应该通过`createTreeView`API提供的[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)创建一个[TreeView](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeView)或者直接使用`registerTreeDataProvider`注册一个[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)。更多示例参考[这里](https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample)
+
+## contributes.viewsContainers
+---
+配置[自定义视图]()的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的`Package Explorer`视图容器应该如何配置。
+
+#### 示例
+```json
+"contributes": {
+    "viewsContainers": {
+        "activitybar": [
+            {
+                "id": "package-explorer",
+                "title": "Package Explorer",
+                "icon": "resources/package-explorer.svg"
+            }
+        ]
+    },
+    "views": {
+        "package-explorer": [
+            {
+                "id": "package-dependencies",
+                "name": "Dependencies"
+            },
+            {
+                "id": "package-outline",
+                "name": "Outline"
+            }
+        ]
+    }
+}
+```
+
+![custom-views-container](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/custom-views-container.png)
+
+**图标规格**
+
+* `Size:` 28x28的图标居中于50x40的视图块上。
+* `Color:` 图标应使用黑白单色。
+* `Format:` 虽然图片格式的图标都是可以的，但建议使用SVG图标。
+* `States:` 所有图标状态继承下列样式：
+
+|State|Opacity|
+|---|---|
+|Default|60%|
+|Hover|100%|
+|Active|100%|
+
+## contributes.problemMatchers
+---
+配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：
+
+#### 示例
+```json
+"contributes": {
+    "problemMatchers": [
+        {
+            "name": "gcc",
+            "owner": "cpp",
+            "fileLocation": ["relative", "${workspaceFolder}"],
+            "pattern": {
+                "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "severity": 4,
+                "message": 5
+            }
+        }
+    ]
+}
+```
+这个问题定位器现在可以通过名称引用`$gcc`在`task.json`中使用了，示例如下：
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "gcc",
+            "args": ["-Wall", "helloWorld.c", "-o", "helloWorld"],
+            "problemMatcher": "$gcc"
+        }
+    ]
+}
+```
+
+更多内容请查看：[实现一个问题定位器]()
+
+## contributes.problemPatterns
+---
+配置可以在问题定位器（见上）中可以使用的问题模式的名称。
+
+## contributes.typescriptServerPlugins
+---
+配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件]()：
+
+```json
+"contributes": {
+   "typescriptServerPlugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+}
+```
+
+上述例子配置了[`typescript-styled-plugin`](https://github.com/Microsoft/typescript-styled-plugin)，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在`dependency`中列明：
+
+```json
+{
+    "dependencies": {
+        "typescript-styled-plugin": "*"
+    }
+}
+```
+
+Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
+
+## 下一步
+
+学习更多VS Code的扩展性模型，试着查看下面的主题吧：
+
+- [插件配置清单]() - VS Code的package.json插件配置清单参考
+- [激活事件]() - VS Code的激活事件参考
+
+
