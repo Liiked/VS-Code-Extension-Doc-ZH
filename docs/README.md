@@ -41,6 +41,7 @@
 
 ```bash
 // 本地启动开发
+npm i docsify-cli -g
 docsify serve docs
 ```
 
