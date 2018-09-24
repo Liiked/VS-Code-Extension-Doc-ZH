@@ -324,3 +324,4 @@ VS Code会动态解析HTML 的Body元素，加上下列类标签`vscode-light`�
   <script nonce="123456" src="file:///path/to/extension/my_trusted_script.js"></script>
 </body>
 </html>
+```
