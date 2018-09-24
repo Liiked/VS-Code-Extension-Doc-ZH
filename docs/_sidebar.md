@@ -22,4 +22,5 @@
     * [语言插件指引](extensibility-reference/language-extension-guidelines)
     * [插件清单](extensibility-reference/extension-manifest)
     * [发布内容配置点](extensibility-reference/contribution-points)
+    * [激活事件](extensibility-reference/activation-events)
     * [复杂命令](extensibility-reference/vscode-api-commands)
