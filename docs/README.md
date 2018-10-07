@@ -29,7 +29,7 @@
     - ☑️ [文本选择](https://code.visualstudio.com/docs/extensionAPI/document-selectors)
     - ☑️ [vscode 命名空间API](https://code.visualstudio.com/docs/extensionAPI/vscode-api)
     - ✅ [复杂命令](https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)
-    - ☑️ [调试器API](https://code.visualstudio.com/docs/extensionAPI/api-debugging)
+    - ✅ [调试器API](https://code.visualstudio.com/docs/extensionAPI/api-debugging)
     - ☑️ [源控制](https://code.visualstudio.com/docs/extensionAPI/api-scm)
     - ☑️ [Markdown插件](https://code.visualstudio.com/docs/extensionAPI/api-markdown)
 

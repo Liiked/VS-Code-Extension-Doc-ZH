@@ -24,3 +24,4 @@
     * [发布内容配置点](extensibility-reference/contribution-points)
     * [激活事件](extensibility-reference/activation-events)
     * [复杂命令](extensibility-reference/vscode-api-commands)
+    * [调试器API](extensibility-reference/api-debugging)
