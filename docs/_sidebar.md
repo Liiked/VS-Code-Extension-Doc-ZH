@@ -26,3 +26,4 @@
     * [复杂命令](extensibility-reference/vscode-api-commands)
     * [调试器API](extensibility-reference/api-debugging)
     * [vscode 命名空间API](extensibility-reference/vscode-api)
+    * [VS Code中的源控制](extensibility-reference/api-scm)
