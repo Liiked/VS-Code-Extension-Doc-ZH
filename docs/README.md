@@ -31,9 +31,13 @@
     - ✅ [复杂命令](https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)
     - ✅ [调试器API](https://code.visualstudio.com/docs/extensionAPI/api-debugging)
     - ✅ [源控制](https://code.visualstudio.com/docs/extensionAPI/api-scm)
-    - ☑️ [Markdown插件](https://code.visualstudio.com/docs/extensionAPI/api-markdown)
+    - ✅ [Markdown插件](https://code.visualstudio.com/docs/extensionAPI/api-markdown)
 
 - **第三期计划** - 审阅文档中的链接和内容
+ - ☑️ 审阅插件创作和Readme
+ - ☑️ 审阅扩展性参考
+
+- **第四期计划** - 添加快速入门章节（待定）
 
 ## 开发指引
 ---
