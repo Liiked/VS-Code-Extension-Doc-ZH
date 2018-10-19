@@ -25,6 +25,7 @@
     * [激活事件](extensibility-reference/activation-events)
     * [复杂命令](extensibility-reference/vscode-api-commands)
     * [调试器API](extensibility-reference/api-debugging)
+    * [文档选择器](extensibility-reference/document-selectors)
     * [vscode 命名空间API](extensibility-reference/vscode-api)
     * [VS Code中的源控制](extensibility-reference/api-scm)
     * [Markdown插件](extensibility-reference/api-markdown)

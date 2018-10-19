@@ -26,7 +26,7 @@
     - ✅ [插件清单](https://code.visualstudio.com/docs/extensionAPI/extension-manifest)
     - ✅ [发布内容配置](https://code.visualstudio.com/docs/extensionAPI/extension-points)
     - ✅ [激活事件](https://code.visualstudio.com/docs/extensionAPI/activation-events)
-    - ☑️ [文本选择](https://code.visualstudio.com/docs/extensionAPI/document-selectors)
+    - ✅ [文档选择器](https://code.visualstudio.com/docs/extensionAPI/document-selectors)
     - ✅ [vscode 命名空间API](https://code.visualstudio.com/docs/extensionAPI/vscode-api)
     - ✅ [复杂命令](https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)
     - ✅ [调试器API](https://code.visualstudio.com/docs/extensionAPI/api-debugging)
