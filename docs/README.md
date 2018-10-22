@@ -6,7 +6,7 @@
 
 - **纠错和润饰**：在翻译过程中难免会出现笔误、翻译不到位、存在优化空间等情况，当然最严重的应属于翻译的章节或者片段难以理解，请在issue中不吝赐教，我们会优先处理这类问题。
 
-- **参与**：由于国内已经有过一版VS Code文档的社区翻译版本，但是质量，emmmmm……，所以本项目会采取较为严格的翻译审查，若你有意一同学习和贡献自己的力量，请参考我们的翻译指南。
+- **参与**：由于国内已经有过一版VS Code文档的社区翻译版本，但是质量，emmmmm……，所以本项目会采取较为严格的翻译审查，若你有热情一同学习和贡献自己的力量，请参考我们的翻译指南。
 
 ## 翻译计划
 ---
@@ -98,5 +98,5 @@ ensure that all content from the user's workspace is properly sanitized.
 - [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单
 - Extensibility 扩展性
 - [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机
-- [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境
+- [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境/插件主机环境
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器
