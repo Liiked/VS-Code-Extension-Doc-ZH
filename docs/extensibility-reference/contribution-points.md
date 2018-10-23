@@ -16,6 +16,9 @@
 * [`views`](extensibility-reference/contribution-points.md#contributesviews)
 * [`problemMatchers`](extensibility-reference/contribution-points.md#contributesproblemmatchers)
 * [`problemPatterns`](extensibility-reference/contribution-points.md#contributesproblempatterns)
+* [`taskDefinitions`](extensibility-reference/contribution-points.md#contributestaskDefinitions)
+* [`colors`](extensibility-reference/contribution-points.md#contributescolors)
+
 
 ## contributes.configuration
 ---
@@ -621,6 +624,60 @@ language-configuration.json
 ```
 
 Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
+
+## contributes.taskDefinitions
+---
+配置和定义一个object结构，定义系统中唯一的*配置任务*。任务定义最少需要一个`type`属性，不过通常需要更多的属性配置。
+在package.json文件中，*一个展示脚本的任务*看起来是这样的：
+```json
+"taskDefinitions": [
+    {
+        "type": "npm",
+        "required": [
+            "script"
+        ],
+        "properties": {
+            "script": {
+                "type": "string",
+                "description": "The script to execute"
+            },
+            "path": {
+                "type": "string",
+                "description": "The path to the package.json file. If omitted the package.json in the root of the workspace folder is used."
+            }
+        }
+    }
+]
+```
+
+任务定义是JSON格式的，且包含`required`和`properties`两个属性。
+`type`属性定义了任务类型，如果上述例子变成：
+- `"type": "npm"`要求任务与npm任务相关联
+- `"required": [ "script" ]`其中`script`属性不可或缺。`path`属性变成可选。
+- `"properties": {...}`：定义了其他属性和他们的类型
+
+当插件真的创建了一个任务，它需要传入一个与package.json中任务配置对应的`TaskDefinition`。对于`npm`任务来说，pacakge.json中的脚本应该是这样的：
+```javascript
+let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
+```
+
+## contributes.colors
+---
+这些色彩可用于状态栏的编辑器装饰器。定义之后，用户可以在`workspace.colorCustomization`设置中自定义颜色，用户的主题会覆盖这些色值。
+
+```json
+"contributes": {
+  "colors": [{
+      "id": "superstatus.error",
+      "description": "Color for error message in the status bar.",
+      "defaults": {
+          "dark": "errorForeground",
+          "light": "errorForeground",
+          "highContrast": "#010203"
+      }
+  }]
+}
+```
 
 ## 下一步
 

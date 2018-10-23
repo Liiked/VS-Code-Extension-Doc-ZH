@@ -17,6 +17,7 @@
 VS Code自带Node.js的调试插件。你也可以在[插件市场](https://marketplace.visualstudio.com/vscode/Debuggers)找到更多调试插件，本篇教程接下来会告诉你怎么开发一个调试器插件。
 
 ## 插件Mock Debug
+---
 
 从零开始做一个调试适配器对本篇教程来说实在太重了。因此我们会从一个简单的教学适配器开始，这个模拟的调试插件支持步进，继续，断点，异常捕捉和变量审查，但它并不会真的连接到调试器上。
 
@@ -39,6 +40,7 @@ VS Code自带Node.js的调试插件。你也可以在[插件市场](https://mark
 那么现在我们要正式学习Mock Debug示例了，我们建议你先删除这个插件。
 
 ## Mock Debug开发设置
+---
 
 接下来让我们获取源码，在VS Code中开始开发吧：
 ```bash
@@ -58,7 +60,7 @@ npm install
 
 现在构建然后加载Mock Debug插件，选择**插件**加载配置，然后按下`F5`，一开始，全部的Typescript编译会进入编译，然后输出到`out`文件夹中。全部构建完成后，会启动一个`watch task`用于监听你所作的任何改动。
 
-之后会弹出一个新的VS Code窗口“[插件开发主机]”，Mock Debug插件就运行在调试模式中。在这个窗口中打开`mock test`，再打开`readme.md`文件，`F5`启动调试会话。
+之后会弹出一个新的VS Code窗口“[扩展开发主机]”，Mock Debug插件就运行在调试模式中。在这个窗口中打开`mock test`，再打开`readme.md`文件，`F5`启动调试会话。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-debuggers/debug-mock-session.png)
 
@@ -97,6 +99,7 @@ npm install
 但是真正的工作现在才开始：你需要把`src/mockDebug.ts`和`src/mockRuntime.ts`中的关于"mock"的实现替换成真正和*调试器*或者*运行时*通信的代码，你首先可能需要理解[调试适配器协议](https://code.visualstudio.com/docs/extensionAPI/api-debugging)。
 
 ## 剖析调试插件的package.json
+---
 
 `package.json`文件除了提供调试器所需的调试适配器和调试插件的实现细节之外，这个文件还包括了各式各样和调试相关的*内容配置点*。
 
@@ -250,6 +253,8 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 这个变量可以用**${command:AskForProgramName}**形式注入到任何*加载配置*允许字符串类型的地方。
 
 ## 使用DebugConfigurationProvider
+---
+
 如果`package.json`中的静态调试*发布配置内容*不够，那`DebugConfigurationProvider`就派上用场了，它能动态控制调试插件的下列内容：
 
 - 动态生成launch.json中的debug配置，例如：基于一些工作区可用的上下文信息。
@@ -276,11 +281,14 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 !> **首要准则**：如果插件的开销不大，就用`onDebug`。如果插件的开销比较高，根据`DebugConfigurationProvider`是否调用`provideDebugConfigurations`或`resolveDebugConfiguration`，在对应的`onDebugInitialConfigurations`或者`onDebugResolve`中处理。
 
 ## 发布你的调试适配器
+---
+
 通过下面的步骤将你的调试适配器发布到市场上：
 - 更新`package.json`中的发布配置内容表明你调试适配器的功能和目标
 - 根据[分享插件](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensions/publish-extension.md)部分把你的插件上传到市场上
 
 ## 可选方案：开发一个调试插件
+---
 
 开发调试插件一般既包含插件，也包含*调试器*和*调试适配器*这两个平行session。就如上面解释的，VS Code对一点支持非常友好，不过如果想要开发得更容易的话，还是把插件和调试适配器放在一个程序里，用一个会话启动更方便些。
 
