@@ -9,7 +9,7 @@
 ---- |:--------:| ---- | -------
 `name` | Y | `string` | 插件的名称必须用全小写无空格的字母组成。
 `version` | Y | `string` | [SemVer](https://semver.org/)版本模式兼容。
-`publisher` | Y | `string` | [出版方名称](/docs/extensions/publish-extension.md#publishers-and-personal-access-tokens)
+`publisher` | Y | `string` | [发行方名称](/docs/extensions/publish-extension.md#publishers-and-personal-access-tokens)
 `engines` | Y | `object` | 一个至少包含`vscode`字段的对象，其值必须[兼容](/docs/extensions/publish-extension.md#visual-studio-code-compatibility) VS Code版本。不可以是`*`。例如：`^0.10.5` 表明最小兼容`0.10.5`版本的VS Code。
 `license` | | `string` | 参考[npm's documentation](https://docs.npmjs.com/files/package.json#license)。如果你在插件根目录已经提供了`LICENSE`文件。那么`license`的值应该是`"SEE LICENSE IN <filename>"`。
 `displayName` | | `string`| 插件市场所显示的插件名称。

@@ -34,10 +34,10 @@
     - ✅ [Markdown插件](https://code.visualstudio.com/docs/extensionAPI/api-markdown)
 
 - **第三期计划** - 审阅文档中的链接和内容
-    - ☑️ 审阅插件创作和Readme
+    - ✅ 审阅插件创作和Readme
         - ✅ 介绍部分
         - ✅ 从示例开始
-        - ☑️ 开发步骤 + 进阶
+        - ✅ 开发步骤 + 进阶
     - ☑️ 审阅扩展性参考
      - ☑️ 1-4节
      - ☑️ 5-7节

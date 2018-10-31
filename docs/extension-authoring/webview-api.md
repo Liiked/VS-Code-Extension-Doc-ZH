@@ -1,22 +1,24 @@
-# VC Code Webview API
+# VS Code Webview API
 webview API为开发者提供了完全自定义视图的能力，例如内置的Markdown插件使用了webview渲染Markdown预览文件。Webview也能用于构建比VS Code原生API支持构建的更加复杂的用户交互界面。
 
 可以把webview看成是VS Code中的`iframe`，它可以渲染几乎全部的HTML内容，并用消息和插件通信。这样的自由度使我们的webview非常强劲，并将插件的潜力提升到了新的高度。
 
 ## 我应该用webview吗？
+---
 
-webview虽然很赞，但是我们应该节制地使用这个功能比如当VS Code原生API不够用时。Webview重度依赖资源，所以会脱离插件而单独运行在其他环境中。设计不良的webview可以很容易地感受到它不是运行在VS Code中的。
+webview虽然很赞，但是我们应该节制地使用这个功能——比如当VS Code原生API不够用时。Webview非常依赖资源，所以它脱离插件的进程而单独运行在其他环境中。在VS Code中使用设计不良的webview会使用户抓狂。
 
 在使用webview之前，请作以下考虑：
 - 这个功能真的需要VS Code来提供吗？分离成一个应用或者网站会不会更好？
 - webview是实现这个特性的最后方案吗？VS Code原生API是否能达到同样的目的呢？
 - 你的webview所牺牲的高资源占用是否能换得同样的用户价值？
 
-请记住：仅仅因为你能使用webview来达成目标，不代表你就应该这么做。相反，如果你有充足的理由和自信，那么本篇教程对你来说会非常有用，现在就让我们开始吧。
+请记住：不要因为能使用webview而滥用webview。相反，如果你有充足的理由和自信，那么本篇教程对你来说会非常有用，现在就让我们开始吧。
 
 ## Webviews API 基础
+---
 
-为了解释webviewAPI，我们先构建一个简单的**Cat Coding**插件。这个插件会用一个webview显示猫写代码的gif。随着我们不断了解API，我们会不断地给插件添加功能，包括我们的喵写了多少行代码的计数跟踪器，如果喵写出了bug还会有一个提示弹出框。
+为了解释webviewAPI，我们先构建一个简单的**Cat Coding**插件。这个插件会用一个webview显示猫写代码的gif。随着我们不断了解API，我们会不断地给插件添加功能，包括我们的猫写了多少行代码的计数跟踪器，如果猫猫写出了bug还会有一个提示弹出框。
 
 这是**Cat Coding**插件的第一版`package.json`，你可以在这里找到完整的代码。我们的第一版插件[提供了一个命令](https://code.visualstudio.com/docs/extensionAPI/extension-points#_contributescommands)，叫做`catCoding.start`。当用户从*命令面板*调用这个**Cat Coding: Start new cat coding session **。
 
@@ -115,7 +117,7 @@ function getWebviewContent() {
 
 大功告成！
 
-`webview.html`应该是一个完整的HTML文档。HTML片段或者格式错乱的HTML会造成预料外的行为。
+`webview.html`应该是一个完整的HTML文档。使用HTML片段或者格式错乱的HTML会造成异常。
 
 #### 更新webview内容
 
@@ -170,7 +172,7 @@ function getWebviewContent(cat: keyof typeof cats) {
 
 #### 生命周期
 
-webview从属于创建他们的插件，插件必须保持住从webview返回的`createWeviewPanel`。如果你的插件失去了这个关联，它就不能再访问webview了，即使这样，webview还会继续展示在VS Code中。
+webview从属于创建他们的插件，插件必须保持住从webview返回的`createWebviewPanel`。如果你的插件失去了这个关联，它就不能再访问webview了，不过即使这样，webview还会继续展示在VS Code中。
 
 因为webview就是一个文本编辑器，所以用户可以随时关闭webview。当用户关闭了webview面板后，webview就被销毁了。在我们销毁webview时缺抛出了一个异常。这意味着我们上面的示例中使用的`seInterval`实际上产生了非常严重的Bug：如果用户关闭了面板，`setInterval`会继续触发，而且还会尝试更新`panel.webview.html`，这当然会抛出异常。喵星人可不喜欢异常，我们现在就来解决这个问题吧。
 
@@ -325,6 +327,7 @@ webview的内容是在webview文档中的一个iframe中的，用开发者工具
 **激活窗体**环境是webview脚本执行的地方，另外，**Developer: Reload Webview**命令会刷新所有激活的webview。如果你需要重置一个webview的状态，这个命令会非常有用，或者你想要读取硬盘内容的webview更新一下，也可以使用这个方法。
 
 ## 加载本地内容
+---
 
 webview运行在独立的环境中，因此不能直接访问本地资源，这是出于安全性考虑的做法。这也意味着要想从你的插件中加载图片、样式等其他资源，或是从用户当前的工作区加载任何内容的话，你必须使用webview中的`vscode-resource:`协议。
 
@@ -423,6 +426,7 @@ code {
 }
 ```
 ## 脚本和信息传递
+---
 
 既然webview就像iframe一样，也就是说它们也可以运行脚本，webview中的Javascript默认是禁用的，不过我们能用`enableScripts: true`打开它。
 
@@ -468,7 +472,8 @@ function getWebviewContent() {
 }
 ```
 ![scripts-basic](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/scripts-basic.gif)
-哇！真是只……额不，真是位高产的喵主子!
+
+哇！真是位高产的喵主子!
 
 !> webveiw的脚本能做到任何普通网页脚本能做到的事情，但是webview运行在自己的上下文中，脚本不能访问VS Code API。
 
@@ -547,7 +552,7 @@ function getWebviewContent() {
 
 #### 将webview的信息传递到插件中
 
-webview也可以把信息传递回对应的插件中，用VS Code API 为webview提供的`postMessage`函数我们就可以完成这个目标。调用webview中的`acquireVsCodeApi`，这个行数在一个会话中只能调用一次，你必须保持住这个方法返回的VS Code API实例，然后再转交到需要调用这个实例的地方。
+webview也可以把信息传递回对应的插件中，用VS Code API 为webview提供的`postMessage`函数我们就可以完成这个目标。调用webview中的`acquireVsCodeApi`获取VS Code API对象。这个函数在一个会话中只能调用一次，你必须保持住这个方法返回的VS Code API实例，然后再转交到需要调用这个实例的地方。
 
 现在我们在**Cat Coding**添加一个弹出bug的警示框：
 
@@ -612,6 +617,7 @@ function getWebviewContent() {
 出于安全性考虑，你必须保证VS Code API的私有性，也不会泄露到全局状态中去。
 
 ## 安全性
+---
 
 每一个你创建的webview都必须遵循这些基础的安全性最佳实践。
 
@@ -669,8 +675,9 @@ function getWebviewContent() {
 只依赖审查内容的安全性是不够的，你也要遵循其他安全性的最佳实践，尽可能减少潜在的内容注入。
 
 ## 持久性
+---
 
-在webview的标准[生命周期]()中，`createWebviewPanel`负责创建和销毁（用户关闭或者调用`.dispose()`方法）webview。而webview的内容再是在webview可见时创建的，在webview处于非激活状态时销毁。webview处于非激活标签中时，任何webview中的保留的状态都会丢失。
+在webview的标准[生命周期](#生命周期)中，`createWebviewPanel`负责创建和销毁（用户关闭或者调用`.dispose()`方法）webview。而webview的内容再是在webview可见时创建的，在webview处于非激活状态时销毁。webview处于非激活标签中时，任何webview中的保留的状态都会丢失。
 
 所以最好减少webview中的状态，取而代之用[消息传递](/extension-authoring/webview-api?id=将webview的信息传递到插件中)储存状态。
 
@@ -787,5 +794,5 @@ function getWebviewContent() {
 ## 下一步
 
 如果你想了解学习更多VS Code扩展性的内容，请查看下列主题：
-- [扩展Visual Studio Code](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensions/overview.md) - 其他扩展VS Code的方式
-- [其他插件示例](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensions/samples.md) - 我们的插件项目示例列表
+- [扩展Visual Studio Code](/extensibility-reference/README.md) - 其他扩展VS Code的方式
+- [其他插件示例](/extension-authoring/samples.md) - 我们的插件项目示例列表
