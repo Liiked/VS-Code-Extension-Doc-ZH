@@ -1,6 +1,6 @@
 # 开发插件
 
-这个章节会详细地讲解如何插件的运行，调试和故障排除。这些技巧也同样适用于调试你在市场中安装的问题应用。
+这个章节会详细地讲解如何插件的运行，调试和故障排除。这些技巧也同样适用于调试你从市场安装的问题应用。
 
 ## 创建你自己的插件
 ---
@@ -11,7 +11,7 @@
 - 运行和调试插件
 - 发布插件
 
-我们建议你用脚手架生成基础文件，Yeoman的`yo code`命令可以完成这个工作，生成器能极大地提升你的开发体验，我们在[插件生成器]()里面有详细的步骤。
+我们建议你用脚手架生成基础文件，Yeoman的`yo code`命令可以完成这个工作，生成器能极大地提升你的开发体验，我们在[插件生成器](/extension-authoring/extension-generator.md)里面有详细的步骤。
 
 !> **注意**：以下部分假设你已经掌握了`yo code`Yeoman 插件生成器，和创建`launch.json`、`task.json`的基础知识。
 
@@ -23,13 +23,13 @@
 
 根据插件的不同，你可能需要更多关于调试适配器或者语言服务器插件的相关教程：
 
-- [示例：语言服务器]() - 学习如何实现一个语言服务器插件
-- [示例：调试器]() - 通过VS Code Debug Protocol接入调试器
+- [示例：语言服务器](/extension-authoring/example-language-server.md) - 学习如何实现一个语言服务器插件
+- [示例：调试器](/extension-authoring/developing-extensions.md) - 通过VS Code Debug Protocol接入调试器
 
 ## 编译Typescript
 如果你的插件是Typescript实现的，那你首先就要把代码编译成Javascript。
 编译过程的配置如下所示：
-- `tsconfig.json`定义了Typescript的编译选项。了解更多[Typescript wiki]()或者[Typescript语言章节]()
+- `tsconfig.json`定义了Typescript的编译选项。了解更多[Typescript wiki](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)或者[Typescript语言章节](https://code.visualstudio.com/docs/languages/typescript#_tsconfigjson)
 - 当前Typescript编译器的版本在`node_modules`文件夹里面
 - API定义在`node_modules/vscode`中
 
@@ -104,32 +104,32 @@ code --extensionDevelopmentPath=_my_extension_folder
 你可以用Chrome DevTool内存和CUP分析工具分析你的插件。
 
 跟我做：
-1. 在命令行中带上`--inspect-extensions=<port>`标识，启动你的vscode，比如：`code --inspect-extensions=9333`
-2. 在VS Code中，从**命令面板**选择**Developer: Toggle Developer Tools**
-3. 选择`控制台`标签。找到`Debugger listening on port 9333`开头`chrome-devtools`链接结尾的信息。
-4. 点击链接，为扩展环境打开DevTools
-5. 用内存和CPU分析器，了解内存和计算资源的使用。
+1. 在命令行中带上`--inspect-extensions=<port>`标识，启动你的VS Code，比如：`code --inspect-extensions=9333`
+2. 在VS Code的**命令面板(`Shfit + Cttl+ P`)**中选择并打开**Developer: Toggle Developer Tools**
+3. 在打开的DevTool中查看`Console`标签，找到`Debugger listening on port 9333`开头的`chrome-devtools`链接信息
+4. 打开你自己的Chrome浏览器，输入该链接，然后会进入DevTool提供的专用调试环境
+5. 使用内存和CPU分析器，了解内存和计算资源的使用情况
 
 ![chrome-devtools](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/developing-extensions/chrome-devtools.png)
 
-## 插件的问题追踪
+## 问题追踪
 
-当你的插件或者从插件市场安装的插件出现问题时，我们在这提供了一些建议：
+当你自己的的插件或者市场上的插件出现问题时，你可以参考这些建议进行问题追踪：
 
 #### 禁用插件，启动VS Code
 
-通过`--disable-extensions`命令行，禁用VS Code会话中的所有插件。这个方式可以帮你逐步缩小问题范围，到底是插件问题，还是VS Code自己的问题。
+通过`--disable-extensions`命令行，禁用VS Code会话中的所有插件。这个方式可以帮你逐步缩小问题范围——到底是插件问题，还是VS Code本身的问题。
 
 ```bash
 code --disable-extensions
 ```
 #### 使用开发工具控制台
 
-如果你安装的插件不能正常工作，第一步工作最好是先检查一下**开发工具**的console面板。可能的话，插件作者在开发插件的时候已经添加指示性日志。VS Code 运行于Web技术的Electron之上，所以你可以通过Chrome**开发者工具**获得有力的支持。
+如果你安装的插件不能正常工作，第一步工作最好是先检查一下VS Code**开发者工具**的Console面板。插件作者可能在开发插件的时候已经添加了一些日志——VS Code 运行于Electron之上，所以你可以通过Chrome**开发者工具**获得有力的支持。
 
-通过**帮助**>**切换开发人员工具**（Windows/Linux：`Ctrl + Shift + I`，macOS：`Cmd + Shift + I`）打开**开发工具**然后选择**Console**标签。试着检测插件的功能性和检查console的输出，用`console.log`输出插件信息和VS Code扩展环境抛出的详细异常。
+通过**帮助**>**切换开发人员工具**（Windows/Linux：`Ctrl + Shift + I`，macOS：`Cmd + Shift + I`）打开**开发工具**然后选择**Console**标签。试着运行插件的功能，检查Console的输出。你可以使用`console.log`输出各类信息以及VS Code扩展环境抛出的详细异常。
 
-?> **开发者小贴士：**当你制作插件的时候，提供有用的日志信息才能帮助用户。你给用户的信息越多，用户越能够独立地解决问题。好的日志也同样能帮你快速地找到真正的问题所在。
+?> **开发者小贴士：**当你制作插件的时候，请为用户提供有用的日志信息，你给用户的信息越多，用户越能够独立地解决问题。好的日志也同样能帮你快速地找到真正的问题所在。
 
 #### 重装插件
 
@@ -137,24 +137,17 @@ code --disable-extensions
 
 #### 查看插件的README
 
-为了正常运行，有些插件会有一些其他的依赖，比如独立的语法检查器/编译器，自定义的配置文件等。因此**插件**侧边栏中点击某个插件后显示的**详情**视图会非常有用，它就是插件的**README**，其中可能包含一些插件的配置和使用方式。
-
-## 下一步
-
-- [测试你的插件]() - 学习如何写单元测试和集成测试。
-- [发布工具]() - 用vsce命令行工具发布你的插件。
-- [插件清单]() - VS Code插件清单文件参阅。
-- [插件API]() - 学习更多VS Code扩展性API。
+为了正常运行，有些插件会有一些其他的依赖，比如独立的语法检查器、编译器、自定义的配置文件等。因此在侧边栏**插件**中点击某个插件后显示的**插件详情**页面会非常有用，它就是插件的**README**，其中可能包含了插件的配置和使用方式。
 
 ## FAQ
 
-问：我怎么在插件里使用VS Code新版本引入的API？
+**问：我怎么在插件里使用VS Code新版本引入的API？**
 
 答：如果你想用最新的VS Code API，你可以在插件的`package.json`中的`engines`声明你想要用的引擎版本。
 
 步骤如下：
 
-- 在`package.json`中的`engines`字段设置你的插件最低所需要的VS Code版本。
+- 在`package.json`中的`engines`字段设置你的插件所需要的最低VS Code版本
 - 在`package.json`中添加`postinstall`脚本：
     ```json
     "scripts": {
@@ -164,3 +157,10 @@ code --disable-extensions
 - 在你的插件根目录下输入`npm install`
 - `vscode`模块根据`engine`中声明的版本下载对应的`vscode.d.ts`
 - 回到VS Code，用代码补全验证是否出现了你想要的API提示
+
+## 下一步
+
+- [测试你的插件](/extension-authoring/testing-extensions.md) - 学习如何写单元测试和集成测试。
+- [发布工具](/extension-authoring/publish-extension.md) - 用vsce命令行工具发布你的插件。
+- [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code插件清单文件参阅。
+- [插件API](/extensibility-reference/vscode-api.md) - 学习更多VS Code扩展性API。

@@ -29,9 +29,9 @@ Successfully published uuid@0.0.1!
 
 发布工具会检查以下内容：
 - `pacakge.json`文件中的icon不可以是SVG。
-- `pacakge.json`中的标记不可以是SVG，除非来自于[可信的标记供应方](https://code.visualstudio.com/docs/extensionAPI/extension-manifest#_approved-badges)
+- `pacakge.json`中的标记不可以是SVG，除非来自于[可靠的图标来源](/extensibility-reference/extension-manifest.md#使用认证过的标志)
 - `README.md`和`CHANGELOG.md`中的图片链接需要使用`https`协议
-- `README.md`和`CHANGELOG.md`中的图片不可以是SVG，除非来自[可信的标记供应方](https://code.visualstudio.com/docs/extensionAPI/extension-manifest#_approved-badges)
+- `README.md`和`CHANGELOG.md`中的图片不可以是SVG，除非来自[可靠的图标来源](/extensibility-reference/extension-manifest.md#使用认证过的标志)
 
 ---
 
@@ -57,28 +57,28 @@ VS Code插件市场的服务是[Visual Studio Team Services](https://visualstudi
 
 然后会显示你刚创建好的Personal Access Token，复制好，待会我们还要用来发布插件呢。
 
-#### 创建一个出版方
+#### 创建一个发行方
 
-一个**出版方**是VS Code市场有权力发布插件的唯一标识，每个插件的[package.json]()文件都包含着`publisher`字段。
+**发行方**是VS Code市场有权发布插件的唯一标识，每个插件的[package.json](/extensibility-reference/extension-manifest.md)文件都包含着`publisher`字段。
 
-现在我们已经有了[Personal Access Token]()，我们马上可以用`vsce`创建一个出版方：
+现在我们已经有了[Personal Access Token](#获取Personal-Access-Token)，我们马上可以用`vsce`创建一个发行方：
 
 ```bash
 vsce create-publisher (publisher name)
 ```
-`vsce`会记住这个Personal Access Token，日后再用这个出版方的时候会自动带上。
+`vsce`会记住这个Personal Access Token，日后再用这个发行方的时候会自动带上。
 
-?> 注意：另外，你也可以在市场的出版方[管理页](https://marketplace.visualstudio.com/manage)中创建出版方，然后用这个账号登录`vsce`。
+?> 注意：另外，你也可以在市场的发行方[管理页](https://marketplace.visualstudio.com/manage)中创建发行方，然后用这个账号登录`vsce`。
 
-#### 出版方登录
+#### 发行方登录
 
-如果你已经有出版方账号了：
+如果你已经有发行方账号了：
 ```bash
 vsce login (publisher name)
 ```
 和`create-publisher`命令类似地，`vsce`会要求输入你的Personal Access Token。
 
-你也可以用命令参数`-p <token>`直接登录出版方然后立即发布插件：
+你也可以用命令参数`-p <token>`直接登录发行方然后立即发布插件：
 
 ```bash
 vsce publish -p <token>
@@ -187,10 +187,6 @@ vsce package
 ```
 上面的示例会在每次插件打包时调用Typescript编译器。
 
-## 下一步
-- [插件市场]() - 学习更多VS Code公共插件市场。
-- [测试插件]() - 添加插件测试，提高插件质量。
-
 ## FAQ
 ##### 问：当我发布插件时遇到了403 Forbidden（或 401 Unauthorized）错误？
 
@@ -198,9 +194,12 @@ vsce package
 
 ##### 问：我没办法用`vsce`工具下架插件？
 
-答：你可能改变了插件ID或者出版方名称。不过你还可以在[管理页面](https://marketplace.visualstudio.com/manage)发布或者下架插件。
+答：你可能改变了插件ID或者发行方名称。不过你还可以在[管理页面](https://marketplace.visualstudio.com/manage)发布或者下架插件。
 
 ##### 问：为什么vsce不保留文件属性？
 
 答：请注意，当你在Windows平台构建和发布插件的时候，所有插件包内的文件会缺失POSIX文件属性，或称之为执行位（executable bit）的东西。一些基于这些属性的`node_modules`依赖则会调整工作方式。从Linux和macOS平台构建则会如预期执行。
 
+## 下一步
+- [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多VS Code公共插件市场。
+- [测试插件](/extension-authoring/testing-extensions.md) - 添加插件测试，提高插件质量。
