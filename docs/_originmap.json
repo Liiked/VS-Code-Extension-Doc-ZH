@@ -1,0 +1,90 @@
+{
+    "extension-authoring/extension-generator": {
+        "name": "插件生成器",
+        "path": "https://code.visualstudio.com/docs/extensions/yocode"
+    },
+    "extension-authoring/themes-snippets-colorizers": {
+        "name": "主题，代码片段和着色器",
+        "path": "https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers"
+    },
+    "extension-authoring/example-hello-world": {
+        "name": "示例:Hello-World",
+        "path": "https://code.visualstudio.com/docs/extensions/example-hello-world"
+    },
+    "extension-authoring/example-word-count": {
+        "name": "示例:Word-Count",
+        "path": "https://code.visualstudio.com/docs/extensions/example-word-count"
+    },
+    "extension-authoring/example-language-server": {
+        "name": "示例:语言服务器",
+        "path": "https://code.visualstudio.com/docs/extensions/example-language-server"
+    },
+    "extension-authoring/example-debug-adapter": {
+        "name": "示例:调试适配器",
+        "path": "https://code.visualstudio.com/docs/extensions/example-debuggers"
+    },
+    "extension-authoring/samples": {
+        "name": "更多示例",
+        "path": "https://code.visualstudio.com/docs/extensions/samples"
+    },
+    "extension-authoring/developing-extensions": {
+        "name": "开发插件",
+        "path": "https://code.visualstudio.com/docs/extensions/developing-extensions"
+    },
+    "extension-authoring/testing-extensions": {
+        "name": "测试插件",
+        "path": "https://code.visualstudio.com/docs/extensions/testing-extensions"
+    },
+    "extension-authoring/publish-extension": {
+        "name": "发布插件",
+        "path": "https://code.visualstudio.com/docs/extensions/publish-extension"
+    },
+    "extension-authoring/webview-api": {
+        "name": "Webview API",
+        "path": "https://code.visualstudio.com/docs/extensions/webview"
+    },
+    "extensibility-reference/principles-patterns": {
+        "name": "扩展性原则和模式",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles)"
+    },
+    "extensibility-reference/language-extension-guidelines": {
+        "name": "语言插件指引",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/language-support)"
+    },
+    "extensibility-reference/extension-manifest": {
+        "name": "插件清单",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-manifest)"
+    },
+    "extensibility-reference/contribution-points": {
+        "name": "发布内容配置点",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-points)"
+    },
+    "extensibility-reference/activation-events": {
+        "name": "激活事件",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/activation-events)"
+    },
+    "extensibility-reference/vscode-api-commands": {
+        "name": "复杂命令",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)"
+    },
+    "extensibility-reference/api-debugging": {
+        "name": "调试器API",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/api-debugging)"
+    },
+    "extensibility-reference/document-selectors": {
+        "name": "文档选择器",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/document-selectors"
+    },
+    "extensibility-reference/vscode-api": {
+        "name": "vscode 命名空间API",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/vscode-api"
+    },
+    "extensibility-reference/api-scm": {
+        "name": "VS Code中的源控制",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/api-scm"
+    },
+    "extensibility-reference/api-markdown": {
+        "name": "Markdown插件",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/api-markdown"
+    }
+}
