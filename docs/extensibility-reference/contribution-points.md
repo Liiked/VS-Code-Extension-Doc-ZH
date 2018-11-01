@@ -110,12 +110,12 @@ configuration是JSON格式的键值对，VS Code为用户提供了良好的设�
 * 编辑器标题栏 - `editor/title`
 * 编辑器标题上下文菜单 - `editor/title/context`
 * 调试栈视图的上下文菜单 - `debug/callstack/context`
-* [SCM 标题菜单](/docs/extensionAPI/api-scm.md#menus) - `scm/title`
-* [SCM 资源组](/docs/extensionAPI/api-scm.md#menus) - `scm/resourceGroup/context`
-* [SCM 资源](/docs/extensionAPI/api-scm.md#menus) - `scm/resource/context`
-* [SCM 改变标题](/docs/extensionAPI/api-scm.md#menus) - `scm/change/title`
-* [视图的标题菜单](/docs/extensionAPI/extension-points.md#contributesviews) - `view/title`
-* The [视图项的菜单](/docs/extensionAPI/extension-points.md#contributesviews) - `view/item/context`
+* [SCM 标题菜单](extensibility-reference/api-scm.md#菜单) - `scm/title`
+* [SCM 资源组](extensibility-reference/api-scm.md#菜单) - `scm/resourceGroup/context`
+* [SCM 资源](extensibility-reference/api-scm.md#菜单) - `scm/resource/context`
+* [SCM 改变标题](extensibility-reference/api-scm.md#菜单) - `scm/change/title`
+* [视图的标题菜单](#contributesviews) - `view/title`
+* The [视图项的菜单](#contributesviews) - `view/item/context`
 
 
 
@@ -381,7 +381,7 @@ language-configuration.json
     }]
 }
 ```
-想要完整地学习`debugger`，移步至[调试器]()
+想要完整地学习`debugger`，移步至[调试器](/extension-authoring/example-debug-adapter.md)
 
 ## contributes.breakpoints
 ---
@@ -423,7 +423,7 @@ language-configuration.json
 }
 ```
 
-查看[添加语言着色器]()学习使用[yo code插件生成器]()将TextMate.tmLanguage文件快速打包成VS Code插件。
+查看[添加语言着色器]()学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmLanguage文件快速打包成VS Code插件。
 
 ![grammars](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/grammars.png)
 
@@ -446,11 +446,11 @@ language-configuration.json
 ```
 ![themes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/extension-points/themes.png)
 
-查看[改变色彩主题]()学习使用[yo code插件生成器]()将TextMate.tmTheme文件快速打包成VS Code插件。
+查看[改变色彩主题](docs/extension-authoring/themes-snippets-colorizers.md)学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmTheme文件快速打包成VS Code插件。
 
 ## contributes.snippets
 ---
-为语言添加代码片段。`language`属性必须是[语言标识符]()而`path`则必须是使用[VS Code代码片段格式]()的代码片段文件的相对路径。
+为语言添加代码片段。`language`属性必须是[语言标识符](https://code.visualstudio.com/docs/languages/identifiers)而`path`则必须是使用[VS Code代码片段格式](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax)的代码片段文件的相对路径。
 
 #### 示例
 下面是一个Go语言的代码片段：
@@ -593,37 +593,11 @@ language-configuration.json
 }
 ```
 
-更多内容请查看：[实现一个问题定位器]()
+更多内容请查看：[实现一个问题定位器](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher)
 
 ## contributes.problemPatterns
 ---
 配置可以在问题定位器（见上）中可以使用的问题模式的名称。
-
-## contributes.typescriptServerPlugins
----
-配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件]()：
-
-```json
-"contributes": {
-   "typescriptServerPlugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
-    ]
-}
-```
-
-上述例子配置了[`typescript-styled-plugin`](https://github.com/Microsoft/typescript-styled-plugin)，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在`dependency`中列明：
-
-```json
-{
-    "dependencies": {
-        "typescript-styled-plugin": "*"
-    }
-}
-```
-
-Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
 
 ## contributes.taskDefinitions
 ---
@@ -679,11 +653,37 @@ let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
 }
 ```
 
+## contributes.typescriptServerPlugins
+---
+配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)：
+
+```json
+"contributes": {
+   "typescriptServerPlugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+}
+```
+
+上述例子配置了[`typescript-styled-plugin`](https://github.com/Microsoft/typescript-styled-plugin)，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在`dependency`中列明：
+
+```json
+{
+    "dependencies": {
+        "typescript-styled-plugin": "*"
+    }
+}
+```
+
+Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
+
 ## 下一步
 
 学习更多VS Code的扩展性模型，试着查看下面的主题吧：
 
-- [插件配置清单]() - VS Code的package.json插件配置清单参考
-- [激活事件]() - VS Code的激活事件参考
+- [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的package.json插件配置清单参考
+- [激活事件](/extensibility-reference/activation-events.md) - VS Code的激活事件参考
 
 

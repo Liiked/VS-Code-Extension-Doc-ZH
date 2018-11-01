@@ -1,6 +1,6 @@
 # 示例 Word Count
 
-如果你还没没有接触过[你的第一个插件](/extension-authoring/example-hello-world.md)章节，我们建议你先去了解一下。
+如果你还没有接触过[你的第一个插件](/extension-authoring/example-hello-world.md)章节，我们建议你先去了解一下。
 
 本篇示例将会告诉你，如何制作一个Markdown辅助编辑工具。开始之前，我们先了解一下本篇你将接触到的核心特性：当编辑Makrdown文件时，状态栏会显示编辑区字数，如果你编辑文档，或者打开了另一个md文件，字数也会随之改变。
 

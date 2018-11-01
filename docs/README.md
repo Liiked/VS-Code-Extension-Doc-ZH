@@ -108,4 +108,4 @@ ensure that all content from the user's workspace is properly sanitized.
 - [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机
 - [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境/插件主机环境
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器
-- [Language Identifier](https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_language-identifiers) 语言标识符
+- [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符
