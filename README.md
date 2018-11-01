@@ -75,11 +75,11 @@
     Consider using a helper library to construct your HTML strings, or at least 
     ensure that all content from the user's workspace is properly sanitized.
     ```
-    虽然这里**HTML 字符串**贴合`HTML strings`的表述，但是适当的加工则更有利于阅读，最终可翻译为**可以考虑用一个辅助库去构建HTML模板，或者确保所有来自用户工作区的内容都通过了审查**。
+    虽然这里**HTML 字符串**贴合`HTML strings`的表述，但是适当的加工则更有利于阅读，最终可考虑翻译为“**尝试使用辅助库构建你的HTML模板，或者确保所有来自用户工作区的内容都通过了审查**”。
 
 - 兼收并蓄
 
-    在多人合作翻译中，个人风格可能与已提交翻译不匹配，但这种情况下不建议修改现有的翻译成果，除非您的释义能极大地帮助读者理解文档原意。
+    在多人合作翻译中，个人风格可能与已提交翻译不匹配，但这种情况下不建议修改现有的翻译成果。
 
 ## 开发指引
 
@@ -88,7 +88,7 @@
 #### 贡献代码
 
 - Markdown的格式要求，尽量避免使用`*`用于表示列表，而是使用`-`等其他符号
-- 贡献流程：fork/clone本项目，修改文件，提交pr
+- 贡献流程：fork/clone本项目，创建分支如“fix/chapter_testing_extensions”，修改文件，提交pr到“branch/docs”
 - 请在翻译中遵循[翻译指南](#翻译指南)，否则本项目的owner可能会与你进行深度的讨论~
 
 ```bash
