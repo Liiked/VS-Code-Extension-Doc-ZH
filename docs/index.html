@@ -29,7 +29,7 @@
           let path;
           hook.beforeEach(content => {
             path = vm.route.path
-            let getMap = Docsify.get(`//${location.host}/_originmap.json`, false, null)
+            let getMap = Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json', false, null)
             let getNav = new Promise((reslove, reject) => {
               let nav;
               let interval = setInterval(() => {
