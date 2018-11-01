@@ -47,7 +47,7 @@ return md.use(require('markdown-it-emoji')).use(require('markdown-it-hashtag'));
 ```
 Markdown预览第一次显示时，配置了markdown-it的插件会变成懒加载激活。
 
-[markdown-emoji]()插件展示了如何使用markdown-it添加emoji支持，你可以在GitHub上查看Emoji插件的[源码](https://github.com/mjbvz/vscode-markdown-emoji)。
+[markdown-emoji](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji)插件展示了如何使用markdown-it添加emoji支持，你可以在GitHub上查看Emoji插件的[源码](https://github.com/mjbvz/vscode-markdown-emoji)。
 
 你可能还想了解：
 - markdown-it插件开发者[指南](https://github.com/markdown-it/markdown-it/blob/master/docs/development.md)

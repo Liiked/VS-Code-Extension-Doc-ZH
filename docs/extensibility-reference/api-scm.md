@@ -155,11 +155,11 @@ export interface SourceControl {
 使用`QuickDiffProvider`，你的实现需要告诉VS Code——参数传入的给定资源URI所对应的原始资源URI。
 
 ## 下一步
----
+
 想要学习更多关于VS Code扩展性模型，请参考：
 
-* [SCM API 参考](/docs/extensionAPI/vscode-api.md#scm) - 查看完整的SCM API文档
+* [SCM API 参考](https://code.visualstudio.com/docs/extensionAPI/vscode-api#_scm) - 查看完整的SCM API文档
 * [Git 插件](https://github.com/Microsoft/vscode/tree/master/extensions/git) - 学习Git插件实现
-* [插件API概览](/docs/extensionAPI/overview.md) - 学习全部的VS Code扩展性模型
-* [插件配置清单](/docs/extensionAPI/extension-manifest.md) - VS Code package.json插件配置清单参考
-* [发布内容配置点](/docs/extensionAPI/extension-points.md) - VS Code发布内容配置点参考
+* [插件API概览](/extensibility-reference/README.md) - 学习全部的VS Code扩展性模型
+* [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code package.json插件配置清单参考
+* [发布内容配置点](/extensibility-reference/contribution-points.md) - VS Code发布内容配置点参考
