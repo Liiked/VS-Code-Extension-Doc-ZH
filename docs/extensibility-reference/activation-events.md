@@ -11,7 +11,7 @@
 * [`onUri`](extensibility-reference/activation-events#activationeventsonuri)
 * [`*`](extensibility-reference/activation-events#activationevents)
 
-我们在[`package.json` 插件清单](/docs/extensionAPI/extension-manifest.md)中提供了一个插件最少所需的激活事件。
+我们在[`package.json` 插件清单](extensibility-reference/extension-manifest.md)中提供了一个插件最少所需的激活事件。
 
 ## activationEvents.onLanguage
 

@@ -3,9 +3,9 @@
 
 当你听到VS Code支持了一门语言，你一般能想到语法高亮、代码补全，或者还有调试支持。能想到这么多很好，但是语言插件还可以承担更多的任务。
 
-通过适当地配置文件，语言插件可以语法高亮、代码片段和智能括号匹配，更多高级特性则可以通过VS Code的[扩展性API]()或者[语言服务器]()来实现。
+通过适当地配置文件，语言插件可以语法高亮、代码片段和智能括号匹配，更多高级特性则可以通过VS Code的[扩展性API](/extensibility-reference/vscode-api.md)或者[语言服务器](/extension-authoring/example-language-server.md)来实现。
 
-语言服务器是一个使用[language server protocol]()通信的独立服务器。你能在适当的任务中使用适当的语言实现一个服务器，例如：你想支持一个非常棒的Python库，那你可能会想要用Python来实现你的语言服务器。如果你想要用Javascript或者Typescript实现语言服务器，那么直接用VS Code顶层的[npm modules]()构建即可。
+语言服务器是一个使用[language server protocol](https://microsoft.github.io/language-server-protocol)通信的独立服务器。你能在适当的任务中使用适当的语言实现一个服务器，例如：你想支持一个非常棒的Python库，那你可能会想要用Python来实现你的语言服务器。如果你想要用Javascript或者Typescript实现语言服务器，那么直接用VS Code顶层的[npm modules](https://github.com/Microsoft/vscode-languageserver-node)构建即可。
 
 在实现语言支持时，你也可以自由选择你想要实现的language server protocol，在protocol的`initialize`方法中声明语言服务器的功能。
 
@@ -14,8 +14,8 @@
 为了让你更方便地决定哪些特性应该先实现，哪些应该是之后用来改进代码的，我们按language server protocol的类名和方法的出现顺序一一展示在下面。每个指引下面都包含了**基础**支持和**进阶**实现。
 
 ## 基于**配置**的语言支持
-
-[语法高亮]()，[代码片段]()和[智能括号匹配]()可以通过声明配置而不需要任何插件代码直接实现。
+---
+[语法高亮](#语法高亮)，[代码片段](#源代码片段)和[智能括号匹配](#智能括号匹配)可以通过声明配置而不需要任何插件代码直接实现。
 
 #### 语言标识符
 
@@ -59,7 +59,7 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 ---
 ![snippets](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/snippets.gif)
 
-有了代码片段之后，你可以用占位符的形式提供源代码片段模板。在插件的`package.json`中注册一个包含代码片段的文件。在[创建你自己的代码片段]()章节中学习更多VS Code代码片段协议。
+有了代码片段之后，你可以用占位符的形式提供源代码片段模板。在插件的`package.json`中注册一个包含代码片段的文件。在[创建你自己的代码片段](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)章节中学习更多VS Code代码片段协议。
 ```json
 "contributes": {
     "snippets": [
@@ -98,7 +98,9 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 > ```
 
 ## 智能括号匹配
+---
 ![smart-editing](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/smart-editing.gif)
+
 在插件的`package.json`中进行配置
 
 ```json 
@@ -157,7 +159,7 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 ## 编程语言支持
 ---
 
-除上面介绍的语言特性外，剩下的特性需要写一些插件代码去处理VS Code的请求。你可以通过[language server protocol]()将插件实现为独立的服务器，或者直接在插件的`active`方法内注册一个*供应器（provider）*。这两种方法在接下的篇章里面会分别以**通过语言服务器实现**和**直接实现**展示。
+除上面介绍的语言特性外，剩下的特性需要写一些插件代码去处理VS Code的请求。你可以通过[language server protocol](https://microsoft.github.io/language-server-protocol)将插件实现为独立的服务器，或者直接在插件的`active`方法内注册一个*供应器（provider）*。这两种方法在接下的篇章里面会分别以**通过语言服务器实现**和**直接实现**展示。
 
 language server protocol方式遵循在`initialize`请求中确定服务器的能力，然后基于用户行为处理特定的请求。
 
@@ -839,7 +841,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 ![format-document-type](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-on-type.gif)
 
-!> **注意**：用户[设置]()中的`editor.formatOnType`控制着这项功能。
+!> **注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
 
 #### 通过语言服务器实现
 除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/onTypeFormatting`请求。你还需要告诉客户端哪些字符可以触发这个特性，`moreTriggerCharacters`是个可选项。
@@ -890,7 +892,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 ![color-decorators](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/color-decorators.png)
 
-!> **注意**：用户[设置]()中的`editor.formatOnType`控制着这项功能。
+!> **注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
 
 #### 通过语言服务器实现
 除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/documentColor`和`textDocument/colorPresentation`请求。

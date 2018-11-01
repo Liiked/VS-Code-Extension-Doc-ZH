@@ -78,7 +78,7 @@ GitHub项目 | 描述 | 实现语言
 [Mono Debug](https://github.com/Microsoft/vscode-mono-debug.git) | 一个供Mono使用的简单的C#调试器 | C#
 
 ## 一语道破——调试适配器协议
-
+---
 我们快速地看一下VS Code和调试器间的互动，这应该能帮你快速地实现基于调试适配器协议的调试适配器。
 
 调试器会话启动，VS Code加载调试适配器，通过*stdin*和*stdout*进行通信。VS Code发送了一个**初始化**请求，然后用*行列值是0，1*的路径格式信息（原生或URI）配置好调试器。如果你的调试器是TypeScript或C#实现的`Debugsession`中派生出来的，你则不需要自行处理初始化请求。
@@ -119,7 +119,7 @@ VS Code调试界面支持多线程（如果你只用Node.js调试器的话可能
 ## 下一步
 学习更多VS Code扩展性模型，请参阅下列主题：
 
-* [示例：调试器](/docs/extensions/example-debuggers.md) - 查看一个可执行的'模拟'调试器示例。
-* [插件API概览](/docs/extensionAPI/overview.md) - 学习完整的VS Code扩展性模型。
-* [插件配置清单](/docs/extensionAPI/extension-manifest.md) - VS Code的package.json插件配置清单参阅
-* [发布内容配置](/docs/extensionAPI/extension-points.md) - VS Code发布内容配置参阅
+* [示例：调试器](/extension-authoring/example-debug-adapter.md) - 查看一个可执行的'模拟'调试器示例。
+* [插件API概览](/extensibility-reference/vscode-api.md) - 学习完整的VS Code扩展性模型。
+* [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的package.json插件配置清单参阅
+* [发布内容配置](/extensibility-reference/contribution-points.md) - VS Code发布内容配置参阅
