@@ -3,30 +3,30 @@
 ## 扩展性实现
 ---
 
-VS Code有着非常丰富的扩展性模型和生产插件的方法。不过我们不会给插件作者提供直接操作底层UI DOM的方法。在VS Code开发中，我们会不断优化底层web技术的使用，使其达到高可用，高响应的状态，我们会随着这些技术和产品的演进继续调整DOM的使用方式。为了维持其性能和兼容性，我们在自有的进程中运行插件并阻止DOM的直接操作。保持了不同编程语言和插件中的一致性，VS Code还为很多场景提供了一整套内置的UI组件，如IntelliSense，这样一来，插件开发者也就不需要重复造轮子了。
+VS Code有着非常丰富的扩展性模型和生产插件的方法。不过我们不会给插件作者提供直接操作底层UI DOM的方法。在VS Code开发中，我们会不断优化底层web技术的使用，使其达到高可用，高响应的状态，我们会随着这些技术和产品的演进继续调整DOM的使用方式。为了维持其性能和兼容性，我们在独立的进程中运行插件并阻止直接操作DOM，有助于保持不同编程语言和插件的一致性，VS Code还为很多场景提供了一整套内置的UI组件，如IntelliSense，这样一来，插件开发者也就不需要重复造轮子了。
 
-这些规定一开始看起来可能比较严格，我们也一直在寻找更好的方法改进我们的扩展性，增加插件的能力，期待能听你的反馈和意见。
+这些规定乍看可能比较严格，我们也一直在寻找更好的方法改进我们的扩展性，增加插件的能力，期待能听你的反馈和意见。
 
 ## 核心
 ---
 
 #### 插件独立 - 稳定性
 
-虽然插件很棒，但是插件会影响到VS Code本身的启动性能或者是整体稳定性。所以为插件的加载和执行单独开辟了一条进程，`extension host process`。出错的插件就不会影响到VS Code，尤其是在VS Code启动的时候。
+虽然插件很棒，但是插件会影响到VS Code的启动性能和整体稳定性，所以VS Code为插件的加载和执行单独开辟了一条进程，`extension host process`，这样一来出错的插件就不会影响到VS Code，尤其是在VS Code刚启动的时候。
 
-这样的架构是为最终用户考虑的，确保他们能控制住VS Code：不论什么时候，用户都可以打开、输入、保存文件，不管插件在做什么，VS Code都需要保证UI的及时响应。
+这样的架构确保了终端用户能控制住VS Code：不论什么时候，用户都可以打开、输入、保存文件，不管插件在做什么VS Code都需要保证UI的及时响应。
 
 `extension host`是一个Node.js进程，并将VS Code API暴露给了插件开发者。VS Code在`extension host`下为插件提供了debug支持。
 
 #### 插件激活时机 - 性能
 
-VS Code会尽可能晚点加载插件，如果插件在会话期间没有用到，那就不会加载，以达到控制内存的目的。为了帮助开发者理解插件的懒加载机制，VS Code提供了称之为`activation events`的事件表。激活事件定义了特定的触发时机，比如：一个Markdown辅助插件只需要在用户打开Markdown文件的时候启动。
+VS Code会尽可能晚地加载插件，如果插件在会话期间没有用到那就不会加载，以达到控制内存的目的。为了帮助开发者理解插件的懒加载机制，VS Code提供了称之为`activation events`的事件表。激活事件定义了特定的触发时机，比如：一个Markdown辅助插件只需要在用户打开Markdown文件的时候启动。
 
 #### Extension Manifest（插件配置清单）
 
-为了激活一个懒加载插件，VS Code需要一份插件的描述文件，`extension manifest`是一份添加了[VS Code特定字段](/extensibility-reference/extension-manifest.md)的`package.json`文件，其中包含了激活事件的配置位置。VS Code提供了一系列插件可以使用的`contribution points`。例如，给VS Code添加一个指令，则需要你在`commands` contribution points 中定义指令。一旦你在`package.json`中定义好了contributions。VS Code 在启动时会读取、解析这个清单准备相应的UI界面。
+为了激活一个懒加载插件，VS Code需要一份插件的描述文件，`插件清单（extension manifest）`是一份添加了[VS Code特定字段](/extensibility-reference/extension-manifest.md)的`package.json`文件，其中包含了激活事件的配置位置。VS Code提供了一系列插件可以使用的`发布内容配置（contribution points）`。例如，给VS Code添加一个指令，则需要你在名为`commands`的配置点中定义指令。一旦你在`package.json`中定义好了配置。VS Code 在启动时会读取、解析这个清单然后准备相应的UI界面。
 
-查看更多的[package.json contribution points reference](https://code.visualstudio.com/docs/extensionAPI/extension-points)
+查看更多的[package.json 发布内容配置](/extensibility-reference/contribution-points.md)
 
 #### 扩展性API
 
@@ -38,11 +38,11 @@ VS Code会尽可能晚点加载插件，如果插件在会话期间没有用到�
 
 #### 基于协议的插件
 
-在VS Code中，比较常见的模式是在分离的进程中执行插件，通过协议与VS Code进行通信，比如：语言服务器和调试适配器。
+在VS Code中比较常见的场景是在各自独立的进程中执行插件，然后通过协议与VS Code进行通信，比如：语言服务器和调试适配器。
 
-通常来说，这个协议使用 stdin/stdout 标准和JSON载荷在两者间进行通信。
+一般来说，这个通信协议使用 stdin/stdout 标准和JSON载荷进行。
 
-使用分离的进程有助于插件建立独立的边界，维持VS Code核心编辑器进程的稳定性。这也有助于插件开发人员为特定的插件实现，选择合适的编程语言。
+使用分离的进程有助于插件建立独立的边界，维持VS Code核心编辑器进程的稳定性，同时也有助于插件开发人员为特定的插件实现选择合适的编程语言。
 
 ## 扩展性模式
 ---
@@ -51,11 +51,11 @@ VS Code会尽可能晚点加载插件，如果插件在会话期间没有用到�
 
 #### Promises（异步）
 
-VS Code API完全采用了promise的实现。对于插件来说，允许任何promise形式的返回格式，如ES6，WinJS，A+等。
+VS Code API完全采用了promise的实现。对于插件来说允许任何promise形式的返回格式，如ES6，WinJS，A+等。
 
-要想成为一个promise库，则需要API使用`Thenable`类型来表达。`Thenable`代表了一种通用特性——then方法。
+一个promise库需要它的API使用`Thenable`类型来表达，`Thenable`类型代表了一种通用特性的实现——then方法。
 
-大多数时候，当VS Code调用插件时promise是一个可选项，它能直接处理正常的返回结果，也能处理`Thenable`的结果类型。当promise是可选时，API会在返回类型中用`Thenable`表示。
+大多数时候promise是一个可选项，VS Code调用插件之后，它能直接处理正常的返回结果也能处理`Thenable`的结果类型。当promise是可选的API返回结果时，API会在返回类型中用`Thenable`表示。
 
 ```typescript
 provideNumber(): number | Thenable<number>
@@ -63,9 +63,9 @@ provideNumber(): number | Thenable<number>
 
 #### Cancellation Tokens（取消式令牌）
 
-有些事件可能从不稳定的变化状态开始，而随着状态变化，这一事件最后被取消了。比如：IntelliSense（智能补全）被触发后，用户持续输入使得这一操作最终被取消了。
+有些事件可能从不稳定的变化状态开始，而随着状态变化这一事件最后肯能被取消了。比如：IntelliSense（智能补全）被触发后，用户持续输入的行为使得这一操作最终被取消了。
 
-API也为这种行为提供了解决方案，你可以通过`CancellationToken`检查取消的状态（`isCancellationRequested`）或者当取消发生时得到通知（`onCancellationRequested`）。取消式令牌通常是API函数的最后一个参数，而且是可选的。
+API也为这种行为提供了解决方案，你可以通过`CancellationToken`检查取消的状态（`isCancellationRequested`）或者当*取消*发生时得到通知（`onCancellationRequested`）。取消式令牌通常是API函数的最后一个（可选）参数。
 
 #### Disposables（释放器）
 
