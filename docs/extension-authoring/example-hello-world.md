@@ -5,18 +5,17 @@
 本节通过Hello World这个完整的项目手把手教你掌握VS Code扩展性概念。
 在本项目中，我们会给VS Code添加一个新的命令，虽然只是用来显示"Hello World"信息。在本节的最后，你将和编辑器编辑器互动，查找用户选中的文本。
 #### 预备工作
----
 请查看[生成插件-预备工作](/extension-authoring/extension-generator?id=预先准备)
 
 #### 生成新插件
 请查看[生成插件-运行Yo](/extension-authoring/extension-generator?id=运行yo-code😎)
 ## 运行插件
 ---
-- 打开VS Code，选择`文件`>`打开文件夹`，选择你刚刚生成的项目目录。
-- 点击`F5`或者`Debug`按钮，然后点击`开始`。
-- 新的VS Code实例会运行在特殊环境中（`Extension Development Host`），并且已经感知到了你的插件。
-- 按下`⇧⌘P`(windows `shift + ctrl + p`)，输入命令`Hello world`。
-- 恭喜！你成功执行了你自己的第一个VS Code插件
+- 打开VS Code，选择`文件`>`打开文件夹`，选择你刚刚生成的项目目录
+- 点击`F5`或者`Debug`按钮，然后点击`开始`
+- 新的VS Code实例会运行在特殊环境中（`Extension Development Host`
+- 按下`⇧⌘P`(windows `shift + ctrl + p`)，输入命令`Hello world`
+- 恭喜！你的第一个VS Code插件执行成功了
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-hello-world/running.png)
 ## 插件的目录结构
@@ -54,7 +53,7 @@
 ```
 让我们看看这些文件夹都是干什么用的：
 #### 插件清单：`package.json`
-- 每个VS Code插件都有`package.json`文件，文件内包含了这个文件能力的和用处。
+- 每个VS Code插件都有`package.json`文件，文件内包含了这个插件功能和用处。
 - 当项目启动时，VS Code会立即读取这个文件中的每个`配置(contributes)`部分并作出响应。
 - 请阅读[package.json插件清单 参考文档](/extensibility-reference/extension-manifest.md)
 - 更多信息请参阅[package.json发布内容配置 参考文档](/extensibility-reference/contribution-points.md)
@@ -104,7 +103,7 @@
 
 这份`package.json`文件说了什么呢？
 - **配置部分(contributes)**给*命令面板*定义了一个叫做`Hello world`的入口，它会调用'extension.sayHello'。
-- 当命令'extension.sayHello'调用时，执行`loaded`(activationEvents)请求。
+- 当命令"extension.sayHello"调用时，执行`loaded`(激活事件)请求。
 - 在"`./out/extension.js`"中，存放着我们的主文件。
 
 !> 注意：VS Code **不会一启动就加载插件**。插件必须在`activationEvents`中描述它的启动时机，比如`loaded`事件。

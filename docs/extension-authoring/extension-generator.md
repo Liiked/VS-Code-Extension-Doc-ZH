@@ -78,13 +78,13 @@ Linux ~/.vscode/extensions
 
 ## FAQ
 ---
-Q: 为什么`yo code`在我的windows 10上无法识别键盘方向键？
+**问: 为什么`yo code`在我的windows 10上无法识别键盘方向键？**
 
 ![yo-workaround](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/yocode/yo-workaround.png)
 
-A： 如果方向键没有任何反应，可以试试在管理员权限下运行终端。
+答： 如果方向键没有任何反应，可以试试在管理员权限下运行终端。
 
 ## 下一步
 - [发布工具](/extension-authoring/publish-extension)
-- [Hellow World](/extension-authoring/example-hello-world)
+- [Hello World](/extension-authoring/example-hello-world)
 - [其他例子](/extension-authoring/samples)
