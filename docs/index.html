@@ -7,6 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div id="app"></div>
@@ -21,7 +22,44 @@
         placeholder: '开始搜索',
         depth: 4
       },
-      subMaxLevel: 2
+      loadNavbar: true,
+      subMaxLevel: 2,
+      plugins: [
+        function (hook, vm) {
+          let path;
+          hook.beforeEach(content => {
+            path = vm.route.path
+            let getMap = Docsify.get(`//${location.host}/_originmap.json`, false, null)
+            let getNav = new Promise((reslove, reject) => {
+              let nav;
+              let interval = setInterval(() => {
+                if (!nav) {
+                  nav = document.querySelector('.app-nav').childNodes[0]
+                } else {
+                  clearInterval(interval)
+                  reslove(nav)
+                }
+              }, 1000)
+            })
+
+
+            Promise.all([getNav, getMap]).then((all) => {
+              let nav = all[0]
+              let data = JSON.parse(all[1])
+
+              let pathList = Object.keys(data)
+              for (const p of pathList) {
+                let reg = new RegExp(p)
+                if (reg.test(path)) {
+                  let originPage = Docsify.dom.create('li', `<a href="${data[p].path}" target="_blank">原始页面</a>`)
+                  Docsify.dom.appendTo(nav, originPage)
+                }
+              }
+            })
+            return content
+          })
+        }
+      ]
     }
 
   </script>
@@ -31,13 +69,12 @@
       font-size: 15px;
       color: #364149;
     }
-  
   </style>
-  <script src="https://cdn.bootcss.com/docsify/4.7.0/docsify.min.js"></script>
+  <script src="https://cdn.bootcss.com/docsify/4.7.0/docsify.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"></script>
-  <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"></script>
+  <script defer src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
 </body>
 </html>
