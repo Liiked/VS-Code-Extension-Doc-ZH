@@ -86,5 +86,5 @@ A： 如果方向键没有任何反应，可以试试在管理员权限下运行
 
 ## 下一步
 - [发布工具](/extension-authoring/publish-extension)
-- [Hellow World](/extension-authoring/example-hello-world)
+- [Hello World](/extension-authoring/example-hello-world)
 - [其他例子](/extension-authoring/samples)

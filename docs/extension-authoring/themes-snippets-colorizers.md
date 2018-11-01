@@ -11,16 +11,16 @@
 
 #### 工作台色彩
 
-创建工作台色彩最简单的方式就是使用已有的主题，然后开始定制。
+创建工作台色彩最简单的方式就是使用现成的主题，然后开始定制。
 
 - 在VS Code中切换到你想要编辑的色彩主题。
-- 打开设置，用`workbench.colorCustomizations`修改视图和编辑器色彩。一般来说会即时生效，如果没有生效的话，需要你自己重启VS Code。
+- 打开设置，用`workbench.colorCustomizations`修改视图和编辑器色彩。一般来说会即时生效，如果没有生效你需要自己重启VS Code。
 - [完整的配置项列表](https://code.visualstudio.com/docs/getstarted/theme-color-reference)
 
 #### 语法高亮色彩
 
 新建语法高亮色彩有两种方式，
-1. 直接使用社区已有的TextMate主题（`.tmTheme`文件）
+1. 直接使用社区现成的TextMate主题（`.tmTheme`文件）
 2. 自己想一个主题规则出来
 
 简单选项：切换到色彩主题，用设置中的`editor.tokenColorCustomizations`进行自定义。
@@ -29,7 +29,7 @@
 
 #### TextMate 主题规则
 
-想要写出符合TextMate的规则，你需要知道TextMate语法和作用域。`TextMate语法`由一系列构成源代码*语法树*的的常规表达式组成。每一个树节点就是一个包含源代码的范围，也被称之为`作用域`。每个作用域会有一个名字代表*代码区块*（如函数，代码块，注释）和还有符号（如关键字，数字，操作符）。
+想要写出符合TextMate的规则，你需要了解TextMate语法和作用域。`TextMate语法`由一系列构成源代码*语法树*的的常规表达式组成。每一个树节点就是一个包含源代码的范围，也被称之为`作用域`。每个作用域会有一个名字代表*代码区块*（如函数，代码块，注释）和还有符号（如关键字，数字，操作符）。
 
 这里是一个Javascript作用域层级的例子：
 
@@ -95,7 +95,7 @@ yo code
 ![生成新主题](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/themes-snippets-colorizers/yocode-colortheme.png)
 
 - 把从设置中生成的主题文件复制到新的插件中
-- 如果你想使用已有的TextMate主题，那你就需要在插件生成的时候选择导入TextMate主题并打包。另外，如果你下载了一个主题，那么只要用`.tmTheme`链接替换`tokenColors`部分就可以了。
+- 如果你想使用现成的TextMate主题，那你就需要在插件生成的时候选择导入TextMate主题并打包。另外，如果你下载了一个主题，那么只要用`.tmTheme`链接替换`tokenColors`部分就可以了。
 
 ```json
 {
@@ -113,7 +113,7 @@ yo code
 ```
 - 为`.color-theme.json`色彩定义文件添加前缀，那么你在编辑文件时能获得悬浮提示、代码补全、色彩装饰器和色彩选择器。
 
-?> [ColorSublime](https://colorsublime.github.io/)有成百上千个已有的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
+?> [ColorSublime](https://colorsublime.github.io/)有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
 
 
 ## 测试新的主题
@@ -159,8 +159,8 @@ yo code
 ```
 
 - `id`作为这个图标主题的标识，目前只做内部使用，未来可能会用在设置里面，所以最好设置一个可读性强的唯一值。
-- `label`会显示在主题选择下拉框中。
-- `path`指示了图标文件集所在的位置。如果你的图标系列名称遵循`*icon-theme.json`命名规范，那么VS Code就能提供完整的支持。
+- `label`会显示在*主题选择*下拉框中。
+- `path`指示了图标集所在的位置。如果你的图标系列名称遵循`*icon-theme.json`命名规范，那么VS Code就能提供完整的支持。
 
 #### 图标文件集(Icon set file)
 图标文件集是一个JSON文件，包含了所有的**关联图标**和图标定义。
@@ -179,7 +179,7 @@ yo code
 }
 ```
 
-这里，**图标定义**包含了一个定义标识符`_folder_dark`。除此之外还支持以下属性：
+这里，**图标定义**包含了一个标识符`_folder_dark`。除此之外还支持以下属性：
 
 - iconPath：当使用svg/png文件时：指向图片的路径。
 - fontCharacter：当使用glyph字体时：字体中使用的字符。
@@ -223,7 +223,7 @@ yo code
 }
 ```
 
-- `file`是一个默认文件图标，为那些没有匹配到任何插件、文件名、语言类型的文件使用的。目前所有文件图标属性都会被继承。
+- `file`是一个默认文件图标，为那些没有匹配到任何插件、文件名、语言类型的文件所准备的。目前所有文件图标属性都会被继承。
 - `folder`收起的文件夹图标，如果`folderExpanded`没有设置，那么展开的文件夹也会使用这个图标。使用`folderNames`关联特殊名称的文件夹。文件夹图标是可选的，如果不设置，那文件夹就不会显示任何图标。
 - `folderExpanded`展开的文件夹图标。这个图标是可选的，如果不设置就会使用`folder`定义好的图标。
 - `folderNames`特殊名称文件夹图标。这个键是用于文件夹名称的，不支持包含路径的名称，不支持匹配模式和通配符。大小写不敏感。
@@ -342,7 +342,7 @@ yo code
 
 使用[Yo code](docs/extension-authoring/extension-generator.md)生成器，从你VS Code中已经安装的语言中挑选一个类型生成插件，为这个语言添加语法高亮和括号匹配。
 
-**语言支持插件**的核心是一份描述着色器规则的TextMate[语言规格](https://manual.macromates.com/en/language_grammars)文件（.tmLanguage）。生成器也能从已有的TextMate语言规格文件中生成，当然你自己开个新的也成。
+**语言支持插件**的核心是一份描述着色器规则的TextMate[语言规格](https://manual.macromates.com/en/language_grammars)文件（.tmLanguage）。生成器也能从现成的TextMate语言规格文件中生成，当然你自己开个新的也成。
 
 学习TextMate .tmLanguage 文件最好的地方是在Github上——找到你感兴趣的语言和对应的TextMate包，找到其中的`Syntatxes`文件夹就可以开始看了。
 
@@ -513,7 +513,7 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
     }
     ```
 
-- **我可以为已有的着色器添加更多文件插件吗？**
+- **我可以为现成的着色器添加更多文件插件吗？**
 
     可以。你可以用`files.associations`[设置](https://code.visualstudio.com/docs/getstarted/settings)将文件插件关联到一个已存在的语言标识符上。IntelliSense会显示当前可用的语言标识符。
 
@@ -524,9 +524,9 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
     }
     ```
 
-- **如果我想完全重载已有的着色器，该怎么做？**
+- **如果我想完全重载现成的着色器，该怎么做？**
 
-    在已有的语言标识符中添加新的`grammers`元素就可以重载着色器。另外，添加`extensionDependencies`属性，这个属性包含着名字的插件，而这个插件定义了你想要替换的语法。
+    在现成的语言标识符中添加新的`grammers`元素就可以重载着色器。另外，添加`extensionDependencies`属性，这个属性包含着名字的插件，而这个插件定义了你想要替换的语法。
 
     ```json
     {
