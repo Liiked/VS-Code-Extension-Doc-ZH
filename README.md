@@ -88,7 +88,7 @@
 #### 贡献代码
 
 - Markdown的格式要求，尽量避免使用`*`用于表示列表，而是使用`-`等其他符号
-- 贡献流程：fork/clone本项目，修改文件，提交pr
+- 贡献流程：fork/clone本项目，创建分支如“fix/chapter_testing_extensions”，修改文件，提交pr到“branch/docs”
 - 请在翻译中遵循[翻译指南](#翻译指南)，否则本项目的owner可能会与你进行深度的讨论~
 
 ```bash
