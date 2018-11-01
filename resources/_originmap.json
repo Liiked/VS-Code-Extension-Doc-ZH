@@ -45,31 +45,31 @@
     },
     "extensibility-reference/principles-patterns": {
         "name": "扩展性原则和模式",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles"
     },
     "extensibility-reference/language-extension-guidelines": {
         "name": "语言插件指引",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/language-support)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/language-support"
     },
     "extensibility-reference/extension-manifest": {
         "name": "插件清单",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-manifest)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-manifest"
     },
     "extensibility-reference/contribution-points": {
         "name": "发布内容配置点",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-points)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/extension-points"
     },
     "extensibility-reference/activation-events": {
         "name": "激活事件",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/activation-events)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/activation-events"
     },
     "extensibility-reference/vscode-api-commands": {
         "name": "复杂命令",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/vscode-api-commands"
     },
     "extensibility-reference/api-debugging": {
         "name": "调试器API",
-        "path": "https://code.visualstudio.com/docs/extensionAPI/api-debugging)"
+        "path": "https://code.visualstudio.com/docs/extensionAPI/api-debugging"
     },
     "extensibility-reference/document-selectors": {
         "name": "文档选择器",
