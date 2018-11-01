@@ -75,11 +75,11 @@
     Consider using a helper library to construct your HTML strings, or at least 
     ensure that all content from the user's workspace is properly sanitized.
     ```
-    虽然这里**HTML 字符串**贴合`HTML strings`的表述，但是适当的加工则更有利于阅读，最终可翻译为**可以考虑用一个辅助库去构建HTML模板，或者确保所有来自用户工作区的内容都通过了审查**。
+    虽然这里**HTML 字符串**贴合`HTML strings`的表述，但是适当的加工则更有利于阅读，最终可考虑翻译为“**尝试使用辅助库构建你的HTML模板，或者确保所有来自用户工作区的内容都通过了审查**”。
 
 - 兼收并蓄
 
-    在多人合作翻译中，个人风格可能与已提交翻译不匹配，但这种情况下不建议修改现有的翻译成果，除非您的释义能极大地帮助读者理解文档原意。
+    在多人合作翻译中，个人风格可能与已提交翻译不匹配，但这种情况下不建议修改现有的翻译成果。
 
 ## 开发指引
 
