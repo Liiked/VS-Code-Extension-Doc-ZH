@@ -2,7 +2,7 @@
 
 如果你还没有接触过[你的第一个插件](/extension-authoring/example-hello-world.md)章节，我们建议你先去了解一下。
 
-本篇示例将会告诉你，如何制作一个Markdown辅助编辑工具。开始之前，我们先了解一下本篇你将接触到的核心特性：当编辑Makrdown文件时，状态栏会显示编辑区字数，如果你编辑文档，或者打开了另一个md文件，字数也会随之改变。
+本篇示例将会告诉你，如何制作一个Markdown辅助编辑工具。开始之前，我们先了解一下本篇你将接触到的插件功能：当编辑Makrdown文件时，状态栏会显示编辑区字数，如果你编辑文档，或者打开了另一个md文件，字数也会随之改变。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/wordcountevent2.gif)
 
@@ -20,7 +20,7 @@
 
 ## 更新状态栏
 ---
-将下列代码更新到`extension.ts`中。这段代码声明了一个`WordCounter`类，用于控制文本计数，并显示到状态栏中。我们依然用了"Hello World"这个命令来执行`updateWordCount`。
+将下列代码更新到`extension.ts`中。这段代码声明了一个`WordCounter`类用于控制文本计数并显示到状态栏中，我们依然用了"Hello World"这个命令来执行`updateWordCount`。
 
 ```typescript
 // 'vscode'模块包含了VS Code扩展性API
@@ -99,7 +99,7 @@ class WordCounter {
 
 现在让我们试试更新插件吧。
 
-在vscode中（非开发主机窗口）按下`F5`或者直接按重启按钮。假设你已经打开了一个markdown文件，然后和Hello-World示例一样，我们在*命令面板*中输入`Hello World`启动插件。
+在VS Code中（非开发主机窗口）按下`F5`或者直接按重启按钮。假设你已经打开了一个markdown文件，然后和Hello-World示例一样，我们在*命令面板*中输入`Hello World`启动插件。
 
 ![](https://github.com/Microsoft/vscode-docs/raw/master/docs/extensions/images/example-word-count/wordcount2.png)
 
@@ -112,9 +112,9 @@ class WordCounter {
 - `onDidChangeTextEditorSelection` - 鼠标位置变动时触发。
 - `onDidChangeActiveTextEditor` - 激活编辑器（打开的编辑器）切换的时候触发。
 
-为了实现这个目标，我们给`extension.ts`添加一个新类，订阅上述事件，然后让`WordCounter`更新字数。
+为了实现这个目标，我们给`extension.ts`添加一个新类，订阅上述事件然后让`WordCounter`更新字数。
 
-?>在实现时，你需要注意我们是如何通过这个类把**订阅( subscription )**作为**临时容器( Disposables )**来管理的，它是如何监听并释放自己的。
+?>在实现时，你需要注意我们是如何把**消息订阅( subscription )**转换为**释放器( Disposables )**来管理的，它将监听并释放自己。
 
 根据下列代码，将`WordCounterController`类添加到`extension.ts`文件底部。
 ```typescript
@@ -148,7 +148,7 @@ class WordCounterController {
 }
 ```
 
-我们不希望命令执行时词汇计数插件才启动，而是为每个markdown文件保持可用状态。
+我们不希望通过执行命令才启动词汇计数插件，而是markdown文件一打开插件就应该启动。
 
 首先，我们将`active`函数替换成这样：
 ```typescript
@@ -159,12 +159,12 @@ console.log('Congratulations, your extension "WordCount" is now active!');
 let wordCounter = new WordCounter();
 let controller = new WordCounterController(wordCounter);
 
-// 插件关闭时，临时容器会自动释放
+// 插件关闭时，释放器会自动释放
 context.subscriptions.push(controller);
 context.subscriptions.push(wordCounter);
 ```
 
-然后，我们必须保证`Markdown`文件打开时才激活。在之前的示例中，我们通过`extension.sayHello`命令激活插件，而我们现在用不到了，删除`package.json`文件中的`contributes`键。
+然后，我们必须保证`Markdown`文件打开时才激活。在之前的示例中，我们通过`extension.sayHello`命令激活插件，而我们现在用不到了，删除`package.json`文件中原来的`contributes`键。
 ```json
 "contributes": {
     "commands":
@@ -175,24 +175,24 @@ context.subscriptions.push(wordCounter);
     ]
 }
 ```
-取而代之的是下列事件配置：
+用下面的代码替换掉：
 ```json
 "activationEvents": [
     "onLanguage:markdown"
 ]
 ```
-为[onLanguage: ${language}]()配置一个语言，在这里是"markdown" ，然后打开这一类文件就会触发这个事件了。
+为[onLanguage: ${language}]()配置一个语言，在这里是"markdown" 。这样一来打开这一类文件就会触发这个事件了。
 
 重启插件(按下`Cmd + R`或者重启按钮)，然后新建一个`.md`文件，你应该能看到下图的效果。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/wordcountevent2.gif)
 
-如果你在`active`函数上打了断点，你应该能看到markdown文件被打开时只触发了一次。`WordCountController`构造器运行之后，订阅了编辑器事件，这样我们整个插件才得以正常运行。
+如果你在`active`函数上打了断点，你应该能看到markdown文件被打开时只触发了一次。`WordCountController`构造器运行之后，订阅了编辑器事件，这样我们整个插件就正常运行了。
 
 ## 自定义状态栏
 ---
 
-vscode允许你定制状态栏的颜色、图标、提示文本等额外样式。用IntelliSense，你会看到各种`StatusBarItem`字段。你也可以通过`vscode.d.ts`学习vscode扩展性API，这个文件就在你生成的项目文件夹里。在编辑器中打开`node_modules\vscode\vscode.d.ts`，你能看到完整的扩展性 API和注释。
+VS Code允许你定制状态栏的颜色、图标、提示文本等额外样式。如果你不清楚**状态栏**相关的API，你可以查看该类型的代码提示，你也可以通过`vscode.d.ts`VS Code扩展性API查看，这个文件就在你生成的项目文件夹里，在编辑器中打开`node_modules\vscode\vscode.d.ts`，你能看到完整的扩展性 API和注释。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/vscode-d-ts.png)
 
@@ -209,11 +209,11 @@ this._statusBarItem.show();
 ## 释放插件资源
 ---
 
-现在，我们来深入了解一下vscode是怎么通过[释放器（Disposables）](/extensibility-reference/principles-patterns?id=disposables（释放器）)控制资源的。
+现在，我们来深入了解一下VS Code是怎么通过[释放器（Disposables）](/extensibility-reference/principles-patterns?id=disposables（释放器）)控制资源的。
 
-当一个插件被激活，它会传入一个`ExtensionContext`对象， 这个对象有一个用于订阅释放器（Disposable）的`subscriptions`方法。插件能将他们的释放器添加到这个订阅列表中，vscode则会在插件关闭的时候释放这些对象。
+当一个插件被激活，它会传入一个`ExtensionContext`对象， 这个对象有一个用于订阅释放器（Disposable）的`subscriptions`方法。插件将=释放器添加到这个订阅列表中，VS Code则会在插件关闭的时候释放这些对象。
 
-很多能生成工作区（workspace）或者UI对象的VS Code API（比如：`registerCommand`）会自动返回一个释放器，我们可以直接调用他们的dispose方法移除这些元素。
+很多能生成工作区（workspace）或者UI对象的VS Code API（比如：`registerCommand`）会自动返回一个释放器，我们可以直接调用他们的dispose方法释放UI元素。
 
 事件则有所不同，比如`onDid*`这类事件订阅器会返回一个释放器。插件通过释放事件的释放器（Disposable）来取消已经订阅的事件。在我们的例子里，`WordCountController`把事件订阅的释放器直接保存到自己的释放器列表中，在插件关闭时释放。
 ```typescript
@@ -228,7 +228,7 @@ this._disposable = Disposable.from(...subscriptions);
 ##  在本地安装你的插件
 ---
 
-到目前为止，你的插件都还跑在插件开发模式中，要想让你的插件在所有vscode中运行起来，将你的插件复制到`.vscode/extensions`目录下。
+到目前为止，你的插件都还跑在插件开发模式中，要想让你的插件在正常的VS Code中运行起来将你的插件复制到`.vscode/extensions`目录下。
 
 ## 发布插件
 ---

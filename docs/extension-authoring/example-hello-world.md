@@ -133,7 +133,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
 }
 ```
-- 每个插件都应该在主文件中注册一个`activate()`函数，因为这个函数只会调用一次。只有`package.json`中注册了`activationEvents`列表中的事件，才会调用这个方法。
+- 每个插件都应该在主文件中注册一个`activate()`函数，因为这个函数只会调用一次。你只有`在package.json`中注册了`activationEvents`列表中的事件，激活事件才会被调用。
 - 如果插件使用了系统资源(如：生成进程），则需要从主文件中导出名为`deactive()`的函数去清理释放这些资源，VS Code会在关闭时调用这个方法。
 - 这个插件导入了VS Code API，然后注册了"extension.sayHello"命令和回调函数，执行后在VS Code中显示一条"Hello World!"消息。
 
@@ -149,12 +149,12 @@ export function activate(context: vscode.ExtensionContext) {
 ## 插件激活过程
 --- 
 我们刚刚已经了解了开发目录下的每个文件，现在我们看看你的插件是怎么运行起来的：
-1. 插件开发实例发现了这个插件，然后读取它的`package.json`
-2. 然后你按下`ctrl shift p`，*命令面板*显示出已注册的命令列表
-3. 在列表中，你找到`package.json`中定义的`Hello world`命令入口
-4. 选中并执行`Hello world`，执行真实的"`extension.sayHello`"命令
+1. 插件开发环境发现了这个插件，然后读取它的`package.json`
+2. 你按下`ctrl shift p`时，*命令面板*显示出已注册的命令列表
+3. 在列表中你找到`package.json`中定义的`Hello world`命令入口
+4. 选中并执行`Hello world`，随即执行真实的"`extension.sayHello`"命令
     - 创建`"onCommand:extension.sayHello"`激活事件
-    - 激活所有插件注册在`activationEvents`的事件
+    - 激活所有注册在`activationEvents`的事件
         - Javascript虚拟机加载`./out/extension.js`文件
         - VS Code查找导出的`activate`函数，并调用
 5. 调用`"extension.sayHello"`注册的函数
@@ -189,7 +189,7 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
     vscode.window.showInformationMessage('Selected characters: ' + text.length);
 });
 ```
-!> 当你修改了代码，你需要按Ctrl+R重启Extension Development Host，或者直接按VS Code上面的重启按钮
+!> 当你修改了代码，你需要按<kbd>Ctrl + R</kbd>(macOS <kbd>Cmd + R</kbd>)重启Extension Development Host，或者直接按VS Code上面的重启按钮
 
 新建一个文件，输入一些文本然后选中。当你运行**Hello World**命令，你应该能看到字符计数的消息框。
 
@@ -205,7 +205,7 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
 参阅[分享插件](/extension-authoring/publish-extension.md)
 ## 下一步
 ---
-在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](docs/extension-authoring/example-word-count.md)中，你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件，显示文本字数。
+在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](docs/extension-authoring/example-word-count.md)中你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件、显示文本字数。
 
 如果你想查看更多extension API的概述，看看这些主题吧：
 - [Extension API 概览](/extensibility-reference/README.md) - 了解完整的VS Code扩展性模型。
