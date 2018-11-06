@@ -51,7 +51,7 @@
               for (const p of pathList) {
                 let reg = new RegExp(p)
                 if (reg.test(path)) {
-                  let originPage = Docsify.dom.create('li', `<a href="${data[p].path}" target="_blank">原始页面</a>`)
+                  let originPage = Docsify.dom.create('li', `<a href="${data[p].path}" target="_blank">原始文档</a>`)
                   Docsify.dom.appendTo(nav, originPage)
                 }
               }
