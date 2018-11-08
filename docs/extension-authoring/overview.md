@@ -42,7 +42,7 @@ VS Code实现了一套原生的调试器UI，并通过`调试适配器`连接到
 
 ## 语言插件指南
 
-通过`extensibility API`学习如何使用语言服务协议——[语言插件指南](/extensibility-reference/language-extension-guidelines)。
+通过`extensibility API`学习如何使用语言服务器协议——[语言插件指南](/extensibility-reference/language-extension-guidelines)。
 
 ## 主题，代码片段和高亮
 

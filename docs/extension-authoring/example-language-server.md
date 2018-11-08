@@ -6,7 +6,7 @@
 
 通常为多个编辑器开发不同的语言插件需要花费大量精力。对于语言插件开发者来说，他们需要根据不同编辑器各自的API来实现插件。而从编辑器的角度来讲，他们也不能指望语言工具API统一。最终导致了为`N`种编辑器实现`M`种语言需要花费`N*M`的工作和精力。
 
-为了解决这些问题，微软提供了[语言服务协议(Language Server Protocol)](https://microsoft.github.io/language-server-protocol)意图为语言插件和编辑器提供社区规范。这样一来，语言服务器就可以用任何一种语言来实现，用协议通讯也避免了插件在主进程中运行的高开销。而且任何LSP兼容的语言插件，都能和LSP兼容的代码编辑器整合起来，LSP是语言插件开发者和第三方编辑器的共赢方案。
+为了解决这些问题，微软提供了[语言服务器协议(Language Server Protocol)](https://microsoft.github.io/language-server-protocol)意图为语言插件和编辑器提供社区规范。这样一来，语言服务器就可以用任何一种语言来实现，用协议通讯也避免了插件在主进程中运行的高开销。而且任何LSP兼容的语言插件，都能和LSP兼容的代码编辑器整合起来，LSP是语言插件开发者和第三方编辑器的共赢方案。
 
 ![语言服务器](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/lsp-languages-editors.png)
 
@@ -17,13 +17,15 @@
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
 
+?> **译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+
 ## 实现你自己的语言服务器
 ---
 
 #### 概览
 
 在VS Code中，一个语言服务器有两个部分：
-- **语言客户端**：一个由Javascript/Typescript写成的常见语言服务器插件，这个插件能使用所有的[VS Code 命名空间API](/extensibility-reference/vscode-api.md)。
+- **语言客户端**：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的[VS Code 命名空间API](/extensibility-reference/vscode-api.md)。
 - **语言服务端**：运行在单独进程中的语言分析工具。
 
 把语言服务器放在隔离进程中运行的好处简单来说有两个：
@@ -78,7 +80,7 @@
 ]
 ```
 
-这个部分告诉VS Code只要有纯文本文件打开之后就激活插件（例如：打开一个`.txt`文件）
+这个部分告诉VS Code只要打开纯文本文件之后就立刻激活插件（例如：打开一个`.txt`文件）
 
 下一步看看[configuration](/extensibility-reference/contribution-points.md#contributesconfiguration)部分：
 
@@ -97,7 +99,7 @@
 }
 ```
 
-这个部分配了VS Code的`configuration`部分，稍后示例会解释这些设置是如何在启动和变动设置后配置到语言服务器的。
+这个部分配置了用户可以自定义的`configuration`，用户通过这个配置可以在**设置**中对你的插件做一些修改。这并不是本节重点，稍后示例将通过代码呈现——插件如何在设置变动后将改*修后的配置*应用到我们的语言服务器上。
 
 真正的语言客户端代码和对应的`package.json`在`/client`文件夹中。`package.json`最有趣的部分是`vscode`插件主机API和`vscode-languageclient`这两个依赖库。
 ```json
@@ -107,7 +109,7 @@
 }
 ```
 
-正如上面所说，客户端实现就是一个普通的VS Code插件，它有使用全部VS Code命名空间API的能力。
+正如上面所说，客户端实现就是一个普通的VS Code插件，它有使用全部VS Code API的能力。
 
 下面是extension.ts文件的对应内容，也是**lsp-sample**插件的入口：
 
@@ -424,7 +426,7 @@ connection.listen();
 ## 添加一个简单的语法校验器
 ---
 
-为了给服务器添加文本校验，我们为text document manager添加一个在文本变动时调用的listener，接下来就交给服务器去判断调用校验器的最佳时机了。在我们实现的示例中，服务器校验纯文本然后给所有大写的单词进行标记。对应的代码片段：
+为了给服务器添加文本校验，我们给text document manager添加一个listener然后在文本变动时调用，接下来就交给服务器去判断调用校验器的最佳时机了。在我们的示例中，服务器的功能是校验纯文本然后给所有大写单词进行标记。对应的代码片段：
 
 ```typescript
 // 事件在文档第一次打开，或者内容变动时触发。
@@ -511,9 +513,9 @@ ANY browser. ANY host. ANY OS. Open Source.
 ## 为语言服务器加上日志
 ---
 
-如果你是用`vscode-languageclient`实现的客户端，你可以配置`[langId].trace.server`指示客户端在`输出`频道中显示通信日志。
+如果你是用`vscode-languageclient`实现的客户端，你可以配置`[langId].trace.server`指示客户端在`output(输出)`面板中显示通信日志。
 
-对于**Isp-sample**中，你能在`"languageServerExample.trace.server": "verbose"`进行配置。现在看看"Language Server Example"频道，你应该能看到这些日志：
+对于**Isp-sample**你能在`"languageServerExample.trace.server": "verbose"`进行配置。现在看看"Language Server Example"频道，你应该能看到这些日志：
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/lsp-log.png)
 
@@ -542,7 +544,7 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 }
 ```
 
-现在唯一要做的事情就是监听在服务端中监听设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
+现在唯一要做的事情就是在服务器端中监听用户修改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
 
 ```typescript
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
@@ -593,7 +595,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 }
 ```
 
-处理配置文件变动的代码通过添加一个通知处理函数完成。
+添加一个*通知处理函数*监听配置文件变动。
 
 ```typescript
 connection.onDidChangeConfiguration(change => {
@@ -798,7 +800,7 @@ async function sleep(ms: number) {
 ---
 
 到目前为止，本篇教程提供了：
-- 一个简短的**语言服务器**和**语言服务协议**概览
+- 一个简短的**语言服务器**和**语言服务器协议**概览
 - VS Code中的语言服务器插件架构
 - 实现了一个**Isp-sample**插件，和如何开发、调试、检查和测试语言服务器
 
