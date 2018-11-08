@@ -794,5 +794,5 @@ function getWebviewContent() {
 ## 下一步
 
 如果你想了解学习更多VS Code扩展性的内容，请查看下列主题：
-- [扩展Visual Studio Code](/extensibility-reference/README.md) - 其他扩展VS Code的方式
+- [扩展Visual Studio Code](/extensibility-reference/overview.md) - 其他扩展VS Code的方式
 - [其他插件示例](/extension-authoring/samples.md) - 我们的插件项目示例列表

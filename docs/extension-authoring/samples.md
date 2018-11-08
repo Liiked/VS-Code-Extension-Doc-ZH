@@ -39,4 +39,4 @@
 
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多关于VS Code公共插件市场的内容。
 - ['code'Yeoman 生成器](/extension-authoring/extension-generator.md) - 快速创建你的第一个VS Code插件。
-- [扩展性参阅](/extensibility-reference/README.md) - 关于API的更多细节。
+- [扩展性参阅](/extensibility-reference/overview.md) - 关于API的更多细节。

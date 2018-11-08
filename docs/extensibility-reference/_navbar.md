@@ -1,7 +1,7 @@
 * [本项目说明](/)
 * 快速入门
 * 插件创作
-    * [VSC扩展机制和插件类型](extension-authoring/)
+    * [VSC扩展机制和插件类型](extension-authoring/overview)
     * [插件生成器](extension-authoring/extension-generator)
     * [主题，代码片段和着色器](extension-authoring/themes-snippets-colorizers)
     * [示例:Hello-World](extension-authoring/example-hello-world)
@@ -13,7 +13,7 @@
     * [测试插件](extension-authoring/testing-extensions)
     * [发布插件](extension-authoring/publish-extension)
     * [Webview API](extension-authoring/webview-api)
-* [扩展性参考](extensibility-reference/)
+* [扩展性参考](extensibility-reference/overview)
     * [扩展性原则和模式](extensibility-reference/principles-patterns)
     * [语言插件指引](extensibility-reference/language-extension-guidelines)
     * [插件清单](extensibility-reference/extension-manifest)

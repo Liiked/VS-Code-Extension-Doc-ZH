@@ -10,7 +10,7 @@
 
 ![语言服务器](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/lsp-languages-editors.png)
 
-该章节需要你已经了解[什么是插件开发](/extension-authoring/)，如果你还没有准备好，请先回过去了解一下吧。
+该章节需要你已经了解[什么是插件开发](/extension-authoring/overview)，如果你还没有准备好，请先回过去了解一下吧。
 
 在本章，我们将：
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
@@ -34,7 +34,7 @@
 
 ![语言服务器示意图](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/lsp-illustration.png)
 
-本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/extension-authoring/)的基础之上。
+本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/extension-authoring/overview)的基础之上。
 
 ## LSP 示例 — 一个纯文本简单语言服务器
 ---

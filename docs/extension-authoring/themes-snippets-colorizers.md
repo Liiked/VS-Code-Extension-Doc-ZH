@@ -554,7 +554,7 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 
 如果你想要查看更多关于VS Code的扩展能力，请查阅下列主题：
 
-- [扩展vscode](/extension-authoring/README.md) - 学习其他扩展VS Code的方式
+- [扩展vscode](/extension-authoring/overview.md) - 学习其他扩展VS Code的方式
 - [其他插件示例](/extension-authoring/samples.md) - 看看我们的示例插件项目
 
 
