@@ -1,4 +1,8 @@
 {
+    "extension-authoring/overview": {
+        "name": "VSC插件扩展机制和插件类型",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/overview"
+    },
     "extension-authoring/extension-generator": {
         "name": "插件生成器",
         "path": "https://code.visualstudio.com/docs/extensions/yocode"
@@ -42,6 +46,10 @@
     "extension-authoring/webview-api": {
         "name": "Webview API",
         "path": "https://code.visualstudio.com/docs/extensions/webview"
+    },
+    "extensibility-reference/overview": {
+        "name": "扩展性参考",
+        "path": "https://code.visualstudio.com/docs/extensionAPI/overview"
     },
     "extensibility-reference/principles-patterns": {
         "name": "扩展性原则和模式",

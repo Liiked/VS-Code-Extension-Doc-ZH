@@ -208,7 +208,7 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
 在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](docs/extension-authoring/example-word-count.md)中你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件、显示文本字数。
 
 如果你想查看更多extension API的概述，看看这些主题吧：
-- [Extension API 概览](/extensibility-reference/README.md) - 了解完整的VS Code扩展性模型。
+- [Extension API 概览](/extensibility-reference/overview.md) - 了解完整的VS Code扩展性模型。
 - [API原则和模式](/extensibility-reference/principles-patterns.md) - VS Code的扩展性基于这些指导性原则和模式。
 - [发布内容配置](/extensibility-reference/contribution-points.md) - 各种各样的VS Code发布内容配置项
 - [激活事件](/extensibility-reference/activation-events.md) - VS Code激活事件参考

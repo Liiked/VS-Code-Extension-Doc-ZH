@@ -239,7 +239,7 @@ this._disposable = Disposable.from(...subscriptions);
 
 [插件生成器](/extension-authoring/extension-generator.md) - 学习Yo Code插件生成器的更多选项
 
-[Extenstion API](/extensibility-reference/README.md) - 插件API概览
+[Extenstion API](/extensibility-reference/overview.md) - 插件API概览
 
 [发布插件](/extension-authoring/publish-extension.md) - 学会如何在应用市场发布一个公共插件
 
