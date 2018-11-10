@@ -1,12 +1,12 @@
 # VS Code Webview API
 webview API为开发者提供了完全自定义视图的能力，例如内置的Markdown插件使用了webview渲染Markdown预览文件。Webview也能用于构建比VS Code原生API支持构建的更加复杂的用户交互界面。
 
-可以把webview看成是VS Code中的`iframe`，它可以渲染几乎全部的HTML内容，并用消息和插件通信。这样的自由度使我们的webview非常强劲，并将插件的潜力提升到了新的高度。
+可以把webview看成是VS Code中的`iframe`，它可以渲染几乎全部的HTML内容，它通过消息机制和插件通信。这样的自由度令我们的webview非常强劲并将插件的潜力提升到了新的高度。
 
 ## 我应该用webview吗？
 ---
 
-webview虽然很赞，但是我们应该节制地使用这个功能——比如当VS Code原生API不够用时。Webview非常依赖资源，所以它脱离插件的进程而单独运行在其他环境中。在VS Code中使用设计不良的webview会使用户抓狂。
+webview虽然很赞，但是我们应该节制地使用这个功能——比如当VS Code原生API不够用时。Webview重度依赖资源，所以它脱离插件的进程而单独运行在其他环境中。在VS Code中使用设计不良的webview会让用户抓狂。
 
 在使用webview之前，请作以下考虑：
 - 这个功能真的需要VS Code来提供吗？分离成一个应用或者网站会不会更好？
@@ -121,7 +121,7 @@ function getWebviewContent() {
 
 #### 更新webview内容
 
-`webview.html`也能在webview创建后更新内容，让我们用猫猫轮播图使**Cat Coding**更加具有动态性：
+`webview.html`也能在webview创建后更新内容，让我们用猫猫轮播图使**Cat Coding**具有动态性：
 ```typescript
 import * as vscode from 'vscode';
 
@@ -166,7 +166,7 @@ function getWebviewContent(cat: keyof typeof cats) {
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/basics-update.gif)
 
-因为设置了`webview.html`，替换了整个webview内容，看起来像重新加载了一个iframe。记住：一旦你在webview中使用了脚本，那就意味着重置了`webview.hmtl`，也重置了脚本的状态。
+因为`webview.html`方法替换了整个webview内容，页面看起来像重新加载了一个iframe。记住：如果你在webview中使用了脚本，那就意味着`webview.html`的重置会使脚本状态重置。
 
 上述示例也使用了`webview.title`改变编辑器中的展示的文件名称，设置标题不会使webview重载。
 
@@ -174,9 +174,9 @@ function getWebviewContent(cat: keyof typeof cats) {
 
 webview从属于创建他们的插件，插件必须保持住从webview返回的`createWebviewPanel`。如果你的插件失去了这个关联，它就不能再访问webview了，不过即使这样，webview还会继续展示在VS Code中。
 
-因为webview就是一个文本编辑器，所以用户可以随时关闭webview。当用户关闭了webview面板后，webview就被销毁了。在我们销毁webview时缺抛出了一个异常。这意味着我们上面的示例中使用的`seInterval`实际上产生了非常严重的Bug：如果用户关闭了面板，`setInterval`会继续触发，而且还会尝试更新`panel.webview.html`，这当然会抛出异常。喵星人可不喜欢异常，我们现在就来解决这个问题吧。
+因为webview是一个文本编辑器视图，所以用户可以随时关闭webview。当用户关闭了webview面板后，webview就被销毁了。在我们的例子中，销毁webview时抛出了一个异常，说明我们上面的示例中使用的`seInterval`实际上产生了非常严重的Bug：如果用户关闭了面板，`setInterval`会继续触发，而且还会尝试更新`panel.webview.html`，这当然会抛出异常。喵星人可不喜欢异常，我们现在就来解决这个问题吧。
 
-`onDidDispose`事件在webview被销毁时触发，我们可以用这个事件取消之后的页面更新并释放webview资源。
+`onDidDispose`事件在webview被销毁时触发，我们在这个事件结束之后更新并释放webview资源。
 
 ```typescript
 import * as vscode from 'vscode';
@@ -241,7 +241,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/basics-drag.gif)
 
-现在更新我们的插件，只允许一次只允许存在一个webview视图。如果面板处于非激活状态，那`catCoding.start`命令就把这个面板激活。
+现在更新我们的插件，一次只允许存在一个webview视图。如果面板处于非激活状态，那`catCoding.start`命令就把这个面板激活。
 
 ```typescript
 export function activate(context: vscode.ExtensionContext) {
@@ -253,7 +253,7 @@ export function activate(context: vscode.ExtensionContext) {
         const columnToShowIn = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
 
         if (currentPanel) {
-            // 如果我们已经有了一个面板，那就把它显示到目标布局中column
+            // 如果我们已经有了一个面板，那就把它显示到目标列布局中
             currentPanel.reveal(columnToShowIn);
         } else {
             // 不然，创建一个新面板
@@ -315,7 +315,7 @@ function updateWebviewForCat(panel: vscode.WebviewPanel, catName: keyof typeof c
 
 #### 检查和调试webviews
 
-在命令面板中输入**Developer: Toggle Developer Tools**能帮助你调试webview。运行命令之后会为当前可见的webview加载一个开发人员工具实例：
+在命令面板中输入**Developer: Toggle Developer Tools**能帮助你调试webview。运行命令之后会为当前可见的webview加载一个devtool：
 
 ![webview Developer Tools](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/basics-developer_tools.png)
 
@@ -324,7 +324,7 @@ webview的内容是在webview文档中的一个iframe中的，用开发者工具
 如果你用了webview开发者工具的console，确保你在Console面板左上角的下拉框里选中了当前**激活窗体**环境：
 ![debug-active-frame](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/debug-active-frame.png)
 
-**激活窗体**环境是webview脚本执行的地方，另外，**Developer: Reload Webview**命令会刷新所有激活的webview。如果你需要重置一个webview的状态，这个命令会非常有用，或者你想要读取硬盘内容的webview更新一下，也可以使用这个方法。
+**激活窗体**环境是webview脚本执行的地方，另外，**Developer: Reload Webview**命令会刷新所有已激活的webview。如果你需要重置一个webview的状态，这个命令会非常有用，或者你想要读取硬盘内容的webview更新一下，也可以使用这个方法。
 
 ## 加载本地内容
 ---

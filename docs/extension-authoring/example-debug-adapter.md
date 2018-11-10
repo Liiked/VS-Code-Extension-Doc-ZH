@@ -231,9 +231,9 @@ npm install
 }]
 ```
 
-**configurationAttributes**表示这个调试器是支持`launch.json`配置的。它也校验`launch.json`和确保编辑*启动配置*文件的时候支持智能提示和悬浮帮助文本。
+**configurationAttributes**表示这个调试器是支持`launch.json`配置，开启之后它会校验`launch.json`。另外这个属性还会启用：编辑*启动配置*文件时的智能提示和悬浮帮助文本。
 
-**initialConfigurations**定义了`launch.json`的初始默认内容。这个文件用于项目没有`launch.json`文件时，用户仍能启动调试会话，VS Code会让用户限额一个调试环境，然后生成对应的`launch.json`：
+**initialConfigurations**定义了`launch.json`的初始默认内容。以便于项目不包含`launch.json`文件时，用户打开调试或者按下调试侧边栏的齿轮按钮后仍能启动调试会话，VS Code会让用户选择一个调试环境，然后生成对应的`launch.json`：
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-debuggers/debug-init-config.png)
 
