@@ -8,6 +8,7 @@
     * [示例:Word-Count](extension-authoring/example-word-count)
     * [示例:语言服务器](extension-authoring/example-language-server)
     * [示例:调试适配器](extension-authoring/example-debug-adapter)
+    * [示例:任务](extension-authoring/example-tasks)
     * [更多示例](extension-authoring/samples)
     * [开发插件](extension-authoring/developing-extensions)
     * [测试插件](extension-authoring/testing-extensions)
