@@ -658,9 +658,9 @@ connection.onCompletionResolve(
 );
 ```
 
-`data`字段用于鉴别处理函数中传入的补全项。这个属性对协议来说是透明的。因为底层协议信息传输是基于JSON的，因此data字段只能保留了从JSON序列化而来的数据。
+`data`字段用于鉴别处理函数中传入的补全项。这个属性对协议来说是透明的，因为底层协议信息传输是基于JSON的，因此data字段只能保留从JSON序列化而来的数据。
 
-那么现在只缺告诉VS Code，服务器能提供代码补全请求。为了做到这个，将对应标记添加到初始化函数中：
+那么现在只缺告诉VS Code服务器能提供代码补全请求。为了做到点，将对应标记添加到初始化函数中：
 
 ```typescript
 connection.onInitialize((params): InitializeResult => {
@@ -684,10 +684,10 @@ connection.onInitialize((params): InitializeResult => {
 ## 测试语言服务器
 ---
 
-为了创建一个高质量的语言服务器，我们需要构建一个号的测试套件覆盖到它的功能点。这有两种常见的测试服务器方式：
+为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
 - 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的HTML/CSS/JSON语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行VS Code命令来测试的，这个方式在你有文件、设置和依赖（如`node_modules`）时更为优先，尤其是难以模拟数据的时候。流行的Python插件就采用了这种测试方式。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行VS Code命令来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的Python插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -831,8 +831,8 @@ async function sleep(ms: number) {
 
 但是这种方式有两个缺点：
 
-- 文件变动时，会重复地发送整个文本数据，而这个传递的数据量相当可观。
-- 如果已经使用了已有的库，这些库通常都要都支持增量文本更新，避免不必要的转换和创建抽象语法树。
+- 文件变动时，会重复地发送整个文本数据，这个传递的数据量相当可观。
+- 现有的库通常都支持增量文本更新，不可避免地，我们会进行不必要的转换和创建抽象语法树。
 
 LSP因此直接提供了增量文本更新的API。
 
@@ -875,7 +875,7 @@ connection.onDidCloseTextDocument((params) => {
 
 #### 直接用VS Code API实现语言特性
 
-语言服务器有这么多好处，只是用来提供VS Code编辑扩展能力就显得有些大材小用了。接下来我们为某类文件提供一些简单的语言服务器特性，主要是使用`vscode.languages.register[LANGUAGE_FEATURE]Provider`选项。
+语言服务器有这么多好处，只是用来提供VS Code编辑扩展能力就显得有些大材小用了。下面的例子里，我们使用`vscode.languages.register[LANGUAGE_FEATURE]Provider`选项为某类文件提供一些简单的语言服务器特性。
 
 [completions-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/completions-sample)是一个使用`vscode.languages.registerCompletionItemProvider`为纯文本添加代码片段的例子。
 
@@ -883,7 +883,7 @@ connection.onDidCloseTextDocument((params) => {
 
 #### 语言服务器的容错解析器
 
-大多数时候，编辑器中的代码都是不完整的，语法是错误的，不过开发人员希望自动补全和语言特性还能保持正常工作。因此，容错解析器就显得十分必要：解析器仍从不完整的代码中创建有意义的AST，语言服务器则根据这份AST提供服务。
+大多数时候，编辑器中的代码都是不完整的，甚至语法都是错的，但是开发人员肯定希望自动补全等语言功能保持正常工作。因此，容错解析器就显得十分必要：解析器仍能从不完整的代码中创建有意义的AST，然后语言服务器根据这份AST提供服务。
 
 我们之前在VS Code中做过PHP的支持，我们意识到PHP官方解析器并没有自带容错，而且也不能直接在语言服务器中直接重用。所以我们一起努力做了[ Microsoft/tolerant-php-parser](https://github.com/Microsoft/tolerant-php-parser)，并留下了详细的[笔记](https://github.com/Microsoft/tolerant-php-parser/blob/master/docs/HowItWorks.md)，或许能帮上需要容错解析器的语言服务器作者。
 
