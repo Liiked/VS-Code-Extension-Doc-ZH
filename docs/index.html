@@ -7,6 +7,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -25,6 +26,7 @@
       loadNavbar: true,
       subMaxLevel: 2,
       plugins: [
+        // 头部导航插件
         function (hook, vm) {
           let path;
           hook.beforeEach(content => {
@@ -32,7 +34,14 @@
             let getMap = Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json', false, null)
             let getNav = new Promise((reslove, reject) => {
               let nav;
+              let attempTimes = 0;
               let interval = setInterval(() => {
+                attempTimes += 1;
+                if (attempTimes > 20) {
+                  clearInterval(interval)
+                  reject()
+                  return
+                }
                 if (!nav) {
                   nav = document.querySelector('.app-nav').childNodes[0]
                 } else {
@@ -41,7 +50,6 @@
                 }
               }, 1000)
             })
-
 
             Promise.all([getNav, getMap]).then((all) => {
               let nav = all[0]
@@ -58,6 +66,68 @@
             })
             return content
           })
+        },
+        function (hook, vm) {
+          const extractTermArray = /\n.+/g
+          const extractLink = /\(.+\)/g
+          const extractTitle = /\)\s*.+/g
+          const comma = /[，|,]/g
+          const colon = /[：|:]/g
+
+          // body
+          hook.beforeEach( content => {
+            // TODO 插件不支持返回promise
+            let req = new Promise((resolve, reject) => {
+              Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md', false, null).then(d => {
+                let clearUnrealtedData = d.split('terms')[1]
+                const rawData = clearUnrealtedData.match(extractTermArray)
+                rawData.push('[Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器，哈哈哈：GGGGG')
+                let termsCollection = []
+                let termMap = rawData.map(e => {
+                  let link = e.match(extractLink)
+                  if (link) {
+                    let cleanLink = link[0].replace(/[\(|\)]/g, '')
+                    let title = e.match(extractTitle)[0]
+                    let [titleUnit, description] = getTitleAndDescript(title)
+                    termsCollection = termsCollection.concat(titleUnit || [])
+                    return {
+                      cleanLink,
+                      titleUnit,
+                      description
+                    }
+                  }
+                });
+                let termsRegStr = `(${termsCollection.join('|')})`
+                let termsReg = new RegExp(termsRegStr, 'g')
+                let result = tansformHTML(content, termsReg)
+                resolve(result)
+              })
+
+            })
+            return req
+          })
+          
+          hook.mounted(() => {
+            $('.tip-box').unbind('click').bind('click', (e) => {
+              console.log(e)
+            })
+            // 初始化完成后调用 ，只调用一次，没有参数。
+          })
+
+          function getTitleAndDescript(str) {
+            let cleanTitle = str.replace(/\)/g, '').replace(/\s*/g, '').replace(colon, '||')
+            let [titleText, description] = cleanTitle.split('||')
+            let titleUnit = titleText.replace(comma, ' ').split(' ')
+            return [titleUnit, description]
+          }
+          
+          function templ(originStr) {
+            return `<span class="hover-tip">${originStr}</span>`
+          }
+
+          function tansformHTML(content, reg) {
+            return content.replace(reg, templ)
+          }
         }
       ]
     }
@@ -68,6 +138,11 @@
       font-weight: bold;
       font-size: 15px;
       color: #364149;
+    }
+
+    .tip-box{
+      height: 0;
+      width: 0;
     }
   </style>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/docsify.js"></script>
