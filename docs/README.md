@@ -14,6 +14,8 @@
 
 !> 约定用法，如Promise通常不做翻译，若有必要或遇到困难的词语，请使用“中文（English）”的方式来显示，如：`异步请求（promise）`，在有参考资料后得出的翻译结果，需要在术语表释义后面注明词汇出现来源或释义链接。
 
+[terms]: 该术语表是术语表插件的源数据，激活术语表插件的关键字即下述链接后的文字请用逗号分隔，术语描述则是冒号后面的内容
+
 - [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件
 - [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点
 - [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器
