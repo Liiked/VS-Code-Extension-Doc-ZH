@@ -7,12 +7,18 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div id="app"></div>
   <script>
+    // $(function() {
+    //   console.log('object');
+    //   $(document).on('mouseenter', '.hover-tip', (e) => {
+    //     console.log(e)
+    //   })
+    // })
     window.$docsify = {
       name: '',
       repo: 'https://github.com/Liiked/VS-Code-Extension-Doc-ZH',
@@ -74,15 +80,18 @@
           const comma = /[，|,]/g
           const colon = /[：|:]/g
 
+          let termsObject = {}
+
           // body
           hook.beforeEach( content => {
-            // TODO 插件不支持返回promise
+            // TODO 解析内容时去除标签、标题等
             let req = new Promise((resolve, reject) => {
               Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md', false, null).then(d => {
                 let clearUnrealtedData = d.split('terms')[1]
                 const rawData = clearUnrealtedData.match(extractTermArray)
-                rawData.push('[Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器，哈哈哈：GGGGG')
+                rawData.push('[Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 项目目录：GGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
                 let termsCollection = []
+                
                 let termMap = rawData.map(e => {
                   let link = e.match(extractLink)
                   if (link) {
@@ -97,6 +106,15 @@
                     }
                   }
                 });
+                termMap.forEach(e => {
+                  if (!e) { return }
+                  let {titleUnit} = e
+                  titleUnit.forEach(d => {
+                    termsObject[d] = e;
+                  })
+                });
+                console.log(termsObject)
+                
                 let termsRegStr = `(${termsCollection.join('|')})`
                 let termsReg = new RegExp(termsRegStr, 'g')
                 let result = tansformHTML(content, termsReg)
@@ -105,13 +123,6 @@
 
             })
             return req
-          })
-          
-          hook.mounted(() => {
-            $('.tip-box').unbind('click').bind('click', (e) => {
-              console.log(e)
-            })
-            // 初始化完成后调用 ，只调用一次，没有参数。
           })
 
           function getTitleAndDescript(str) {
@@ -122,7 +133,13 @@
           }
           
           function templ(originStr) {
-            return `<span class="hover-tip">${originStr}</span>`
+            let {description} = termsObject[originStr]
+            return `<div class="hover-tip">${originStr}
+                <div class="tip-box">
+                    <p class="no-margin"><a class="tips-title" href="/" target="_blank">${originStr}</a></p>
+                    <p class="tips-content">${description}</p>
+                </div>
+              </div>`.replace(/\n/g, '')
           }
 
           function tansformHTML(content, reg) {
@@ -140,12 +157,57 @@
       color: #364149;
     }
 
-    .tip-box{
+    .hover-tip{
+      display: inline-block;
+      position: relative;
+      color: white;
+      background: #42b983;
+      padding: 0 5px;
+      margin: 0 2px;
+    }
+
+    .hover-tip:hover .tip-box{
+      height: 200px;
+      width: 240px;
+      padding: 1rem;
+      position: absolute;
+      opacity: 1;
+      transition: all 0.2s;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .hover-tip .tip-box{
       height: 0;
       width: 0;
+      overflow: hidden;
+      right: 0;
+      bottom: 1.4rem;
+      box-sizing: border-box;
+      opacity: 0;
+      border: 2px solid #42b983;
+      position: absolute;
+      background: white;
+      transition: all 0.2s;
+    }
+    .hover-tip > a {
+      color: white;
+    }
+
+    .tip-box .no-margin{
+      margin: 0;
+    }
+
+    .tip-box .tips-title{
+      font-size: 1rem;
+      margin: 0;
+    }
+    .tip-box .tips-content{
+      word-break: break-all;
+      color: #364149;
     }
   </style>
-  <script src="https://cdn.bootcss.com/docsify/4.7.0/docsify.js"></script>
+  <script src="./docsify.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"></script>
