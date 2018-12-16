@@ -82,7 +82,6 @@
 
           // body
           hook.beforeEach( content => {
-            console.log(vm);
             // TODO 多个同名术语长短不同时应以最长的匹配优先
             // TODO 缓存结果，而不是每次请求
             // TODO 英文术语对应多义词汇的map解析
@@ -97,7 +96,8 @@
                 
                 let getTerms = pipe(termMapFactory, termObjFactory)
                 let termsObject = getTerms(rawData)
-                let htmlContent = transformContent(termsObject, content)
+                let htmlContent = content
+                htmlContent = transformContent(termsObject, htmlContent)
                 resolve(htmlContent)
               })
             })

@@ -17,12 +17,12 @@
 
 [terms]: 该术语表是术语表插件的源数据，激活术语表插件的关键字即下述链接后的文字请用逗号分隔，术语描述则是冒号后面的内容
 
-- [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件
-- [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点
+- [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件：用于激活插件的VS Code事件钩子。
+- [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点：插件清单的一部分，用于配置插件启动命令、用户可更改的插件配置，可以理解为插件的主要配置文件。
 - [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器
-- [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单
+- [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单：VS Code自定义的pacakge.json文件，其中包含着插件的入口、配置等重要信息。
 - Extensibility 扩展性
-- [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机
-- [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境/插件主机环境
-- [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器
+- [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机：用于插件开发者调试尚未完成插件的特殊VS Code实例。
+- [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境/插件主机环境：用于插件开发者调试尚未完成插件的特殊VS Code实例。
+- [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器：VS Code使用的C/S结构的插件模式中的服务器端，用于高消耗的特殊插件场景，如语言解析、智能提示等。
 - [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符
