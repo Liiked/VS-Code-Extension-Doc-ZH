@@ -82,6 +82,8 @@
     在多人合作翻译中，个人风格可能与已提交翻译不匹配，但这种情况下不建议修改现有的翻译成果。
 - 术语翻译优先参考[github的开源翻译项目](https://github.com/Microsoft/vscode-loc/blob/master/i18n/vscode-language-pack-zh-hans/translations/main.i18n.json)
 
+!> 约定用法，如Promise通常不做翻译，若有必要或遇到困难的词语，请使用“中文（English）”的方式来显示，如：`异步请求（promise）`，在有参考资料后得出的翻译结果，需要在术语表释义后面注明词汇出现来源或释义链接。
+
 ## 开发指引
 
 本项目依赖nodejs，npm，[docsify](https://docsify.js.org/)和[官方文档](https://code.visualstudio.com/docs)。另外对新手不太友好（萌新等级警告⚠️请勿轻易尝试）。

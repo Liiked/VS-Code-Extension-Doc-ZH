@@ -38,7 +38,7 @@
 
 本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/extension-authoring/overview)的基础之上。
 
-## LSP 示例 — 一个纯文本简单语言服务器
+## 示例：一个简单的纯文本语言服务器
 ---
 
 让我们首先实现一个简单的语言服务器插件吧，这个插件的功能是自动补全、诊断纯文本文件。我们会同时学习客户端/服务端的配置。

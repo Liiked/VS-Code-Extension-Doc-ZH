@@ -18,12 +18,6 @@
         (acc, fn) => fn(acc),
         input
     );
-    // $(function() {
-    //   console.log('object');
-    //   $(document).on('mouseenter', '.hover-tip', (e) => {
-    //     console.log(e)
-    //   })
-    // })
     window.$docsify = {
       name: '',
       repo: 'https://github.com/Liiked/VS-Code-Extension-Doc-ZH',
@@ -78,6 +72,7 @@
             return content
           })
         },
+        // 术语插件
         function (hook, vm) {
           const extractTermArray = /\n.+/g
           const extractLink = /\(.+\)/g
@@ -87,24 +82,25 @@
 
           // body
           hook.beforeEach( content => {
-            // TODO 解析内容时去除标签、标题等
+            console.log(vm);
+            // TODO 多个同名术语长短不同时应以最长的匹配优先
+            // TODO 缓存结果，而不是每次请求
+            // TODO 英文术语对应多义词汇的map解析
             let req = new Promise((resolve, reject) => {
+              if (vm.route.path === '/') {
+                resolve(content)
+                return
+              }
               Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md', false, null).then(d => {
                 let clearUnrealtedData = d.split('terms')[1]
                 const rawData = clearUnrealtedData.match(extractTermArray)
-                rawData.push('[Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 项目目录：GGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
                 
                 let getTerms = pipe(termMapFactory, termObjFactory)
                 let termsObject = getTerms(rawData)
-                
-                let a = new RegExp('插件清单', 'g')
-                let htmlContent = content
-                htmlContent = transformContent(termsObject, htmlContent)
+                let htmlContent = transformContent(termsObject, content)
                 resolve(htmlContent)
               })
-
             })
-            return req
           })
 
           function termMapFactory(arr) {
@@ -145,7 +141,7 @@
           }
           
           function templ(termsObject, originStr) {
-            let {description} = termsObject[originStr]
+            let {description = ''} = termsObject[originStr]
             return `<span class="hover-tip">${originStr}
                 <span class="tip-box">
                     <span class="no-margin"><a class="tips-title" href="/" target="_blank">${originStr}</a></span>
@@ -158,13 +154,17 @@
             let template = templ(termsObject, key)
             return content.replace(/\{\{0\}\}/g, template)
           }
-          
+          /***
+          * 标记需要转换html的位置
+          ***/
           function markHtml(content, index, length) {
             let left = content.substring(0, index)
             let right = content.substring(index + length, content.length)
             return left + '{{0}}' + right
           }
-
+          /***
+          * 将文档中的术语转换为自定义格式
+          ***/
           function transformContent(termsObject, html) {
             let exceptIdentifers = /(\/+|\]|\[|#)/g
             let ct = html
@@ -178,9 +178,7 @@
                 
                 while (findOne) {
                   const idx = findOne.index
-                  console.log('before', ct.length)
-                  const str = ct.substring(idx - 6, idx + termLen + 4)
-                  console.log('after', ct.length)
+                  const str = ct.substring(idx - 14, idx + termLen + 4)
                   const context = str.replace(/\s+/g, '')
                   // test在处理的时候会遇到诡异的问题，因此用match替换
                   // const notConvertable = exceptIdentifers.test(context)
@@ -188,7 +186,6 @@
                   //    b = /\#/g
                   //    多次执行 b.test(a) -> true true true false true
                   const notConvertable = context.match(exceptIdentifers)
-                  console.log(ct.substring(idx - 6, idx + termLen + 4), context, notConvertable)
 
                   if (notConvertable) {
                     findOne = termReg.exec(ct)
