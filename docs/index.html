@@ -178,10 +178,17 @@
                 
                 while (findOne) {
                   const idx = findOne.index
-                  const str = ct.substring(idx - 4, idx + termLen + 2)
-                  const context = str.replace(/\s*/g, '')
-                  const notConvertable = exceptIdentifers.test(context)
-                  console.log(ct.substring(idx - 4, idx + termLen + 2), context, notConvertable)
+                  console.log('before', ct.length)
+                  const str = ct.substring(idx - 6, idx + termLen + 4)
+                  console.log('after', ct.length)
+                  const context = str.replace(/\s+/g, '')
+                  // test在处理的时候会遇到诡异的问题，因此用match替换
+                  // const notConvertable = exceptIdentifers.test(context)
+                  // 如 a = '` ###插件清单：`'
+                  //    b = /\#/g
+                  //    多次执行 b.test(a) -> true true true false true
+                  const notConvertable = context.match(exceptIdentifers)
+                  console.log(ct.substring(idx - 6, idx + termLen + 4), context, notConvertable)
 
                   if (notConvertable) {
                     findOne = termReg.exec(ct)
@@ -210,10 +217,16 @@
     .hover-tip{
       display: inline-block;
       position: relative;
+      padding: 0 4px;
       color: #42b983;
-      padding: 0 5px;
-      margin: 0 2px;
-      border: 2px solid;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      border-bottom-color: white;
+      transition: all .2s;
+    }
+
+    .hover-tip:hover {
+      border-bottom-color: #42b983;
     }
 
     .hover-tip:hover .tip-box{
