@@ -55,8 +55,8 @@
 #### 插件清单：`package.json`
 - 每个VS Code插件都有`package.json`文件，文件内包含了这个插件功能和用处。
 - 当项目启动时，VS Code会立即读取这个文件中的每个`配置(contributes)`部分并作出响应。
-- 请阅读[package.json插件清单 参考文档](/extensibility-reference/extension-manifest.md)
-- 更多信息请参阅[package.json发布内容配置 参考文档](/extensibility-reference/contribution-points.md)
+- 请阅读[package.json插件清单](/extensibility-reference/extension-manifest.md)参考文档
+- 更多信息请参阅[package.json发布内容配置](/extensibility-reference/contribution-points.md)参考文档
 
 ?> 译者注：为了便于理解，`contribution / contributes`在本教程中译为**发布内容配置/配置**，`contribution points`译为**发布内容配置点/配置点**。
 

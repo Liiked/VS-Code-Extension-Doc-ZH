@@ -13,6 +13,11 @@
 <body>
   <div id="app"></div>
   <script>
+
+    const pipe = (...functions) => input => functions.reduce(
+        (acc, fn) => fn(acc),
+        input
+    );
     // $(function() {
     //   console.log('object');
     //   $(document).on('mouseenter', '.hover-tip', (e) => {
@@ -80,8 +85,6 @@
           const comma = /[，|,]/g
           const colon = /[：|:]/g
 
-          let termsObject = {}
-
           // body
           hook.beforeEach( content => {
             // TODO 解析内容时去除标签、标题等
@@ -90,40 +93,49 @@
                 let clearUnrealtedData = d.split('terms')[1]
                 const rawData = clearUnrealtedData.match(extractTermArray)
                 rawData.push('[Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 项目目录：GGGGGFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
-                let termsCollection = []
                 
-                let termMap = rawData.map(e => {
-                  let link = e.match(extractLink)
-                  if (link) {
-                    let cleanLink = link[0].replace(/[\(|\)]/g, '')
-                    let title = e.match(extractTitle)[0]
-                    let [titleUnit, description] = getTitleAndDescript(title)
-                    termsCollection = termsCollection.concat(titleUnit || [])
-                    return {
-                      cleanLink,
-                      titleUnit,
-                      description
-                    }
-                  }
-                });
-                termMap.forEach(e => {
-                  if (!e) { return }
-                  let {titleUnit} = e
-                  titleUnit.forEach(d => {
-                    termsObject[d] = e;
-                  })
-                });
-                console.log(termsObject)
+                let getTerms = pipe(termMapFactory, termObjFactory)
+                let termsObject = getTerms(rawData)
                 
-                let termsRegStr = `(${termsCollection.join('|')})`
-                let termsReg = new RegExp(termsRegStr, 'g')
-                let result = tansformHTML(content, termsReg)
-                resolve(result)
+                let a = new RegExp('插件清单', 'g')
+                let htmlContent = content
+                htmlContent = transformContent(termsObject, htmlContent)
+                resolve(htmlContent)
               })
 
             })
             return req
           })
+
+          function termMapFactory(arr) {
+            let termsCollection = []
+            return arr.map(e => {
+              let link = e.match(extractLink)
+              if (link) {
+                let cleanLink = link[0].replace(/[\(|\)]/g, '')
+                let title = e.match(extractTitle)[0]
+                let [titleUnit, description] = getTitleAndDescript(title)
+                termsCollection = termsCollection.concat(titleUnit || [])
+                return {
+                  cleanLink,
+                  titleUnit,
+                  description
+                }
+              }
+            });
+          }
+
+          function termObjFactory(arr) {
+            let termsObject = {}
+            arr.forEach(e => {
+              if (!e) { return }
+              let {titleUnit} = e
+              titleUnit.forEach(d => {
+                termsObject[d] = e;
+              })
+            });
+            return termsObject
+          }
 
           function getTitleAndDescript(str) {
             let cleanTitle = str.replace(/\)/g, '').replace(/\s*/g, '').replace(colon, '||')
@@ -132,18 +144,56 @@
             return [titleUnit, description]
           }
           
-          function templ(originStr) {
+          function templ(termsObject, originStr) {
             let {description} = termsObject[originStr]
-            return `<div class="hover-tip">${originStr}
-                <div class="tip-box">
-                    <p class="no-margin"><a class="tips-title" href="/" target="_blank">${originStr}</a></p>
-                    <p class="tips-content">${description}</p>
-                </div>
-              </div>`.replace(/\n/g, '')
+            return `<span class="hover-tip">${originStr}
+                <span class="tip-box">
+                    <span class="no-margin"><a class="tips-title" href="/" target="_blank">${originStr}</a></span>
+                    <span class="tips-content">${description}</span>
+                </span>
+              </span>`.replace(/(\n|\s{2,})/g, '')
           }
 
-          function tansformHTML(content, reg) {
-            return content.replace(reg, templ)
+          function tansformHTML(content, termsObject, key) {
+            let template = templ(termsObject, key)
+            return content.replace(/\{\{0\}\}/g, template)
+          }
+          
+          function markHtml(content, index, length) {
+            let left = content.substring(0, index)
+            let right = content.substring(index + length, content.length)
+            return left + '{{0}}' + right
+          }
+
+          function transformContent(termsObject, html) {
+            let exceptIdentifers = /(\/+|\]|\[|#)/g
+            let ct = html
+            for (const key in termsObject) {
+              if (termsObject.hasOwnProperty(key)) {
+                const e = termsObject[key];
+                const termReg = new RegExp(key, 'g')
+                const termLen = key.length
+                let findOne = termReg.exec(ct)
+                if (!findOne) { continue }
+                
+                while (findOne) {
+                  const idx = findOne.index
+                  const str = ct.substring(idx - 4, idx + termLen + 2)
+                  const context = str.replace(/\s*/g, '')
+                  const notConvertable = exceptIdentifers.test(context)
+                  console.log(ct.substring(idx - 4, idx + termLen + 2), context, notConvertable)
+
+                  if (notConvertable) {
+                    findOne = termReg.exec(ct)
+                    continue
+                  }
+                  ct = markHtml(ct, idx, termLen)
+                  findOne = termReg.exec(ct)
+                }
+                ct = tansformHTML(ct, termsObject, key)
+              }
+            }
+            return ct
           }
         }
       ]
@@ -160,10 +210,10 @@
     .hover-tip{
       display: inline-block;
       position: relative;
-      color: white;
-      background: #42b983;
+      color: #42b983;
       padding: 0 5px;
       margin: 0 2px;
+      border: 2px solid;
     }
 
     .hover-tip:hover .tip-box{
@@ -192,6 +242,10 @@
     }
     .hover-tip > a {
       color: white;
+    }
+
+    .tip-box > * {
+      display: block;
     }
 
     .tip-box .no-margin{
