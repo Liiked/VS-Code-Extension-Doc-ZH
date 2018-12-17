@@ -82,9 +82,6 @@
 
           
           hook.beforeEach( content => {
-            // TODO 多个同名术语长短不同时应以最长的匹配优先
-            // TODO 缓存结果，而不是每次请求
-            // TODO 英文术语对应多义词汇的map解析
             let req = new Promise((resolve, reject) => {
               if (vm.route.path === '/') {
                 resolve(content)
@@ -126,8 +123,10 @@
             let termsObject = {}
             arr.forEach(e => {
               if (!e) { return }
-              let {titleUnit} = e
-              titleUnit.forEach(d => {
+              const {titleUnit} = e
+              const title = titleUnit[0]
+              const titleArrary = title.split('/')
+              titleArrary.forEach(d => {
                 termsObject[d] = e;
               })
             });
@@ -167,7 +166,7 @@
           * 将文档中的术语转换为自定义格式
           ***/
           function transformContent(termsObject, html) {
-            let exceptIdentifers = /(\/+|\]|\[|#)/g
+            let exceptIdentifers = /(\/+|\]|\[|#|`)/g
             let ct = html
             for (const key in termsObject) {
               if (termsObject.hasOwnProperty(key)) {
@@ -272,7 +271,7 @@
       color: #364149;
     }
   </style>
-  <script src="./docsify.js"></script>
+  <script type="text/javascript" src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"></script>
