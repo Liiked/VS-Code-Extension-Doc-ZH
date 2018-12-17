@@ -20,9 +20,9 @@
 
 - [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件：用于激活插件的VS Code事件钩子。
 - [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点：插件清单的一部分，用于配置插件启动命令、用户可更改的插件配置，可以理解为插件的主要配置文件。
-- [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器：连接真正的调试程序（或运行时）和调试界面的插件称之为调试适配器。VS Code没有原生调试程序，而是依赖**调试器插件**调用通信协议（调试适配器协议）和VS Code的调试器界面实现。
+- [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器：连接真正的调试程序（或运行时）和调试界面的插件称之为调试适配器。VS Code没有原生调试程序，而是依赖【调试器插件】调用通信协议（调试适配器协议）和VS Code的调试器界面实现。
 - [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单：VS Code自定义的pacakge.json文件，其中包含着插件的入口、配置等重要信息。
 - Extensibility 扩展性
-- [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机：用于插件开发者调试尚未完成插件的特殊VS Code实例。
+- [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机：与VS Code主进程隔离的插件进程，插件运行的地方，开发者可在这个进程中调用VS Code提供的各类API。
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器：VS Code使用的C/S结构的插件模式中的服务器端，用于高消耗的特殊插件场景，如语言解析、智能提示等。
-- [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符：定义在发布内容配置的特定标识/名称，便于后续引用该语言配置。通常为某种编程语言的通俗名称，如JavaScript的语言标识符是`javascript`，Python的语言标识符是`python`。
+- [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符：定义在发布内容配置的特定标识/名称，便于后续引用该语言配置。通常为某种编程语言的通俗名称，如JavaScript的语言标识符是【javascript】，Python的语言标识符是【python】。
