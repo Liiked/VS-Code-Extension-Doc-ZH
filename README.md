@@ -53,7 +53,7 @@
 
 - **第四期计划**
     - ✅ 添加[示例-任务](https://code.visualstudio.com/docs/extensions/example-tasks)章节
-    - 添加术语速查小插件
+    - ✅ 添加术语速查小插件
     - 添加快速入门章节（待定）
 
 ## 翻译指南
