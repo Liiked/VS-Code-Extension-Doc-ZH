@@ -2,7 +2,7 @@
 
 虽然VS Code实现了一个原生的调试界面，但是它不能直接和调试器通信，而是依赖于*调试插件*实现调试和运行时的功能特性。
 
-这些调试插件各不相同，主要是因为他们的实现并不运行在扩展主机中，而是作为一个分离的独立程序。我们称这些调试插件为*适配器*是因为他们能“适配”API、具体的调试器，或者由VS Code定义的*调试适配器协议*(DAP)。
+这些调试插件各不相同，主要是因为他们的实现并不运行在扩展主机中，而是作为一个分离的独立程序。我们称这些调试插件为*适配器*是因为他们能“适配”API、具体的调试器，或者由VS Code定义的**调试适配器协议**(DAP)。
 
 ![适配器运行框架](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-debuggers/extensibility-architecture.png)
 
