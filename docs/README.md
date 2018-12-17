@@ -19,7 +19,7 @@
 [terms]: 该术语表是术语表插件的源数据，激活术语表插件的关键字即下述链接后的文字请用逗号分隔，术语描述则是冒号后面的内容
 
 - [Activation Events](https://code.visualstudio.com/docs/extensionAPI/overview) 激活事件：用于激活插件的VS Code事件钩子。
-- [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点：插件清单的一部分，用于配置插件启动命令、用户可更改的插件配置，可以理解为插件的主要配置文件。
+- [Contribution Points](https://code.visualstudio.com/docs/extensionAPI/overview) 发布内容配置点：package.json的一部分，用于配置插件启动命令、用户可更改的插件配置，可以理解为插件的主要配置文件。
 - [Debug Adapter](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 调试适配器：连接真正的调试程序（或运行时）和调试界面的插件称之为调试适配器。VS Code没有原生调试程序，而是依赖【调试器插件】调用通信协议（调试适配器协议）和VS Code的调试器界面实现。
 - [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单：VS Code自定义的pacakge.json文件，其中包含着插件的入口、配置等重要信息。
 - Extensibility 扩展性
