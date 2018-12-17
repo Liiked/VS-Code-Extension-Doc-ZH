@@ -228,19 +228,18 @@
     }
 
     .hover-tip:hover .tip-box{
-      height: 200px;
-      width: 240px;
-      padding: 1rem;
-      position: absolute;
+      transform: scale(1) translate(0, -2px);
       opacity: 1;
-      transition: all 0.2s;
-      overflow: hidden;
+      max-height: 240px;
+      padding: 1rem;
+      transition: transform 0.2s, max-height 0.2s ease-in, opacity 0.2s;
       z-index: 999;
     }
 
     .hover-tip .tip-box{
-      height: 0;
-      width: 0;
+      transform: scale(0) translate(100px, 100px);
+      max-height: 0px;
+      width: 240px;
       overflow: hidden;
       right: 0;
       bottom: 1.4rem;
@@ -249,7 +248,8 @@
       border: 2px solid #42b983;
       position: absolute;
       background: white;
-      transition: all 0.2s;
+      transition: transform 0.2s;
+
     }
     .hover-tip > a {
       color: white;
@@ -270,6 +270,8 @@
     .tip-box .tips-content{
       word-break: break-all;
       color: #364149;
+      font-weight: normal;
+      font-size: 0.8rem;
     }
   </style>
   <script type="text/javascript" src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"></script>
