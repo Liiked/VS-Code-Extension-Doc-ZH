@@ -141,10 +141,11 @@
           }
           
           function templ(termsObject, originStr) {
-            let {description = ''} = termsObject[originStr]
+            
+            let {description = '', cleanLink} = termsObject[originStr]
             return `<span class="hover-tip">${originStr}
                 <span class="tip-box">
-                    <span class="no-margin"><a class="tips-title" href="/" target="_blank">${originStr}</a></span>
+                    <span class="no-margin"><a class="tips-title" href="${cleanLink}" target="_blank">${originStr}</a></span>
                     <span class="tips-content">${description}</span>
                 </span>
               </span>`.replace(/(\n|\s{2,})/g, '')
