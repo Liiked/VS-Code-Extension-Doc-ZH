@@ -80,7 +80,7 @@
           const comma = /[，|,]/g
           const colon = /[：|:]/g
 
-          // body
+          
           hook.beforeEach( content => {
             // TODO 多个同名术语长短不同时应以最长的匹配优先
             // TODO 缓存结果，而不是每次请求
@@ -101,6 +101,7 @@
                 resolve(htmlContent)
               })
             })
+            return req;
           })
 
           function termMapFactory(arr) {
