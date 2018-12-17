@@ -12,6 +12,7 @@
 ---
 术语表收录出现在VS Code中独有的或是易引起歧义的词汇，不包含常见词汇，如Extension。该表按首字母排序。
 该表格式：
+- 普通词汇 `英文名称 术语名称`
 - 单义词 `[出处或参考解释链接]() 术语名称：解释`
 - 多义词 `[出处或参考解释链接]() 术语名称1/术语名称2：解释`
 
@@ -23,6 +24,5 @@
 - [Extension Manifest](https://code.visualstudio.com/docs/extensionAPI/overview) 插件清单：VS Code自定义的pacakge.json文件，其中包含着插件的入口、配置等重要信息。
 - Extensibility 扩展性
 - [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机：用于插件开发者调试尚未完成插件的特殊VS Code实例。
-- [Extension Host Process](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机环境/插件主机环境：用于插件开发者调试尚未完成插件的特殊VS Code实例。
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器：VS Code使用的C/S结构的插件模式中的服务器端，用于高消耗的特殊插件场景，如语言解析、智能提示等。
 - [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符
