@@ -9,10 +9,10 @@
     * [发布插件](/working-with-extensions/publish-extension.md)
     * [持续集成](/working-with-extensions/continuous-integration.md)
 * ◼️插件功能
-    * 概述
-    * 常用功能
-    * 主题
-    * 扩展工作台
+    * [概述](/extension-capabilities/readme.md)
+    * [常用功能](/extension-capabilities/)
+    * [主题](/extension-capabilities/)
+    * [扩展工作台](/extension-capabilities/)
 * ◼️插件指南
     * 概述
     * 命令
