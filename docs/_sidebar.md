@@ -7,7 +7,7 @@
 * ◼️开发插件
     * [测试插件](/working-with-extensions/testing-extension.md)
     * [发布插件](/working-with-extensions/publish-extension.md)
-    * [持续集成](/working-with-extensions/)
+    * [持续集成](/working-with-extensions/continuous-integration.md)
 * ◼️插件功能
     * 概述
     * 常用功能
