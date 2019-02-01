@@ -10,7 +10,7 @@
     * [持续集成](/working-with-extensions/continuous-integration.md)
 * ◼️插件功能
     * [概述](/extension-capabilities/readme.md)
-    * [常用功能](/extension-capabilities/)
+    * [常用功能](/extension-capabilities/common-capabilities.md)
     * [主题](/extension-capabilities/)
     * [扩展工作台](/extension-capabilities/)
 * ◼️插件指南
