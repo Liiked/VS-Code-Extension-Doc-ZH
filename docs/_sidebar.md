@@ -5,9 +5,9 @@
     * [解析插件结构](/get-started/extension-anatomy.md)
     * [小结](/get-started/wrapping-up.md)
 * ◼️开发插件
-    * 测试插件
-    * 发布插件
-    * 持续集成
+    * [测试插件](/working-with-extensions/testing-extension.md)
+    * [发布插件](/working-with-extensions/)
+    * [持续集成](/working-with-extensions/)
 * ◼️插件功能
     * 概述
     * 常用功能
