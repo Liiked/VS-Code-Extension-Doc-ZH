@@ -3,7 +3,7 @@
 * ◼️第一步
     * [你的第一个插件](/get-started/your-first-extension.md)
     * [解析插件结构](/get-started/extension-anatomy.md)
-    * 打包插件
+    * [小结](/get-started/wrapping-up.md)
 * ◼️开发插件
     * 测试插件
     * 发布插件
