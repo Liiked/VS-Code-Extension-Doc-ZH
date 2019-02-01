@@ -12,7 +12,7 @@
     * [概述](/extension-capabilities/readme.md)
     * [常用功能](/extension-capabilities/common-capabilities.md)
     * [主题](/extension-capabilities/theming.md)
-    * [扩展工作台](/extension-capabilities/)
+    * [扩展工作台](/extension-capabilities/extending-workbench.md)
 * ◼️插件指南
     * 概述
     * 命令
