@@ -6,7 +6,7 @@
     * [小结](/get-started/wrapping-up.md)
 * ◼️开发插件
     * [测试插件](/working-with-extensions/testing-extension.md)
-    * [发布插件](/working-with-extensions/)
+    * [发布插件](/working-with-extensions/publish-extension.md)
     * [持续集成](/working-with-extensions/)
 * ◼️插件功能
     * 概述
