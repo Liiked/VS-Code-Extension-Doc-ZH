@@ -2,7 +2,7 @@
 * [◼️概述](/api/readme)
 * ◼️第一步
     * [你的第一个插件](/get-started/your-first-extension.md)
-    * 解析插件结构
+    * [解析插件结构](/get-started/extension-anatomy.md)
     * 打包插件
 * ◼️开发插件
     * 测试插件
