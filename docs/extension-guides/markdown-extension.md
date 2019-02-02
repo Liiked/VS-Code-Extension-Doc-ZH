@@ -2,9 +2,9 @@
 
 Markdown插件可以帮你扩展和加强VS Code内置的Markdown预览，包括改变预览的样式、添加新的Markdown语法。
 
-## 用CSS改变Mark预览样式
+## 用CSS改变Markdown预览样式
 ---
-配置CSS可以改变mark预览的布局和样式，在你的插件`pacakge.json`中注册`markdown.previewStyles`即可：
+配置CSS可以改变markdown预览的布局和样式，在你的插件`pacakge.json`中注册`markdown.previewStyles`即可：
 
 ```json
 "contributes": {
