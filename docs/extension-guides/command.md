@@ -5,13 +5,13 @@
 ## 使用命令
 ---
 
-VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令]()。许多插件将它们的核心功能暴露为命令的形式，供用户或者其他插件使用。
+VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令]()。许多插件将它们的核心功能暴露为*命令*的形式供用户或者其他插件使用。
 
 #### 程序性执行一个命令
 
-[`vscode.commands.executeCommand`]()API可以程序性调用一个命令，你可以通过它使用内置函数，然后构建在你的插件中，比如VS Code内置的Git和Markdown插件中的东西。
+[`vscode.commands.executeCommand`]()API可以程序性调用一个命令，你可以通过它将VS Code的内置函数构建在你的插件中，比如VS Code内置的Git和Markdown插件中的东西。
 
-比如说，`editor.action.addCommentLine`命令将当前选中行变成注释：
+我们看个例子🌰`editor.action.addCommentLine`命令可以将当前选中行变成注释(你可以偷偷把这个功能地集成到你自己的插件中哦)：
 ```typescript
 import * as vscode from 'vscode';
 

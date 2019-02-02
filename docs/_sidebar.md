@@ -16,27 +16,37 @@
 * ◼️插件指南
     * [概述](/extension-guides/readme.md)
     * [命令](/extension-guides/command.md)
-    * [色彩主题](/extension-guides/)
-    * [图标主题](/extension-guides/)
-    * [树视图](/extension-guides/)
-    * [Webview](/extension-guides/)
-    * [虚拟文档](/extension-guides/)
-    * [任务](/extension-guides/)
-    * [源控制](/extension-guides/)
-    * [调试器插件](/extension-guides/)
-    * [Markdown插件](/extension-guides/)
+    * [色彩主题](/extension-guides/color-theme.md)
+    * [图标主题](/extension-guides/icon-theme.md)
+    * [树视图](/extension-guides/tree-view.md)
+    * [Webview](/extension-guides/webview.md)
+    * [虚拟文档](/extension-guides/virtual-documents.md)
+    * [任务](/extension-guides/task-provider.md)
+    * [源控制](/extension-guides/scm-provider.md)
+    * [调试器插件](/extension-guides/debugger-extension.md)
+    * [Markdown插件](/extension-guides/markdown-extension.md)
 * ◼️语言插件
-    * 概述
-    * 语法高亮
-    * 代码片段
-    * 语言配置
-    * 程序性语言特性
-    * 语言服务器
+    * [概述](/language-extensions/)
+    * [语法高亮](/language-extensions/syntax-highlight-guide.md)
+    * [代码片段](/language-extensions/snippet-guide.md)
+    * [语言配置](/language-extensions/language-configuration-guide.md)
+    * [程序性语言特性](/language-extensions/programmatic-language-features.md)
+    * [语言服务器](/language-extensions/language-server-extension-guide.md)
 * ◼️进阶主题
-    * 插件主机
-    * 建议使用的API
-* ◼️快速入门
-
+    * [插件主机](/advanced-topics/extension-host.md)
+    * [建议使用的API](/advanced-topics/using-proposed-api.md)
+* ️️◼️参考
+    * [VS Code API](/references/vscode-api.md)
+    * [发布内容配置](/references/contribution-points.md)
+    * [激活事件](/references/activation-events.md)
+    * [插件清单](/references/extension-manifest.md)
+    * [命令](/references/commands.md)
+    * [主题色彩](/references/theme-color.md)
+    * [文档选择器](/references/document-selector.md)
+<!-- * ◼️快速入门 -->
+* 
+* -------- 旧版分割线 --------
+* 
 * ◼️插件创作
     * ◻️介绍
         * [VSC扩展机制和插件类型](extension-authoring/overview)
