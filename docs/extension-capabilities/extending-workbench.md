@@ -9,7 +9,7 @@
 
 VS Code提供了各式各样的API让在工作台你添加自己的组件。比如下图：
 
-![]()
+![workbench-contribution](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-capabilities/images/extending-workbench/workbench-contribution.png)
 
 - 活动栏：[Azure App Service extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)添加了一个[视图容器](#view-container)
 - 侧边栏：内置的[NPM 插件](https://github.com/Microsoft/vscode/tree/master/extensions/npm) 添加了一个 [Tree View](#tree-view) 到资源管理器视图

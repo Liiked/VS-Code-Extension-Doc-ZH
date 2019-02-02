@@ -14,17 +14,17 @@
     * [主题](/extension-capabilities/theming.md)
     * [扩展工作台](/extension-capabilities/extending-workbench.md)
 * ◼️插件指南
-    * 概述
-    * 命令
-    * 色彩主题
-    * 图标主题
-    * 树视图
-    * Webview
-    * 虚拟文档
-    * 任务
-    * 源控制
-    * 调试器插件
-    * Markdown插件
+    * [概述](/extension-guides/readme.md)
+    * [命令](/extension-guides/command.md)
+    * [色彩主题](/extension-guides/)
+    * [图标主题](/extension-guides/)
+    * [树视图](/extension-guides/)
+    * [Webview](/extension-guides/)
+    * [虚拟文档](/extension-guides/)
+    * [任务](/extension-guides/)
+    * [源控制](/extension-guides/)
+    * [调试器插件](/extension-guides/)
+    * [Markdown插件](/extension-guides/)
 * ◼️语言插件
     * 概述
     * 语法高亮
