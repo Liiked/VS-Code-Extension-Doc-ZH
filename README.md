@@ -16,8 +16,10 @@
 - **参与**：由于国内已经有过一版VS Code文档的社区翻译版本，但是质量，emmmmm……，所以本项目会采取较为严格的翻译审查，若你有热情一同学习和贡献自己的力量，请参考我们的翻译指南。
 
 ## 翻译计划
-
-已移动到[Progess](/Progeress.md)
+目前VS Code Doc正在改版，第一版的图片全部挂了。
+因为改动内容过多，第二版翻译预计会耗费较长的时间，因此针对一些迫不及待的小伙伴先已上了部分翻译
+如果你有兴趣、能力、时间，欢迎[贡献代码](#贡献代码)
+已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/docs/Progeress.md)
 
 ## 翻译指南
 
@@ -55,7 +57,7 @@
 #### 贡献代码
 
 - Markdown的格式要求，尽量避免使用`*`用于表示列表，而是使用`-`等其他符号
-- 贡献流程：fork/clone本项目，创建分支如“fix/chapter_testing_extensions”，修改文件，提交pr到“branch/docs”
+- 贡献流程：fork/clone本项目，根据目前的项目进度和自己的兴趣，挑选进行中的翻译，在issue面板中创建一个`help translate`告知项目owner，通过后创建分支如“fix/chapter_testing_extensions”，修改文件，提交pr到“branch/docs”
 - 请在翻译中遵循[翻译指南](#翻译指南)，否则本项目的owner可能会与你进行深度的讨论~
 
 ```bash
