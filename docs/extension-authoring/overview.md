@@ -6,7 +6,7 @@
     - [语言服务器](#语言服务器) - 高IO/CPU密集型任务的插件
     - [调试器](#调试适配器debug-adapter) - 通过`调试适配器`连接外部调试器的插件
 
-![调用示意图](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/overview/extensibility-architecture.png)
+![调用示意图](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/extensibility-architecture.png)
 
 ## 插件
 ---
