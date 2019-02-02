@@ -16,10 +16,13 @@
 - **参与**：由于国内已经有过一版VS Code文档的社区翻译版本，但是质量，emmmmm……，所以本项目会采取较为严格的翻译审查，若你有热情一同学习和贡献自己的力量，请参考我们的翻译指南。
 
 ## 翻译计划
-目前VS Code Doc正在改版，第一版的图片全部挂了。
-因为改动内容过多，第二版翻译预计会耗费较长的时间，因此针对一些迫不及待的小伙伴先已上了部分翻译
-如果你有兴趣、能力、时间，欢迎[贡献代码](#贡献代码)
-已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/docs/Progeress.md)
+目前VS Code Doc正在改版，第一版的图片全军覆没。因为有很多图片已经被替换或者删除，所以第一版不再维护，直接进入第二版翻译。
+
+因为改动内容过多，第二版翻译预计会耗费较长的时间，针对一些迫不及待的小伙伴已经先上了部分翻译
+
+如果你有兴趣、能力和时间，欢迎[贡献代码](#贡献代码)
+
+翻译计划已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/docs/Progeress.md)
 
 ## 翻译指南
 
