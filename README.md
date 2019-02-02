@@ -22,7 +22,7 @@
 
 如果你有兴趣、能力和时间，欢迎[贡献代码](#贡献代码)
 
-翻译计划已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/docs/Progeress.md)
+翻译计划已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/Progress.md)
 
 ## 翻译指南
 
