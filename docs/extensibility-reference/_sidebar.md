@@ -32,7 +32,7 @@
 
 * 🚧🚧🚧 第二版（施工中）🚧🚧🚧
 
-* [◼️概述](/api/readme)
+* [◼️概述](/api/README)
 * ◼️第一步
     * [你的第一个插件](/get-started/your-first-extension.md)
     * [解析插件结构](/get-started/extension-anatomy.md)
@@ -42,12 +42,12 @@
     * [发布插件](/working-with-extensions/publish-extension.md)
     * [持续集成](/working-with-extensions/continuous-integration.md)
 * ◼️插件功能
-    * [概述](/extension-capabilities/readme.md)
+    * [概述](/extension-capabilities/README.md)
     * [常用功能](/extension-capabilities/common-capabilities.md)
     * [主题](/extension-capabilities/theming.md)
     * [扩展工作台](/extension-capabilities/extending-workbench.md)
 * ◼️插件指南
-    * [概述](/extension-guides/readme.md)
+    * [概述](/extension-guides/README.md)
     * [命令](/extension-guides/command.md)
     * [色彩主题](/extension-guides/color-theme.md)
     * [图标主题](/extension-guides/icon-theme.md)
