@@ -65,9 +65,9 @@
     * [语言配置](/language-extensions/language-configuration-guide.md)
     * [程序性语言特性](/language-extensions/programmatic-language-features.md)
     * [语言服务器](/language-extensions/language-server-extension-guide.md)
-* ◼️进阶主题（🚧施工中）
+* ◼️进阶主题
     * [插件主机](/advanced-topics/extension-host.md)
-    * [建议使用的API](/advanced-topics/using-proposed-api.md)
+    * [使用不稳定的API](/advanced-topics/using-proposed-api.md)
 * ️️◼️参考（🚧施工中）
     * [VS Code API](/references/vscode-api.md)
     * [发布内容配置](/references/contribution-points.md)
