@@ -29,7 +29,7 @@ VS Code内置了扩展能力，在插件API加持之下，VS Code几乎每一个
 - **插件功能** 将VS Code庞杂的API拆解成了几个小分类，帮你掌握到每个主题下的开发细节
 - **插件指南** 包括指南和代码实例，详细介绍特定API的使用场景
 - **语言插件** 通过代码和指南阐述如何添加编程语言支持
-- **进阶主题** 解释了如[插件主机](/advanced-topics/extension-host.md)和[建议使用的API](/advanced-topics/using-proposed-api.md)等更深层级的概念
+- **进阶主题** 解释了[插件主机](/advanced-topics/extension-host.md)和[使用不稳定的API](/advanced-topics/using-proposed-api.md)等更深层级的概念
 
 ## 寻求帮助
 ---
