@@ -138,6 +138,8 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 `vscode.previewHtml` - 在编辑器窗口中渲染HTML
 
+🚨**previewHtml 命令已经废弃了. 使用[Webview API]()代替**
+
 - *uri* - 要预览的uri
 - *column* - (可选的)要展示在窗口的哪一列
 - *label* - (可选的)预览的标题
@@ -172,3 +174,98 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 - *layout* - 被设置的布局
 
+布局是一个对象，带有初始布局方向（可选，0 = 水平布局，1 = 垂直布局），还有一个包含编辑器组的数组。每个编辑器组又有一个尺寸和另一个数组，其中有矩形布局和方向信息。如果设置了编辑器组的大小，每一行或者每一列的总和必须为1。比如一个2x2的网格：`{ orientation: 0, groups: [{ groups: [{}, {}], size: 0.5 }, { groups: [{}, {}], size: 0.5 }] }`
+
+`cursorMove` - 移动光标到视图的合理位置
+
+- *Cursor move argument object*
+
+  可以传递的键值对
+
+    - 'to': 必选, 鼠标要移动到的合理位置
+    ```js
+    'left', 'right', 'up', 'down'
+    'wrappedLineStart', 'wrappedLineEnd', 'wrappedLineColumnCenter'
+    'wrappedLineFirstNonWhitespaceCharacter', 'wrappedLineLastNonWhitespaceCharacter'
+    'viewPortTop', 'viewPortCenter', 'viewPortBottom', 'viewPortIfOutside'
+    ```
+    - 'by': 移动的单位. 默认根据'to'来计算.
+    ```js
+    'line', 'wrappedLine', 'character', 'halfLine'
+    ```
+    - 'value': 单位步数. 默认为'1'.
+    - 'select': 如果为'true'则会选中. 默认为'false'.
+
+`editorScroll` - 编辑器滚动方向
+
+- *Editor scroll argument object*
+
+  可以传递的键值对
+
+    - 'to': 必须的. 方向值
+    ```js
+    'up', 'down'
+    ```
+    - 'by': 移动的单位. 默认根据'to'来计算.
+    ```js
+    'line', 'wrappedLine', 'page', 'halfPage'
+    ```
+    - 'value': 单位步数. 默认为'1'.
+    - 'revealCursor': 如果为'true', 在超出滚动视图也会显示光标.
+
+`revealLine` - 在给定的位置显示行
+
+- *Reveal line argument object*
+
+  可以传递的键值对
+
+    - 'lineNumber': 必须的. 行号
+    - 'at': 显示的合理位置
+    ```js
+    'top', 'center', 'bottom'
+    ```
+
+`editor.unfold` - 展开编辑器内容
+
+- *Unfold editor argument*
+
+  可以传递的键值对
+
+    - 'levels': 展开的层级数. 默认为 1.
+    - 'direction': 如果是'up', 向上展开, 否则向下展开
+    - 'selectionLines': 要使用展开功能的起始行（从0起）。如果不设置，就会使用当前激活的行（选中区）.
+
+`editor.fold` - 折叠编辑器内容
+
+- `Fold editor argument`
+
+  可以传递的键值对
+
+    - 'levels': 折叠的的层级数。默认为1
+    - 'direction':  如果设置为'up'，向上折叠，不然向下折叠
+    - 'selectionLines': 要使用折叠功能的起始行（从0起）。如果不设置，就会使用当前激活的行（选中区）
+
+`editor.action.showReferences` - 在文件中显示引用
+
+- *uri* - 要显示引用的文件
+- *position* - 要显示的位置
+- *locations* - 位置数组
+
+`moveActiveEditor` - 通过标签或者组移动激活的编辑器
+
+- *Active editor move argument*
+
+  参数
+
+  - 'to': String. 目标位置
+  - 'by': String. 移动的单位(通过标签或者组).
+  - 'value': Number. 要移动的位置或者绝对位置值
+
+## 简单命令
+
+简单的命令不需要参数, 可以在`keybindings.json`的**键盘快捷方式**列表中找到.
+
+查看`keybindings.json`:
+
+Windows, Linux: **文件** > **首选项** > **键盘快捷方式** > `keybindings.json`
+macOS: **编码** > **首选项** > **键盘快捷方式** > `keybindings.json`
