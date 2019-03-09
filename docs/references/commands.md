@@ -11,7 +11,7 @@ let uri = Uri.file('/some/path/to/folder');
 let success = await commands.executeCommand('vscode.openFolder', uri);
 ```
 
-## 命令
+## 复杂命令
 
 `vscode.executeWorkspaceSymbolProvider` - 执行工作区所有的**符号**供应器函数
 
