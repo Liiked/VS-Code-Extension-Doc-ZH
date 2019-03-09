@@ -71,7 +71,7 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 - *uri* - 文档的Uri
 - *position* - 在文档中的位置
-- *triggerCharacter* - (可选的)当用户输入特定字符时（如, 或 (）触发符号帮助
+- *triggerCharacter* - (可选的)当用户输入特定字符时（如`,` 或 `(`）触发符号帮助
 - *(returns)* - promise函数, 且参数为SignatureHelp
 
 `vscode.executeDocumentSymbolProvider` - 执行**文档符号**供应器函数
@@ -83,7 +83,7 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 - *uri* - 文档的Uri
 - *position* - 在文档中的位置
-- *triggerCharacter* - (可选的)当用户输入诸如(, (, ))之类的字符时触发
+- *triggerCharacter* - (可选的)当用户输入诸如(`,` `(`)之类的字符时触发
 - *itemResolveCount* - (可选的)补全的符号数量(数目太大会减慢补全速度)
 - *(returns)* - promise函数, 且参数为CompletionList实例
 
