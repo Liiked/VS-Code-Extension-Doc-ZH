@@ -135,3 +135,40 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 - *color* - 需要展示并插入的颜色
 - *context* - 上下文对象, 包括uri和影响范围
 - *(returns)* - promise函数, 且参数为ColorPresentation对象数组
+
+`vscode.previewHtml` - 在编辑器窗口中渲染HTML
+
+- *uri* - 要预览的uri
+- *column* - (可选的)要展示在窗口的哪一列
+- *label* - (可选的)预览的标题
+- *options* - (可选的)webview环境配置项
+
+`vscode.openFolder` - 在当前窗口或者新的窗口打开一个文件夹或者工作区
+
+- *uri* - 被打开的文件夹或工作区Uri. 如果未提供, 会打开一个询问提示框
+- *newWindow* - (可选的)是否在新窗口打开. 默认在本窗口
+
+!> **注意：** 在当前窗口打开, 如果未设置`newWindow = true`, 会在指定的工作区或者文件夹开启新的拓展主机进程, 并且关闭当前拓展主机进程.
+
+`vscode.diff` - 在diff编辑器中打开指定资源以比较它们的内容
+
+- *left* diff编辑器左边的文件
+- *right* diff编辑器右边的文件
+- *title* (可选)diff编辑器标题
+- *options* (可选)编辑器配置项, 参考`vscode.TextDocumentShowOptions`
+
+`vscode.open` - 在编辑器打开指定文件
+
+- *resource* - 要打开的文件
+- *columnOrOptions* - (可选)可以是要打开的编辑器列，也可以是编辑器选项，参考`vscode.TextDocumentShowOptions`
+
+可以是文本文件、二进制文件、http(s) url. 如果需要更多的配置项, 使用`vscode.window.showTextDocument`代替.
+
+`vscode.removeFromRecentlyOpened` - 在最近打开的列表中移除一个路径
+
+- *path* - 被移除的路径
+
+`vscode.setEditorLayout` - 设置编辑器布局
+
+- *layout* - 被设置的布局
+
