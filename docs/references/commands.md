@@ -268,4 +268,5 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 查看`keybindings.json`:
 
 Windows, Linux: **文件** > **首选项** > **键盘快捷方式** > `keybindings.json`
+
 macOS: **编码** > **首选项** > **键盘快捷方式** > `keybindings.json`
