@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
+  <style>
+    .markdown-section ul {
+      padding-left: 2.5rem;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
@@ -80,7 +85,7 @@
           const comma = /[，|,]/g
           const colon = /[：|:]/g
 
-          
+
           hook.beforeEach( content => {
             let req = new Promise((resolve, reject) => {
               if (vm.route.path === '/') {
@@ -90,7 +95,7 @@
               Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md', false, null).then(d => {
                 let clearUnrealtedData = d.split('terms')[1]
                 const rawData = clearUnrealtedData.match(extractTermArray)
-                
+
                 let getTerms = pipe(termMapFactory, termObjFactory)
                 let termsObject = getTerms(rawData)
                 let htmlContent = content
@@ -139,9 +144,9 @@
             let titleUnit = titleText.replace(comma, ' ').split(' ')
             return [titleUnit, description]
           }
-          
+
           function templ(termsObject, originStr) {
-            
+
             let {description = '', cleanLink} = termsObject[originStr]
             return `<span class="hover-tip">${originStr}
                 <span class="tip-box">
@@ -176,7 +181,7 @@
                 const termLen = key.length
                 let findOne = termReg.exec(ct)
                 if (!findOne) { continue }
-                
+
                 while (findOne) {
                   const idx = findOne.index
                   const str = ct.substring(idx - 14, idx + termLen + 4)
