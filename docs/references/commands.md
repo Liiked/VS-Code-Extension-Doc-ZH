@@ -6,7 +6,7 @@
 
 下面是一个如何在 VS Code 中打开新文件夹的例子:
 
-```js
+```javascript
 let uri = Uri.file('/some/path/to/folder');
 let success = await commands.executeCommand('vscode.openFolder', uri);
 ```
@@ -183,14 +183,14 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
   可以传递的键值对
 
     - 'to': 必选, 鼠标要移动到的合理位置
-    ```js
+    ```
     'left', 'right', 'up', 'down'
     'wrappedLineStart', 'wrappedLineEnd', 'wrappedLineColumnCenter'
     'wrappedLineFirstNonWhitespaceCharacter', 'wrappedLineLastNonWhitespaceCharacter'
     'viewPortTop', 'viewPortCenter', 'viewPortBottom', 'viewPortIfOutside'
     ```
     - 'by': 移动的单位. 默认根据'to'来计算.
-    ```js
+    ```
     'line', 'wrappedLine', 'character', 'halfLine'
     ```
     - 'value': 单位步数. 默认为'1'.
@@ -203,11 +203,11 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
   可以传递的键值对
 
     - 'to': 必须的. 方向值
-    ```js
+    ```
     'up', 'down'
     ```
     - 'by': 移动的单位. 默认根据'to'来计算.
-    ```js
+    ```
     'line', 'wrappedLine', 'page', 'halfPage'
     ```
     - 'value': 单位步数. 默认为'1'.
@@ -221,7 +221,7 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
     - 'lineNumber': 必须的. 行号
     - 'at': 显示的合理位置
-    ```js
+    ```
     'top', 'center', 'bottom'
     ```
 
@@ -263,7 +263,7 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 ## 简单命令
 
-简单的命令不需要参数, 可以在`keybindings.json`的**键盘快捷方式**列表中找到.
+简单的命令不需要参数, 可以在`keybindings.json`的**键盘快捷方式**列表中找到. 在文件底部的注释块中列出了未绑定的命令.
 
 查看`keybindings.json`:
 
