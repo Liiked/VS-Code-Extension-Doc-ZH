@@ -68,12 +68,12 @@
 
 ### onDebugResolve
 
-这是两个比较细致的`onDebug`激活事件:
+这是两个粒度更细的`onDebug`激活事件:
 
-- `onDebugInitialConfigurations`在`DebugConfigurationProvider`中的`provideDebugConfigurations`方法之前触发.
+- `DebugConfigurationProvider`中的`provideDebugConfigurations`在`onDebugInitialConfigurations`之后触发
 - `onDebugResolve:type`在`DebugConfigurationProvider`的`resolveDebugConfiguration`方法之前触发.
 
-**友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据DebugConfigurationProvider实现的对应方法（ provideDebugConfigurations或resolveDebugConfiguration），使用onDebugInitialConfigurations或onDebugResolve. 参阅[使用调试器插件]().
+**友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据`DebugConfigurationProvider`实现的对应方法（`provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve`. 参阅[使用调试器插件]().
 
 ## workspaceContains
 
@@ -87,7 +87,7 @@
 
 ## onFileSystem
 
-从协议（scheme）打开的文件或文件夹打开时触发。通常是`file`-协议，也可以用自定义的文件供应器函数替换掉，比如`ftp`、`ssh`.
+以协议（scheme）打开文件或文件夹时触发。通常是`file`-协议，也可以用自定义的文件供应器函数替换掉，比如`ftp`、`ssh`.
 
 ```json
 ...
@@ -111,7 +111,7 @@
 
 ## onUri
 
-插件的系统级URI打开时触发。这个URI协议需要带上`vscode`或者 `vscode-insiders`协议。URI授权必须是插件的唯一标识，剩余的URI是可选的。
+插件的系统级URI打开时触发。这个URI协议需要带上`vscode`或者 `vscode-insiders`协议。URI主机名必须是插件的唯一标识，剩余的URI是可选的。
 
 ```json
 ...
@@ -129,7 +129,7 @@
 
 ## onWebviewPanel
 
-VS Code需要还原匹配到`viewType`的`webview`视图时触发.
+VS Code需要恢复匹配到`viewType`的`webview`视图时触发.
 
 下面是一个例子:
 
