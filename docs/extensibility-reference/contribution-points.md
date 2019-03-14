@@ -115,7 +115,7 @@ configuration是JSON格式的键值对，VS Code为用户提供了良好的设�
 * [SCM 资源](extensibility-reference/api-scm.md#菜单) - `scm/resource/context`
 * [SCM 改变标题](extensibility-reference/api-scm.md#菜单) - `scm/change/title`
 * [视图的标题菜单](#contributesviews) - `view/title`
-* The [视图项的菜单](#contributesviews) - `view/item/context`
+* [视图项的菜单](#contributesviews) - `view/item/context`
 
 
 
