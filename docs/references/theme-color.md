@@ -206,11 +206,197 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 ## 编辑器色彩
 
+编辑器里面最突出的色彩主要是语法高亮, 并且基于你已经安装的语言. 可以在色彩主题中或者使用`editor.tokenColorCustomizations`配置. 参阅[定制色彩主题](https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme)以了解更新色彩主题和可用的标记类型
+
+下面列出了所有的编辑器色彩:
+
+- `editor.background`: 编辑器背景色
+- `editor.foreground`: 编辑器前景色
+- `editorLineNumber.foreground`: 编辑器行号的颜色
+- `editorLineNumber.activeForeground`: 编辑器活动行号的颜色
+- `editorCursor.background`: 编辑器光标的背景色。可以自定义块型光标覆盖字符的颜色
+- `editorCursor.foreground`: 编辑器光标的前景色。可以自定义块型光标覆盖字符的颜色
+
+当选中多个字符时会显示选区颜色. 这是为了高亮显示与所选文本相关的区域
+
+![选区高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/selectionhighlight.png)
+
+- `editor.selectionBackground`: 编辑器所选内容的颜色
+- `editor.selectionForeground`: 用以彰显高对比度的所选文本的颜色
+- `editor.inactiveSelectionBackground`: 非活动编辑器中所选内容的颜色，颜色必须透明，以免隐藏下面的装饰效果
+- `editor.selectionHighlightBackground`: 具有与所选项相关内容的区域的颜色。颜色必须透明，以免隐藏下面的修饰效果
+- `editor.selectionHighlightBorder`: 与所选项内容相同的区域的边框颜色
+
+光标在符号或单词内部时会触发符号高亮. 取决于受支持的语言文件, 所有匹配到的引用和声明会根据读和写显示不同的颜色, 反之, 只会字符高亮:
+
+![符号和单词高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/occurrences.png)
+
+- `editor.wordHighlightBackground`: 读取访问期间符号的背景色，例如读取变量时。颜色必须透明，以免隐藏下面的修饰效果
+- `editor.wordHighlightBorder`: 符号在进行读取访问操作时的边框颜色，例如读取变量
+- `editor.wordHighlightStrongBackground`: 写入访问过程中符号的背景色，例如写入变量时。颜色必须透明，以免隐藏下面的修饰效果
+- `editor.wordHighlightStrongBorder`: 符号在进行写入访问操作时的边框颜色，例如写入变量
+
+搜索匹配项的颜色取决于搜索/替换对话框中的输入文字:
+
+![搜索匹配项](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/findmatches.png)
+
+- `editor.findMatchBackground`: 当前搜索匹配项的颜色
+- `editor.findMatchHighlightBackground`: 其他搜索匹配项的颜色。颜色必须透明，以免隐藏下面的修饰效果
+- `editor.findRangeHighlightBackground`: 限制搜索范围的颜色(启用搜索小组件的'Find in Selection'配置项)。颜色必须透明，以免隐藏底层装饰
+- `editor.findMatchBorder`: 当前搜索匹配项的边框颜色
+- `editor.findMatchHighlightBorder`: 其他搜索匹配项的边框颜色
+- `editor.findRangeHighlightBorder`: 限制搜索的范围的边框颜色(启用搜索小组件的'Find in Selection'配置项)
+
+鼠标悬停符号时的颜色:
+
+![悬停高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/hoverhighlight.png)
+
+- `editor.hoverHighlightBackground`: 在下面突出显示悬停的字词。颜色必须透明，以免隐藏下面的修饰效果
+
+当前行(光标所在行)只会显示背景高亮或者边框高亮(两者之一)
+
+![行高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/line.png)
+
+- `editor.lineHighlightBackground`: 光标所在行高亮内容的背景颜色
+- `editor.lineHighlightBorder`: 标所在行四周边框的背景颜色
+
+点击链接时的颜色:
+
+![点击链接](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/link.png)
+
+- `editorLink.activeForeground`: 文本中链接在点击或鼠标悬停时的前景色
+
+选择搜索结果时的高亮区域:
+
+![高亮区域](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/rangehighlight.png)
+
+- `editor.rangeHighlightBackground`: 限制搜索范围的颜色, 用于快速打开、文件中的符号、搜索结果。颜色不能不透明，以免隐藏底层装饰
+- `editor.rangeHighlightBorder`: 限制搜索的范围的边框颜色
+
+要查看编辑器在空白字符上显示符号的方式, 启用(enable)**Toggle Render Whitespace**配置项
+
+- `editorWhitespace.foreground`: 编辑器中空白字符的前景色
+
+使用`"editor.renderIndentGuides: true"`配置编辑器显示缩进参考线
+
+- `editorIndentGuide.background`: 编辑器缩进参考线的颜色
+- `editorIndentGuide.activeBackground`: 编辑器活动缩进参考线的颜色
+
+使用`"editor.rulers"`来配置编辑器标尺
+
+- `editorRuler.foreground`: 编辑器标尺的前景色
+
+CodeLens:
+
+![CodeLens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/codelens.png)
+
+- `editorCodeLens.foreground`: 编辑器 CodeLens 的前景色
+
+匹配括号:
+
+![匹配括号](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/bracket-colors.png)
+
+- `editorBracketMatch.background`: 匹配括号的背景色
+- `editorBracketMatch.border`: 匹配括号外框的颜色
+
+概览标尺:
+
+位于编辑器右边缘滚动条下方, 可以概览整个编辑器.
+
+- `editorOverviewRuler.border`: 概览标尺边框的颜色
+- `editorOverviewRuler.findMatchForeground`: 用于查找匹配项的概述标尺标记颜色, 颜色必须透明，以免隐藏下面的修饰效果
+- `editorOverviewRuler.rangeHighlightForeground`: 用于突出显示范围的概述标尺标记颜色, , 比如快速打开、文件中的符号、查找功能. 颜色必须透明，以免隐藏下面的修饰效果
+- `editorOverviewRuler.selectionHighlightForeground`: 用于突出显示所选内容的概述标尺标记颜色。颜色必须透明，以免隐藏下面的修饰效果
+- `editorOverviewRuler.wordHighlightForeground`: 用于突出显示符号的概述标尺标记颜色。颜色必须透明，以免隐藏下面的修饰效果
+- `editorOverviewRuler.wordHighlightStrongForeground`: 用于突出显示写权限符号的概述标尺标记颜色。颜色必须透明，以免隐藏下面的修饰效果
+- `editorOverviewRuler.modifiedForeground`: 概览标尺中已修改内容的颜色
+- `editorOverviewRuler.addedForeground`: 概览标尺中已增加内容的颜色
+- `editorOverviewRuler.deletedForeground`: 概览标尺中已删除内容的颜色
+- `editorOverviewRuler.errorForeground`: 概览标尺中错误内容的颜色
+- `editorOverviewRuler.warningForeground`: 概览标尺中警告信息的颜色
+- `editorOverviewRuler.infoForeground`: 概览标尺中信息的颜色
+- `editorOverviewRuler.bracketMatchForeground`: 概览标尺上表示匹配括号的标记颜色
+
+错误和警告:
+
+- `editorError.foreground`: 错误信息的整体前景色。此颜色仅在不被组件覆盖时适用
+- `editorError.border`: 编辑器中错误波浪线的边框颜色
+- `editorWarning.foreground`: 编辑器中警告波浪线的前景色
+- `editorWarning.border`: 编辑器中警告波浪线的边框颜色
+- `editorInfo.foreground`: 编辑器中信息波浪线的前景色
+- `editorInfo.border`: 编辑器中信息波浪线的边框颜色
+- `editorHint.foreground`: 编辑器中提示波浪线的前景色
+- `editorHint.border`: 编辑器中提示波浪线的边框颜色
+
+未使用的源代码:
+
+- `editorUnnecessaryCode.border`: 编辑器中不必要(未使用)的源代码的边框颜色
+- `editorUnnecessaryCode.opacity`: 不必要（未使用）代码的在编辑器中显示的不透明度。例如，`"#000000c0"` 将以 75% 的不透明度显示代码。对于高对比度主题，请使用 `"editorUnnecessaryCode.border"` 主题来为非必须代码添加下划线，以避免颜色淡化
+
+导航线包括边缘符号和行号:
+
+- `editorGutter.background`: 编辑器导航线的背景色, 导航线包括边缘符号和行号
+- `editorGutter.modifiedBackground`: 编辑器导航线中被修改行的背景颜色
+- `editorGutter.addedBackground`: 编辑器导航线中已插入行的背景颜色
+- `editorGutter.deletedBackground`: 编辑器导航线中被删除行的背景颜色
+
 ## 差异编辑器色彩
+
+已插入或者移除的文字的颜色, 使用背景色或者边框色(两者选其一)
+
+- `diffEditor.insertedTextBackground`: 已插入的文本的背景色。颜色必须透明，以免隐藏下面的修饰效果
+- `diffEditor.insertedTextBorder`: 插入的文本的轮廓颜色
+- `diffEditor.removedTextBackground`: 已删除的文本的背景色。颜色必须透明，以免隐藏下面的修饰效果
+- `diffEditor.removedTextBorder`: 被删除文本的轮廓颜色
+- `diffEditor.border`: 两个文本编辑器之间的边框颜色
 
 ## 编辑器小部件色彩
 
+编辑器组件在其内容的前面. 例如(查找/替换)对话框、建议组件、编辑器悬停提示框
+
+- `editorWidget.background`: 编辑器组件(如查找/替换)背景颜色
+- `editorWidget.border`: 编辑器小部件的边框颜色。此颜色仅在小部件有边框且不被小部件重写时适用
+- `editorWidget.resizeBorder`: 编辑器小部件大小调整条的边框颜色。此颜色仅在小部件有调整边框且不被小部件颜色覆盖时使用
+- `editorSuggestWidget.background`: 建议小组件的背景色
+- `editorSuggestWidget.border`: 建议小组件的边框颜色
+- `editorSuggestWidget.foreground`: 建议小组件的前景色
+- `editorSuggestWidget.highlightForeground`: 建议小组件中匹配内容的高亮颜色
+- `editorSuggestWidget.selectedBackground`: 建议小组件中所选条目的背景色
+- `editorHoverWidget.background`: 编辑器悬停提示背景颜色
+- `editorHoverWidget.border`: 编辑器悬停提示边框颜色
+
+异常小组件是一个速览窗口, 当调试抛出异常时出现
+
+- `debugExceptionWidget.background`: 异常小组件背景颜色
+- `debugExceptionWidget.border`: 异常小组件边框颜色
+
+编辑器标记, 当导航至编辑器中的错误和警告时出现(**跳到下一个错误或警告**命令)
+
+- `editorMarkerNavigation.background`: 编辑器标记导航小组件背景色
+- `editorMarkerNavigationError.background`: 编辑器标记导航小组件错误颜色
+- `editorMarkerNavigationWarning.background`: 编辑器标记导航小组件警告颜色
+- `editorMarkerNavigationInfo.background`: 编辑器标记导航小组件信息颜色
+
 ## 速览窗口色彩
+
+速览窗口在编辑器内部, 将引用和声明显示为视图
+
+![速览窗口](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/peek-view.png)
+
+- `peekView.border`: 速览视图边框和箭头颜色
+- `peekViewEditor.background`: 速览视图编辑器背景色
+- `peekViewEditorGutter.background`: 速览视图编辑器中装订线的背景色
+- `peekViewEditor.matchHighlightBackground`: 在速览视图编辑器中匹配突出显示颜色
+- `peekViewEditor.matchHighlightBorder`: 在速览视图编辑器中匹配项的突出显示边框
+- `peekViewResult.background`: 速览视图结果列表背景色
+- `peekViewResult.fileForeground`: 速览视图结果列表中文件节点的前景色
+- `peekViewResult.lineForeground`: 速览视图结果列表中行节点的前景色
+- `peekViewResult.matchHighlightBackground`: 在速览视图结果列表中匹配突出显示颜色
+- `peekViewResult.selectionBackground`: 速览视图结果列表中所选条目的背景色
+- `peekViewResult.selectionForeground`: 速览视图结果列表中所选条目的前景色
+- `peekViewTitle.background`: 速览视图标题区域背景颜色
+- `peekViewTitleDescription.foreground`: 速览视图标题信息颜色
+- `peekViewTitleLabel.foreground`: 速览视图标题颜色
 
 ## 合并冲突
 
