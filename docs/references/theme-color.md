@@ -400,32 +400,207 @@ CodeLens:
 
 ## 合并冲突
 
+合并冲突装饰, 当编辑器包含范围差异时显示
+
+![合并范围差异](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/merge-ranges.png)
+
+- `merge.currentHeaderBackground`: 当前标题背景的内联合并冲突. 颜色不能不透明，以免隐藏底层装饰
+- `merge.currentContentBackground`: 内联合并冲突中的当前内容背景. 颜色必须透明，以免隐藏下面的修饰效果
+- `merge.incomingHeaderBackground`: 内联合并冲突中的传入标题背景. 颜色必须透明, 以免隐藏下面的修饰效果
+- `merge.incomingContentBackground`: 内联合并冲突中的传入内容背景. 颜色必须透明, 以免隐藏下面的修饰效果
+- `merge.border`: 内联合并冲突中标头和分割线的边框颜色
+- `merge.commonContentBackground`: 内联合并冲突中的常见祖先内容背景. 颜色必须透明, 以免隐藏下面的修饰效果
+- `merge.commonHeaderBackground`: 内联合并冲突中的常见祖先标头背景, 颜色必须透明, 以免隐藏下面的修饰效果
+- `editorOverviewRuler.currentContentForeground`: 内联合并冲突中当前版本区域的概览标尺前景色
+- `editorOverviewRuler.incomingContentForeground`: 内联合并冲突中传入的版本区域的概览标尺前景色
+- `editorOverviewRuler.commonContentForeground`: 内联合并冲突中共同祖先区域的概览标尺前景色
+
 ## 面板色彩
+
+面板显示在编辑器区域下方，可包含输出和集成终端等视图
+
+- `panel.background`: 面板的背景色
+- `panel.border`: 将面板与编辑器隔开的边框的颜色
+- `panel.dropBackground`: 面板标题项在拖放时的反馈颜色, 此颜色应有透明度，以便面板项仍能透过
+- `panelTitle.activeBorder`: 活动面板标题的边框颜色
+- `panelTitle.activeForeground`: 活动面板的标题颜色
+- `panelTitle.inactiveForeground`: 非活动面板的标题颜色
 
 ## 状态栏色彩
 
+状态栏显示在工作区底部
+
+- `statusBar.background`: 工作区打开时状态栏的背景色
+- `statusBar.foreground`: 工作区打开时状态栏的前景色
+- `statusBar.border`: 状态栏分隔侧边栏和编辑器的边框颜色
+- `statusBar.debuggingBackground`: 调试程序时状态栏的背景色
+- `statusBar.debuggingForeground`: 调试程序时状态栏的前景色
+- `statusBar.debuggingBorder`: 调试程序时区别于侧边栏和编辑器的状态栏边框颜色
+- `statusBar.noFolderForeground`: 没有打开文件夹时状态栏的前景色
+- `statusBar.noFolderBackground`: 没有打开文件夹时状态栏的背景色
+- `statusBar.noFolderBorder`: 当没有打开文件夹时，用来使状态栏与侧边栏、编辑器分隔的状态栏边框颜色
+- `statusBarItem.activeBackground`: 单击时的状态栏项背景色
+- `statusBarItem.hoverBackground`: 悬停时的状态栏项背景色
+- `statusBarItem.prominentBackground`: 状态栏突出显示项的背景颜色, 突出显示项比状态栏中的其他条目更醒目以表明其重要性, 在命令面板中更改`切换 Tab 键是否移动焦点`可查看示例
+- `statusBarItem.prominentHoverBackground`: 状态栏突出显示项在被悬停时的背景颜色, 突出显示项比状态栏中的其他条目更醒目以表明其重要性. 在命令面板中更改`切换 Tab 键是否移动焦点`可查看示例
+
 ## 标题栏色彩
+
+- `titleBar.activeBackground`: 窗口处于活动状态时的标题栏背景色
+- `titleBar.activeForeground`: 窗口处于活动状态时的标题栏前景色
+- `titleBar.inactiveBackground`: 窗口处于非活动状态时的标题栏背景色
+- `titleBar.inactiveForeground`: 窗口处于非活动状态时的标题栏前景色
+- `titleBar.border`: 标题栏边框颜色
 
 ## 菜单栏色彩
 
+- `menubar.selectionForeground`: 菜单栏中选定菜单项的前景色
+- `menubar.selectionBackground`: 菜单栏中选定菜单项的背景色
+- `menubar.selectionBorder`: 菜单栏中所选菜单项的边框颜色
+- `menu.foreground`: 菜单项的前景颜色
+- `menu.background`: 菜单项的背景颜色
+- `menu.selectionForeground`: 菜单中选定菜单项的前景色
+- `menu.selectionBackground`: 菜单中所选菜单项的背景色
+- `menu.selectionBorder`: 菜单中所选菜单项的边框颜色
+- `menu.separatorBackground`: 菜单中分隔线的颜色
+
 ## 通知框色彩
 
-## 插件栏
+!> **注意**: 下列的色彩只适用于VS Code-1.21或更高版本
+
+通知横幅从窗口右下角滑入
+
+![通知横幅](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/notification-toast.png)
+
+打开的通知中心会在一个带有标题的列表中显示
+
+![通知中心](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/notification-center.png)
+
+- `notificationCenter.border`: 通知中心的边框颜色
+- `notificationCenterHeader.foreground`: 通知中心头部的前景色
+- `notificationCenterHeader.background`: 通知中心头部的背景色
+- `notificationToast.border`: 通知横幅的边框颜色
+- `notifications.foreground`: 通知的前景色
+- `notifications.background`: 通知的背景色
+- `notifications.border`: 通知中心中分隔通知的边框的颜色
+- `notificationLink.foreground`: 通知链接的前景色
+
+如果你使用的VS Code版本低于1.21(2018-2), 可以使用旧的色彩(不再支持):
+
+- `notification.background`
+- `notification.foreground`
+- `notification.buttonBackground`
+- `notification.buttonForeground`
+- `notification.buttonHoverBackground`
+- `notification.errorBackground`
+- `notification.errorForeground`
+- `notification.infoBackground`
+- `notification.infoForeground`
+- `notification.warningBackground`
+- `notification.warningForeground`
+
+## 拓展栏
+
+- `extensionButton.prominentForeground`: 扩展中突出操作的按钮前景色(比如 **安装**按钮)
+- `extensionButton.prominentBackground`: 扩展中突出操作的按钮背景色
+- `extensionButton.prominentHoverBackground`: 扩展中突出操作的按钮被悬停时的颜色
 
 ## 快速选取器
 
+- `pickerGroup.border`: 快速选取(快速打开)器分组边框的颜色
+- `pickerGroup.foreground`: 快速选取(快速打开)器分组标签的颜色
+
 ## 集成终端色彩
+
+- `terminal.background`: 终端视口的背景颜色
+- `terminal.border`: 分隔终端中拆分窗格的边框的颜色。默认值为 panel.border 的颜色
+- `terminal.foreground`: 集成终端的默认前景色
+- `terminal.ansiBlack`: 终端中的'黑色'ANSI
+- `terminal.ansiBlue`: 终端中的'蓝色'ANSI
+- `terminal.ansiBrightBlack`: 终端中的'亮黑色'ANSI
+- `terminal.ansiBrightBlue`: 终端中的'亮蓝色'ANSI
+- `terminal.ansiBrightCyan`: 终端中的'亮青色'ANSI
+- `terminal.ansiBrightGreen`: 终端中的'亮绿色'ANSI
+- `terminal.ansiBrightMagenta`: 终端中的'亮品红色'ANSI
+- `terminal.ansiBrightRed`: 终端中的'亮红色'ANSI
+- `terminal.ansiBrightWhite`: 终端中的'亮白色'ANSI
+- `terminal.ansiBrightYellow`: 终端中的'亮黄色'ANSI
+- `terminal.ansiCyan`: 终端中的'青色'ANSI
+- `terminal.ansiGreen`: 终端中的'绿色'ANSI
+- `terminal.ansiMagenta`: 终端中的'品红色'ANSI
+- `terminal.ansiRed`: 终端中的'红色'ANSI
+- `terminal.ansiWhite`: 终端中的'白色'ANSI
+- `terminal.ansiYellow`: 终端中的'黄色'ANSI
+- `terminal.selectionBackground`: 终端中选中内容的背景色
+- `terminalCursor.background`: 终端光标的背景色. 允许自定义被 block 光标遮住的字符的颜色
+- `terminalCursor.foreground`: 终端光标的前景色
 
 ## 调试
 
+- `debugToolBar.background`: 调试工具栏背景颜色
+- `debugToolBar.border`: 调试工具栏边框颜色
+- `editor.stackFrameHighlightBackground`: 堆栈帧中顶部一行的高亮背景色
+- `editor.focusedStackFrameHighlightBackground`: 堆栈帧中焦点一行的高亮背景色
+
 ## 欢迎界面
+
+- `welcomePage.background`: 欢迎页面的背景色
+- `welcomePage.buttonBackground`: 欢迎页按钮的背景色
+- `welcomePage.buttonHoverBackground`: 欢迎页按钮被悬停时的背景色
+- `walkThrough.embeddedEditorBackground`: 嵌入于交互式操场中的编辑器的背景颜色
 
 ## Git色彩
 
+- `gitDecoration.addedResourceForeground`: 新增的Git资源的前景色. 用于显示文件标签和源代码管理
+- `gitDecoration.modifiedResourceForeground`: 修改过的Git资源的前景色. 用于显示文件标签和源代码管理
+- `gitDecoration.deletedResourceForeground`: 移除过的Git资源的前景色. 用于显示文件标签和源代码管理
+- `gitDecoration.untrackedResourceForeground`: 未跟踪的Git资源的前景色. 用于文件标签和源代码管理
+- `gitDecoration.ignoredResourceForeground`: 已忽视的Git资源的前景色. 用于文件标签和源代码管理
+- `gitDecoration.conflictingResourceForeground`: 冲突的Git资源的前景色. 用于文件标签和源代码管理
+- `gitDecoration.submoduleResourceForeground`: 子模块资源的前景色
+
 ## 设置编辑器色彩
 
-## 面包屑
+!> **注意**: 下列色彩配置只适用于GUI(图形用户界面)设置编辑器, 可以通过`首选项: 打开设置(UI)`命令打开.
+
+- `settings.headerForeground`: 小节标题与活动标题的前景色
+- `settings.modifiedItemIndicator`: 已修改设置指示器的颜色
+- `settings.dropdownBackground`: 下拉列表的背景色
+- `settings.dropdownForeground`: 下拉列表的前景色
+- `settings.dropdownBorder`: 下拉列表的边框颜色
+- `settings.dropdownListBorder`: 下拉列表选项的边框颜色
+- `settings.checkboxBackground`: 复选框的背景色
+- `settings.checkboxForeground`: 复选框的前景色
+- `settings.checkboxBorder`: 复选框的边框颜色
+- `settings.textInputBackground`: 文本输入框的背景色
+- `settings.textInputForeground`: 文本输入框的前景色
+- `settings.textInputBorder`: 文本输入框的边框颜色
+- `settings.numberInputBackground`: 数字输入框的背景色
+- `settings.numberInputForeground`: 数字输入框的前景色
+- `settings.numberInputBorder`: 数字输入框的边框颜色
+
+## 导航路径
+
+导航路径(面包屑)的色彩主题:
+
+- `breadcrumb.background`: 导航路径的背景色
+- `breadcrumb.foreground`: 导航路径的前景色
+- `breadcrumb.background`: 导航路径项的背景色
+- `breadcrumb.focusForeground`: 焦点导航路径的颜色
+- `breadcrumb.activeSelectionForeground`: 已选导航路径项的颜色
+- `breadcrumbPicker.background`: 导航路径项选择器的背景色
 
 ## 片段
 
+片段的色彩主题:
+
+- `editor.snippetTabstopHighlightBackground`: 代码片段 Tab 位的高亮背景色
+- `editor.snippetTabstopHighlightBorder`: 代码片段 Tab 位的高亮边框颜色
+- `editor.snippetFinalTabstopHighlightBackground`: 代码片段中最后的 Tab 位的高亮背景色
+- `editor.snippetFinalTabstopHighlightBorder`: 代码片段中最后的 Tab 位的高亮边框颜色
+
+也可以根据[发布内容的颜色配置项](), 使用插件来发布色彩id(Ids). 当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时, 这些色彩也会出现. 用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩.
+
 ## 插件色彩
+
+也可以根据[发布内容的颜色配置项](), 使用插件来发布色彩id(Ids). 当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时, 这些色彩也会出现. 用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩.
