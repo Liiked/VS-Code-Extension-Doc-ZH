@@ -94,5 +94,154 @@
     "extensibility-reference/api-markdown": {
         "name": "Markdown插件",
         "path": "https://code.visualstudio.com/docs/extensionAPI/api-markdown"
+    },
+
+    "get-started/your-first-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/get-started/your-first-extension"
+    },
+    "get-started/extension-anatomy": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/get-started/extension-anatomy"
+    },
+    "get-started/wrapping-up": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/get-started/wrapping-up"
+    },
+    "working-with-extensions/testing-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/working-with-extensions/testing-extension"
+    },
+    "working-with-extensions/bundling-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/working-with-extensions/bundling-extension"
+    },
+    "working-with-extensions/publish-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/working-with-extensions/publish-extension"
+    },
+    "working-with-extensions/continuous-integration": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/working-with-extensions/continuous-integration"
+    },
+    "extension-capabilities/readme": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-capabilities/readme"
+    },
+    "extension-capabilities/common-capabilities": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-capabilities/common-capabilities"
+    },
+    "extension-capabilities/theming": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-capabilities/theming"
+    },
+    "extension-capabilities/extending-workbench": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-capabilities/extending-workbench"
+    },
+    "extension-guides/readme": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/readme"
+    },
+    "extension-guides/command": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/command"
+    },
+    "extension-guides/color-theme": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/color-theme"
+    },
+    "extension-guides/icon-theme": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/icon-theme"
+    },
+    "extension-guides/tree-view": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/tree-view"
+    },
+    "extension-guides/webview": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/webview"
+    },
+    "extension-guides/virtual-documents": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/virtual-documents"
+    },
+    "extension-guides/task-provider": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/task-provider"
+    },
+    "extension-guides/scm-provider": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/scm-provider"
+    },
+    "extension-guides/debugger-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/debugger-extension"
+    },
+    "extension-guides/markdown-extension": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/extension-guides/markdown-extension"
+    },
+    "language-extensions": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions"
+    },
+    "language-extensions/syntax-highlight-guide": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide"
+    },
+    "language-extensions/snippet-guide": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions/snippet-guide"
+    },
+    "language-extensions/language-configuration-guide": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions/language-configuration-guide"
+    },
+    "language-extensions/programmatic-language-features": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions/programmatic-language-features"
+    },
+    "language-extensions/language-server-extension-guide": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/language-extensions/language-server-extension-guide"
+    },
+    "advanced-topics/extension-host": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/advanced-topics/extension-host"
+    },
+    "advanced-topics/using-proposed-api": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/advanced-topics/using-proposed-api"
+    },
+    "references/vscode-api": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/vscode-api"
+    },
+    "references/contribution-points": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/contribution-points"
+    },
+    "references/activation-events": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/activation-events"
+    },
+    "references/extension-manifest": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/extension-manifest"
+    },
+    "references/commands": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/commands"
+    },
+    "references/theme-color": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/theme-color"
+    },
+    "references/document-selector": {
+        "name": "",
+        "path": "https://code.visualstudio.com/api/references/document-selector"
     }
 }

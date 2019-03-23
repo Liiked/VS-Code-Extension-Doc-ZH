@@ -33,6 +33,7 @@
     * [小结](/get-started/wrapping-up.md)
     * **开发插件**
     * [测试插件](/working-with-extensions/testing-extension.md)
+    * [打包插件](/working-with-extensions/bundling-extension.md)
     * [发布插件](/working-with-extensions/publish-extension.md)
     * [持续集成](/working-with-extensions/continuous-integration.md)
     * **插件功能**
@@ -69,4 +70,5 @@
     * [插件清单](/references/extension-manifest.md)
     * [命令](/references/commands.md)
     * [主题色彩](/references/theme-color.md)
+    * [标签中的图标](/references/icons-in-labels.md)
     * [文档选择器](/references/document-selector.md)
