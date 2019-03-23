@@ -39,6 +39,7 @@
     * [小结](/get-started/wrapping-up.md)
 * ◼️开发插件
     * [测试插件](/working-with-extensions/testing-extension.md)
+    * [打包插件](/working-with-extensions/bundling-extension.md)
     * [发布插件](/working-with-extensions/publish-extension.md)
     * [持续集成](/working-with-extensions/continuous-integration.md)
 * ◼️插件功能
@@ -68,12 +69,13 @@
 * ◼️进阶主题
     * [插件主机](/advanced-topics/extension-host.md)
     * [使用不稳定的API](/advanced-topics/using-proposed-api.md)
-* ️️◼️参考（🚧施工中）
+* ️️◼️参考
     * [VS Code API](/references/vscode-api.md)
     * [发布内容配置](/references/contribution-points.md)
     * [激活事件](/references/activation-events.md)
     * [插件清单](/references/extension-manifest.md)
     * [命令](/references/commands.md)
     * [主题色彩](/references/theme-color.md)
+    * [标签中的图标](/references/icons-in-labels.md)
     * [文档选择器](/references/document-selector.md)
 <!-- * ◼️快速入门 -->
