@@ -7,13 +7,13 @@ VS Code中的主题分为两类：
 ## 色彩主题
 ---
 
-![color-theme](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/color-theme.png)
+![color-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/color-theme.png)
 
 如上图所示，色彩主题定义了2种映射：
 - `colors`控制UI组件的颜色
-- `tokenColors`控制了每个代码标记单元(你的代码会根据[语法]()分割成一个个标记单元)的颜色。
+- `tokenColors`控制了每个代码标记单元(你的代码会根据[语法](/language-extensions/syntax-highlight-guide)分割成一个个标记单元)的颜色。
 
-创建主题详见[色彩主题指南]()和[色彩主题 示例]()
+创建主题详见[色彩主题指南](/extension-guides/color-theme)和[色彩主题 示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/theme-sample)
 
 ## 图标主题
 ---
@@ -21,5 +21,5 @@ VS Code中的主题分为两类：
 - 将图标ID映射至图片或者字体图标上。
 - 根据文件名或这个文件的语言类型关联上图标ID
 
-[图标主题指南]()会详细探讨其中的细节。
-![icon-theme](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/icon-theme.png)
+[图标主题指南](/extension-guides/icon-theme)会详细探讨其中的细节。
+![icon-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/icon-theme.png)
