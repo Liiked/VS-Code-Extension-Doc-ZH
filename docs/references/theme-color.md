@@ -13,6 +13,7 @@
 !> **注意**: 如果你想用现成的颜色主题的话，通过**首选项: 颜色主题**的下拉菜单选取即可(<kbd>Ctrl+K Ctrl+T</kbd>)，参阅[色彩主题](https://code.visualstudio.com/docs/getstarted/themes)。
 
 ## 颜色格式
+---
 
 可以使用RGBA来定义色值。同样，也支持十六进制表示法: `#RGB`，`#RGBA`，`#RRGGBB`，`#RRGGBBAA`。R(红)，G(绿)，B(蓝)，A(阿尔法)是一个十六进制字符(0-9，a-f，A-F)。`#RRGGBB`和`#RRGGBBAA`分别可以简写为`#RGB`和`#RGBA`。比如，`#ee3355ff`和`#e35f`是一样的效果。
 
@@ -21,6 +22,7 @@
 一些颜色应该设置成透明的，以免遮挡其他注释的视线。查看颜色描述来了解哪些颜色应该使用这个规则。
 
 ## 对比色
+---
 
 一般用于高对比度的主题。通过给UI项添加额外的边框来增强对比度。
 
@@ -28,6 +30,7 @@
 - `contrastBorder`: 在元素周围额外的一层边框，用来提高对比度从而区别其他元素
 
 ## 基色
+---
 
 - `focusBorder`: 焦点元素的整体边框颜色。此颜色仅在不被其他组件覆盖时适用
 - `foreground`: 整体前景色。此颜色仅在不被组件覆盖时适用
@@ -37,6 +40,7 @@
 - `errorForeground`: 错误信息的全局前景色。此颜色仅在不被组件覆盖时适用
 
 ## 文本颜色
+---
 
 文本文档中的颜色，比如欢迎页
 
@@ -49,6 +53,7 @@
 - `textSeparator.foreground`: 文字分隔符的颜色
 
 ## 按钮控件
+---
 
 按钮小组件的颜色，例如新窗口的资源管理器中的**打开文件夹**按钮。
 
@@ -59,6 +64,7 @@
 - `button.hoverBackground`: 鼠标悬停时按钮的背景颜色
 
 ## 下拉列表控件
+---
 
 下拉列表小部件颜色，例如集成终端和输出面板。
 
@@ -72,6 +78,7 @@
 - `dropdown.foreground`: 下拉列表前景色
 
 ## 输入框控件
+---
 
 输入框控件颜色，例如搜索视图、搜索/替换对话框。
 
@@ -93,6 +100,7 @@
 - `inputValidation.warningBorder`: 严重性为警告时输入验证的边框颜色
 
 ## 滚动条控件
+---
 
 - `scrollbar.shadow`: 视图滚动后，滚动条的阴影
 - `scrollbarSlider.activeBackground`: 点击滚动条滑块后的背景色
@@ -100,6 +108,7 @@
 - `scrollbarSlider.hoverBackground`: 鼠标悬停滚动条滑块时的背景色
 
 ## 徽章
+---
 
 Badge 是小型的信息标签，如表示搜索结果数量的标签
 
@@ -107,10 +116,12 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `badge.background`: Badge背景色
 
 ## 进度条
+---
 
 - `progressBar.background`: 表示长时间操作的进度条的背景色
 
 ## 列表和树
+---
 
 列表和树的色彩，例如资源管理器。激活的列表/树具有键盘焦点，反之则没有。
 
@@ -133,6 +144,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `listFilterWidget.noMatchesOutline`: 当没有匹配项时，列表和树中类型筛选器小组件的轮廓颜色
 
 ## 活动栏
+---
 
 活动栏可显示在最左侧或最右侧，供用户快速切换侧边栏视图
 
@@ -145,6 +157,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `activityBarBadge.foreground`: 活动通知徽章前景色
 
 ## 侧边栏
+---
 
 侧边栏是资源管理器和搜索等视图的容器。
 
@@ -158,6 +171,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `sideBarSectionHeader.border`: 侧边栏节标题的边框颜色
 
 ## 编辑器组 & 选项卡
+---
 
 编辑器组是多个编辑器的容器，一个编辑器组可以包含多个编辑器。一个选项卡是一个编辑器的容器。可以在一个编辑器组里面打开多个选项卡。
 
@@ -205,6 +219,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `editorPane.background`: 居中编辑器布局中左侧与右侧编辑器窗格的背景色
 
 ## 编辑器色彩
+---
 
 编辑器里面最重要的字符符号颜色主要是语法高亮。可以在色彩主题中或者使用`editor.tokenColorCustomizations`配置。参阅[定制色彩主题](https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme)以了解更新色彩主题和可用的标记类型
 
@@ -341,6 +356,7 @@ CodeLens:
 - `editorGutter.deletedBackground`: 编辑器导航线中被删除行的背景颜色
 
 ## 差异编辑器色彩
+---
 
 已插入或者移除的文字的颜色，使用背景色或者边框色(两者选其一)
 
@@ -351,6 +367,7 @@ CodeLens:
 - `diffEditor.border`: 两个文本编辑器之间的边框颜色
 
 ## 编辑器小部件色彩
+---
 
 编辑器组件在其内容的前面。例如(查找/替换)对话框、建议组件、编辑器悬浮提示框
 
@@ -378,6 +395,7 @@ CodeLens:
 - `editorMarkerNavigationInfo.background`: 编辑器标记导航小组件信息颜色
 
 ## 速览窗口色彩
+---
 
 速览窗口在编辑器内部，将引用和声明显示为视图
 
@@ -399,6 +417,7 @@ CodeLens:
 - `peekViewTitleLabel.foreground`: 速览视图标题颜色
 
 ## 合并冲突
+---
 
 合并冲突装饰，当编辑器包含范围差异时显示
 
@@ -416,6 +435,7 @@ CodeLens:
 - `editorOverviewRuler.commonContentForeground`: 共同祖先内容的缩略图标尺前景色
 
 ## 面板色彩
+---
 
 面板显示在编辑器区域下方，包含输出和集成终端等视图
 
@@ -427,6 +447,7 @@ CodeLens:
 - `panelTitle.inactiveForeground`: 非活动面板的标题颜色
 
 ## 状态栏色彩
+---
 
 状态栏显示在工作区底部
 
@@ -445,6 +466,7 @@ CodeLens:
 - `statusBarItem.prominentHoverBackground`: 鼠标悬停过程中状态栏突出显示项的背景颜色，突出显示项比状态栏中的其他条目更醒目以表明其重要性。在命令面板中更改`切换 Tab 键是否移动焦点`可查看示例
 
 ## 标题栏色彩
+---
 
 - `titleBar.activeBackground`: 窗口处于活动状态时的标题栏背景色
 - `titleBar.activeForeground`: 窗口处于活动状态时的标题栏前景色
@@ -453,6 +475,7 @@ CodeLens:
 - `titleBar.border`: 标题栏边框颜色
 
 ## 菜单栏色彩
+---
 
 - `menubar.selectionForeground`: 菜单栏中选定菜单项的前景色
 - `menubar.selectionBackground`: 菜单栏中选定菜单项的背景色
@@ -465,6 +488,7 @@ CodeLens:
 - `menu.separatorBackground`: 菜单中分隔线的颜色
 
 ## 通知框色彩
+---
 
 !> **注意**: 下列的色彩只适用于VS Code-1.21或更高版本
 
@@ -500,17 +524,20 @@ CodeLens:
 - `notification.warningForeground`
 
 ## 插件栏
+---
 
 - `extensionButton.prominentForeground`: 扩展中突出操作的按钮前景色(比如 **安装**按钮)
 - `extensionButton.prominentBackground`: 扩展中突出操作的按钮背景色
 - `extensionButton.prominentHoverBackground`: 鼠标悬停时插件中突出操作的按钮的颜色
 
 ## 快速选取器
+---
 
 - `pickerGroup.border`: 快速选取(快速打开)器分组边框的颜色
 - `pickerGroup.foreground`: 快速选取(快速打开)器分组标签的颜色
 
 ## 集成终端色彩
+---
 
 - `terminal.background`: 终端视口的背景颜色
 - `terminal.border`: 分隔终端中拆分窗格的边框的颜色。默认为 panel.border 的颜色
@@ -536,6 +563,7 @@ CodeLens:
 - `terminalCursor.foreground`: 终端光标的前景色
 
 ## 调试
+---
 
 - `debugToolBar.background`: 调试工具栏背景颜色
 - `debugToolBar.border`: 调试工具栏边框颜色
@@ -543,6 +571,7 @@ CodeLens:
 - `editor.focusedStackFrameHighlightBackground`: 堆栈帧中焦点一行的高亮背景色
 
 ## 欢迎界面
+---
 
 - `welcomePage.background`: 欢迎页面的背景色
 - `welcomePage.buttonBackground`: 欢迎页按钮的背景色
@@ -550,6 +579,7 @@ CodeLens:
 - `walkThrough.embeddedEditorBackground`: 嵌入于交互式操场中的编辑器的背景颜色
 
 ## Git色彩
+---
 
 - `gitDecoration.addedResourceForeground`: 新增的Git资源的前景色。用于显示文件标签和源代码管理
 - `gitDecoration.modifiedResourceForeground`: 修改过的Git资源的前景色。用于显示文件标签和源代码管理
@@ -560,6 +590,7 @@ CodeLens:
 - `gitDecoration.submoduleResourceForeground`: 子模块资源的前景色
 
 ## 设置编辑器色彩
+---
 
 !> **注意**: 下列色彩配置只适用于**设置**编辑器界面，可以通过`首选项: 打开设置(UI)`命令打开。
 
@@ -580,6 +611,7 @@ CodeLens:
 - `settings.numberInputBorder`: 数字输入框的边框颜色
 
 ## 面包屑导航
+---
 
 面包屑导航的色彩主题:
 
@@ -591,6 +623,7 @@ CodeLens:
 - `breadcrumbPicker.background`: 导航路径项选择器的背景色
 
 ## 代码片段
+---
 
 代码片段的色彩主题:
 
@@ -602,5 +635,6 @@ CodeLens:
 也可以根据[发布内容的颜色配置项]()，使用插件来发布色彩id(Ids)。当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时，这些色彩也会出现。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
 
 ## 配置插件中的色彩
+---
 
 也可以根据[发布内容的颜色配置项]()，使用插件来发布色彩id。当在`workbench.colorCustomizations`当编辑`workbench.colorCustomizations`和主题颜色文件时，这些色彩会出现在代码补全中。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。

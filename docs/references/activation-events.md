@@ -17,6 +17,7 @@
 `package.json`的配置项都可以在[插件清单]()中找到.
 
 ## onLanguage
+---
 
 打开特定语言文件时激活事件和相关插件
 
@@ -41,6 +42,7 @@
 ```
 
 ## onCommand
+---
 
 调用命令时激活
 
@@ -53,6 +55,7 @@
 ```
 
 ## onDebug
+---
 
 调试会话(debug session)启动前激活
 
@@ -76,6 +79,7 @@
 **友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据`DebugConfigurationProvider`实现的对应方法（`provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve`. 参阅[使用调试器插件]().
 
 ## workspaceContains
+---
 
 文件夹打开后，且文件夹中至少包含一个符合glob模式的文件时触发.
 
@@ -86,6 +90,7 @@
 ```
 
 ## onFileSystem
+---
 
 以协议（scheme）打开文件或文件夹时触发。通常是`file`-协议，也可以用自定义的文件供应器函数替换掉，比如`ftp`、`ssh`.
 
@@ -98,6 +103,7 @@
 ```
 
 ## onView
+---
 
 指定id的视图展开时触发:
 
@@ -110,6 +116,7 @@
 ```
 
 ## onUri
+---
 
 插件的系统级URI打开时触发。这个URI协议需要带上`vscode`或者 `vscode-insiders`协议。URI主机名必须是插件的唯一标识，剩余的URI是可选的。
 
@@ -128,6 +135,7 @@
 - `vscode-insiders://vscode.git/init`(for VS Code Insiders)
 
 ## onWebviewPanel
+---
 
 VS Code需要恢复匹配到`viewType`的`webview`视图时触发.
 
@@ -143,6 +151,7 @@ VS Code需要恢复匹配到`viewType`的`webview`视图时触发.
 这会导致插件被激活. 调用`window.createWebviewPanel`时可以设置`viewType`, 你可能会需要其它的激活事件(比如: `onCommand`)来创建`webview`视图.
 
 ## Start up
+---
 
 当VS Code启动时触发。为了保证良好的用户体验，只在你的插件没有其他任何激活事件的前提下，添加这个激活事件。
 
