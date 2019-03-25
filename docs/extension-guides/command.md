@@ -1,17 +1,17 @@
 # 命令
 
-命令会触发VS Code中注册的行为，如果你[配置过键位]()，那么你就处理过了命令。命令也是插件将功能暴露给用户的地方，它绑定了VS Code UI中的行为，并在内部处理了相关逻辑。
+命令会触发VS Code中注册的行为，如果你[配置过键位](https://code.visualstudio.com/docs/getstarted/keybindings)，那么你就处理过了命令。命令也是插件将功能暴露给用户的地方，它绑定了VS Code UI中的行为，并在内部处理了相关逻辑。
 
 ## 使用命令
 ---
 
-VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令]()。许多插件将它们的核心功能暴露为*命令*的形式供用户或者其他插件使用。
+VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令](/references/commands)。许多插件将它们的核心功能暴露为*命令*的形式供用户或者其他插件使用。
 
-#### 程序性执行一个命令
+### 程序性执行一个命令
 
-[`vscode.commands.executeCommand`]()API可以程序性调用一个命令，你可以通过它将VS Code的内置函数构建在你的插件中，比如VS Code内置的Git和Markdown插件中的东西。
+[`vscode.commands.executeCommand`](https://code.visualstudio.com/api/references/vscode-api#commands.executeCommand)API可以程序性调用一个命令，你可以通过它将VS Code的内置函数构建在你的插件中，比如VS Code内置的Git和Markdown插件中的东西。
 
-我们看个例子🌰`editor.action.addCommentLine`命令可以将当前选中行变成注释(你可以偷偷把这个功能地集成到你自己的插件中哦)：
+我们看个例子🌰：`editor.action.addCommentLine`命令可以将当前选中行变成注释(你可以偷偷把这个功能地集成到你自己的插件中哦)：
 ```typescript
 import * as vscode from 'vscode';
 
@@ -45,9 +45,9 @@ async function printDefinitionsForActiveEditor() {
 
 更多命令详见：
 - [浏览键盘快捷键](https://code.visualstudio.com/docs/getstarted/keybindings)
-- [VS Code内置高级命令API]()
+- [VS Code内置高级命令API](/references/commands)
 
-#### 命令的URLs
+### 命令的URLs
 
 命令URI是执行注册命令的链接。它们可被用于悬停文本上的可点击链接，代码补全提示中的细节信息，甚至可以出现在webview中。
 
@@ -110,9 +110,9 @@ export function activate(context: vscode.ExtensionContext) {
 ## 新建命令
 ---
 
-#### 注册一个命令
+### 注册一个命令
 
-[`vscode.commands.registerCommand`]()会把命令ID绑定到你插件的函数上：
+[`vscode.commands.registerCommand`](https://code.visualstudio.com/api/references/vscode-api#commands.registerCommand)会把命令ID绑定到你插件的函数上：
 ```typescript
 import * as vscode from 'vscode';
 
@@ -129,7 +129,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 只要`myExtension.sayHello`命令执行，就会调用对应的处理函数，你也可以通过`executeCommand`程序性调用它，或者从VS Code UI中，抑或快捷键的方式调用。
 
-#### 创建面向用户的命令
+### 创建面向用户的命令
 `vscode.commands.registerCommand`仅仅是将命令id绑定到了处理函数上，如果想让用户从*命令面板*中找到你的命令，你还需要在`package.json`中配置对应的命令`配置项(contribution)`：
 ```json
 {
@@ -146,7 +146,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 `commands`配置告诉VS Code你的插件提供了一个命令，而且允许你控制命令在UI中的显示。现在，我们的命令终于出现在*命令面板*中了：
 
-![palette](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/commands/palette.png)
+![命令面板](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/commands/palette.png)
 
 我们依旧需要使用`registerCommand`将真实的命令id绑定到函数上。也就是说，如果我们的插件没有激活，那么用户从*命令面板*中选择`myExtension.sayHello`也不会有任何效果。为了避免这种事，插件必须注册一个面向全部用户场景的命令`onCommand` `activiationEvent`：
 ```json
@@ -162,11 +162,11 @@ export function activate(context: vscode.ExtensionContext) {
 - 需要通过VS Code UI调用，比如在编辑器标题栏上触发
 - 意在供其他插件使用时
 
-#### 控制命令出现在*命令面板*的时机
+### 控制命令出现在*命令面板*的时机
 
 默认情况下，所有*命令面板*中出现的命令都可以在`package.json`的`commands`部分中配置。不过，有些命令是场景相关的，比如在特定的语言的编辑器中，或者只有用户设置了某些选项时才展示。
 
-[`menus.commandPalette`]()发布内容配置运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
+[`menus.commandPalette`](/references/contribution-points#contributesmenus)发布内容配置运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
 ```json
 {
 	"contributes": {
