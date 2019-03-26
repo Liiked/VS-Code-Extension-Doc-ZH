@@ -4,8 +4,7 @@ VS Code内置了扩展能力，在插件API加持之下，VS Code几乎每一个
 本文档将介绍：
 - 如何构建、运行、调试、测试和发布插件
 - 如何利用好VS Code丰富的插件API
-- 代码示例和各个指南的位置，方便你快速入门
-如果你只是想看看已经发布的插件，移步至[VS Code插件市场](https://marketplace.visualstudio.com/vscode)
+- 代码示例和各个指南的位置，方便你快速入门。如果你只是想看看已经发布的插件，可移步至[VS Code插件市场](https://marketplace.visualstudio.com/vscode)
 
 ## 插件能做什么？
 ---
