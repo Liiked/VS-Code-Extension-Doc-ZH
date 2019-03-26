@@ -172,7 +172,7 @@
           * 将文档中的术语转换为自定义格式
           ***/
           function transformContent(termsObject, html) {
-            let exceptIdentifers = /(\/+|\]|\[|#|`)/g
+            let exceptIdentifers = /(\/+|\]|\[|#|`|\=)/g
             let ct = html
             for (const key in termsObject) {
               if (termsObject.hasOwnProperty(key)) {
