@@ -22,7 +22,7 @@ const myProvider = class implements vscode.TextDocumentContentProvider {
 };
 ```
 
-注意我们的供应器函数不为虚拟文档创建uri——它的角色仅仅只是**根据uri返回对应的文本内容**。
+!> **注意**：我们的供应器函数不为虚拟文档创建uri——他的角色仅仅只是**根据uri返回对应的文本内容**。
 
 下面我们简单使用一个'cowsay'命令创建一个uri，然后编辑器就能显示了：
 
@@ -41,7 +41,25 @@ vscode.commands.registerCommand('cowsay.say', async () => {
 
 经过这整个流程，我们才算完整地实现了一个*文本内容供应器*，接下来的部分我们继续学习怎么更新虚拟文档，怎么注册虚拟文档的 UI命令。
 
-#### 添加编辑器命令
+### 更新虚拟文档
+
+为了支持跟踪虚拟文档发生的变化，供应器实现了`onDidChange`事件。如果文档正在被使用，那么必须为其提供一个uri来调用它，同时编辑器会请求新的内容。
+
+`vscode.Event`定义了VS Code的事件规范。实现事件的最好方式就是使用`vscode.EventEmitter`，比如：
+
+```typescript
+const myProvider = class implements vscode.TextDocumentContentProvider {
+  // 事件发射器和事件
+  onDidChangeEmitter = new vscode.EventEmitter<vscode.Uri>();
+  onDidChange = this.onDidChangeEmitter.event;
+
+  //...
+};
+```
+
+上述就是VS Code监听虚拟文档变化所必须的内容。下面将使用事件发射器来添加*编辑器行为*。
+
+### 添加编辑器命令
 
 为了阐述事件变动和获取更多cowsay，我们需要倒叙cow刚刚说的东西。首先我们需要一个命令：
 
@@ -83,14 +101,14 @@ subscriptions.push(
   ]
 }
 ```
-`contributes/commands`中的`cowsay.backwards`命令告诉编辑器*操作*出现在编辑器的标题菜单中（工具栏右上角），但如果只是这样简单的配置，每个编辑器就都会显示这个命令。然后我们的`when`语句就出场了，它描述了何时才显示这个操作。在这个例子中，文档的资源协议必须是`cowsay`我们的命令才会生效。这个配置对默认显示全部命令的`commandPalette`菜单同样生效。
+`contributes/commands`中的`cowsay.backwards`命令告诉编辑器*操作*出现在编辑器的标题菜单中（工具栏右上角），但如果只是这样简单的配置，每个编辑器就都会显示这个命令。然后我们的`when`语句就出场了，它描述了何时才显示这个操作。在这个例子中，文档的资源协议必须是`cowsay`，我们的命令才会生效。这个配置对默认显示全部命令的`commandPalette`菜单同样生效。
 
-![cowsay-bwd](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/virtual-documents/cowsay-bwd.png)
+![cowsay-bwd](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/virtual-documents/cowsay-bwd.png)
 
-#### 事件的可见性
+### 事件的可见性
 
 *文档供应器函数*是VS Code中的一等公民，它们的内容以常规的文本文档格式呈现，它们共用一套基础实现方式——如：使用了文件系统的实现。这也就意味着“你的”文档无法被隐藏，它们必定会出现在`onDidOpenTextDocument`和`onDidCloseTextDocument`事件中，它们是`vscode.workspace.textDocuments`中的一部分。通用的准则就是根据文档的`协议`决定你是否需要对文档进行什么操作。
 
-#### 文件系统API
+### 文件系统API
 
 如果你需要更强的灵活性和掌控力，请查看[`FileSystemProvider`](https://code.visualstudio.com/api/references/vscode-api#FileSystemProvider)API，它可以实现整套完整的文件系统，获取文件、文件夹、二进制数据，删除文件，创建文件等等。
