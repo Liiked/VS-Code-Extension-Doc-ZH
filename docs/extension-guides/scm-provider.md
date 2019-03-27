@@ -1,15 +1,15 @@
-# 源控制
-
-# VS Code中的源控制
+# 源控制API
 
 VS Code 允许插件创作者通过扩展API去定义*源控制管理*特性（Source Control Management，SCM），VS Code整合了各式各样的SCM体系，而只给用户展现了一组小巧、强大的API接口，还是带用户界面的那种。
 
-![main.png](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/main.png)
+![VS Code的SCM](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/main.png)
 
 
-VS Code自带一个源控制器：Git，本篇能帮你在VS Code中加入你自己的SCM系统。
+VS Code自带一个源控制器：Git，它是源控制API的最佳实践。如果你想构建你自己的SCM供应器，那么这是[一个很好的起点](https://github.com/Microsoft/vscode/blob/master/extensions/git/src/repository.ts)。
 
-如果你需要帮助，请查看[vscode命名空间API](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/vscode-api.md#scm)。
+> VS Code插件市场还有很多类似的超赞的插件，比如[SVN](https://marketplace.visualstudio.com/items?itemName=johnstoncode.svn-scm)。
+
+如果你需要帮助，请查看[vscode命名空间API](https://code.visualstudio.com/api/references/vscode-api#scm)。
 
 ## 源控制模型
 ---
@@ -17,7 +17,8 @@ VS Code自带一个源控制器：Git，本篇能帮你在VS Code中加入你自
 
 通过`vscode.scm.createSourceControl`创建一个新的*源控制器*。
 
-为了更好地理解这几种实体的交互，让我们拿Git来做例子，考虑下列`git status`输出：
+为了更好地理解这几种实体的交互，让我们拿[Git](https://github.com/Microsoft/vscode/tree/master/extensions/git)来做例子，考虑下列`git status`输出：
+
 ```bash
 vsce master* → git status
 On branch master
@@ -93,14 +94,19 @@ export interface SourceControlResourceState {
 
 要想提供更加丰富的交互效果，我们提供了5个源控制菜单项供你使用。
 
-`scm/title`菜单在源控制视图的顶部右上方，菜单项水平排列在标题栏中，另外一些会在`...`下拉菜单中。`scm/resourceGroup/context`和`scm/resourceState/context`是类似的，你可以通过前者自定义资源组，后者则是定义资源状态。将菜单项放在`inline`组里，可以水平在视图中展示它们。而其他的菜单项可以通过鼠标右击的形式展示在菜单中。菜单中调用的命令会传入资源状态作为参数。注意SCM视图提供多选，因此命令函数可能一次性会接收一个或多个参数。
+`scm/title`菜单在源控制视图的顶部右上方，菜单项水平排列在`标题栏`中，另外一些会在`...`下拉菜单中。
+
+`scm/resourceGroup/context`和`scm/resourceState/context`是类似的，你可以通过前者自定义资源组，后者则是定义资源状态。将菜单项放在`inline`组里，可以水平在视图中展示它们。而其他的菜单项可以通过鼠标右击的形式展示在菜单中。菜单中调用的命令会传入资源状态作为参数。注意SCM视图提供多选，因此命令函数可能一次性会接收一个或多个参数。
 
 例如，Git支持往`scm/resourceState/context`菜单中添加`git.stage`命令和使用下列方法，提供多个文件的存备（staged）：
+
 ```typescript
 stage(...resourceStates: SourceControlResourceState[]): Promise<void>;
 ```
+
 创建它们的时候，`SourceControl`和`SourceControlResourceGroup`实例会需要你提供一个string类型的`id`，这些值最终会在`scmProvider`和`scmResourceGroup`以上下文键值的形式出现。在菜单项的`when`语法中使用这些[上下文键值](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)。看个Git如何通过`git.stage`命令显示菜单项的：
-```
+
+```json
 {
   "command": "git.stage",
   "when": "scmProvider == git && scmResourceGroup == merge",
@@ -116,11 +122,12 @@ async stageChange(uri: Uri, changes: LineChange[], index: number): Promise<void>
 
 `scm/sourceControl`菜单根据环境出现在源控制实例的边上。
 
-![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/sourcecontrol-menu.png)
+![源控制菜单](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/sourcecontrol-menu.png)
 
 最后，`scm/change/title`菜单是和快速Diff功能相关联的，越新的文件越靠前，你可以针对特定的代码变动调用命令。
 
 ### SCM 输入框
+
 源控制输入框位于每个源控制视图的顶部，接收用户输入的信息。你可以获取（或设置）这个信息供后续使用。在Git中，比如说，这可以作为一个commit框，用户输入了提交信息后，触发`git commit`命令：
 
 ```typescript
@@ -134,16 +141,19 @@ export interface SourceControl {
 ```
 
 用户可以通过<kbd>Ctrl+Enter</kbd>（Mac上是<kbd>Cmd+Enter</kbd>）接收任意信息，在`SourceControl`中的`acceptInputCommand`处理这类事件。
+
 ```typescript
 export interface SourceControl {
   readonly acceptInputCommand?: Command;
 }
 ```
+
 ## 快速Diff
 ---
-VS Code支持显示快速Diff编辑器的高亮槽，点击这些槽会出现一个内部diff交互器，你可以在这里为上下文配置命令。
 
-![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/quickdiff.png)
+VS Code支持显示**快速Diff**编辑器的高亮槽，点击这些槽会出现一个内部diff交互器，你可以在这里为上下文配置命令。
+
+![SCM快速Diff](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/quickdiff.png)
 
 这些高亮槽是VS Code自己计算出来的，你要做的就是根据给定的文件提供原始文件内容
 
@@ -153,7 +163,9 @@ export interface SourceControl {
 }
 ```
 
-使用`QuickDiffProvider`，你的实现需要告诉VS Code——参数传入的给定资源URI所对应的原始资源URI。
+使用`QuickDiffProvider`，你的实现需要告诉VS Code——参数传入的给定资源`Uri`所对应的原始资源`Uri`。
+
+?> **提示**: 如果你想在给定`Uri`的情况下，为任意资源提供内容，那么你可以把**源控制API**和**[工作区命名空间的`registerTextDocumentContentProvider`方法](https://code.visualstudio.com/api/references/vscode-api#workspace)**结合起来使用。
 
 ## 下一步
 
@@ -161,6 +173,6 @@ export interface SourceControl {
 
 * [SCM API 参考](https://code.visualstudio.com/docs/extensionAPI/vscode-api#_scm) - 查看完整的SCM API文档
 * [Git 插件](https://github.com/Microsoft/vscode/tree/master/extensions/git) - 学习Git插件实现
-* [插件API概览](/extensibility-reference/overview.md) - 学习全部的VS Code扩展性模型
-* [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code package.json插件配置清单参考
-* [发布内容配置点](/extensibility-reference/contribution-points.md) - VS Code发布内容配置点参考
+* [插件API概览](/) - 学习全部的VS Code扩展性模型
+* [插件配置清单](/references/extension-manifest) - VS Code package.json插件配置清单参考
+* [发布内容配置点](/references/contribution-points) - VS Code发布内容配置点参考

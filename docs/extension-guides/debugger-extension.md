@@ -4,7 +4,7 @@ VS Code已经内置了一套通用的用户界面，插件作者能够通过VS C
 
 VS Code已经内置了一个[Node.js](https://nodejs.org/)调试器插件，它将成为你学习VS Code调试器特性的绝佳搭档。
 
-![debug-features](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-features.png)
+![VS Code调试功能](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-features.png)
 
 上面的截图展示了以下调试功能：
 
@@ -21,11 +21,12 @@ VS Code已经内置了一个[Node.js](https://nodejs.org/)调试器插件，它�
 
 ## VS Code 中的调试架构
 ---
+
 VS Code基于抽象协议，实现了一个原生（非语言相关的）的调试器UI，它可以和任意后台调试程序通信。通常来讲，调试器不会实现这份协议，因此调试器中需要一些中间件去“适配”这个协议。这个中间件一般而言是一个独立和调试器通信的进程。
 
-![debug-arch1](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch1.png)
+![VS Code的调试架构](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch1.png)
 
-我们将这个中间件称为**调试适配器（Debug Adapter）**（简写为**DA**），在VS Code和DA之间通信的抽象协议称之为**调试适配器协议(Debug Adapter Protocol)** (简写**DAP**)。调试适配器协议独立于VS Code，它有自己的[网站](https://microsoft.github.io/debug-adapter-protocol/)，你在上面可以找到相关的[介绍和概述](https://microsoft.github.io/debug-adapter-protocol/overview)，以及详细的[说明书](https://microsoft.github.io/debug-adapter-protocol/specification)，上面还列出了一些[已知实现和支持工具]()，这份努力背后的故事和动机，我们都记录在了[博客](https://code.visualstudio.com/blogs/2018/08/07/debug-adapter-protocol-website#_why-the-need-for-decoupling-with-protocols)中。
+我们将这个中间件称为**调试适配器（Debug Adapter）**（简写为**DA**），在VS Code和DA之间通信的抽象协议称之为**调试适配器协议(Debug Adapter Protocol)** (简写**DAP**)。调试适配器协议独立于VS Code，它有自己的[网站](https://microsoft.github.io/debug-adapter-protocol/)，你在上面可以找到相关的[介绍和概述](https://microsoft.github.io/debug-adapter-protocol/overview)，以及详细的[说明书](https://microsoft.github.io/debug-adapter-protocol/specification)，上面还列出了一些[已知实现和支持工具](https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/)，这份努力背后的故事和动机，我们都记录在了[博客](https://code.visualstudio.com/blogs/2018/08/07/debug-adapter-protocol-website#_why-the-need-for-decoupling-with-protocols)中。
 
 因为调试适配器独立于VSCode，所以它可用在[其他开发工具](https://microsoft.github.io/debug-adapter-protocol/implementors/tools/)中，它们无需匹配VS Code的插件架构，而只需基于插件和*发布内容配置*即可。
 
@@ -33,7 +34,7 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 
 因此调试适配器的最小形式就是声明一个配置，对应调试适配器的实现，这个插件就是调试适配器的装载容器，而且不需要任何多余的代码。
 
-![debug-arch2](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch2.png)
+![VS Code调试架构-2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch2.png)
 
 一个更贴近现实的调试器插件往往会添加很多配置，如下面的：
 - 调试器支持的语言。VS Code会为这些语言启用UI界面的断点功能
@@ -42,12 +43,44 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 - 用户可以给launch.json添加的调试配置片段
 - 声明调试配置中可以使用的变量
 
-想要了解更多相关内容，请查看[contributes.breakpoints](https://code.visualstudio.com/api/references/contribution-points#contributes.breakpoints)和[contributes.debuggers](https://code.visualstudio.com/api/references/contribution-points#contributes.debuggers)。
+想要了解更多相关内容，请查看[contributes.breakpoints](/extensibility-reference/contribution-points#contributesbreakpoints)和[contributes.debuggers](/extensibility-reference/contribution-points#contributesdebuggers)。
 
+## 模拟调试插件
+---
 
+由于从头开始创建一个调试适配器太繁琐了，所以我们将从简单的DA(我们已经创建过的**入门级调试适配器**)开始。因为它不与真正的调试器进行通信，所以就叫它——*模拟调试*吧。
 
+*模拟调试*模拟了调试器功能，支持：
 
-## 进行模拟调试前配置
+- 单步调试
+- 跳到下一个断点
+- 断点
+- 异常
+- 访问变量
+
+在深入了解开发中的*模拟调试*之前，我们先去VS Code插件市场安装个[预构建版本](https://marketplace.visualstudio.com/items?itemName=andreweinand.mock-debug)玩一玩，就像下面这样：
+
+- 打开VS Code的插件面板，输入"mock"并找到**Mock Debug**插件
+- **安装**并**重启**
+
+通过如下流程来启动*模拟调试*：
+
+- 新建一个空的文件夹`mock test`并在VS Code中打开
+- 创建一个`readme.md`，在里面随便写点什么东西
+- 切换到**调试**视图，点一下**齿轮图标**
+- VS Code会让你选择一个"环境"，并将其作为默认的启动配置。这里选择"Mock Debug"。
+- 点击绿色的**开始**按钮，然后开始调试
+
+至此，一个调试会话就开始了，你可以在`readme.md`文件中进行单步调试、打断点。如果某一行出现异常则会跳进该异常。
+
+![模拟运行调试工具](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/mock-debug.gif)
+
+在使用*模拟调试*之前，我们建议你卸载掉[预构建版本](https://marketplace.visualstudio.com/items?itemName=andreweinand.mock-debug)：
+
+- 切换到Extensions视图，然后单击*模拟调试*插件的齿轮图标
+- 卸载该插件并重启VS Code
+
+## 开发环境配置模拟调试
 ---
 
 现在让我们下载Mock Debug的源码，然后用VS Code进行开发吧：
@@ -58,12 +91,13 @@ cd vscode-mock-debug
 npm install
 ```
 
-用VS Code打开vscode-mock-debug项目
+用VS Code打开`vscode-mock-debug`项目
 
 我们的项目里面有什么呢？
+
 - `package.json`是mock-debug插件的配置清单：
     - 里面是mock-debug插件的*发布内容配置*清单
-    - `compile`脚本会将Typescript源码编译到`out`文件夹中，然后`watch`脚本会追踪源码每个细微的修改
+    - `compile`和`watch`脚本会将Typescript源码编译到`out`文件夹中，然后`watch`脚本会追踪源码每个细微的修改
     - `vscode-debugprotocol`，`vscode-debugadapter`和`vscode-debugadapter-testsupport`npm依赖包简化了基于node的调试适配器开发工作
 - `src/mockRuntime.ts`是一个**模拟的**运行时，仅仅包含一些简单的调试API
 - `src/mockDebug.ts`是我们的主要代码，是它将*运行时*适配到**调试适配器**上。你可以在里面找到各种处理DAP请求的方式。
@@ -73,15 +107,15 @@ npm install
 
 代码编译完成后，带有"[Extension Development Host]"（中文环境下是"[扩展开发主机]"）VS Code新窗口会自动打开，Mock Debug插件就运行在调试模式中了。在这个窗口中，打开`mock test`项目，打开里面的`readme.md`，然后直接按下<kbd>F5</kbd>启动调试会话，现在你就可以调试了！
 
-![debug-mock-session](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-mock-session.png)
+![模拟调试会话](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-mock-session.png)
 
 因为的你插件运行在 *调试模式* 中，所以你能在`src/extension.ts`里面打断点，不过就如上文所说，这个插件关于*插件*本身的代码是没有多少的，最有意思的代码运行在调试适配器里，它是一个独立的进程。
 
 要想调试调试适配器本身，我们需要把它运行在调试模式里。最简单的办法就是将调试适配器以*服务器模式*运行，然后配置VS Code去连接它。在你的vscode-mock-debug项目中，重新在打开的调试侧边栏的配置下拉菜单中选择*Server*配置，按下旁边的绿色开始按钮。
 
-因为我们已经启动了一个调试会话，所以VS Code 调试器UI现在会进入 *多会话* 模式，在**调用栈（CALL STACK）**中你现在可以看到2个调试会话—— **Extension** 和 **Server** 。
+因为我们已经启动了一个调试会话，所以VS Code 调试器UI现在会进入 *多会话* 模式，在**调用栈（CALL STACK）**视图中你现在可以看到2个调试会话—— **Extension** 和 **Server** 。
 
-![debugger-extension-server](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debugger-extension-server.png)
+![调试插件和服务器](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debugger-extension-server.png)
 
 现在我们可以同时调试插件和DA（调试适配器）了。到我们目前这一步还有个更快的方式，启动调试时选择**Extension + Server**配置就会自动加载这两个会话。
 
@@ -109,9 +143,11 @@ npm install
 经过这样一连串的配置，你终于可以轻松地编辑、编译和调试Mock Debug插件了。
 
 但是好戏才刚刚开始：你需要替换`src/mockDebug.ts`和`src/mockRuntime.ts`的中的调试适配器代码，让它可以和“真正的”调试器或者运行时通信。这项工作涉及到理解和实现调试适配器协议。
+
 更多内容请查看[这里](https://microsoft.github.io/debug-adapter-protocol/overview#How_it_works)。
 
 ## 剖析调试器插件的package.json
+---
 
 除了提供调试适配的特定实现之外，调试器插件还需要一个配置各种各样和调试相关的`package.json`。
 
@@ -201,7 +237,7 @@ npm install
 
 现在我们来看看调试器插件中的`contributes`部分。
 
-首先，**breakpoints**配置部分列出了可以使用断点的语言列表，没有这个配置的话，就不可能在 Markdown文件中设置断点了。 
+首先，**breakpoints**配置部分列出了可以使用断点的语言列表，没有这个配置的话，就不可能在 Markdown文件中设置断点了。
 
 接下来是**debuggers**部分，这里引入了一个类型是`mock`的调试器，用户可以在调试器加载配置中引用这个类型。可选属性**label**是这个调试器的名字，它会显示在UI上。
 
@@ -247,7 +283,7 @@ npm install
 
 **initialConfigurations**定义了这个调试器的初始`launch.json`。当一个项目没有`launch.json`，然后用户打开了调试会话时，就会使用这个启动配置。然后VS Code会让用户选择一个调试环境，接着再创建对应的`launch.json`：
 
-![debug-init-config](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-init-config.png)
+![调试速选框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-init-config.png)
 
 除了在`package.json`中静态定义`launch.json`的初始内容，你还可以使用`DebugConfigurationProvider`动态注入初始配置内容（详情见下[使用DebugConfigurationProvider](#使用DebugConfigurationProvider)）。
 
@@ -255,7 +291,7 @@ npm install
 
 **variables**配置，将“变量”绑定到了“命令”上。这些变量会出现在加载配置（launch.json）中，用法是**${command:xyz}**，调试会话启动后，其中的值会被命令中的返回值替换。
 
-*命令*实现在插件（而不是调试适配器）中，它可以由一句简单的表达式实现，也可以复杂到基于插件API和UI特性实现。Mock Debug将变量`AskForProgramName`绑定到了命令`extension.mock-debug.getProgramName`，这个命令的实现在`src/extension.ts`中，代码中的`showInputBox`允许用户为程序命名：
+*命令*实现在插件（而不是调试适配器）中，它可以由一句简单的表达式实现，也可以复杂到基于插件API和UI特性实现。Mock Debug将变量`AskForProgramName`绑定到了命令`extension.mock-debug.getProgramName`，这个命令的[实现](https://github.com/Microsoft/vscode-mock-debug/blob/606454ff3bd669867a38d9b2dc7b348d324a3f6b/src/extension.ts#L21-L26)在`src/extension.ts`中，代码中的`showInputBox`允许用户为程序命名：
 
 ```typescript
 vscode.commands.registerCommand('extension.mock-debug.getProgramName', config => {
@@ -301,15 +337,15 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 ---
 
 通过下面的步骤将你的调试适配器发布到市场上：
+
 - 更新`package.json`中的发布配置内容表明你调试适配器的功能和目标
-- 参考[发布插件]()部分然后将你的插件上传到市场上
+- 参考[发布插件](/working-with-extensions/publish-extension)部分然后将你的插件上传到市场上
 
 ## 开发调试器插件的其他方式
+---
 
 如我们所见，开发一个调试插件涉及到*一个普通插件*再加上一个调试适配器，它们分别运行在不同的会话中。VS Code支持这样的实现，但是简单的办法是还是把*插件*和调试适配器用一个程序实现，这样你就可以在一个调试会话中同时调试了。
 
 实际上，只要你的调试适配器是基于Typescript/Javascript实现的，这个方法就都是可行的。基本的思路是把调试适配器实现为一个服务器，让*插件*去启动这个服务，再让VS Code连接上去，这样你就不用每个调试会话都启动一个新的调试适配器了。
 
-Mock Debug的例子阐述了一个[DebugAdapterDescriptorFactory](https://github.com/Microsoft/vscode-mock-debug/blob/6a2ef01b95bb22cdf55683f4d616cad501051510/src/extension.ts#L74-L98)可以怎样创建和[注册]()一个基于服务器的调试适配器。通过将编译时的`EMBED_DEBUG_ADAPTER`配置设置为true启用这个特性。现在如果你用**F5**启动调试，你就不仅仅是在插件开发主机中打了断点，你也同时在调试适配器中打了同样的断点。
-
----
+Mock Debug的例子阐述了一个[DebugAdapterDescriptorFactory](https://github.com/Microsoft/vscode-mock-debug/blob/6a2ef01b95bb22cdf55683f4d616cad501051510/src/extension.ts#L74-L98)可以怎样创建和[注册](https://github.com/Microsoft/vscode-mock-debug/blob/6a2ef01b95bb22cdf55683f4d616cad501051510/src/extension.ts#L32-L36)一个基于服务器的调试适配器。通过将编译时的[`EMBED_DEBUG_ADAPTER`](https://github.com/Microsoft/vscode-mock-debug/blob/6a2ef01b95bb22cdf55683f4d616cad501051510/src/extension.ts#L17)配置设置为true启用这个特性。现在如果你用**F5**启动调试，你就不仅仅是在插件开发主机中打了断点，你也同时在调试适配器中打了同样的断点。
