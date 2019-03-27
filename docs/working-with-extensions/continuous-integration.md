@@ -18,7 +18,7 @@
 
 ## Azure Pipelines
 ---
-![pipelines-logo](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/continuous-integration/pipelines-logo.png)
+![pipelines-logo](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/continuous-integration/pipelines-logo.png)
 
 你可以在[Azure DevOps](https://azure.microsoft.com/services/devops/)上创建免费的项目，它为你提供了代码托管、看板、构建和测试基础设施等等。最重要的是，你可以获得[10个免费的并行任务](https://azure.microsoft.com/services/devops/pipelines/)容量，用于你构建项目，不论是在Windows, macOS 还是Linux上。
 
@@ -100,4 +100,4 @@ jobs:
 
 接下来在你的DevOps项目中新建一个Pipeline，并指向至`build.yml`文件，启动build，然后……真香~
 
-![pipelines](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/continuous-integration/pipelines.png)
+![pipelines](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/continuous-integration/pipelines.png)

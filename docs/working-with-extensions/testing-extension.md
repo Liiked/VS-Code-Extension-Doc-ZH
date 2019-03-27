@@ -10,11 +10,11 @@ VS Code为你的插件提供了运行和调试的能力。这些测试会运行�
 
 用VS Code 打开你新创建的插件项目，打开**调试**侧边栏选择`Extension Tests`配置。
 
-![launch-tests](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/testing-extension/launch-tests.png)
+![launch-tests](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/testing-extension/launch-tests.png)
 
-启用这个配置之后，点击绿色的小角标(<kbd>F5</kbd>)，启动调试，VS Code会将你的插件加载进`扩展开发环境`中。测试输出，会显示在**调试控制台**中。
+启用这个配置之后，点击绿色的小角标(<kbd>F5</kbd>)，启动调试，VS Code会将你的插件加载进`扩展开发环境`中。测试输出（的日志、错误等）会显示在**调试控制台**中。
 
-![test-output](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/testing-extension/test-output.png)
+![test-output](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/testing-extension/test-output.png)
 
 生成器生成的测试使用了[Mocha 测试框架](https://mochajs.org/)的测试运行器和库。
 
@@ -70,5 +70,5 @@ out/test/**
 
 ## 下一步
 
-- [持续集成]()：将你的插件运行在持续集成服务中，比如Azure Devops。
+- [持续集成](/working-with-extensions/continuous-integration.md)：将你的插件运行在持续集成服务中，比如Azure Devops。
 
