@@ -43,22 +43,22 @@ VS Code插件市场的服务是[Visual Studio Team Services](https://visualstudi
 
 首先，你得有一个[Azure DevOps 组织](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization-msa-or-work-student)。
 
-下面的例子里，我们假设组织名为`vscode`，从你的组织主页（例如：`https://dev.azure.com/vscode` ）进入**安全（Security）**页：
+下面的例子里，我们假设组织名为`vscode`，从你的组织主页（例如：`https://dev.azure.com/vscode` ）进入**安全（Security）**页面：
 
-![publishers1](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token1.png)
+![publishers1](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token1.png)
 
 
 选择Personal Access Token，点击**New Token**创建一个新的Personal Access Token
 
-![publishers2](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token2.png)
+![publishers2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token2.png)
 
 给Personal Access Token添加描述，过期时间等等，你最好把过期时间设置为1年，这样你接下就能方便很多，选择**custom defined（用户自定义）**范围，然后点击**Show all scopes(显示全部)**
 
-![publishers3](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token3.png)
+![publishers3](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token3.png)
 
 最后，在这个列表中找到**Marketplace**，并勾选**Acquire**和**Manage**
 
-![publishers4](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token4.png)
+![publishers4](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token4.png)
 
 点击**Create**，你就会看到新创建的Personal Access Token了，复制好，你接下来就会用到这个token来创建一个*发行方*了。
 
@@ -71,7 +71,7 @@ VS Code插件市场的服务是[Visual Studio Team Services](https://visualstudi
 ```bash
 vsce create-publisher (publisher name)
 ```
-`vsce`会记住这个Personal Access Token，日后重复使用的时候会自动带上。
+`vsce`会记住这个Personal Access Token，日后你需要再次使用的时候会自动带上。
 
 ?> 注意：另外，你也可以在市场的发行方[管理页](https://marketplace.visualstudio.com/manage)中创建发行方，然后用这个账号登录`vsce`。
 
@@ -134,19 +134,19 @@ vsce package
 }
 ```
 
-`1.8.0`标识你的插件只与`1.8.0`的VS Code兼容，`^1.8.0`则表示你的插件向上兼容，包括`1.8.1, 1.9.0`等等。
+`1.8.0`表示你的插件只能兼容`1.8.0`版本的VS Code，`^1.8.0`则表示你的插件向上兼容，包括`1.8.1, 1.9.0`等等。
 
-用`engines.vscode`可以保证插件的安装环境包含了插件依赖的API。这个机制在稳定版和Insider版本都适用。
+使用`engines.vscode`可以确保插件安装环境包含了插件依赖的API。这个机制在稳定版和Insider版本都适用。
 
-例如，最新的稳定版VS Code版本是`1.8.0`，而新的API在`1.9.0`开发版中释出，所以用`1.9.0-insider`标识插件在Insider版本中都可用。
-如果你想发布一个使用这些API的插件，则设置版本依赖为`^1.9.0`，你的插件则只能安装在`>=1.9.0`的VS Code上，也就意味着所有当前的Insider版本都可以用得上，而稳定版只有在更新到`1.9.0`才能使用。
+现在我们假设最新的稳定版API是`1.8.0`，而`1.9.0`引入了新的API，所以你可以用`1.9.0-insider`标识插件在Insider版中也可正常使用。
+如果你想使用这些刚刚引入的API，则将依赖版本设置为`^1.9.0`，你的插件则只能安装在`>=1.9.0`的VS Code上，也就意味着所有当前的Insider版本都可以用得上，而稳定版只有在更新到`1.9.0`才能使用你的插件。
 
 ## 进阶用法
 ---
 
 #### 符合市场的插件
 
-你可以自定义插件在市场中的外观，查看示例`GO 插件`。
+你可以自定义插件在市场中的外观，查看示例[GO 插件](https://marketplace.visualstudio.com/items/ms-vscode.Go)。
 
 下面是一些让你的插件在市场看起来更酷的小提示：
 
@@ -203,7 +203,7 @@ vsce package
 
 ##### 问：为什么vsce不保留文件属性？
 
-答：请注意，当你在Windows平台构建和发布插件的时候，所有插件包内的文件会缺失POSIX文件属性，或称之为执行位（executable bit）的东西。一些基于这些属性的`node_modules`依赖则会调整工作方式。从Linux和macOS平台构建则会如预期执行。
+答：请注意，当你在Windows平台构建和发布插件的时候，所有插件包内的文件会丢失POSIX文件属性，或称之为执行位（executable bit）的东西。一些基于这些属性的`node_modules`依赖则会调整工作方式。从Linux和macOS平台构建则会如预期执行。
 
 ## 下一步
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多VS Code公共插件市场。
