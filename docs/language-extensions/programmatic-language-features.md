@@ -1,6 +1,6 @@
 # 程序性语言特性
 
-程序性语言特性是由[`vscode.languages.*`]()API提供的一系列智能编辑功能。在VS Code中有两种实现动态语言特性的途径。我们先以[悬停提示]()为例：
+程序性语言特性是由[`vscode.languages.*`](https://code.visualstudio.com/api/references/vscode-api#languages)API提供的一系列智能编辑功能。在VS Code中有两种实现动态语言特性的途径。我们先以[悬停提示](#显示悬浮提示)为例：
 
 ```typescript
 vscode.languages.registerHoverProvider('javascript', {
@@ -11,7 +11,8 @@ vscode.languages.registerHoverProvider('javascript', {
 	}
 });
 ```
-正如你所见，代码中[`vscode.languages.registerHoverProvider`]()API可以很方便地在JS文件中提供悬停提示的内容。这个插件激活后，只要你悬停到了JS代码上，VS Code就会查询全部对JS注册了的[`HoverProvider`]然后在悬浮提示框中显示对应内容。你可以查看下面的[语言功能列表]()，里面包含了VS Code API / LSP实现的语言功能。
+
+正如你所见，代码中[`vscode.languages.registerHoverProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerHoverProvider)API可以很方便地在JS文件中提供悬停提示的内容。这个插件激活后，只要你悬停到了JS代码上，VS Code就会查询全部对JS注册了的[`HoverProvider`](https://code.visualstudio.com/api/references/vscode-api#HoverProvider)然后在悬浮提示框中显示对应内容。你可以查看下面的[语言功能列表](#语言功能列表)，里面包含了VS Code API / LSP实现的语言功能。
 
 那么一种实现就是使用了[语言服务器协议](https://microsoft.github.io/language-server-protocol/)的语言服务器。它的实现方式如下：
 
@@ -27,45 +28,45 @@ vscode.languages.registerHoverProvider('javascript', {
 - 语言服务器可以用任何语言实现
 - 语言服务器可以被多个编辑器重用，提供更加智能的编辑体验
 
-深入指南，请移步至[语言服务器插件指南](https://code.visualstudio.com/api/language-extensions/language-server-extension-guide)
+深入指南，请移步至[语言服务器插件指南](/language-extensions/language-server-extension-guide)
 
 ## 语言功能列表
+---
 
 | VS Code API                                                                                                                       | LSP method                                                                                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`createDiagnosticCollection`](/api/references/vscode-api#languages.createDiagnosticCollection)                                   | [PublishDiagnostics](https://microsoft.github.io/language-server-protocol/specification#textDocument_publishDiagnostics)                                                                                                                 |
-| [`registerCompletionItemProvider`](/api/references/vscode-api#languages.registerCompletionItemProvider)                           | [Completion](https://microsoft.github.io/language-server-protocol/specification#textDocument_completion) & [Completion Resolve](https://microsoft.github.io/language-server-protocol/specification#completionItem_resolve)               |
-| [`registerHoverProvider`](/api/references/vscode-api#languages.registerHoverProvider)                                             | [Hover](https://microsoft.github.io/language-server-protocol/specification#textDocument_hover)                                                                                                                                           |
-| [`registerSignatureHelpProvider`](/api/references/vscode-api#languages.registerSignatureHelpProvider)                             | [SignatureHelp](https://microsoft.github.io/language-server-protocol/specification#textDocument_signatureHelp)                                                                                                                           |
-| [`registerDefinitionProvider`](/api/references/vscode-api#languages.registerDefinitionProvider)                                   | [Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_definition)                                                                                                                                 |
-| [`registerTypeDefinitionProvider`](/api/references/vscode-api#languages.registerTypeDefinitionProvider)                           | [TypeDefinition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)                                                                                                                         |
-| [`registerImplementationProvider`](/api/references/vscode-api#languages.registerImplementationProvider)                           | [Implementation](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)                                                                                                                         |
-| [`registerReferenceProvider`](/api/references/vscode-api#languages.registerReferenceProvider)                                     | [References](https://microsoft.github.io/language-server-protocol/specification#textDocument_references)                                                                                                                                 |
-| [`registerDocumentHighlightProvider`](/api/references/vscode-api#languages.registerDocumentHighlightProvider)                     | [DocumentHighlight](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentHighlight)                                                                                                                   |
-| [`registerDocumentSymbolProvider`](/api/references/vscode-api#languages.registerDocumentSymbolProvider)                           | [DocumentSymbol](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol)                                                                                                                         |
-| [`registerCodeActionsProvider`](/api/references/vscode-api#languages.registerCodeActionsProvider)                                 | [CodeAction](https://microsoft.github.io/language-server-protocol/specification#textDocument_codeAction)                                                                                                                                 |
-| [`registerCodeLensProvider`](/api/references/vscode-api#languages.registerCodeLensProvider)                                       | [CodeLens](https://microsoft.github.io/language-server-protocol/specification#textDocument_codeLens) & [CodeLens Resolve](https://microsoft.github.io/language-server-protocol/specification#codeLens_resolve)                           |
-| [`registerDocumentLinkProvider`](/api/references/vscode-api#languages.registerDocumentLinkProvider)                               | [DocumentLink](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentLink) & [DocumentLink](https://microsoft.github.io/language-server-protocol/specification#documentLink_resolve)                   |
-| [`registerColorProvider`](/api/references/vscode-api#languages.registerDocumentColorProvider)                                     | [DocumentColor](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor) & [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation) |
-| [`registerDocumentFormattingEditProvider`](/api/references/vscode-api#languages.registerDocumentFormattingEditProvider)           | [Formatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_formatting)                                                                                                                                 |
-| [`registerDocumentRangeFormattingEditProvider`](/api/references/vscode-api#languages.registerDocumentRangeFormattingEditProvider) | [RangeFormatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_rangeFormatting)                                                                                                                       |
-| [`registerOnTypeFormattingEditProvider`](/api/references/vscode-api#languages.registerOnTypeFormattingEditProvider)               | [OnTypeFormatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_onTypeFormatting)                                                                                                                     |
-| [`registerRenameProvider`](/api/references/vscode-api#languages.registerRenameProvider)                                           | [Rename](https://microsoft.github.io/language-server-protocol/specification#textDocument_rename) & [Prepare Rename](https://microsoft.github.io/language-server-protocol/specification#textDocument_prepareRename)                       |
-| [`registerFoldingRangeProvider`](/api/references/vscode-api#languages.registerFoldingRangeProvider)                               | [FoldingRange](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)                                                                                                                             |
-
+| [`createDiagnosticCollection`](https://code.visualstudio.com/api/references/vscode-api#languages.createDiagnosticCollection)                                   | [PublishDiagnostics](https://microsoft.github.io/language-server-protocol/specification#textDocument_publishDiagnostics)                                                                                                                 |
+| [`registerCompletionItemProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerCompletionItemProvider)                           | [Completion](https://microsoft.github.io/language-server-protocol/specification#textDocument_completion) & [Completion Resolve](https://microsoft.github.io/language-server-protocol/specification#completionItem_resolve)               |
+| [`registerHoverProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerHoverProvider)                                             | [Hover](https://microsoft.github.io/language-server-protocol/specification#textDocument_hover)                                                                                                                                           |
+| [`registerSignatureHelpProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerSignatureHelpProvider)                             | [SignatureHelp](https://microsoft.github.io/language-server-protocol/specification#textDocument_signatureHelp)                                                                                                                           |
+| [`registerDefinitionProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDefinitionProvider)                                   | [Definition](https://microsoft.github.io/language-server-protocol/specification#textDocument_definition)                                                                                                                                 |
+| [`registerTypeDefinitionProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerTypeDefinitionProvider)                           | [TypeDefinition](https://microsoft.github.io/language-server-protocol/specification#textDocument_typeDefinition)                                                                                                                         |
+| [`registerImplementationProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerImplementationProvider)                           | [Implementation](https://microsoft.github.io/language-server-protocol/specification#textDocument_implementation)                                                                                                                         |
+| [`registerReferenceProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerReferenceProvider)                                     | [References](https://microsoft.github.io/language-server-protocol/specification#textDocument_references)                                                                                                                                 |
+| [`registerDocumentHighlightProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentHighlightProvider)                     | [DocumentHighlight](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentHighlight)                                                                                                                   |
+| [`registerDocumentSymbolProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentSymbolProvider)                           | [DocumentSymbol](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentSymbol)                                                                                                                         |
+| [`registerCodeActionsProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerCodeActionsProvider)                                 | [CodeAction](https://microsoft.github.io/language-server-protocol/specification#textDocument_codeAction)                                                                                                                                 |
+| [`registerCodeLensProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerCodeLensProvider)                                       | [CodeLens](https://microsoft.github.io/language-server-protocol/specification#textDocument_codeLens) & [CodeLens Resolve](https://microsoft.github.io/language-server-protocol/specification#codeLens_resolve)                           |
+| [`registerDocumentLinkProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentLinkProvider)                               | [DocumentLink](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentLink) & [DocumentLink](https://microsoft.github.io/language-server-protocol/specification#documentLink_resolve)                   |
+| [`registerColorProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentColorProvider)                                     | [DocumentColor](https://microsoft.github.io/language-server-protocol/specification#textDocument_documentColor) & [Color Presentation](https://microsoft.github.io/language-server-protocol/specification#textDocument_colorPresentation) |
+| [`registerDocumentFormattingEditProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentFormattingEditProvider)           | [Formatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_formatting)                                                                                                                                 |
+| [`registerDocumentRangeFormattingEditProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerDocumentRangeFormattingEditProvider) | [RangeFormatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_rangeFormatting)                                                                                                                       |
+| [`registerOnTypeFormattingEditProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerOnTypeFormattingEditProvider)               | [OnTypeFormatting](https://microsoft.github.io/language-server-protocol/specification#textDocument_onTypeFormatting)                                                                                                                     |
+| [`registerRenameProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerRenameProvider)                                           | [Rename](https://microsoft.github.io/language-server-protocol/specification#textDocument_rename) & [Prepare Rename](https://microsoft.github.io/language-server-protocol/specification#textDocument_prepareRename)                       |
+| [`registerFoldingRangeProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerFoldingRangeProvider)                               | [FoldingRange](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)                                                                                                                             |
 
 ## 提供诊断信息
 ---
 
 诊断信息是提示代码问题的一种方式。
 
-![diagnostics](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/diagnostics.gif)
+![diagnostics](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/diagnostics.gif)
 
 ##### 语言服务器协议
 
 语言服务器需要向客户端发送`textDocument/publishDiagnostics`信息，这个信息中包含了诊断信息url的数组。
 
-?> **注意：**客户端不会主动向服务端请求信息，需要服务器将诊断信息推送到客户端。
+!> **注意：**客户端不会主动向服务端请求信息，需要服务器将诊断信息推送到客户端。
 
 ##### 直接实现
 
@@ -109,10 +110,11 @@ function onChange() {
 > 不仅仅为打开的编辑器提供诊断，而是诊断当前打开的文件目录中的所有资源，不论文件是被打开还是关闭。
 
 ## 提供补全建议
+---
 
 代码补全可以给用户提供内容感知建议。
 
-![code-completion](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-completion.gif)
+![code-completion](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-completion.gif)
 
 ##### 语言服务器协议
 
@@ -162,9 +164,10 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 ## 显示悬浮提示
 ---
+
 悬浮信息会展示在鼠标光标的下方，为用户提供符号/对象的相关信息，一般展示关于符号的类型和描述。
 
-![hovers](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/hovers.gif)
+![hovers](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/hovers.gif)
 
 ##### 语言服务器协议
 
@@ -214,7 +217,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 当用户输入函数和方法时，显示调用该方法的相关信息。
 
-![signature-help](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/signature-help.gif)
+![signature-help](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/signature-help.gif)
 
 ##### 语言服务器协议
 
@@ -267,7 +270,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户查看变量/函数/方法的定义。
 
-![goto-definition](https://code.visualstudio.com/assets/api/language-extensions/language-support/goto-definition.gif)
+![goto-definition](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/goto-definition.gif)
 
 ##### 语言服务器协议
 
@@ -318,7 +321,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在当前编辑器直接查看变量/函数/方法的定义的源代码。
 
-![find-references](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/find-references.gif)
+![find-references](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/find-references.gif)
 
 ##### 语言服务器协议
 
@@ -370,7 +373,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在打开的编辑器中查看某个符号的全部匹配项。
 
-![document-highlights](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-highlights.gif)
+![document-highlights](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-highlights.gif)
 
 ##### 语言服务器协议
 
@@ -416,12 +419,12 @@ export function activate(ctx: vscode.ExtensionContext): void {
 >
 > 无
 
-## 跳转到当前文档中的符号定义
+## 显示当前文档中的符号定义
 ---
 
 允许用户在打开的编辑器中快速跳转到任何符号定义。
 
-![document-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-symbols.gif)
+![document-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-symbols.gif)
 
 ##### 语言服务器协议
 
@@ -472,7 +475,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在打开的文件夹（工作区）中快速跳转到任何符号定义。
 
-![workspace-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/workspace-symbols.gif)
+![workspace-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/workspace-symbols.gif)
 
 ##### 语言服务器协议
 
@@ -523,7 +526,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户提供处理错误和警告的办法。如果有更正操作可用，就会在那个错误边上显示一个小灯泡。当用户点击灯泡的时候，会显示出操作列表。
 
-![quick-fixes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/quick-fixes.gif)
+![quick-fixes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/quick-fixes.gif)
 
 ##### 语言服务器协议
 
@@ -575,7 +578,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户弹出一个可以操作、包含上下文信息的分隔弹出框。
 
-![code-lens](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-lens.gif)
+![code-lens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-lens.gif)
 
 ##### 语言服务器协议
 
@@ -632,7 +635,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在文件中预览和修改颜色。
 
-![color-decorators](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/color-decorators.png)
+![color-decorators](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/color-decorators.png)
 
 ##### 语言服务器协议
 
@@ -688,7 +691,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 提供整个文档的代码格式化支持。
 
-![format-document](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document.gif)
+![format-document](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document.gif)
 
 ##### 语言服务器协议
 
@@ -738,7 +741,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户选中区域提供代码格式化支持。
 
-![format-document-range](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document-range.gif)
+![format-document-range](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document-range.gif)
 
 ##### 语言服务器协议
 
@@ -792,7 +795,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 !> **注意：**用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着本功能。
 
-![format-on-type](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-on-type.gif)
+![format-on-type](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-on-type.gif)
 ##### 语言服务器协议
 
 为了响应请求`initialize`方法，语言服务器需要声明它能提供这项功能。服务器还得告诉客户端哪些字符需要被格式化，`moreTriggerCharacters`是可选的。
@@ -846,7 +849,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户重命名符号，并更新对应符号的全部引用。
 
-![rename](https://code.visualstudio.com/assets/api/language-extensions/language-support/rename.gif)
+![rename](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/rename.gif)
 
 ##### 语言服务器协议
 
@@ -890,5 +893,5 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 不提供本功能支持。
 
 > **进阶实现**
-> 
+>
 > 返回工作区中全部需要生效的编辑区，比如当一个符号在项目的各个地方都被引用时。
