@@ -1,6 +1,6 @@
 # 语言配置
 
-通过[`contributes.languages`](https://code.visualstudio.com/api/references/contribution-points#contributes.languages)发布内容配置，你可以配置以下*声明式语言特性*：
+通过[`contributes.languages`](/extensibility-reference/contribution-points#contributeslanguages)发布内容配置，你可以配置以下*声明式语言特性*：
 
 - 启用/关闭注释
 - 定义括号
@@ -12,7 +12,7 @@
 
 [语言配置示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/language-configuration-sample)中配置JavaScript文件中的编辑功能。本篇指南会详细解释`language-configuration.json`中的内容：
 
-?> **注意**：如果你的语言配置文件以`language-configuration.json`结尾，那么VS Code会帮你添加代码补全和校验功能。
+!> **注意**：如果你的语言配置文件以**`language-configuration.json`**结尾，那么VS Code会帮你添加代码补全和校验功能。
 
 ```json
 {
@@ -54,8 +54,15 @@
 ```
 
 ## 启用/关闭注释
+---
 
-VS Code提供了切换注释开关的命令——**Toggle Line Comment**和**Toggle Block Comment**。配置`comments.blockComment`控制块注释或`comments.lineComment`控制行注释。
+VS Code提供了切换注释开关的命令：
+
+- **Toggle Line Comment**
+- **Toggle Block Comment**
+
+分别来配置`comments.lineComment`控制块注释和`comments.blockComment`控制行注释。
+
 ```json
 {
 	"comments": {
@@ -66,16 +73,20 @@ VS Code提供了切换注释开关的命令——**Toggle Line Comment**和**Tog
 ```
 
 ## 定义括号
+---
 
 你在VS Code中将鼠标移动到一个括号边上时，VS Code会自动高亮对应的括号。
+
 ```json
 {
 	"brackets": [["{", "}"], ["[", "]"], ["(", ")"]]
 }
 ```
+
 另外，当你运行**Go to Bracket**或**Select to Bracket**时，VS Code会自动使用你的定义找到最近、最匹配的括号。
 
 ## 自动闭合符号
+---
 
 当你输入`'`时，VS Code会自动帮你补全另一个单引号然后将光标放在引号中间，我们来看看是怎么做的：
 
@@ -126,6 +137,7 @@ const Component = () =>
 现在如果你在`>`前面输入`{`，VS Code会自动补全`}`。
 
 ## 自动环绕符号
+---
 
 当你选择了一堆文本然后输入左括号时，VS Code会对选中内容外围加上对应的括号。这个功能叫做*自动环绕符号*，你可以参考下面的代码指定这项功能：
 
@@ -141,9 +153,11 @@ const Component = () =>
 	]
 }
 ```
+
 注意用户可以通过`editor.autoSurround`设置*自动环绕符号*的行为。
 
 ## 代码折叠
+---
 
 在VS Code中有三种代码折叠类型：
 
@@ -160,11 +174,13 @@ const Component = () =>
 	}
 }
 ```
-- 语言服务器折叠：语言服务器获取到[textDocument/foldingRange](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)请求中的代码折叠列表数据，VS Code之后根据这份列表创建折叠标记。通过语言服务器协议学习更多关于[程序性语言特性]。
+
+- 语言服务器折叠：语言服务器获取到[textDocument/foldingRange](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)请求中的代码折叠列表数据，VS Code之后根据这份列表创建折叠标记。通过语言服务器协议学习更多关于[程序性语言特性](/language-extensions/programmatic-language-features)。
 
 ## 单词匹配
+---
 
-`wordPattern`定义了程序语言中*单词*单位。因此当你使用词语相关的命令，如：**Move cursor to word start**（`Ctrl+Left`）或者**Move cursor to word end**（`Ctrl+Right`）时，编辑器会根据正则寻找单词边界。
+`wordPattern`定义了程序语言中*单词*单位。因此当你使用词语相关的命令，如：**Move cursor to word start**（<kbd>Ctrl+Left</kbd>）或者**Move cursor to word end**（<kbd>Ctrl+Right</kbd>）时，编辑器会根据正则寻找单词边界。
 
 ```json
 {
@@ -173,6 +189,7 @@ const Component = () =>
 ```
 
 ## 缩进规则
+---
 
 `indentationRules`定义了编辑器应该如何调整当前行或你粘贴、输入、移动的下一行缩进。
 
@@ -186,10 +203,12 @@ const Component = () =>
 ```
 
 比如，`if (true) {`匹配`increasedIndentPattern`，然后如果你在`{`后面按下<kbd>Enter</kbd>后，编辑器会自动缩进一次，你如代码看起来会像这样：
+
 ```javascript
 if (true) {
 	console.log();
 ```
+
 如果没有设置缩进规则，当行尾以开符号结尾时编辑器会左缩进，以闭合符号结尾时右缩进。这里的*开闭符号*由`brackets`定义。
 
 注意`editor.formatOnPaste`是由[DocumentRangeFormattingEditProvider](https://code.visualstudio.com/api/references/vscode-api#DocumentRangeFormattingEditProvider)控制，而不由自动缩进控制。
