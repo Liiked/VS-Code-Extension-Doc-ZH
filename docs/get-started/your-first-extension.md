@@ -50,8 +50,8 @@ code ./helloworld
 
 请浏览你的项目目录和代码，然后进行下面的小练习：
 - 为命令面板中的`Hello World`换一个名字
-- [配置]()一个新的命令：打开一个信息提示，显示当前时间
-- 用显示警告信息的[VS Code API]()替换`vscode.window.showInformationMessage`
+- [配置](/references/contribution-points.md)一个新的命令：打开一个信息提示，显示当前时间
+- 用显示警告信息的[VS Code API](/references/vscode-api.md)替换`vscode.window.showInformationMessage`
 
 ## 调试插件
 ---
@@ -61,14 +61,14 @@ VS Code内置的调试功能已经非常方便了，在代码序号的左侧空�
   <source src="https://code.visualstudio.com/api/get-started/your-first-extension/debug.mp4" type="video/mp4">
 </video>
 
-有关Node.js调试的部分，请参考[Node.js调试]()部分。
+有关Node.js调试的部分，请参考[Node.js调试](https://code.visualstudio.com/docs/nodejs/nodejs-debugging)部分。
 
 ## 下一步
 
-在下个主题[解析插件结构]()中，我们会大致看一下`Hello World`示例的源码，然后解释一些关键的概念。
+在下个主题[解析插件结构](/get-started/extension-anatomy.md)中，我们会大致看一下`Hello World`示例的源码，然后解释一些关键的概念。
 
 本节教程的源码可参考[https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-sample)。
-此外，[插件指引]()章节还包含了其他示例代码，每个例子都对应着不同的VS Code Api或者发布内容配置。
+此外，[插件指引](/extension-guides/README.md)章节还包含了其他示例代码，每个例子都对应着不同的VS Code Api或者发布内容配置。
 
 #### 使用Javascript
 在本指南中，我们主要使用TypeScript开发VS Code插件，因为我们认为TS是开发插件的最佳实践。如果你想使用JS，我们也同样提供了源码[helloworld-minimal-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/helloworld-minimal-sample)

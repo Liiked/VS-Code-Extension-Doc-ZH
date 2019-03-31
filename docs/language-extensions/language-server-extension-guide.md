@@ -1,14 +1,16 @@
 # 示例：语言服务器
 
-就如你在[程序性语言特性]()章节所见，实现语言特性的直接方式是使用`languages.*`API。但是语言服务器不同，它是另一种语言插件的实现方式。
+就如你在[程序性语言特性](/language-extensions/programmatic-language-features)章节所见，实现语言特性的直接方式是使用`languages.*`API。但是语言服务器不同，它是另一种语言插件的实现方式。
 
 本章将：
+
 - 解释语言服务器插件的好处
 - 手把手教你实现一个语言服务器[`Microsoft/vscode-languageserver-node`](https://github.com/Microsoft/vscode-languageserver-node)，你觉得啰嗦的话，也可以直接看[lsp-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample)源码。
 
 ## 为什么使用语言服务器？
+---
 
-语言服务器是一种可以提升语言编辑体验的特殊VS Code插件。有了语言服务器，你可以实现如自动补全、错误检查（诊断）、转跳到定义等等其他VS Code[语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features)。
+语言服务器是一种可以提升语言编辑体验的特殊VS Code插件。有了语言服务器，你可以实现如自动补全、错误检查（诊断）、转跳到定义等等其他VS Code[语言特性](/language-extensions/programmatic-language-features)。
 
 但是在VS Code中实现语言功能会面临三个问题：
 
@@ -20,11 +22,10 @@
 
 为了解决这些问题，微软提供了[语言服务器协议(Language Server Protocol)](https://microsoft.github.io/language-server-protocol)意图为语言插件和编辑器提供社区规范。这样一来，语言服务器就可以用任何一种语言来实现，用协议通讯也避免了插件在主进程中运行的高开销。而且任何LSP兼容的语言插件，都能和LSP兼容的代码编辑器整合起来，LSP是语言插件开发者和第三方编辑器的共赢方案。
 
-![lsp-languages-editors](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-languages-editors.png)
-
-该章节需要你已经了解[什么是插件开发](/extension-authoring/overview)，如果你还没有准备好，请先回过去了解一下吧。
+![lsp-languages-editors](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-languages-editors.png)
 
 在本章，我们将：
+
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
@@ -35,28 +36,32 @@
 ---
 
 在VS Code中，一个语言服务器有两个部分：
-- **语言客户端**：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的[VS Code 命名空间API](/extensibility-reference/vscode-api.md)。
+
+- **语言客户端**：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的[VS Code 命名空间API](/references/vscode-api)。
 - **语言服务器**：运行在单独进程中的语言分析工具。
 
 语言服务器运行在单独的进程有两个好处：
+
 - 只要能通过LSP通信，语言分析工具可以用任何语言实现。
 - 语言分析工具一般非常消耗CPU和内存，在单独的进程中运行能避免大性能开销
 
 下面是一个运行了2个**语言服务器插件**的示意图。HTML语言客户端和PHP语言客户端是常见的VS Code插件。两个客户端都用LSP与各自对应的语言服务器进行通信——即使PHP语言服务器是用PHP写的，但是仍然能通过LSP与PHP语言客户端建立起通信。
 
-![lsp-illustration](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-illustration.png)
+![lsp-illustration](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-illustration.png)
 
-本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/extension-authoring/overview)的基础之上。
+本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/)的基础之上。
 
 ## 示例：一个简单的纯文本语言服务器
 ---
 
 让我们首先实现一个简单的语言服务器插件吧，这个插件的功能是自动补全、诊断纯文本文件。我们会同时学习客户端/服务端的配置。
 如果你想直接上手代码：
+
 - [lsp-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample)：本篇教程的主要源代码，有大量注释
 - [lsp-multi-server-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-multi-server-sample)：**lsp-sample**的进阶版本，同样有大量注释，支持[多目录工作区](https://code.visualstudio.com/docs/editor/multi-root-workspaces)特性的语言服务器实例。
 
 复制[Microsoft/vscode-extension-samples](https://github.com/Microsoft/vscode-extension-samples)然后打开示例：
+
 ```bash
 > cd lsp-sample
 > npm install
@@ -83,7 +88,8 @@
 
 我们先看看`/package.json`，这个文件描述了语言客户端的能力。里面有3个有趣的部分：
 
-首先看看[activationEvents](/extensibility-reference/activation-events.md)：
+首先看看[activationEvents](/references/activation-events)：
+
 ```json
 "activationEvents": [
     "onLanguage:plaintext"
@@ -92,7 +98,7 @@
 
 这个部分告诉VS Code只要打开纯文本文件之后就立刻激活插件（例如：打开一个`.txt`文件）
 
-下一步看看[configuration](/extensibility-reference/contribution-points.md#contributesconfiguration)部分：
+下一步看看[configuration](/extensibility-reference/contribution-points#contributesconfiguration)部分：
 
 ```json
 "configuration": {
@@ -112,6 +118,7 @@
 这个部分配置了用户可以自定义的`configuration`，用户通过这个配置可以在**设置**中对你的插件做一些修改。这并不是本节重点，稍后示例将通过代码呈现——插件如何在设置变动后将改*修后的配置*应用到我们的语言服务器上。
 
 真正的语言客户端代码和对应的`package.json`在`/client`文件夹中。`package.json`最有趣的部分是`vscode`插件主机API和`vscode-languageclient`这两个依赖库。
+
 ```json
 "dependencies": {
     "vscode": "^1.1.18",
@@ -194,6 +201,7 @@ export function deactivate(): Thenable<void> {
 在这个例子中，服务器是Typescript实现的，由Node.js运行。因为VS Code自带Node.js运行时，所以你无需安装其他依赖，除非你对运行时有特别要求。
 
 这个语言服务器的源码在`/server`中。比较重要的`pacakge.json`部分是：
+
 ```json
 "dependencies": {
     "vscode-languageserver": "^4.1.3"
@@ -498,7 +506,8 @@ documents.onDidChangeContent(async (change) => {
 - 如果你想要把波浪线加到行未为止，就把`end position`设置为`Number.MAX_VALUE`
 
 运行语言服务器步骤：
-1. 启动build任务。这个任务会把客户端和服务器端都编译掉。
+
+1. 通过快捷键(<kbd>Ctrl+Shift+B</kbd>)启动build任务。这个任务会把客户端和服务器端都编译掉。
 2. 打开调试侧边栏，选择`启动客户端`加载配置，然后按`开始调试`按钮启动`扩展开发主机`。
 3. 在根目录下新建一个'test.txt'文件，然后粘贴下述内容：
 
@@ -510,18 +519,18 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 `扩展开发主机`实例看起来像是这样：
 
-![validation](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validation.png)
+![validation](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validation.png)
 
 ## 调试客户端和服务端
 ---
 
-调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后启动插件调试。（如何启动代码调试的部分，请参阅[开发插件](/extension-authoring/developing-extensions.md)）
+调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后按<kbd>F5</kbd>启动插件调试。
 
-![debugging-client](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-client.png)
+![debugging-client](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-client.png)
 
-因为服务器是由`LanguageClient`启动的，我们需要附加一个*调试器*给运行中的服务器。为了做到这一点，切换到**调试**侧边栏，选择加载配置`Attach to Server`然后启动调试（要保证server已经启动哦，也就是上面一步），看起来会像这样：
+因为服务器是由`LanguageClient`启动的，我们需要附加一个*调试器*给运行中的服务器。为了做到这一点，切换到**调试**侧边栏，选择加载配置`Attach to Server`然后按<kbd>F5</kbd>启动调试（要保证server已经启动哦，也就是上面一步），看起来会像这样：
 
-![debugging-server](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-server.png)
+![debugging-server](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-server.png)
 
 ## 为语言服务器加上日志
 ---
@@ -530,13 +539,14 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 对于**Isp-sample**你能在`"languageServerExample.trace.server": "verbose"`进行配置。现在看看"Language Server Example"频道，你应该能看到这些日志：
 
-![lsp-log](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-log.png)
+![lsp-log](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-log.png)
 
 因为语言服务器通信会非常啰嗦（5s的正常使用会产生5000行日志），因此我们提供了一个可视化和可筛选的日志工具。你可以先从频道中保存所有的日志，然后在[语言服务器协议检查器](https://microsoft.github.io/language-server-protocol/inspector/)中加载。
 
-![lsp-inspector](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-inspector.png)
+![lsp-inspector](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-inspector.png)
 
-在服务器中设置`Configuration`
+## 在服务器中设置Configuration
+---
 
 当我们写插件的客户端部分的时候，我们已经定义了一个控制最大问题报告数的配置。所以我们也可以在服务器中写一段读取客户端配置的代码：
 
@@ -628,7 +638,7 @@ connection.onDidChangeConfiguration(change => {
 
 再次启动客户端，然后把设置中的`maximum report`改为1，就能看到：
 
-![validationOneProblem](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validationOneProblem.png)
+![validationOneProblem](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validationOneProblem.png)
 
 ## 添加其他语言特性
 ---
@@ -692,15 +702,15 @@ connection.onInitialize((params): InitializeResult => {
 
 下面的截屏显示了运行在纯文本文件中的补全代码：
 
-![codeComplete](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/codeComplete.png)
+![codeComplete](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/codeComplete.png)
 
 ## 测试语言服务器
 ---
 
 为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
-- 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的HTML/CSS/JSON语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行VS Code命令来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的Python插件就采用了这种测试方式。
+- 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的[HTML](https://github.com/Microsoft/vscode-html-languageservice)/[CSS](https://github.com/Microsoft/vscode-css-languageservice)/[JSON](https://github.com/Microsoft/vscode-json-languageservice)语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -813,6 +823,7 @@ async function sleep(ms: number) {
 ---
 
 到目前为止，本篇教程提供了：
+
 - 一个简短的**语言服务器**和**语言服务器协议**概览
 - VS Code中的语言服务器插件架构
 - 实现了一个**Isp-sample**插件，和如何开发、调试、检查和测试语言服务器
@@ -836,6 +847,11 @@ async function sleep(ms: number) {
 - 重命名：重命名整个项目内的某些符号
 - 文件链接：计算和解析文件中的链接
 - 文件色彩：计算和解析文件中的色彩，并提供编辑器内的取色器
+
+[程序性语言特性](/language-extensions/programmatic-language-features)章节详细介绍了上述的语言特性，并且告诉我们如何通过下述(**两者之一**)去实现它们：
+
+- 语言服务器协议
+- 直接使用VS Code的可拓展性API
 
 ## 增量文本同步更新
 ---

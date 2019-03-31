@@ -1,6 +1,8 @@
 # 任务
 
-通常，在VS Code中，用户可以通过`task.json`定义一个[任务](https://code.visualstudio.com/docs/editor/tasks)。不过在软件开发中，VS Code会自动检测某些任务。本节介绍了插件应该怎样自动检测任务，为最终用户提供任务。
+通常，在VS Code中，用户可以通过`task.json`定义一个[任务](https://code.visualstudio.com/docs/editor/tasks)。不过在软件开发中，VS Code会自动检测某些任务。
+
+本节介绍了插件应该怎样使用[Rakefiles](https://ruby.github.io/rake/)中的**自动检测任务**配置项，为最终用户提供任务。完整的源代码请参阅[这里](https://github.com/Microsoft/vscode-extension-samples/tree/master/task-provider-sample)。
 
 ## 定义任务
 ---
@@ -30,7 +32,7 @@
 ]
 ```
 
-上面代码里面，我们为`rake`*任务集*配置了一个**任务定义**。任务定义有两个属性`task`和`file`，`task`是Rake任务的名字，file指向了包含任务的文件。`task`属性是必须的，`file`则为可选。如果省略了`file`属性，则会使用工作区根目录下名为rake的文件。
+上面代码里面，我们为`rake`*任务集*配置了一个**任务定义**。任务定义有两个属性`task`和`file`，`task`是Rake任务的名字，file指向了包含任务的文件。`task`属性是必须的，`file`则为可选。如果省略了`file`属性，则会使用工作区根目录下名为`RakeFile`的文件。
 
 ## 任务供应器函数
 ---
@@ -79,7 +81,12 @@ interface RakeTaskDefinition extends vscode.TaskDefinition {
 
 假设我们的输出最终来自于一个叫`compile`的任务，那么对应的任务创建过程如下所示：
 ```typescript
-let task = new vscode.Task({ type: 'rake', task: 'compile' }, 'compile', 'rake', new vscode.ShellExecution('rake compile'));
+let task = new vscode.Task(
+    { type: 'rake', task: 'compile' },
+    'compile',
+    'rake',
+    new vscode.ShellExecution('rake compile')
+);
 ```
 
 每个输出任务都对应着上述过程，最后通过调用`getRakeTasks`会返回一个任务数组。

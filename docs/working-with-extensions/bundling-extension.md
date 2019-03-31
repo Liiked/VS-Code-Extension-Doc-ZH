@@ -1,10 +1,10 @@
 # 打包插件
 
 VS Code插件体积常常随着更新越来越大，它会产生很多文件，而且还依赖各种[npm](https://www.npmjs.com/)包。
-程序开发的最佳实践是抽象和重用，但是安装和运行插件时代价就来了。加载100个小文件远比加载一个大文件来的慢，这就是我们更推荐打包插件的原因。
+程序开发的最佳实践是抽象和重用，但过度拆分和庞大的代码结构产生的代价则会影响插件体积和运行效率。加载100个小文件远比加载一个大文件来的慢，这就是我们更推荐打包插件的原因。
 *打包*是将多个小的源文件打包成单个入口文件的过程。
 
-对于Javascript而言，可选的构建工具非常多，比较流行的如[rollup.js](https://rollupjs.org/)，[parcel](https://parceljs.org/)和[webpack](https://webpack.js.org/)。大部分的构建工具的概念和功能都是相似的，本节主要使用**webpack**打包。
+对于Javascript而言，可选的构建工具非常多，比较流行的如[rollup.js](https://rollupjs.org/)，[parcel](https://parceljs.org/)和[webpack](https://webpack.js.org/)。大部分构建工具的概念和功能都是相似的，本节主要使用**webpack**打包。
 
 ## 使用webpack
 ---
@@ -75,11 +75,11 @@ const config = {
 module.exports = config;
 ```
 
-这份文件时[webpack-extension](https://github.com/Microsoft/vscode-extension-samples/blob/master/webpack-sample)中的[一部分](https://github.com/Microsoft/vscode-extension-samples/blob/master/webpack-sample/webpack.config.js)。webpack配置最后输出的就是JS对象。
+这份文件是[webpack-extension](https://github.com/Microsoft/vscode-extension-samples/blob/master/webpack-sample)中的[一部分](https://github.com/Microsoft/vscode-extension-samples/blob/master/webpack-sample/webpack.config.js)。webpack配置最后输出的就是JS对象。
 
 在上面的例子里，我们定义了如下内容：
-- `traget`是'node'，因为我们的插件运行在Node.js中。
-- webpack使用的入口文件。这就像是`package.json`中的`main`属性，有点不一样的是你还需要给webpack提供"source"—— 一般就是`src/extension.ts`，小心不要配置在"output"里了。webpack可以解析Typescript，所以我们不需要单独的Typescript编译步骤了。
+- `traget`是'node'，因为我们的插件运行在Node.js环境中。
+- webpack使用的入口文件。这就像是`package.json`中的`main`属性，有点不一样的是你还需要给webpack提供"source"—— 一般就是`src/extension.ts`，小心不要配置在"output"里了。webpack可以解析Typescript，所以我们不需要再单独执行Typescript编译了。
 - `output`配置告诉webpack应该把打包好的文件放在哪里，一般而言我们会放在`dist`文件夹里。在这个例子里，webpack最后会产生一个`dist/extension.js`文件。
 - 在`resolve`和`module/rules`中配置Typescript和Javascript的解析器。
 - `externals`即排除配置，在这里可以配置打包文件不应包含的文件和模块。`vscode`不需要被打包是因为它并不储存在磁盘上，它是VS Code热更新生成的临时文件夹。根据插件依赖的具体node模块，你可能需要通过这个配置优化打包文件。
@@ -131,7 +131,7 @@ module.exports = config;
 ## 发布
 ---
 
-在发布前，你需要更新`.vscodeignore`文件。现在所有东西都打包到了`dist/extension.js`文件中，所以应该排除这个文件，还有`out`文件夹（怕你漏了，特此提醒），以及最重要的`node_modules`文件夹。
+发布前你需要更新`.vscodeignore`文件。现在所有东西都打包到了`dist/extension.js`文件中，所以应该排除这个文件还有`out`文件夹（怕你漏了，特此提醒），以及最重要的`node_modules`文件夹。
 
 一般来说，`.vsignore`文件应该是这样的：
 
@@ -147,7 +147,7 @@ webpack.config.json
 ## 迁移插件
 ---
 
-用webpack迁移现有的插件是很容易的，整个过程就像我们上面的指南一样。真实的例子，比如VS Code的References视图就是从这个[pull request](https://github.com/Microsoft/vscode-references-view/pull/50)应用了webpack而来的。
+用webpack迁移现有的插件是很容易的，整个过程就像我们上面的指南一样。真实的例子如VS Code的References视图就是从这个[pull request](https://github.com/Microsoft/vscode-references-view/pull/50)应用了webpack而来的。
 
 在里面，你可以看到：
 - `devDependencies`中添加`webpack`，`webpack-cli`和`ts-loader`
@@ -162,7 +162,7 @@ webpack.config.json
 
 #### 压缩
 
-使用`production`模式会执行代码压缩，它会去除源代码中的空白符合注释，并把变量名和函数名进行替换——混淆和压缩。不过源代码形如`Function.prototype.name`的使用方式可能不会触发压缩。
+使用`production`模式会执行代码压缩，它会去除源代码中的空格和注释，并把变量名和函数名进行替换——混淆和压缩。不过形如`Function.prototype.name`的代码不会压缩。
 
 #### webpack critical dependencies
 
@@ -174,7 +174,7 @@ webpack.config.json
 - 通过`externals`排除这部分依赖，但是注意它们的Javascript文件还是应该保留在我们打包的插件里，在`.vscodeignore`中使用glob模式，比如`!node_modules/mySpecialModule`。
 
 ## 下一步
----
-- [插件市场]() - 学习更多VS Code插件市场的有关内容。
-- [测试插件]() - 测试插件，提高项目质量。
-- [持续整合]() - 使用Azure Pipeline运行插件的CI 构建。
+
+- [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多VS Code插件市场的有关内容。
+- [测试插件](/working-with-extensions/testing-extension.md) - 测试插件，提高项目质量。
+- [持续集成](/working-with-extensions/continuous-integration.md) - 使用Azure Pipeline运行插件的CI 构建。
