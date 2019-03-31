@@ -5,14 +5,14 @@
 ## 不在磁盘上的文件
 ---
 
-并不是所有文件都是储存在磁盘上的，比如一份刚刚创建的文件。除非特别指明，文档选择器通常会应用于**所有**文档类型。使用[DocumentFilter]()的`scheme`属性将协议范围缩小，比如说，`{ scheme: 'file', language: 'typescript' }`是特定的用于储存在磁盘上的TypeScript文件。
+并不是所有文件都是储存在磁盘上的，比如一份刚刚创建的文件。除非特别指明，文档选择器通常会应用于**所有**文档类型。使用[DocumentFilter](https://code.visualstudio.com/api/references/vscode-api#DocumentFilter)的`scheme`属性将协议范围缩小，比如说，`{ scheme: 'file', language: 'typescript' }`是特定的用于储存在磁盘上的TypeScript文件。
 
 ## 文档选择器
 ---
 
-VS Code插件API结合了特定的语言特性, 通过文档选择器的[DocumentSelector]()类型, 可以支持例如智能感知(IntelliSense)等特性. 这是实现特定语言所支持特性的最为简单的机制.
+VS Code插件API结合了特定的语言特性, 通过文档选择器的[DocumentSelector](https://code.visualstudio.com/api/references/vscode-api#DocumentSelector)类型, 可以支持例如智能感知(IntelliSense)等特性. 这是实现特定语言所支持特性的最为简单的机制.
 
-下面的片段注册了一个Typescript文件的[HoverProvider](), 此时的文档选择器是`typescript`语言标识符.
+下面的片段注册了一个Typescript文件的[HoverProvider](https://code.visualstudio.com/api/references/vscode-api#HoverProvider), 此时的文档选择器是`typescript`语言标识符.
 
 ```typescript
 vscode.languages.registerHoverProvider('typescript', {
@@ -22,7 +22,7 @@ vscode.languages.registerHoverProvider('typescript', {
 });
 ```
 
-文档选择器可以不只是一个语言标识符, 还可以是复杂选择器——比如基于`协议(scheme)`和文件路径的[DocumentFilter](), 文件路径支持`pattern`参数和glob模式:
+文档选择器可以不只是一个语言标识符, 还可以是复杂选择器——比如基于`协议(scheme)`和文件路径的[DocumentFilter](https://code.visualstudio.com/api/references/vscode-api#DocumentFilter), 文件路径支持`pattern`参数和glob模式:
 
 ```typescript
 vscode.languages.registerHoverProvider(
@@ -88,5 +88,5 @@ vscode.languages.registerHoverProvider(
 
 阅读下列文章来了解更多有关于VS Code可拓展模型的知识.
 
-- [插件清单]() - VS Code的package.json(插件清单)文件配置相关
-- [发布内容配置]() - VS Code发布内容相关
+- [插件清单](/references/extension-manifest) - VS Code的package.json(插件清单)文件配置相关
+- [发布内容配置](/references/contribution-points) - VS Code发布内容相关

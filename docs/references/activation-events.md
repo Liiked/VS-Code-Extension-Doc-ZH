@@ -1,6 +1,6 @@
 # 激活事件
 
-**激活事件**是在`package.json`中的`activationEvents`字段声明的一个JSON对象, 参考[插件清单](). 当**激活事件**触发时, 插件就会被激活. 下面是可用的**激活事件**列表:
+**激活事件**是在`package.json`中的`activationEvents`字段声明的一个JSON对象, 参考[插件清单](/references/extension-manifest). 当**激活事件**触发时, 插件就会被激活. 下面是可用的**激活事件**列表:
 
 - [onLanguage](#onlanguage)
 - [onCommand](#oncommand)
@@ -14,7 +14,7 @@
 - [onWebviewPanel](#onwebviewpanel)
 - [*](#Start-up)
 
-`package.json`的配置项都可以在[插件清单]()中找到.
+`package.json`的配置项都可以在[插件清单](/references/extension-manifest)中找到.
 
 ## onLanguage
 ---
@@ -76,7 +76,7 @@
 - `DebugConfigurationProvider`中的`provideDebugConfigurations`在`onDebugInitialConfigurations`之后触发
 - `onDebugResolve:type`在`DebugConfigurationProvider`的`resolveDebugConfiguration`方法之前触发.
 
-**友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据`DebugConfigurationProvider`实现的对应方法（`provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve`. 参阅[使用调试器插件]().
+**友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据`DebugConfigurationProvider`实现的对应方法（`provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve`. 参阅[使用调试器插件](/extension-guides/debugger-extension#using-a-debugconfigurationprovider).
 
 ## workspaceContains
 ---
