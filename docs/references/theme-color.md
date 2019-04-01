@@ -632,9 +632,9 @@ CodeLens:
 - `editor.snippetFinalTabstopHighlightBackground`: 代码片段中最后的 Tab 位的高亮背景色
 - `editor.snippetFinalTabstopHighlightBorder`: 代码片段中最后的 Tab 位的高亮边框颜色
 
-也可以根据[发布内容的颜色配置项]()，使用插件来发布色彩id(Ids)。当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时，这些色彩也会出现。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
+也可以根据[发布内容的颜色配置项](/references/contribution-points#contributescolors)，使用插件来发布色彩id(Ids)。当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时，这些色彩也会出现。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
 
 ## 配置插件中的色彩
 ---
 
-也可以根据[发布内容的颜色配置项]()，使用插件来发布色彩id。当在`workbench.colorCustomizations`当编辑`workbench.colorCustomizations`和主题颜色文件时，这些色彩会出现在代码补全中。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
+也可以根据[发布内容的颜色配置项]((/references/contribution-points#contributescolors)，使用插件来发布色彩id。当在`workbench.colorCustomizations`当编辑`workbench.colorCustomizations`和主题颜色文件时，这些色彩会出现在代码补全中。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。

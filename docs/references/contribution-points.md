@@ -2,24 +2,24 @@
 
 发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
-* [`configuration`](extensibility-reference/contribution-points.md#contributesconfiguration)
-* [`commands`](extensibility-reference/contribution-points.md#contributescommands)
-* [`menus`](extensibility-reference/contribution-points.md#contributesmenus)
-* [`keybindings`](extensibility-reference/contribution-points.md#contributeskeybindings)
-* [`languages`](extensibility-reference/contribution-points.md#contributeslanguages)
-* [`debuggers`](extensibility-reference/contribution-points.md#contributesdebuggers)
-* [`breakpoints`](extensibility-reference/contribution-points.md#contributesbreakpoints)
-* [`grammars`](extensibility-reference/contribution-points.md#contributesgrammars)
-* [`themes`](extensibility-reference/contribution-points.md#contributesthemes)
-* [`snippets`](extensibility-reference/contribution-points.md#contributessnippets)
-* [`jsonValidation`](extensibility-reference/contribution-points.md#contributesjsonvalidation)
-* [`views`](extensibility-reference/contribution-points.md#contributesviews)
-* [`viewsContainers`](extensibility-reference/contribution-points.md#viewscontainers)
-* [`problemMatchers`](extensibility-reference/contribution-points.md#contributesproblemmatchers)
-* [`problemPatterns`](extensibility-reference/contribution-points.md#contributesproblempatterns)
-* [`taskDefinitions`](extensibility-reference/contribution-points.md#contributestaskDefinitions)
-* [`colors`](extensibility-reference/contribution-points.md#contributescolors)
-* [`typescriptServerPlugins`](extensibility-reference/contribution-points.md#typescriptserverplugins)
+* [`configuration`](#contributesconfiguration)
+* [`commands`](#contributescommands)
+* [`menus`](#contributesmenus)
+* [`keybindings`](#contributeskeybindings)
+* [`languages`](#contributeslanguages)
+* [`debuggers`](#contributesdebuggers)
+* [`breakpoints`](#contributesbreakpoints)
+* [`grammars`](#contributesgrammars)
+* [`themes`](#contributesthemes)
+* [`snippets`](#contributessnippets)
+* [`jsonValidation`](#contributesjsonvalidation)
+* [`views`](#contributesviews)
+* [`viewsContainers`](#contributesviewscontainers)
+* [`problemMatchers`](#contributesproblemmatchers)
+* [`problemPatterns`](#contributesproblempatterns)
+* [`taskDefinitions`](#contributestaskDefinitions)
+* [`colors`](#contributescolors)
+* [`typescriptServerPlugins`](#typescriptserverplugins)
 
 ## contributes.configuration
 ---
@@ -54,7 +54,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 }
 ```
 
-![configuration](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/configuration.png)
+![configuration](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/configuration.png)
 
 ## contributes.configurationDefaults
 ---
@@ -94,7 +94,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
     }]
 }
 ```
-![commands](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
+![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
 
 ## contributes.menus
 ---
@@ -140,7 +140,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
     }
 }
 ```
-![menus](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/menus.png)
+![menus](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/menus.png)
 
 #### 让菜单项只显示在命令面板中
 
@@ -172,7 +172,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 - `9_cutcopypaste` - 然后是基础编辑命令。
 - `z_commands` - 最后一个分组则是命令面板入口。
 
-![groupSorting](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/groupSorting.png)
+![groupSorting](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/groupSorting.png)
 
 **资源管理器上下文菜单**默认有下列分组：
 
@@ -209,7 +209,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ## contributes.keybindings
 ---
 
-这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定]()中，你可以了解更加细节的东西。
+这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中，你可以了解更加细节的东西。
 
 配置快捷键绑定会使*默认键盘快捷方式*中显示你的规则，每一处和命令相关的UI部分也会显示你添加的快捷键组合。
 
@@ -227,7 +227,7 @@ Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayH
     }]
 }
 ```
-![keybindings](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/keybindings.png)
+![keybindings](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/keybindings.png)
 
 ## contributes.languages
 ---
@@ -426,9 +426,9 @@ language-configuration.json
 }
 ```
 
-查看[添加语言着色器]()学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmLanguage文件快速打包成VS Code插件。
+查看[语法高亮指南](/language-extensions/syntax-highlight-guide)学习更多从现有的语法高亮插件迁移的内容。
 
-![grammars](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/grammars.png)
+![grammars](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/grammars.png)
 
 ## contributes.themes
 ---
@@ -447,7 +447,7 @@ language-configuration.json
     }]
 }
 ```
-![themes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/themes.png)
+![themes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/themes.png)
 
 查看[改变色彩主题](docs/extension-authoring/themes-snippets-colorizers.md)学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmTheme文件快速打包成VS Code插件。
 
@@ -506,13 +506,13 @@ language-configuration.json
 }
 ```
 
-![views](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/views.png)
+![views](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/views.png)
 
 插件创作者应该通过`createTreeView`API提供的[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)创建一个[TreeView](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeView)或者直接使用`registerTreeDataProvider`注册一个[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)。更多示例参考[这里](https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample)
 
 ## contributes.viewsContainers
 ---
-配置[自定义视图]()的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的`Package Explorer`视图容器应该如何配置。
+配置[自定义视图](/references/contribution-points#contributesviews)的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的`Package Explorer`视图容器应该如何配置。
 
 #### 示例
 ```json
@@ -541,7 +541,7 @@ language-configuration.json
 }
 ```
 
-![custom-views-container](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/references/images/contribution-points/custom-views-container.png)
+![custom-views-container](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/custom-views-container.png)
 
 **图标规格**
 
