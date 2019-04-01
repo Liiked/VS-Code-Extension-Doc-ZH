@@ -17,7 +17,7 @@
 
 ## 翻译计划
 
-翻译计划已移动到[Progess](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/Progress.md)
+翻译计划已移动到[Progress](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/Progress.md)
 
 如果你有兴趣、能力和时间，欢迎[贡献代码](#贡献代码)
 
@@ -31,15 +31,15 @@
     如Promise通常不做翻译，若有必要或遇到困难的词语，请使用“中文（English）”的方式来显示，如：`异步请求（promise）`，在有参考资料后得出的翻译结果，需要在术语表释义后面注明词汇出现来源或释义链接。
 - 避免冗余
     ```markdown
-    By implementing a `WebviewPanelSerializer`, your webviews can be automatically restored 
-    when VS Code restarts. Serialization builds on `getState` and `setState`, and is only 
+    By implementing a `WebviewPanelSerializer`, your webviews can be automatically restored
+    when VS Code restarts. Serialization builds on `getState` and `setState`, and is only
     enabled if your extension registers a `WebviewPanelSerializer` for your webviews.
     ```
     后一句`and is only enabled if your extension registers a WebviewPanelSerializer for your webviews`再翻译出来显得多余，可以不翻译。
 
 - 平白易懂
     ```markdown
-    Consider using a helper library to construct your HTML strings, or at least 
+    Consider using a helper library to construct your HTML strings, or at least
     ensure that all content from the user's workspace is properly sanitized.
     ```
     虽然这里**HTML 字符串**贴合`HTML strings`的表述，但是适当的加工则更有利于阅读，最终可考虑翻译为“**尝试使用辅助库构建你的HTML模板，或者确保所有来自用户工作区的内容都通过了审查**”。
