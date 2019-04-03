@@ -94,6 +94,9 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
     }]
 }
 ```
+
+?> **提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
+
 ![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
 
 ## contributes.menus
