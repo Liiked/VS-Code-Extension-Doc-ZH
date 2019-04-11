@@ -136,15 +136,6 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 - *context* - 上下文对象, 包括uri和影响范围
 - *(returns)* - promise函数, 且参数为ColorPresentation对象数组
 
-`vscode.previewHtml` - 在编辑器窗口中渲染HTML
-
-🚨**previewHtml 命令已经废弃了. 使用[Webview API]()代替**
-
-- *uri* - 要预览的uri
-- *column* - (可选的)要展示在窗口的哪一列
-- *label* - (可选的)预览的标题
-- *options* - (可选的)webview环境配置项
-
 `vscode.openFolder` - 在当前窗口或者新的窗口打开一个文件夹或者工作区
 
 - *uri* - 被打开的文件夹或工作区Uri. 如果未提供, 会打开一个询问提示框
