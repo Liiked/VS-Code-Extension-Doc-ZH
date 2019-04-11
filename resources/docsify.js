@@ -4714,9 +4714,14 @@ function initEvent(vm) {
 function loadNested(path, qs, file, next, vm, first) {
   path = first ? path : path.replace(/\/$/, '');
   path = getParentPath(path);
+  const noneRootPathReg = /\/.+\//g
 
   if (!path) {
     return
+  }
+
+  if (noneRootPathReg.test(path)) {
+    return loadNested(path, qs, file, next, vm);
   }
 
   get(
@@ -4780,7 +4785,7 @@ function fetchMixin(proto) {
       };
 
       // Load sidebar
-      loadNested(path, qs, loadSidebar, fn, this$1, true);
+      // loadNested(path, qs, loadSidebar, fn, this$1, true);
     }
   };
 
