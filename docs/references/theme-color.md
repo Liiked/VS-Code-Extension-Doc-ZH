@@ -615,7 +615,6 @@ CodeLens:
 
 面包屑导航的色彩主题:
 
-- `breadcrumb.background`: 导航路径的背景色
 - `breadcrumb.foreground`: 导航路径的前景色
 - `breadcrumb.background`: 导航路径项的背景色
 - `breadcrumb.focusForeground`: 焦点导航路径的颜色
