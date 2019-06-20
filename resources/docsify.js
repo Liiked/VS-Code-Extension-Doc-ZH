@@ -260,7 +260,14 @@ function create(node, tpl) {
 }
 
 function appendTo(target, el) {
-  return target.appendChild(el)
+  // return target.appendChild(el);
+  try {
+    target.appendChild(el);
+  } catch (error) {
+
+  } finally {
+    return target;
+  }
 }
 
 function before(target, el) {
@@ -3735,6 +3742,7 @@ function collapse(el) {
     if (
       target.nodeName === 'A' &&
       target.nextSibling &&
+      target.nextSibling.classList &&
       target.nextSibling.classList.contains('app-sub-sidebar')
     ) {
       toggleClass(target.parentNode, 'collapse');
@@ -4785,7 +4793,8 @@ function fetchMixin(proto) {
       };
 
       // Load sidebar
-      // loadNested(path, qs, loadSidebar, fn, this$1, true);
+      // ! BUG-FIX: https://github.com/Liiked/VS-Code-Extension-Doc-ZH/issues/70
+      loadNested(path, qs, loadSidebar, fn, this$1, true);
     }
   };
 
