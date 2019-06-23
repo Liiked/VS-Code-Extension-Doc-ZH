@@ -5,7 +5,7 @@
 [创建代码片段](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)主题详细介绍了新建代码片段的全部内容。本篇指南只是告诉你关于打包*代码片段*的大体思路。比较推荐的做法是：
 
 - 用`Preferences: Configure User Snippets`命令创建和调试代码片段。
-- 如果你觉得满意了，将整个JSON文件复制到插件目录下，骑个名字比如说`snippets.json`文件。
+- 如果你觉得满意了，将整个JSON文件复制到插件目录下，起个名字比如说`snippets.json`文件。
 - 将下列配置添加到你的`package.json`中
 
 ```json
