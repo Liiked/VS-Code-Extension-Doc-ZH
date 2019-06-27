@@ -27,13 +27,13 @@
       name: '',
       repo: 'https://github.com/Liiked/VS-Code-Extension-Doc-ZH',
       loadSidebar: true,
+      loadNavbar: true,
       auto2top: true,
       search: {
         paths: 'auto',
         placeholder: '开始搜索',
         depth: 4
       },
-      loadNavbar: true,
       subMaxLevel: 2,
       plugins: [
         // 头部导航插件
@@ -282,6 +282,53 @@
     video {
       width: 100%;
     }
+
+    /** 
+     * 优化导航栏
+     * **/
+
+    .app-nav > li > ul > li {
+      margin: 10px 0;
+      margin-right: 16px;
+    }
+
+    .app-nav > ul > li > ul > li {
+      padding: 10px;
+      margin: 0;
+    }
+
+    .app-nav > ul > li > ul > li:hover {
+      background: #1d4742;
+    }
+
+    .app-nav > ul > li:hover > ul {
+      min-width: 100px;
+      display: flex;
+      padding: 10px;
+      color: white;
+      background: #0b6b62;
+    }
+
+    .app-nav li:hover > ul {
+      overflow: visible;
+    }
+    .app-nav li:hover > ul > li {
+      border-radius: 4px;
+    }
+    .app-nav li:hover > ul > li > ul {
+      background: transparent;
+    }
+
+    .app-nav > ul > li > ul > li > ul {
+      overflow: visible;
+      position: initial;
+      border: none;
+    }
+    .app-nav > ul > li > ul > li > ul > li {
+      margin: 0;
+      margin-bottom: 4px;
+    }
+
   </style>
   <script type="text/javascript" src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
