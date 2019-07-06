@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" defer></script>
   <style>
     .markdown-section ul {
       padding-left: 2.5rem;
@@ -36,6 +36,11 @@
         depth: 4
       },
       subMaxLevel: 2,
+      copyCode: {
+        buttonText : '复制到剪贴板',
+        errorText  : '复制错误',
+        successText: '已复制'
+      },
       plugins: [
         // 头部导航插件
         function (hook, vm) {
@@ -215,6 +220,7 @@
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://unpkg.com/docsify-copy-code@2"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"></script>
   <script defer src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
