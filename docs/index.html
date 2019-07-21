@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>VS Code插件创作中文开发文档</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico" type="image/x-icon">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="shortcut icon"
+    href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico"
+    type="image/x-icon">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
   <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" defer></script>
@@ -16,13 +20,13 @@
     }
   </style>
 </head>
+
 <body>
   <div id="app"></div>
   <script>
-
     const pipe = (...functions) => input => functions.reduce(
-        (acc, fn) => fn(acc),
-        input
+      (acc, fn) => fn(acc),
+      input
     );
     window.$docsify = {
       name: '',
@@ -37,8 +41,8 @@
       },
       subMaxLevel: 2,
       copyCode: {
-        buttonText : '复制到剪贴板',
-        errorText  : '复制错误',
+        buttonText: '复制到剪贴板',
+        errorText: '复制错误',
         successText: '已复制'
       },
       plugins: [
@@ -47,7 +51,9 @@
           let path;
           hook.beforeEach(content => {
             path = vm.route.path
-            let getMap = Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json', false, null)
+            let getMap = Docsify.get(
+              'https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json',
+              false, null)
             let getNav = new Promise((reslove, reject) => {
               let nav;
               let attempTimes = 0;
@@ -75,7 +81,8 @@
               for (const p of pathList) {
                 let reg = new RegExp(p)
                 if (reg.test(path)) {
-                  let originPage = Docsify.dom.create('li', `<a href="${data[p].path}" target="_blank">原始文档</a>`)
+                  let originPage = Docsify.dom.create('li',
+                    `<a href="${data[p].path}" target="_blank">原始文档</a>`)
                   Docsify.dom.appendTo(nav, originPage)
                 }
               }
@@ -92,13 +99,15 @@
           const colon = /[：|:]/g
 
 
-          hook.beforeEach( content => {
+          hook.beforeEach(content => {
             let req = new Promise((resolve, reject) => {
               if (vm.route.path === '/') {
                 resolve(content)
                 return
               }
-              Docsify.get('https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md', false, null).then(d => {
+              Docsify.get(
+                'https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md',
+                false, null).then(d => {
                 let clearUnrealtedData = d.split('terms')[1]
                 const rawData = clearUnrealtedData.match(extractTermArray)
 
@@ -133,8 +142,12 @@
           function termObjFactory(arr) {
             let termsObject = {}
             arr.forEach(e => {
-              if (!e) { return }
-              const {titleUnit} = e
+              if (!e) {
+                return
+              }
+              const {
+                titleUnit
+              } = e
               const title = titleUnit[0]
               const titleArrary = title.split('/')
               titleArrary.forEach(d => {
@@ -153,7 +166,9 @@
 
           function templ(termsObject, originStr) {
 
-            let {description = '', cleanLink} = termsObject[originStr]
+            let {
+              description = '', cleanLink
+            } = termsObject[originStr]
             return `<span class="hover-tip">${originStr}
                 <span class="tip-box">
                     <span class="no-margin"><a class="tips-title" href="${cleanLink}" target="_blank">${originStr}</a></span>
@@ -167,16 +182,16 @@
             return content.replace(/\{\{0\}\}/g, template)
           }
           /***
-          * 标记需要转换html的位置
-          ***/
+           * 标记需要转换html的位置
+           ***/
           function markHtml(content, index, length) {
             let left = content.substring(0, index)
             let right = content.substring(index + length, content.length)
             return left + '{{0}}' + right
           }
           /***
-          * 将文档中的术语转换为自定义格式
-          ***/
+           * 将文档中的术语转换为自定义格式
+           ***/
           function transformContent(termsObject, html) {
             let exceptIdentifers = /(\/+|\]|\[|#|`|\=)/g
             let ct = html
@@ -186,7 +201,9 @@
                 const termReg = new RegExp(key, 'g')
                 const termLen = key.length
                 let findOne = termReg.exec(ct)
-                if (!findOne) { continue }
+                if (!findOne) {
+                  continue
+                }
 
                 while (findOne) {
                   const idx = findOne.index
@@ -215,7 +232,8 @@
       ]
     }
   </script>
-  <script type="text/javascript" src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"></script>
+  <script type="text/javascript"
+    src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
   <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
@@ -226,23 +244,25 @@
   <script defer src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
   <script>
     const gitalk = new Gitalk({
-      clientID: 'bb00108602b518c6b424',
-      clientSecret: '3fc0d5fcdf500e47a1dc7278e8f175d712976107',
-      repo: 'https://github.com/Liiked/VS-Code-Extension-Doc-ZH',
+      clientID: '9b16ded173ee4fa97e7a',
+      clientSecret: '647586aeb30a27e714482aec08a9de9046bfd536',
+      repo: 'VS-Code-Extension-Doc-ZH',
       owner: 'Liiked',
       admin: ['Liiked'],
+      id: location.pathname,
       // facebook-like distraction free mode
       distractionFreeMode: false
     })
   </script>
   <style type="text/css">
-    .sidebar .sidebar-nav ul > li, .sidebar .sidebar-nav > ul > li > a{
+    .sidebar .sidebar-nav ul>li,
+    .sidebar .sidebar-nav>ul>li>a {
       font-weight: bold;
       font-size: 15px;
       color: #364149;
     }
 
-    .hover-tip{
+    .hover-tip {
       display: inline-block;
       position: relative;
       padding: 0 4px;
@@ -257,7 +277,7 @@
       border-bottom-color: #42b983;
     }
 
-    .hover-tip:hover .tip-box{
+    .hover-tip:hover .tip-box {
       transform: scale(1) translate(0, -2px);
       opacity: 1;
       max-height: 240px;
@@ -266,7 +286,7 @@
       z-index: 999;
     }
 
-    .hover-tip .tip-box{
+    .hover-tip .tip-box {
       transform: scale(0) translate(100px, 100px);
       max-height: 0px;
       width: 240px;
@@ -281,23 +301,25 @@
       transition: transform 0.2s;
 
     }
-    .hover-tip > a {
+
+    .hover-tip>a {
       color: white;
     }
 
-    .tip-box > * {
+    .tip-box>* {
       display: block;
     }
 
-    .tip-box .no-margin{
+    .tip-box .no-margin {
       margin: 0;
     }
 
-    .tip-box .tips-title{
+    .tip-box .tips-title {
       font-size: 1rem;
       margin: 0;
     }
-    .tip-box .tips-content{
+
+    .tip-box .tips-content {
       word-break: break-all;
       color: #364149;
       font-weight: normal;
@@ -312,21 +334,21 @@
      * 优化导航栏
      * **/
 
-    .app-nav > li > ul > li {
+    .app-nav>li>ul>li {
       margin: 10px 0;
       margin-right: 16px;
     }
 
-    .app-nav > ul > li > ul > li {
+    .app-nav>ul>li>ul>li {
       padding: 10px;
       margin: 0;
     }
 
-    .app-nav > ul > li > ul > li:hover {
+    .app-nav>ul>li>ul>li:hover {
       background: #1d4742;
     }
 
-    .app-nav > ul > li:hover > ul {
+    .app-nav>ul>li:hover>ul {
       min-width: 100px;
       display: flex;
       padding: 10px;
@@ -334,25 +356,29 @@
       background: #0b6b62;
     }
 
-    .app-nav li:hover > ul {
+    .app-nav li:hover>ul {
       overflow: visible;
     }
-    .app-nav li:hover > ul > li {
+
+    .app-nav li:hover>ul>li {
       border-radius: 4px;
     }
-    .app-nav li:hover > ul > li > ul {
+
+    .app-nav li:hover>ul>li>ul {
       background: transparent;
     }
 
-    .app-nav > ul > li > ul > li > ul {
+    .app-nav>ul>li>ul>li>ul {
       overflow: visible;
       position: initial;
       border: none;
     }
-    .app-nav > ul > li > ul > li > ul > li {
+
+    .app-nav>ul>li>ul>li>ul>li {
       margin: 0;
       margin-bottom: 4px;
     }
   </style>
 </body>
+
 </html>
