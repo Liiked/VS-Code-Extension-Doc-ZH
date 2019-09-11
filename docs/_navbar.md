@@ -1,5 +1,12 @@
 <!-- * 快速入门 -->
 * 内容导航
+    * **预备知识**
+      * [非JS开发者的第一步](/preknowledge/first-step.md)
+      * [Typescript-变量和类型](/preknowledge/variable-and-type.md)
+      * [Typescript-类](/preknowledge/class.md)
+      * [Typescript-接口和命名空间](/preknowledge/interface-and-namespace.md)
+      * [Typescript-泛型](/preknowledge/generics.md)
+      * [Typescript-声明文件](/preknowledge/declaration-files.md)
     * **第一步**
         * [你的第一个插件](/get-started/your-first-extension.md)
         * [解析插件结构](/get-started/extension-anatomy.md)

@@ -63,7 +63,6 @@ name = "smith";
 let name: string = `Gene`;
 let age: number = 37;
 let sentence: string = `Hello, my name is ${ name }.
-
 I'll be ${ age + 1 } years old next month.`;
 ```
 
@@ -132,23 +131,12 @@ console.log(colorName);  // 显示'Green'因为上面代码里它的值是2
 ```
 
 #### Any
-有时候，我们会想要为那些在编程阶段还不清楚类型的变量指定一个类型。 这些值可能来自于动态的内容，比如来自用户输入或第三方代码库。 这种情况下，我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。 那么我们可以使用 any类型来标记这些变量：
+有时候，我们会想要为那些在编写阶段还不清楚类型的变量指定一个类型。 这些值可能来自于动态的内容，比如来自用户输入或第三方代码库。 这种情况下，我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。 那么我们可以使用 any类型来标记这些变量：
 
 ```typescript
 let notSure: any = 4;
 notSure = "maybe a string instead";
 notSure = false; // 合法, 定义了一个布尔值
-```
-
-在对现有代码进行改写的时候，any类型是十分有用的，它允许你在编译时可选择地包含或移除类型检查。 你可能认为 Object有相似的作用，就像它在其它语言中那样。 但是 Object 类型的变量只是允许你给它赋任意值 - 但是却不能够在它上面调用任意的方法，即便它真的有这些方法：
-
-```typescript
-let notSure: any = 4;
-notSure.ifItExists(); // 合法, ifItExists 可能只存在于运行时
-notSure.toFixed(); // 合法, toFixed存在(不过编译器不会检查)
-
-let prettySure: Object = 4;
-prettySure.toFixed(); // 错误: 'toFixed'不存在于类型'Object'上
 ```
 
 当你只知道一部分数据的类型时，any类型也是有用的。 比如，你有一个数组，它包含了不同的类型的数据：
@@ -193,24 +181,24 @@ create(undefined); // Error
 ## Typescript类型表
 ---
 
-|       类型        |        例子        |
-| -------- | -------- |
-| **基本类型**   |
-|   boolean     |    `x: boolean = false`   |
-|   number      |    `x: number = 10`   |
-|   string      |    `x: string = '10'`   |
-|   undefined   |    `x: undefined = undefined`   |
-|   null        |    `x: null = null`   |
-| **引用类型以及其他类型**   |
-|   object      |    `x: object = { age: '14', name: 'John' }` |
-|   array       |    `x: array = [1, '2', 3.0]` |
-|   function    |    `x: function = (args) => { console.log(args) }`   |
-|   symbol      |    `x: symbol = Symbol('id')`   |
-| **Typescript 补充类型** |
-|   any         |    `x: any = null`   |
-|   never       |    `function error (msg): never => { throw new Error(msg) }`   |
-|   enum        |    `enum Color {Red = 1, Green, Blue}`   |
-|   tuple       |    `x: [string, number] = ['name', 12]`   |
+| 类型                     | 例子                                                      |
+| ------------------------ | --------------------------------------------------------- |
+| **基本类型**             |
+| boolean                  | `x: boolean = false`                                      |
+| number                   | `x: number = 10`                                          |
+| string                   | `x: string = '10'`                                        |
+| undefined                | `x: undefined = undefined`                                |
+| null                     | `x: null = null`                                          |
+| **引用类型以及其他类型** |
+| object                   | `x: object = { age: '14', name: 'John' }`                 |
+| array                    | `x: array = [1, '2', 3.0]`                                |
+| function                 | `x: function = (args) => { console.log(args) }`           |
+| symbol                   | `x: symbol = Symbol('id')`                                |
+| **Typescript 补充类型**  |
+| any                      | `x: any = null`                                           |
+| never                    | `function error (msg): never => { throw new Error(msg) }` |
+| enum                     | `enum Color {Red = 1, Green, Blue}`                       |
+| tuple                    | `x: [string, number] = ['name', 12]`                      |
 
 ## 类型断言
 ---
@@ -361,6 +349,79 @@ kitty.numLives--;
 ```
 
 除非你使用特殊的方法去避免，实际上const变量的内部状态是可修改的。
+
+## 访问/设置对象的属性和方法
+---
+
+我们在前面已经看过很多对象的例子了，而且Javascript的各种衍生类型都是基于Object构造出来的，所以本小节介绍的内容也同时适用数组、元组等数据类型。
+
+#### 点表示法
+
+对象的名字表现为一个命名空间(namespace)，它必须写在第一位——当你想访问对象内部的属性或方法时，然后是一个点`.`，紧接着是你想要访问的项目，标识可以是简单属性的名字(name)，或者是数组属性的一个子元素，又或者是对象的方法调用。
+```typescript
+person.age
+person.interests[1]
+person.bio()
+```
+
+创建一个对象在Typescript中非常简单，在赋值语句右侧使用形如`{}`的方式就能创建对象
+```typescript
+const name = {
+  first : 'Bob',
+  last : 'Smith'
+}
+```
+用点表示法访问对象属性
+```typescript
+name.first
+name.last
+```
+
+
+
+#### 中括号表示法
+另外一种访问属性的方式是使用括号表示法(bracket notation)，替代这样的代码
+```typescript
+person.age
+person.name.first
+```
+
+```typescript
+person['age']
+person['name']['first']
+```
+
+同样，创建一个数组也非常容易
+```typescript
+const name = ['Bob', 'Smith']
+```
+
+用中括号表示法访问数组元素
+```typescript
+name[0]
+name[1]
+
+// 数组或类数组格式的数据只能用括号表示法访问元素，不可以使用`name.0`方式访问
+```
+
+#### 设置对象成员
+分别用点表示法和中括号表示法设置对象成员的值
+```typescript
+person.age = 45
+person['name']['last'] = 'Cratchit'
+```
+
+设置成员并不意味着你只能更新已经存在的属性的值，你完全可以创建新的成员，尝试以下代码：
+```typescript
+person['eyes'] = 'hazel'
+person.farewell = function() { alert("Bye everybody!") }
+```
+
+现在你可以测试你新创建的成员
+```typescript
+person['eyes']
+person.farewell()
+```
 
 ## 变量解构
 ---
@@ -518,4 +579,5 @@ let search = { food: "rich", ...defaults };
 
 ## 下一步
 
-[泛型和命名空间](/preknowledge/generics-and-modules.md) -  进一步了解Typescript所规定的语法
+- [类](/preknowledge/class.md) - 进一步了解Typescript所规定的类
+- [泛型和命名空间](/preknowledge/generics-and-modules.md) - 进一步了解Typescript所规定的语法

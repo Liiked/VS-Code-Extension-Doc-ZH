@@ -102,4 +102,6 @@
     - ⬜ 修改"_sidebar"，"_navbar"的请求依赖
     - ✅ 更好的navbar
     - ✅ 添加评论插件
-    - ⬜ 添加复制代码插件
+    - ✅ 添加复制代码插件
+    - ⬜ 预备知识 - Javascript部分
+    - ✅ 预备知识 - Typescript部分
