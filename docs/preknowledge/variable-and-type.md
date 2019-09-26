@@ -1,13 +1,13 @@
-# 认识Typescript-变量和类型
+# 认识TypeScript-变量和类型
 
-本节将介绍基础的Typescript变量以及它的类型系统，它本质上和javascript是一样的，不过东西会更多一点，对于非js开发者来说，你可能会遇到熟悉的“枚举”、“元组”类型，了解了这点，或许能让你安心并更快地掌握TS，但是这并不意味着你就可以高枕无忧了，虽然TS扩展了JS的类型能力，但它本质上依旧是一门弱类型语言，请在书写代码时遵循社区的最佳实践并保持谨慎。
+本节将介绍基础的TypeScript变量以及它的类型系统，它本质上和JavaScript是一样的，不过东西会更多一点，对于非js开发者来说，你可能会遇到熟悉的“枚举”、“元组”类型，了解了这点，或许能让你安心并更快地掌握TS，但是这并不意味着你就可以高枕无忧了，虽然TS扩展了JS的类型能力，但它本质上依旧是一门弱类型语言，请在书写代码时遵循社区的最佳实践并保持谨慎。
 
 ?> 本文参考社区翻译文档，详见[https://www.tslang.cn/docs/handbook/basic-types.html](https://www.tslang.cn/docs/handbook/basic-types.html)
 
 ## 类型
 ---
 
-变量声明的基础规则请自行参考Javascript，Javascript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[]()。
+变量声明的基础规则请自行参考JavaScript，JavaScript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[]()。
 
 ### 类型注解
 TS扩展了JS的语法格式，规则：在变量、声明的后面立即加上冒号`:`，如：
@@ -27,7 +27,7 @@ function returnValue (): string {
 }
 ```
 
-请注意，类型注释应使用小写，而不是使用首字母大写的Javascript的衍生类型（应使用`string`，而不是`String`）
+请注意，类型注释应使用小写，而不是使用首字母大写的JavaScript的衍生类型（应使用`string`，而不是`String`）
 
 #### 布尔值
 
@@ -178,7 +178,7 @@ create(false); // Error
 create(undefined); // Error
 ```
 
-## Typescript类型表
+## TypeScript类型表
 ---
 
 | 类型                     | 例子                                                      |
@@ -194,7 +194,7 @@ create(undefined); // Error
 | array                    | `x: array = [1, '2', 3.0]`                                |
 | function                 | `x: function = (args) => { console.log(args) }`           |
 | symbol                   | `x: symbol = Symbol('id')`                                |
-| **Typescript 补充类型**  |
+| **TypeScript 补充类型**  |
 | any                      | `x: any = null`                                           |
 | never                    | `function error (msg): never => { throw new Error(msg) }` |
 | enum                     | `enum Color {Red = 1, Green, Blue}`                       |
@@ -229,7 +229,7 @@ let strLength: number = (someValue as string).length;
 
 ### let声明
 
-由于本章侧重于帮助读者流畅地阅读文档中出现的TS代码，因此本节不再赘述var和新关键字之间的区别，读者如有兴趣可自行参考[Typescript文档]()。
+由于本章侧重于帮助读者流畅地阅读文档中出现的TS代码，因此本节不再赘述var和新关键字之间的区别，读者如有兴趣可自行参考[TypeScript文档]()。
 
 let的声明格式
 
@@ -290,7 +290,7 @@ let x = 10;
 let x = 20; // 错误，不能在1个作用域里多次声明`x`
 ```
 
-以下情况，Typescript均会报错
+以下情况，TypeScript均会报错
 
 ```typescript
 function f(x) {
@@ -353,7 +353,7 @@ kitty.numLives--;
 ## 访问/设置对象的属性和方法
 ---
 
-我们在前面已经看过很多对象的例子了，而且Javascript的各种衍生类型都是基于Object构造出来的，所以本小节介绍的内容也同时适用数组、元组等数据类型。
+我们在前面已经看过很多对象的例子了，而且JavaScript的各种衍生类型都是基于Object构造出来的，所以本小节介绍的内容也同时适用数组、元组等数据类型。
 
 #### 点表示法
 
@@ -364,7 +364,7 @@ person.interests[1]
 person.bio()
 ```
 
-创建一个对象在Typescript中非常简单，在赋值语句右侧使用形如`{}`的方式就能创建对象
+创建一个对象在TypeScript中非常简单，在赋值语句右侧使用形如`{}`的方式就能创建对象
 ```typescript
 const name = {
   first : 'Bob',
@@ -579,5 +579,5 @@ let search = { food: "rich", ...defaults };
 
 ## 下一步
 
-- [类](/preknowledge/class.md) - 进一步了解Typescript所规定的类
-- [泛型和命名空间](/preknowledge/generics-and-modules.md) - 进一步了解Typescript所规定的语法
+- [类](/preknowledge/class.md) - 进一步了解TypeScript所规定的类
+- [泛型和命名空间](/preknowledge/generics-and-modules.md) - 进一步了解TypeScript所规定的语法
