@@ -13,8 +13,8 @@
         * [小结](/get-started/wrapping-up.md)
     * **开发插件**
         * [测试插件](/working-with-extensions/testing-extension.md)
-        * [打包插件](/working-with-extensions/bundling-extension.md)
         * [发布插件](/working-with-extensions/publish-extension.md)
+        * [打包插件](/working-with-extensions/bundling-extension.md)
         * [持续集成](/working-with-extensions/continuous-integration.md)
     * **插件功能**
         * [概述](/extension-capabilities/readme.md)
@@ -42,6 +42,7 @@
         * [语言服务器](/language-extensions/language-server-extension-guide.md)
     * **进阶主题**
         * [插件主机](/advanced-topics/extension-host.md)
+        * [远程开发](/advanced-topics/remote-extensions.md)
         * [使用不稳定的API](/advanced-topics/using-proposed-api.md)
     * ️️**参考**
         * [VS Code API](/references/vscode-api.md)

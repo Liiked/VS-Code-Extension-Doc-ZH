@@ -65,3 +65,11 @@
 npm i docsify-cli -g
 docsify serve docs
 ```
+
+## 特别感谢
+
+[//]: contributor-faces
+
+<a href="https://github.com/ddzy"><img src="https://avatars3.githubusercontent.com/u/33921398?s=400&v=4" title="ddzy" width="80" height="80"></a>
+
+[//]: contributor-faces
