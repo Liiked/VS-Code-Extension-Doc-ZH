@@ -93,7 +93,7 @@ declare function getWidget(s: string): Widget[];
 >
 > 1- greeting：必需的字符串
 >
-> 2- duration: 可靠的时长（毫秒表示）
+> 2- duration: 可选的时长（毫秒表示）
 > 
 > 3- color: 可选字符串，比如‘#ff00ff’
 
