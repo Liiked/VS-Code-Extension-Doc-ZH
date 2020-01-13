@@ -115,7 +115,7 @@
 }
 ```
 
-这个部分配置了用户可以自定义的`configuration`，用户通过这个配置可以在**设置**中对你的插件做一些修改。这并不是本节重点，稍后示例将通过代码呈现——插件如何在设置变动后将改*修后的配置*应用到我们的语言服务器上。
+这个部分配置了用户可以自定义的`configuration`，用户通过这个配置可以在**设置**中对你的插件做一些修改。这并不是本节重点，稍后示例将通过代码呈现——插件如何在设置变动后将**修改后的配置**应用到我们的语言服务器上。
 
 真正的语言客户端代码和对应的`package.json`在`/client`文件夹中。`package.json`最有趣的部分是`vscode`插件主机API和`vscode-languageclient`这两个依赖库。
 
@@ -567,7 +567,8 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 }
 ```
 
-现在唯一要做的事情就是在服务器端中监听用户修改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
+现在唯一要做的事情就是在服务器端中监听用户
+改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
 
 ```typescript
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
