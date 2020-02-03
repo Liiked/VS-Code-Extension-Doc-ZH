@@ -567,8 +567,7 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 }
 ```
 
-现在唯一要做的事情就是在服务器端中监听用户
-改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
+现在唯一要做的事情就是在服务器端中监听用户修改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到`validateTextDocument`函数中，然后新建一个`maxNumberOfProblems`变量：
 
 ```typescript
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
