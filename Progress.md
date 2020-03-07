@@ -98,7 +98,7 @@
     - ✅ 参考
 
 - **第七期计划**
-    - ⬜ 更新docsify依赖
+    - ✅ 更新docsify依赖
     - ⬜ 修改"_sidebar"，"_navbar"的请求依赖
     - ✅ 更好的navbar
     - ✅ 添加评论插件
