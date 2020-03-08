@@ -119,7 +119,6 @@
                 ).then(d => {
                   let clearUnrealtedData = d.split("terms")[1];
                   const rawData = clearUnrealtedData.match(extractTermArray);
-
                   let getTerms = pipe(termMapFactory, termObjFactory);
                   let termsObject = getTerms(rawData);
                   let htmlContent = content;

@@ -1,4 +1,11 @@
 * [◼️术语表和说明](/)
+* [◼️预备知识](/)
+    * [非JS开发者的第一步](/preknowledge/first-step.md)
+    * [认识Typescript-变量和类型](/preknowledge/variable-and-type.md)
+    * [认识Typescript-类](/preknowledge/class.md)
+    * [认识Typescript-接口和命名空间](/preknowledge/interface-and-namespace.md)
+    * [认识Typescript-泛型](/preknowledge/generics.md)
+    * [认识Typescript-声明文件](/preknowledge/declaration-files.md)
 * [◼️概述](/api/README)
 * ◼️第一步
     * [你的第一个插件](/get-started/your-first-extension.md)
