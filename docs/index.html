@@ -119,11 +119,7 @@
                 ).then(d => {
                   let clearUnrealtedData = d.split("terms")[1];
                   const rawData = clearUnrealtedData.match(extractTermArray);
-
-                  let getTerms = pipe(
-                    termMapFactory,
-                    termObjFactory
-                  );
+                  let getTerms = pipe(termMapFactory, termObjFactory);
                   let termsObject = getTerms(rawData);
                   let htmlContent = content;
                   htmlContent = transformContent(termsObject, htmlContent);
@@ -244,7 +240,7 @@
     </script>
     <script
       type="text/javascript"
-      src="https://raw.githack.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/docsify.js"
+      src="https://cdn.jsdelivr.net/gh/Liiked/VS-Code-Extension-Doc-ZH/resources/docsify.js"
     ></script>
     <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
     <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
