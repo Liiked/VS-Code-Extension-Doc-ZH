@@ -5055,7 +5055,7 @@
       path = first ? path : path.replace(/\/$/, '');
       path = getParentPath(path);
   
-      if (!path || path !== '/') {
+      if (!path) {
         return
       }
   
