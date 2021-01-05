@@ -29,6 +29,7 @@
     * [产品图标主题](/extension-guides/product-icon-theme.md)
     * [树视图](/extension-guides/tree-view.md)
     * [Webview](/extension-guides/webview.md)
+    * [记事本](/extension-guides/notebook.md)
     * [虚拟文档](/extension-guides/virtual-documents.md)
     * [任务](/extension-guides/task-provider.md)
     * [源控制](/extension-guides/scm-provider.md)
