@@ -8,9 +8,9 @@
 
 ---
 
-一个笔记本由一系列单元格以及输出构成。单元格由 VS Code 核心进程负责渲染，它有两种类型，一种是 **Markdown 单元格**，另一种是**代码单元格**。输出的格式是多种多样的，比如普通文本、JSON、图片、HTML。其它的应用相关的数据以及交互式的小程序，由插件**自行**负责渲染。
+一个笔记本由一系列代码块以及输出构成。代码块由 VS Code 核心进程负责渲染，它有两种类型，一种是 **Markdown 代码块**，另一种是**常规代码块**。输出的格式是多种多样的，比如普通文本、JSON、图片、HTML。其它的应用相关的数据以及交互式的小程序，由插件**自行**负责渲染。
 
-单元格的读写操作是由 `NotebookContentProvider` 控制的，`NotebookContentProvider` 从文件系统中读取数据并将其转化为单元格，同时将笔记本的改动同步给文件系统。`NotebookKernel` 处理来自代码块的内容，并输出各种各样的格式，包括纯文本、格式化文档或者交互式小程序。应用相关的输出格式和交互式小程序则由 `NotebookOutputRenderer` 渲染。
+代码块的读写操作是由 `NotebookContentProvider` 控制的，`NotebookContentProvider` 从文件系统中读取数据并将其转化为代码块，同时将笔记本的改动同步给文件系统。`NotebookKernel` 处理来自代码块的内容，并输出各种各样的格式，包括纯文本、格式化文档或者交互式小程序。应用相关的输出格式和交互式小程序则由 `NotebookOutputRenderer` 渲染。
 
 一图胜千言：
 
@@ -117,7 +117,7 @@ class SampleProvider implements vscode.NotebookContentProvider {
 
 ![简单的供应商——ipynb](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/ipynb-simple-provider.png)
 
-现在，我们可以打开和编辑 Jupyter 格式的笔记本，并且以普通文本和 Markdown 的形式预览单元格。然而，在编辑的时候由于并不会自动并持续性的将内容写入到磁盘中，所以需要实现 `saveNotebook` 方法，上面的代码中也提到了这个方法。同时，如果要运行每个单元格，需要实现 `NotebookKernel` 方法。
+现在，我们可以打开和编辑 Jupyter 格式的笔记本，并且以普通文本和 Markdown 的形式预览代码块。然而，在编辑的时候由于并不会自动并持续性的将内容写入到磁盘中，所以需要实现 `saveNotebook` 方法，上面的代码中也提到了这个方法。同时，如果要运行每个代码块，需要实现 `NotebookKernel` 方法。
 
 !> **注意：**默认情况下，输出的 MIME 类型的顺序是通过笔记本提供的 `NotebookData#metadata.displayOrder` 属性来定义的，你也可以在 `openNotebook` 方法中自行设置。
 
@@ -155,7 +155,7 @@ class SampleProvider implements vscode.NotebookContentProvider {
 
 ### 最佳实践
 
-尽管一个笔记本内核只需要返回一个输出，实际上你仍然可以在其执行每一个单元格的时候，设置单元格的 `metadata`，借此来实现诸如时间计数器、执行徽标排序、运行状态图标此类的功能。下面的代码演示了如何使用 `executeCell` 方法：
+尽管一个笔记本内核只需要返回一个输出，实际上你仍然可以在其执行每一个代码块的时候，设置代码块的 `metadata`，借此来实现诸如时间计数器、执行徽标排序、运行状态图标此类的功能。下面的代码演示了如何使用 `executeCell` 方法：
 
 ```typescript
 async function executeCell(
@@ -197,13 +197,13 @@ async function executeCell(
 - 错误
 - 富文本
 
-一个单元格如果产生多种输出，这种情况下输出为一个列表。
+一个代码块如果产生多种输出，这种情况下输出为一个列表。
 
 一些简单的输出格式，比如文本、错误、富文本（HTML，Markdown，JSON），由 VS Code 核心进程负责渲染；而一些增强型的输出格式，比如与应用相关的富文本输出类型，则由 [NotebookOutputRenderer](#输出渲染器) 负责渲染。插件可以自行渲染一些 “简单的” 增强型输出格式，比如添加 Markdown 对 LaTeX 的支持。
 
 ![内核](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/kernel.png)
 
-### 输出文本
+### 文本输出
 
 文本是最简单的输出格式，输出文本所做的工作和很多其它的编辑器类似。文本仅由 `文本域` 组成，会以普通文本的形式进行渲染。
 
@@ -216,7 +216,7 @@ async function executeCell(
 
 ![输出文本](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/text-output.png)
 
-### 输出错误
+### 错误输出
 
 输出错误可以通过一种易于理解的方式来展示运行时发生的异常。它包含 `ename`、`evalue`、`traceback` 这几个属性，前两者分别用来展示错误类型和错误信息，`traceback` 接收一个字符串数组并以调用栈的形式展示。并且数组中的字符串可以使用 ANSI 编码来进行着色：
 
@@ -231,9 +231,9 @@ async function executeCell(
 
 ![输出错误](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/error-output.png)
 
-### 输出富文本
+### 富文本输出
 
-富文本以 MIME 类型作为 key 值，可以为输出的数据提供多种不同的展现形式，是展示单元格的最高级的输出格式。假如单元格是一个 Github Issue，那么内核会基于单元格的 `data` 配置项，产生以下几种不同格式的输出：
+富文本以 MIME 类型作为 key 值，可以为输出的数据提供多种不同的展现形式，是展示代码块的最高级的输出格式。假如代码块是一个 Github Issue，那么内核会基于代码块的 `data` 配置项，产生以下几种不同格式的输出：
 
 - `text/html`：将 Github Issue 转化为 HTML 输出
 - `application/json`：输出 JSON 格式的数据
@@ -297,9 +297,9 @@ async function executeCell(
 }
 ```
 
-为了避免输出渲染器和 VS Code 的 UI 发生冲突，导致 VS Code 性能下降，输出渲染器总是被放到一个独立的 `iframe` 中。上述代码中 “entrypoint” 字段指的是一个独立的脚本文件，可以是自己手写，也可以是 Webpack、Rollup、Parcel 打包后的文件，当 `iframe` 里面有需要渲染的内容的时候，就会加载这个脚本。
+为了避免输出渲染器和 VS Code 的 UI 发生冲突，导致 VS Code 性能下降，输出渲染器总是被放到一个独立的 `iframe` 中。上述代码中 “entrypoint” 字段指的是一个独立的脚本文件，可以是自己手写，也可以是 Webpack、Rollup、Parcel 打包后的文件，当 `iframe` 里面需要渲染内容的时候，就会加载这个脚本。
 
-当 “entrypoint” 脚本加载完成之后，会立刻调用 `acquireNotebookRendererApi()` 函数并传入你的渲染器 ID 作为参数，与此同时，开始监听笔记本的输出事件。比如，下面的代码会把整个 Github Issue 作为 JSON 传递给单元格作为输出：
+当 “entrypoint” 脚本加载完成之后，会立刻调用 `acquireNotebookRendererApi()` 函数并传入你的渲染器 ID 作为参数，与此同时，开始监听笔记本的输出事件。比如，下面的代码会把整个 Github Issue 作为 JSON 传递给代码块作为输出：
 
 ```javascript
 const notebookApi = acquireNotebookRendererApi('github-issue-static-renderer');
@@ -340,15 +340,15 @@ notebookApi.onDidCreateOutput((evt) => {
 });
 ```
 
-现在可以在输出单元格上通过运行 `ms-vscode.github-issue-notebook/github-issue` 来预览结果，如下图所示：
+现在可以在输出代码块上通过运行 `ms-vscode.github-issue-notebook/github-issue` 来预览结果，如下图所示：
 
 ![静态的渲染器示例](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/static-renderer-sample.png)
 
-如果在单元格的 DOM 容器外部有其它的元素，或者有一些异步任务，那么你可以在 `onWillDestroyOutput` 方法中进行释放。`onWillDestroyOutput`方法会在以下几个条件下执行：
+如果在代码块的 DOM 容器外部有其它的元素，或者有一些异步任务，那么你可以在 `onWillDestroyOutput` 方法中进行释放。`onWillDestroyOutput`方法会在以下几个条件下执行：
 
-- 单元格输出被清空后
-- 当前单元格被删除之后
-- 当前单元格的输出进行渲染之前
+- 代码块输出被清空后
+- 当前代码块被删除之后
+- 当前代码块的输出进行渲染之前
 
 可以看下面的例子：
 
@@ -384,7 +384,7 @@ notebookApi.onWillDestroyOutput(scope => {
 });
 ```
 
-你必须牢记在心的是，一个笔记本中的每个单元格，会被渲染到同一个 iframe 的不同 DOM 元素上，所以为了避免产生冲突，当你使用诸如 `document.querySelector` 此类的选择器的时候，要确保每个单元格都有一个特定的标识。在上面的例子中，我们通过使用 `evt.element.querySelector` 来避免这个问题。
+你必须牢记在心的是，一个笔记本中的每个代码块，会被渲染到同一个 iframe 的不同 DOM 元素上，所以为了避免产生冲突，当你使用诸如 `document.querySelector` 此类的选择器的时候，要确保每个代码块都有一个特定的标识。在上面的例子中，我们通过使用 `evt.element.querySelector` 来避免这个问题。
 
 ### 交互式的笔记本
 
@@ -484,7 +484,7 @@ export class MyKernelProvider extends vscode.NotebookKernelProvider {
 
 ---
 
-对于一些实现了支持编程语言特性的笔记本内核，支持单元格的调试是很有必要的。可以通过以下几种方式来为内核添加调试支持：
+对于一些实现了支持编程语言特性的笔记本内核，支持代码块的调试是很有必要的。可以通过以下几种方式来为内核添加调试支持：
 
 - 可以利用笔记本内核实现一个 [调试器插件](/extension-guides/debugger-extension.md)
 - 直接实现一个 [调试器协议(DAP)](https://microsoft.github.io/debug-adapter-protocol/)
