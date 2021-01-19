@@ -35,6 +35,7 @@
     * [源控制](/extension-guides/scm-provider.md)
     * [调试器插件](/extension-guides/debugger-extension.md)
     * [Markdown插件](/extension-guides/markdown-extension.md)
+    * [自定义编辑器](/extension-guides/custom-editors.md)
 * ◼️语言插件
     * [概述](/language-extensions/)
     * [语法高亮](/language-extensions/syntax-highlight-guide.md)
