@@ -44,6 +44,7 @@
         * [语言配置](/language-extensions/language-configuration-guide.md)
         * [程序性语言特性](/language-extensions/programmatic-language-features.md)
         * [语言服务器](/language-extensions/language-server-extension-guide.md)
+        * [嵌入语言](/language-extensions/embedded-languages.md)
     * **进阶主题**
         * [插件主机](/advanced-topics/extension-host.md)
         * [远程开发](/advanced-topics/remote-extensions.md)
