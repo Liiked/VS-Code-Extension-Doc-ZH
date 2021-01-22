@@ -167,7 +167,7 @@ a               keyword.letter, source.abc
 
 使用[VS Code的Yeoman模板](/get-started/your-first-extension)快速创建一个新的语法插件，运行`yo code`然后选择`New Language`：
 
-![yo-new-language](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/yo-new-language.png)
+![yo-new-language](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/yo-new-language.png)
 
 Yeoman通过问问题的方式最后生成新的插件，对于创建语法插件最重要的几点就是：
 
@@ -175,13 +175,13 @@ Yeoman通过问问题的方式最后生成新的插件，对于创建语法插�
 - `Language Name` - 友好的名称
 - `Scope names` - TextMate根作用域名称
 
-![yo-new-language-questions](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/yo-new-language-questions.png)
+![yo-new-language-questions](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/yo-new-language-questions.png)
 
 生成器会假设你要同时对新语言定义好语言id和语法。如果你只是根据已有的语言创建新的语法，那么你只要填好目标语言的信息就好，然后一定要删除生成的`package.json`中的`languages`部分。
 
 回答了一大堆问题之后，Yeoman会创建一个新的插件，其结构如下：
 
-![generated-new-language-extension](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/generated-new-language-extension.png)
+![generated-new-language-extension](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/generated-new-language-extension.png)
 
 !> 注意：如果你只是配置一个VS Code中已有语言的语法，记得删掉生成的`package.json`中的`languages`配置。
 
@@ -189,7 +189,7 @@ Yeoman通过问问题的方式最后生成新的插件，对于创建语法插�
 
 `yo code`也快成帮你把已有的TextMate语法转成一个VS Code插件。使用`yo code`，选择`Language extension`，当询问是否从已有TextMate文件插件的时候，填入后缀为`.tmLanguage`或`.json`的TextMate语法文件。
 
-![yo-convert](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/yo-convert.png)
+![yo-convert](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/yo-convert.png)
 
 #### 用YAML配置语法
 
@@ -197,7 +197,7 @@ Yeoman通过问问题的方式最后生成新的插件，对于创建语法插�
 
 Yaml语法和json有着同样的结构，但是它的语法更加精简，如多行字符串和注释。
 
-![yaml-grammar](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/yaml-grammar.png)
+![yaml-grammar](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/yaml-grammar.png)
 
 VS Code只能加载json语法，所以yaml格式的语法文件必须最终转换成json文件。[`js-yaml`包](https://www.npmjs.com/package/js-yaml)可以帮你完成这个任务：
 
@@ -315,6 +315,7 @@ $ npx js-yaml syntaxes/abc.tmLanguage.yaml > syntaxes/abc.tmLanguage.json
 
 
 ## 主题化
+---
 
 主题化是把颜色和样式应用到**符号**的过程。色彩主题定义了主题化规则，但用户可以在*用户设置*中自定义主题化规则。
 
@@ -325,6 +326,7 @@ $ npx js-yaml syntaxes/abc.tmLanguage.yaml > syntaxes/abc.tmLanguage.json
 [色彩主题](/extension-guides/color-theme) 章节介绍了如何创建新的色彩主题，语义化分词的主题化则在[语义高亮](/language-extensions/semantic-highlight-guide)中。
 
 ## 作用域检查器
+---
 
 VS Code自带的作用域检查器能帮你调试语法文件。它能显示当前位置*符号*作用域，以及应用在上面的主题规则和元信息。
 
