@@ -1,6 +1,7 @@
 # 嵌入语言
+---
 
-VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器]() 中看到的那样，语言服务器可以支持任何编程语言。但要支持嵌入的语言，我们还要做更多工作。
+VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器](/language-extensions/language-server-extension-guide) 中看到的那样，语言服务器可以支持任何编程语言。但要支持嵌入的语言，我们还要做更多工作。
 
 时至今日，嵌入语言日与俱增，比如：
 - HTML 中的 JavaScript 和 CSS
@@ -8,14 +9,14 @@ VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器]
 - 模板语法，比如 Vue，Handlebars 和 Razor
 - PHP 中的 HTML
 
-本篇指南着重于实现嵌入语言的各种语言功能。如果你只是对嵌入语言的语法高亮感兴趣，请参考[语法高亮指南]()。
+本篇指南着重于实现嵌入语言的各种语言功能。如果你只是对嵌入语言的语法高亮感兴趣，请参考[语法高亮指南](/language-extensions/syntax-highlight-guide)。
 
 本指南包含两个示例，它们介绍了 2 种构建嵌入语言服务器的方法——**语言服务**和**请求转发**。我们将学习这两个示例，并了解它们各自的优点和缺点。
 
 示例代码见下：
 
-- [嵌入语言服务器（语言服务实现）]()
-- [嵌入语言服务器（请求转发实现）]()
+- [嵌入语言服务器（语言服务实现）](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-embedded-language-service)
+- [嵌入语言服务器（请求转发实现）](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-embedded-request-forwarding)
 
 我们先看看我们要构建的嵌入语言服务器实现的效果：
 
@@ -27,14 +28,15 @@ VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器]
 - CSS 语法诊断（仅在**语言服务**实现中可用）
 
 ## 语言服务
+---
 
-**语言服务**是实现了[程序性语言功能]()的库。**语言服务器**可嵌入到语言服务中，解决嵌入语言的各类问题。
+**语言服务**是实现了[程序性语言功能](https://code.visualstudio.com/api/language-extensions/programmatic-language-features)的库。**语言服务器**可嵌入到语言服务中，解决嵌入语言的各类问题。
 
 下面是 VS Code 为 HTML 提供的功能大纲：
-- 内建的 [html 插件]() 只提供了语法高亮和 HTML 的语言配置能力
-- 内建的 [html 语言功能插件]()包含 HTML 语言服务器，为 HTML 提供程序性语言特性
--  HTML 语言服务器使用 [vscode-html-languageservice]() 支持 HTML
--  CSS 语言服务器使用 [vscode-css-languageservice]() 支持 HTML 中的 CSS
+- 内建的 [html 插件](https://github.com/microsoft/vscode/tree/master/extensions/html) 只提供了语法高亮和 HTML 的语言配置能力
+- 内建的 [html 语言功能插件](https://github.com/microsoft/vscode/tree/master/extensions/html-language-features)包含 HTML 语言服务器，为 HTML 提供程序性语言特性
+-  HTML 语言服务器使用 [vscode-html-languageservice](https://github.com/microsoft/vscode-html-languageservice) 支持 HTML
+-  CSS 语言服务器使用 [vscode-css-languageservice](https://github.com/microsoft/vscode-css-languageservice) 支持 HTML 中的 CSS
 
 HTML 语言服务器分析 HTML 文档，将其分解为**语言域**，然后使用对应的**语言服务**处理语言服务器的请求。
 
@@ -42,13 +44,13 @@ HTML 语言服务器分析 HTML 文档，将其分解为**语言域**，然后�
 - `<|` 的自动补全请求，HTML 语言服务器使用 HTML 语言服务提供 HTML 的自动补全。
 - `<style>.foo { | }</style>` 的自动补全请求，HTML 语言服务器则使用 CSS 语言服务器提供 CSS 补全功能。
 
-现在让我们在 [lsp-embedded-language-service]() 示例中检验一下。
+现在让我们在 [lsp-embedded-language-service](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-embedded-language-service) 示例中检验一下。
 
 ### 语言服务示例
 
-?> 注意: 本示例假设你已经掌握了 [程序性语言特性]() 和 [语言服务器]() 这2章内容。本示例构建于 [lsp-sample]()
+!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
 
-与 [lsp-sample]() 相同的是，本示例的客户端代码都是一样的。
+与 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample) 相同的是，本示例的客户端代码都是一样的。
 
 我们刚刚在上面提到了，服务器会将文档切分为不同的**语言域**，然后分别处理对应的嵌入内容。
 
@@ -129,6 +131,7 @@ export function getCSSMode(
 别急，我们马上来实现 `请求转发` 解决上面的问题。
 
 ## 请求转发
+---
 
 简单来说，请求转发和语言服务的工作机制是类似的。请求转发方法，也接收语言服务器的请求，计算虚拟文档，然后返回结果。
 
@@ -160,7 +163,8 @@ export function getCSSMode(
 
 ### 请求转发示例
 
-?> 注意: 本示例假设你已经掌握了 [程序性语言特性]() 和 [语言服务器]() 这2章内容。本示例构建于 [lsp-sample]()
+!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+
 
 建立文档 URI 和它们对应虚拟文档的映射，根据这个映射提供对应的请求：
 
@@ -214,6 +218,7 @@ let clientOptions: LanguageClientOptions = {
 ```
 
 ## 潜在问题
+---
 
 当实现嵌入语言服务器的时候，我们会遇到很多问题，到目前为止，我们也没有找到完美的方案，所以当你遇到下面的问题，可别说我们没有事先说过。
 
@@ -227,7 +232,7 @@ VS Code 的 HTML 支持提供了 HTML、CSS 和 JavaScript特性。虽然 HTML �
 
 ### 编码和解码
 
-文件的首要语言和嵌入的语言，他们的编解码和转义规则可能完全不同。比如，根据 [HTML 规范]()，下面的 HTML 文档是无效的：
+文件的首要语言和嵌入的语言，他们的编解码和转义规则可能完全不同。比如，根据 [HTML 规范](https://www.w3.org/TR/html401/appendix/notes.html#h-B.3.2)，下面的 HTML 文档是无效的：
 
 ```html
 <SCRIPT type="text/javascript">
@@ -238,13 +243,14 @@ VS Code 的 HTML 支持提供了 HTML、CSS 和 JavaScript特性。虽然 HTML �
 在这个例子里，语言服务器在处理`</`时应该转义为`<\/`才行。
 
 ## 总结
+---
 
 我们的这两种方法各有千秋。
 
 语言服务：
 - + 可获完全掌控语言服务器和用户体验
 - + 无需依赖其他语言服务器。所有代码都在一个仓库内完成
-- + 语言服务器可被所有 [LSP-兼容的代码编辑器]() 重用
+- + 语言服务器可被所有 [LSP-兼容的代码编辑器](https://microsoft.github.io/language-server-protocol/implementors/tools/) 重用
 - - 可能很难嵌入用其他语言实现的语言服务
 - - 需要持续维护语言服务依赖来获得新的特性
 

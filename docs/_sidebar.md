@@ -40,6 +40,7 @@
 * ◼️语言插件
     * [概述](/language-extensions/)
     * [语法高亮](/language-extensions/syntax-highlight-guide.md)
+    * [语义高亮](/language-extensions/semantic-highlight-guide.md)
     * [代码片段](/language-extensions/snippet-guide.md)
     * [语言配置](/language-extensions/language-configuration-guide.md)
     * [程序性语言特性](/language-extensions/programmatic-language-features.md)

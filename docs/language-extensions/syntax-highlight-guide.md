@@ -1,34 +1,49 @@
 # 语法高亮
+---
 
 语法高亮决定源代码的颜色和样式，它主要负责关键字（如javascript中的`if`，`for`）、字符串、注释、变量名等等语法的着色工作。
 
 语法高亮由两部分工作组成：
 
-- 根据语法将文本解析成符号和作用域
-- 然后根据这份作用域映射应用对应的颜色和样式
+- [分词](#分词)：将文本分割为一系列符号（包括单词和标点）
+- [主题化](#主题化)：然后根据主题或用户设置，对符号进行着色添加样式
 
-本文档只教你第一部分：根据语法将文本解析成符号和作用域，然后使用现成的颜色和样式。自定义样式的部分请参考[色彩主题指南](/extension-guides/color-theme#语法色彩)
+在本章开始之前，建议你先玩一下 [作用域检查器](#作用域检查器) 工具看看文件中的符号都长什么样子，他们都应用了哪些主题样式。用内置主题（比如 Dark+）查看一份 TypeScript 文件，你就能同时看到语义高亮和语法高亮了。
 
-## TextMate 语法
+## 分词
 ---
+
+文本分词是指将文本打碎成一个个片段，并将每个片段根据符号类型（单词、标点等）进行分类。
+
+VS Code 的分词引擎是通过 [TextMate](https://macromates.com/manual/en/language_grammars) 驱动的。TextMate 语法是一套使用 plist(XML) 或 JSON 格式的结构化正则表达式集合。VS Code 则可通过 `grammar` 配置点进行语法配置。
+
+TextMate 分词引擎和渲染引擎在同一个进程上运行，用户输入时，对应的**符号**也会实时更新。**符号**是语法高亮的最小单位，它将代码分为注释、字符串、正则等类型。
+
+从1.43 版本开始，VS Code 也允许插件通过 [语义化分词供应器函数](https://code.visualstudio.com/api/references/vscode-api#DocumentSemanticTokensProvider) 提供分词功能。语义供应器函数通常由语言服务器实现，它必须能够深入理解源代码，并且能够解析上下文的各类符号。比如，一个常量的名称应该在整个项目中都使用常量类型的语法高亮，而不是只在它声明的地方。
+
+基于语义化分词的语法高亮，一般被认为是基于 TextMate 语言高亮的一个补充。语义化高亮是语法高亮的上层建筑。由于语言服务器通常都要花不少时间加载和分析项目，所以语义化高亮展现也可能会有所延迟。
+
+本章侧重于介绍基于 TextMate 的分词和语法高亮，语义化分词高亮请查看[语义高亮](/language-extensions/semantic-highlight-guide)。
+
+### TextMate 语法
 
 VS Code使用[TextMate 语法](https://macromates.com/manual/en/language_grammars)将文本分割成一个个符号。TextMate语法是[Oniguruma正则表达式](https://macromates.com/manual/en/regular_expressions)的集合，一般是一份plist或者JSON格式的文件。你可以在[这里](https://www.apeth.com/nonblog/stories/textmatebundle.html)找到更棒的介绍文档，在里面可以找到你感兴趣的TextMate语法。
 
-#### 符号和作用域
+#### TextMate符号和作用域
 
-符号是由一门编程语言中最常见的一到几个字符组成的。符号包括运算符（如：`+`和`*`），变量名（如：`myVar`），或者字符串（如：`"my string"`）。
+**符号**是由一门编程语言中最常见的一到几个字符组成的。符号包括运算符（如：`+`和`*`），变量名（如：`myVar`），或者字符串（如：`"my string"`）。
 
-每个符号都有其作用域，作用域描述了这个符号的上下文。一个符号可被由**点**符号序列查找到，比如javascript中的`+`符号有这样的作用域`keyword.operator.arithmetic.js`。
+每个**符号**都有其作用域，作用域描述了这个**符号**的上下文。一个**符号**可被由**点**符号序列查找到，比如javascript中的`+`符号有这样的作用域`keyword.operator.arithmetic.js`。
 
 主题会把颜色和样式映射到作用域上，这样一来就实现了语法高亮。TextMate提供了一些主题中[常用的作用域](https://macromates.com/manual/en/language_grammars)，如果你想要尽可能全面地支持语法，最好从现成的主题中入手，避免重新编写主题。
 
-作用域支持嵌套，每个符号都会关联到它的父作用域上。下面的例子使用了[作用域检查器](#作用域检查器)，可以清晰地看到javascript函数中的运算符`+`和它的作用域层级：
+**作用域**支持嵌套，每个符号都会关联到它的父作用域上。下面的例子使用了[作用域检查器](#作用域检查器)，可以清晰地看到javascript函数中的运算符`+`和它的作用域层级：
 
-![scopes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/scopes.png)
+![scopes](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/scopes.png)
 
 父作用域的信息也同样是主题中的一部分。当主题指定了作用域，该作用域下的所有符号都会进行对应的着色，除非主题里面对单个作用域有其特殊配置。
 
-#### 配置基本语法
+### 配置基本语法
 
 VS Code支持JSON格式的TextMate语法。你可以在[发布内容配置](/references/contribution-points)里面的`grammers`进行配置。
 
@@ -124,7 +139,7 @@ a               keyword.letter, source.abc
 
 注意文本匹配不是单一规则，比如字符串`xyz`，是包含在当前作用域中的。文件的最后一个括号在`expression.group`里面，因为不会匹配`end`规则。
 
-#### 嵌入式语言
+### 嵌入式语言
 
 如果你的语法中需要在父语言中嵌入其他语言，比如HTML中的CSS，那么你可以使用`embeddedLanguages`配置，告诉VSCode怎么处理嵌入的语言。然后嵌入语言的括号匹配，注释，和其他基础语言功能都会正常运作。
 
@@ -148,8 +163,7 @@ a               keyword.letter, source.abc
 
 现在，如你对应用了`meta.embedded.block.javascript`的符号进行注释就会有正确的`//`javascript风格，如果你触发代码片段，也会提示对应的javascript片段。
 
-## 开发全新的语法插件
----
+### 开发全新的语法插件
 
 使用[VS Code的Yeoman模板](/get-started/your-first-extension)快速创建一个新的语法插件，运行`yo code`然后选择`New Language`：
 
@@ -195,30 +209,8 @@ $ npm install js-yaml --save-dev
 $ npx js-yaml syntaxes/abc.tmLanguage.yaml > syntaxes/abc.tmLanguage.json
 ```
 
-#### 作用域检查器
+#### 语法注入
 
-VS Code自带的作用域检查器能帮你调试语法文件。它能显示当前位置*符号*作用域，以及应用在上面的主题规则和元信息。
-
-在命令面板中输入`Developer: Inspect TM Scopes`或者[使用快捷键](https://code.visualstudio.com/docs/getstarted/keybindings)启动*作用域检查器*。
-
-```json
-{
-	"key": "cmd+alt+shift+i",
-	"command": "editor.action.inspectTMScopes"
-}
-```
-
-![scope-inspector](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/syntax-highlighting/scope-inspector.png)
-
-作用域检查器可以显示以下的信息：
-
-1. 当前符号
-2. 关于符号的元信息，这些值都是计算后的值。如果你使用了嵌入语言，那么这里最重要的信息就是`language`和`token type`了
-3. 符号使用的主题规则。这里只显示当前应用的规则，而不显示被其他样式覆盖的规则。
-4. 完整的作用域列表，越往上作用域越明确。
-
-## 语法注入
----
 
 你可以通过*语法注入*扩展一个现成的语法文件。*语法注入*就是常规的TextMate语法，*语法注入*的应用有：
 
@@ -226,7 +218,7 @@ VS Code自带的作用域检查器能帮你调试语法文件。它能显示当�
 - 对现有语法添加更明确的作用域信息
 - 向Markdown中的代码区块添加语法高亮
 
-#### 创建一个基础语法注入
+**创建一个基础语法注入**
 
 *语法注入*也是在`package.json`中配置的，不过这次不需要配置`language`，而是配置`injectTo`指明目需要注入的语言作用域列表。
 
@@ -268,7 +260,7 @@ VS Code自带的作用域检查器能帮你调试语法文件。它能显示当�
 
 注入选择器中的`L:`代表注入的语法添加在现有语法规则的左边。也就是说我们注入的语法规则会在任何现有语法规则之前生效。
 
-#### 嵌入语法
+**嵌入语法**
 
 *语法注入*也可以用在嵌入语言中，在他们的父级语法中进行配置。就和普通的语法意义，*语法注入*也可以使用`embeddedLanguages`将嵌入语言的作用域映射到顶层的语言作用域上。
 
@@ -291,7 +283,7 @@ VS Code自带的作用域检查器能帮你调试语法文件。它能显示当�
 }
 ```
 
-#### 符号类型和嵌入语言
+**符号类型和嵌入语言**
 
 对于嵌入语言中的注入语言还会有个副作用，那就是VS Code把所有字符串（string）中的*符号*视为字符文本，而且把注释中的所有*符号*视为符号内容（token content）。
 因此诸如括号匹配和自动补全在字符串和注释中是无法使用的，如果*嵌入语言*刚好出现在字符串或注释中，那么这些功能就无法在*嵌入语言*中使用。
@@ -320,3 +312,37 @@ VS Code自带的作用域检查器能帮你调试语法文件。它能显示当�
 	}
 }
 ```
+
+
+## 主题化
+
+主题化是把颜色和样式应用到**符号**的过程。色彩主题定义了主题化规则，但用户可以在*用户设置*中自定义主题化规则。
+
+`tokenColors` 定义了 TextMate 主题规则，它的语法和常用的 TextMate 主题是完全一样的。每份规则都定义了 TextMate 作用域选择器，并应用对应的颜色和样式。
+
+解析符号的颜色或样式时，当前符号的**作用域**需要和规则中的**选择器**相匹配，然后找到最为匹配的样式属性（前景色、加粗、斜体、下划线）。
+
+[色彩主题](/extension-guides/color-theme) 章节介绍了如何创建新的色彩主题，语义化分词的主题化则在[语义高亮](/language-extensions/semantic-highlight-guide)中。
+
+## 作用域检查器
+
+VS Code自带的作用域检查器能帮你调试语法文件。它能显示当前位置*符号*作用域，以及应用在上面的主题规则和元信息。
+
+在命令面板中输入`Developer: Inspect TM Scopes`或者[使用快捷键](https://code.visualstudio.com/docs/getstarted/keybindings)启动*作用域检查器*。
+
+```json
+{
+	"key": "cmd+alt+shift+i",
+	"command": "editor.action.inspectTMScopes"
+}
+```
+
+![scope-inspector](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/scope-inspector.png)
+
+作用域检查器可以显示以下的信息：
+
+1. 当前符号
+2. 关于符号的元信息，这些值都是计算后的值。如果你使用了嵌入语言，那么这里最重要的信息就是`language`和`token type`了
+3. 符号使用的主题规则。这里只显示当前应用的规则，而不显示被其他样式覆盖的规则。
+4. 完整的作用域列表，越往上作用域越明确。
+
