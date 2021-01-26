@@ -30,7 +30,7 @@
   <body>
     <div id="app"></div>
     <script>
-      const pipe = (...functions) => input =>
+      const pipe = (...functions) => (input) =>
         functions.reduce((acc, fn) => fn(acc), input);
       window.$docsify = {
         name: "",
@@ -41,20 +41,21 @@
         search: {
           paths: "auto",
           placeholder: "开始搜索",
-          depth: 4
+          depth: 4,
         },
         subMaxLevel: 2,
         copyCode: {
           buttonText: "复制到剪贴板",
           errorText: "复制错误",
-          successText: "已复制"
+          successText: "已复制",
         },
         plugins: [
           // 头部导航插件
-          function(hook, vm) {
+          function (hook, vm) {
             let path;
-            hook.beforeEach(content => {
+            hook.beforeEach((content) => {
               path = vm.route.path;
+              console.log(`path`, path);
               let getMap = Docsify.get(
                 "https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json",
                 false,
@@ -71,7 +72,7 @@
                     return;
                   }
                   if (!nav) {
-                    nav = document.querySelector(".app-nav").childNodes[0];
+                    nav = document.querySelector(".app-nav");
                   } else {
                     clearInterval(interval);
                     reslove(nav);
@@ -79,34 +80,26 @@
                 }, 1000);
               });
 
-              Promise.all([getNav, getMap]).then(all => {
+              Promise.all([getNav]).then((all) => {
                 let nav = all[0];
-                let data = JSON.parse(all[1]);
-
-                let pathList = Object.keys(data);
-                for (const p of pathList) {
-                  let reg = new RegExp(p);
-                  if (reg.test(path)) {
-                    let originPage = Docsify.dom.create(
-                      "li",
-                      `<a href="${data[p].path}" target="_blank">原始文档</a>`
-                    );
-                    Docsify.dom.appendTo(nav, originPage);
-                  }
-                }
+                let originPage = Docsify.dom.create(
+                  `div`,
+                  `<div class="go-origin-doc"> <a href="https://code.visualstudio.com/api/${path}" target="_blank">原始文档</a> </div>`
+                );
+                Docsify.dom.appendTo(document.body, originPage);
               });
               return content;
             });
           },
           // 术语插件
-          function(hook, vm) {
+          function (hook, vm) {
             const extractTermArray = /\n.+/g;
             const extractLink = /\(.+\)/g;
             const extractTitle = /\)\s*.+/g;
             const comma = /[，|,]/g;
             const colon = /[：|:]/g;
 
-            hook.beforeEach(content => {
+            hook.beforeEach((content) => {
               let req = new Promise((resolve, reject) => {
                 if (vm.route.path === "/") {
                   resolve(content);
@@ -116,7 +109,7 @@
                   "https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md",
                   false,
                   null
-                ).then(d => {
+                ).then((d) => {
                   let clearUnrealtedData = d.split("terms")[1];
                   const rawData = clearUnrealtedData.match(extractTermArray);
                   let getTerms = pipe(termMapFactory, termObjFactory);
@@ -131,7 +124,7 @@
 
             function termMapFactory(arr) {
               let termsCollection = [];
-              return arr.map(e => {
+              return arr.map((e) => {
                 let link = e.match(extractLink);
                 if (link) {
                   let cleanLink = link[0].replace(/[\(|\)]/g, "");
@@ -141,7 +134,7 @@
                   return {
                     cleanLink,
                     titleUnit,
-                    description
+                    description,
                   };
                 }
               });
@@ -149,14 +142,14 @@
 
             function termObjFactory(arr) {
               let termsObject = {};
-              arr.forEach(e => {
+              arr.forEach((e) => {
                 if (!e) {
                   return;
                 }
                 const { titleUnit } = e;
                 const title = titleUnit[0];
                 const titleArrary = title.split("/");
-                titleArrary.forEach(d => {
+                titleArrary.forEach((d) => {
                   termsObject[d] = e;
                 });
               });
@@ -234,8 +227,8 @@
               }
               return ct;
             }
-          }
-        ]
+          },
+        ],
       };
     </script>
     <script
@@ -272,7 +265,7 @@
         admin: ["Liiked"],
         id: location.pathname,
         // facebook-like distraction free mode
-        distractionFreeMode: false
+        distractionFreeMode: false,
       });
     </script>
     <style type="text/css">
@@ -397,6 +390,29 @@
       .app-nav > ul > li > ul > li > ul > li {
         margin: 0;
         margin-bottom: 4px;
+      }
+      /* 查看原始文档 */
+      .go-origin-doc {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 100;
+        background: #42b983;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 2em;
+        filter: grayscale(0.6);
+        opacity: 0.2;
+        transition: all 0.4s;
+      }
+      .go-origin-doc:hover {
+        opacity: 1;
+        filter: grayscale(0);
+      }
+      .go-origin-doc a {
+        color: white;
+        font-style: normal;
+        text-decoration: none;
       }
     </style>
   </body>
