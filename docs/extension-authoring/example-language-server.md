@@ -151,7 +151,7 @@ export function activate(context: ExtensionContext) {
 		// 注册纯文本服务器
 		documentSelector: [{ scheme: 'file', language: 'plaintext' }],
 		synchronize: {
-			// 当文件变动为'.clientrc'中那样时，统治服务器
+			// 当文件变动为'.clientrc'中那样时，通知服务器
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	};
@@ -365,7 +365,7 @@ connection.onDidChangeWatchedFiles(_change => {
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
 	// 传入的变量包含了文本请求代码补全的位置。
-	// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
+	// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
 	return [
 		{
 			label: 'TypeScript',
@@ -627,7 +627,7 @@ connection.onDidChangeConfiguration(change => {
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
 		// 传入的变量包含了文本请求代码补全的位置。
-		// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
+		// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
 		return [
 			{
 				label: 'TypeScript',
