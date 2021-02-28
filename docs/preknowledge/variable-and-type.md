@@ -7,7 +7,7 @@
 ## 类型
 ---
 
-变量声明的基础规则请自行参考JavaScript，JavaScript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[]()。
+变量声明的基础规则请自行参考JavaScript，JavaScript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[MDN](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#变量（variable）)。
 
 ### 类型注解
 TS扩展了JS的语法格式，规则：在变量、声明的后面立即加上冒号`:`，如：
@@ -69,7 +69,7 @@ I'll be ${ age + 1 } years old next month.`;
 这与下面定义`sentence`的方式效果相同：
 
 ```typescript
-let sentence: string = "Hello, my name is " + name + ".\n\n" +
+let sentence: string = "Hello, my name is " + name + ".\n\t" +
     "I'll be " + (age + 1) + " years old next month.";
 ```
 
@@ -229,7 +229,7 @@ let strLength: number = (someValue as string).length;
 
 ### let声明
 
-由于本章侧重于帮助读者流畅地阅读文档中出现的TS代码，因此本节不再赘述var和新关键字之间的区别，读者如有兴趣可自行参考[TypeScript文档]()。
+由于本章侧重于帮助读者流畅地阅读文档中出现的TS代码，因此本节不再赘述var和新关键字之间的区别，读者如有兴趣可自行参考[TypeScript文档](https://www.tslang.cn/)。
 
 let的声明格式
 
@@ -305,7 +305,7 @@ function g() {
 
 注意函数作用域和块作用域不同，你可以在函数作用域里嵌套块作用域，作用域之间的变量声明互不影响，同时，块作用域是允许嵌套的。
 
-在一个嵌套作用域里引入一个新名字的行为称做**屏蔽**。 它是一把双刃剑，它可能会不小心地引入新问题，还可能会遮蔽掉一些错误。 
+在一个嵌套作用域里引入一个新名字的行为称做**屏蔽**。 它是一把双刃剑，它可能会不小心地引入新问题，还可能会遮蔽掉一些错误。
 
 ```typescript
 function f(condition, x) {
@@ -426,7 +426,7 @@ person.farewell()
 ## 变量解构
 ---
 
-ES2015的变量解构参照了名为[模式匹配]()的设计模式，本质来说是一种便利的语法糖
+ES2015的变量解构参照了名为[模式匹配](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)的设计模式，本质来说是一种便利的语法糖
 
 ### 解构数组
 
