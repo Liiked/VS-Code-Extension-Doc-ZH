@@ -415,7 +415,7 @@ webview运行在独立的环境中，因此不能直接访问本地资源，这�
 
 `vscode-resource:`协议就像`file:`协议一样，不过它只允许访问本地文件。和`file:`一样的是，`vscode-resource:`只能从绝对路径中加载资源。
 
-想想一下，我们想要从本地把喵喵们的gif打包进来，而不是从Giphy（国外出名的gif收集站）里加载进来。要想做到这点，我们首先给本地文件新建一个URI，然后用`vscode-resource:`协议更新这些URI：
+想象一下，我们想要从本地把喵喵们的gif打包进来，而不是从Giphy（国外出名的gif收集站）里加载进来。要想做到这点，我们首先给本地文件新建一个URI，然后用`vscode-resource:`协议更新这些URI：
 
 ```typescript
 import * as vscode from 'vscode';

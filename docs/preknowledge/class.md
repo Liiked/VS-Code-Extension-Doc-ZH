@@ -208,22 +208,22 @@ if (employee.fullName) {
 
 #### static
 
-到目前为止，我们只讨论了类的实例成员，那些仅当类被实例化的时候才会被初始化的属性。 我们也可以创建类的静态成员，这些属性存在于类本身上面而不是类的实例上。 
+到目前为止，我们只讨论了类的实例成员，那些仅当类被实例化的时候才会被初始化的属性。 我们也可以创建类的静态成员，这些属性存在于类本身上面而不是类的实例上。
 
 ```typescript
 class Router {
     static baseRoute = '/basePath';
     calculateRoute(path: string) {
-        return this.baseRoute + this.commonPrefix  + path;
+        return Router.baseRoute + this.commonPrefix  + path;
     }
-    constructor (public commonPrefix: number) { }
+    constructor (public commonPrefix: string) { }
 }
 
 let route1 = new Router('/api');  // 一级路径为/api
 let route2 = new Router('/page');  // 一级路径为/page
 
-console.log(route1.calculateRoute('/main');  // 最终路径/basePath/api/main
-console.log(route2.calculateRoute('/user');  // 最终路径/basePath/page/user
+console.log(route1.calculateRoute('/main'));  // 最终路径/basePath/api/main
+console.log(route2.calculateRoute('/user'));  // 最终路径/basePath/page/user
 ```
 
 #### abstract
@@ -241,5 +241,5 @@ abstract class Animal {
 
 ## 下一步
 
-- [泛型和命名空间](/preknowledge/generics-and-modules.md) -  进一步了解Typescript所规定的语法
+- [接口和命名空间](/preknowledge/interface-and-namespace) -  进一步了解Typescript所规定的语法
 
