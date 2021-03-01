@@ -37,7 +37,7 @@ code \
 --extensionTestsPath=<TEST-RUNNER-SCRIPT-PATH>
 ```
 
-**测试入口**（[src/test/runTest.ts](https://github.com/microsoft/vscode-extension-samples/blob/master/helloworld-test-sample/src/test/runTest.ts)））使用了`vscode-test`API，简化了下载、解压、启动 VS Code 的测试流程：
+**测试入口**（[src/test/runTest.ts](https://github.com/microsoft/vscode-extension-samples/blob/master/helloworld-test-sample/src/test/runTest.ts)）使用了`vscode-test`API，简化了下载、解压、启动 VS Code 的测试流程：
 
 ```typescript
 import * as path from "path";
