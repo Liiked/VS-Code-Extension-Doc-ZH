@@ -59,4 +59,5 @@
     * [主题色彩](/references/theme-color.md)
     * [标签中的图标](/references/icons-in-labels.md)
     * [文档选择器](/references/document-selector.md)
+    * [插件开发准则](/references/extension-guidelines.md)
 <!-- * ◼️快速入门 -->
