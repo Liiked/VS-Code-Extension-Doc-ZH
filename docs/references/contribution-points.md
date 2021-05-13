@@ -2,24 +2,45 @@
 
 发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
-* [`configuration`](#contributesconfiguration)
-* [`commands`](#contributescommands)
-* [`menus`](#contributesmenus)
-* [`keybindings`](#contributeskeybindings)
-* [`languages`](#contributeslanguages)
-* [`debuggers`](#contributesdebuggers)
-* [`breakpoints`](#contributesbreakpoints)
-* [`grammars`](#contributesgrammars)
-* [`themes`](#contributesthemes)
-* [`snippets`](#contributessnippets)
-* [`jsonValidation`](#contributesjsonvalidation)
-* [`views`](#contributesviews)
-* [`viewsContainers`](#contributesviewscontainers)
-* [`problemMatchers`](#contributesproblemmatchers)
-* [`problemPatterns`](#contributesproblempatterns)
-* [`taskDefinitions`](#contributestaskDefinitions)
-* [`colors`](#contributescolors)
-* [`typescriptServerPlugins`](#typescriptserverplugins)
+- [发布内容配置](#发布内容配置)
+  - [## contributes.configuration](#-contributesconfiguration)
+      - [示例](#示例)
+  - [## contributes.configurationDefaults](#-contributesconfigurationdefaults)
+      - [示例](#示例-1)
+  - [## contributes.commands](#-contributescommands)
+      - [示例](#示例-2)
+  - [## contributes.menus](#-contributesmenus)
+      - [示例](#示例-3)
+      - [让菜单项只显示在命令面板中](#让菜单项只显示在命令面板中)
+      - [分组排序](#分组排序)
+      - [组内排序](#组内排序)
+  - [## contributes.keybindings](#-contributeskeybindings)
+      - [示例](#示例-4)
+  - [## contributes.languages](#-contributeslanguages)
+      - [示例](#示例-5)
+  - [## contributes.debuggers](#-contributesdebuggers)
+      - [示例](#示例-6)
+  - [## contributes.breakpoints](#-contributesbreakpoints)
+  - [## contributes.grammars](#-contributesgrammars)
+      - [示例](#示例-7)
+  - [## contributes.themes](#-contributesthemes)
+      - [示例](#示例-8)
+  - [## contributes.snippets](#-contributessnippets)
+      - [示例](#示例-9)
+  - [## contributes.jsonValidation](#-contributesjsonvalidation)
+      - [示例](#示例-10)
+  - [## contributes.views](#-contributesviews)
+      - [示例](#示例-11)
+  - [contributes.viewsWelcome](#contributesviewswelcome)
+  - [## contributes.viewsContainers](#-contributesviewscontainers)
+      - [示例](#示例-12)
+  - [## contributes.problemMatchers](#-contributesproblemmatchers)
+      - [示例](#示例-13)
+  - [## contributes.problemPatterns](#-contributesproblempatterns)
+  - [## contributes.taskDefinitions](#-contributestaskdefinitions)
+  - [## contributes.colors](#-contributescolors)
+  - [## contributes.typescriptServerPlugins](#-contributestypescriptserverplugins)
+  - [下一步](#下一步)
 
 ## contributes.configuration
 ---
@@ -513,6 +534,28 @@ language-configuration.json
 
 插件创作者应该通过`createTreeView`API提供的[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)创建一个[TreeView](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeView)或者直接使用`registerTreeDataProvider`注册一个[data provider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider)。更多示例参考[这里](https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample)
 
+## contributes.viewsWelcome 
+
+给[自定义视图]()配置欢迎内容。欢迎内容只能应用到空的树视图中。如果一个树视图中没有任何子树数据时，才是空的树视图。按照约定，任何单独成行的链接会被展示为按钮。你可以配置`view`属性，指定欢迎页展示的位置。欢迎页的可见性可通过`when`语句和变量值配置。展示在欢迎页的内容，可通过`contents`属性配置。
+
+```json
+{
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "scm",
+        "contents": "In order to use git features, you can open a folder containing a git repository or clone from a URL.\n[Open Folder](command:vscode.openFolder)\n[Clone Repository](command:git.clone)\nTo learn more about how to use git and source control in VS Code [read our docs](https://aka.ms/vscode-scm).",
+        "when": "config.git.enabled && git.state == initialized && workbenchState == empty"
+      }
+    ]
+  }
+}
+```
+
+![Welcome content example](https://code.visualstudio.com/assets/api/references/contribution-points/viewsWelcome.png)
+
+一个视图可以展示多条欢迎内容，当出现这类场景时，VS Code 内置的内容会优先呈现，然后是插件提供欢迎内容，最后是来自其他插件的内容。
+
 ## contributes.viewsContainers
 ---
 配置[自定义视图](/references/contribution-points#contributesviews)的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的`Package Explorer`视图容器应该如何配置。
@@ -553,11 +596,11 @@ language-configuration.json
 * `Format:` 虽然图片格式的图标都是可以的，但建议使用SVG图标。
 * `States:` 所有图标状态继承下列样式：
 
-|State|Opacity|
-|---|---|
-|Default|60%|
-|Hover|100%|
-|Active|100%|
+| State   | Opacity |
+| ------- | ------- |
+| Default | 60%     |
+| Hover   | 100%    |
+| Active  | 100%    |
 
 ## contributes.problemMatchers
 ---
