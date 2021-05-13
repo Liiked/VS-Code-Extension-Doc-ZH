@@ -1,8 +1,14 @@
 # VS Code 插件开发文档
 
+![Maintenance](https://img.shields.io/maintenance/yes/2021?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/liiked/VS-Code-Extension-Doc-ZH?style=for-the-badge)
+
+
 欢迎来到为巨硬填坑的中文文档😆
 
-[📚 查看中文文档](https://liiked.github.io/VS-Code-Extension-Doc-ZH/
+[🚀 中文文档（加速版-实验中...）](http://liik.gitee.io/vs-code-extension-doc-zh/#/)
+
+[📚 中文文档（github 版）](https://liiked.github.io/VS-Code-Extension-Doc-ZH/
 )
 
 [📚 原文档](https://code.visualstudio.com/docs/extensions/overview)
@@ -17,9 +23,7 @@
 
 ## 翻译计划
 
-翻译计划见[Progress](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/blob/master/Progress.md)
-
-即将移动到[项目计划](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/projects/2)
+翻译计划见[项目计划](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/projects/2)
 
 如果你有兴趣、能力和时间，欢迎[贡献代码](https://github.com/Liiked/VS-Code-Extension-Doc-ZH/issues/104)
 
