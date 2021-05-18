@@ -56,6 +56,7 @@
     * [激活事件](/references/activation-events.md)
     * [插件清单](/references/extension-manifest.md)
     * [命令](/references/commands.md)
+    * [when 子句上下文](/references/when-clause-contexts.md)
     * [主题色彩](/references/theme-color.md)
     * [标签中的图标](/references/icons-in-labels.md)
     * [文档选择器](/references/document-selector.md)
