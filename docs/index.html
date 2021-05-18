@@ -30,8 +30,10 @@
   <body>
     <div id="app"></div>
     <script>
-      const pipe = (...functions) => (input) =>
-        functions.reduce((acc, fn) => fn(acc), input);
+      const pipe =
+        (...functions) =>
+        (input) =>
+          functions.reduce((acc, fn) => fn(acc), input);
       window.$docsify = {
         name: "",
         repo: "https://github.com/Liiked/VS-Code-Extension-Doc-ZH",
@@ -55,12 +57,6 @@
             let path;
             hook.beforeEach((content) => {
               path = vm.route.path;
-              console.log(`path`, path);
-              let getMap = Docsify.get(
-                "https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/_originmap.json",
-                false,
-                null
-              );
               let getNav = new Promise((reslove, reject) => {
                 let nav;
                 let attempTimes = 0;
