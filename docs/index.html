@@ -44,6 +44,10 @@
         github: "https://github.com/Liiked/VS-Code-Extension-Doc-ZH",
         gitee: 'https://gitee.com/liik/VS-Code-Extension-Doc-ZH'
       }
+      const termMap = {
+        github: "https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md",
+        gitee: 'https://gitee.com/liik/VS-Code-Extension-Doc-ZH/raw/master/docs/README.md'
+      }
       const host = window.location.host.split('.')[1]
       window.$docsify = {
         name: "",
@@ -113,7 +117,7 @@
                   return;
                 }
                 Docsify.get(
-                  "https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/docs/README.md",
+                  termMap[host],
                   false,
                   null
                 ).then((d) => {
