@@ -14,8 +14,14 @@
       href="https://raw.githubusercontent.com/Liiked/VS-Code-Extension-Doc-ZH/master/resources/favicon.ico"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" />
-    <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css" />
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/docsify/4.12.1/themes/vue.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.css"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"
       defer
@@ -34,9 +40,15 @@
         (...functions) =>
         (input) =>
           functions.reduce((acc, fn) => fn(acc), input);
+      const repoMap = {
+        github: "https://github.com/Liiked/VS-Code-Extension-Doc-ZH",
+        gitee: 'https://gitee.com/liik/VS-Code-Extension-Doc-ZH'
+      }
+      const host = window.location.host.split('.')[1]
+
       window.$docsify = {
         name: "",
-        repo: "https://github.com/Liiked/VS-Code-Extension-Doc-ZH",
+        repo: repoMap[host],
         loadSidebar: true,
         loadNavbar: true,
         auto2top: true,
@@ -233,24 +245,24 @@
     ></script>
     <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/search.min.js"></script>
     <script src="https://cdn.bootcss.com/docsify/4.7.0/plugins/emoji.min.js"></script>
-    <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
-    <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/docsify/4.12.1/plugins/gitalk.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/gitalk/1.7.2/gitalk.min.js"></script>
+    <script src="//unpkg.com/docsify-copy-code@2"></script>
     <script
       defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-typescript.min.js"
+      src="https://cdn.bootcdn.net/ajax/libs/prism/1.24.1/components/prism-typescript.min.js"
     ></script>
     <script
       defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"
+      src="https://cdn.bootcdn.net/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"
     ></script>
     <script
       defer
-      src="//unpkg.com/prismjs/components/prism-json.min.js"
+      src="https://cdn.bootcdn.net/ajax/libs/prism/1.24.1/components/prism-json.min.js"
     ></script>
     <script
       defer
-      src="https://cdn.bootcss.com/prism/9000.0.1/components/prism-yaml.min.js"
+      src="https://cdn.bootcdn.net/ajax/libs/prism/1.24.1/components/prism-yaml.min.js"
     ></script>
     <script>
       const gitalk = new Gitalk({
