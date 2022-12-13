@@ -2,17 +2,21 @@
 
 **激活事件**是在`package.json`中的`activationEvents`字段声明的一个JSON对象, 参考[插件清单](/references/extension-manifest). 当**激活事件**触发时, 插件就会被激活. 下面是可用的**激活事件**列表:
 
-- [onLanguage](#onlanguage)
-- [onCommand](#oncommand)
-- [onDebug](#ondebug)
-  - [onDebugInitialConfigurations](#ondebuginitialconfigurations)
-  - [onDebugResolve](#onDebugResolve)
-- [workspaceContains](#workspacecontains)
-- [onFileSystem](#onfilesystem)
-- [onView](#onview)
-- [onUri](#onuri)
-- [onWebviewPanel](#onwebviewpanel)
-- [*](#Start-up)
+- [激活事件](#激活事件)
+  - [onLanguage](#onlanguage)
+  - [onCommand](#oncommand)
+  - [onDebug](#ondebug)
+    - [onDebugInitialConfigurations](#ondebuginitialconfigurations)
+    - [onDebugResolve](#ondebugresolve)
+  - [workspaceContains](#workspacecontains)
+  - [onFileSystem](#onfilesystem)
+  - [onView](#onview)
+  - [onUri](#onuri)
+  - [onWebviewPanel](#onwebviewpanel)
+  - [onCustomEditor](#oncustomeditor)
+  - [onAuthenticationRequest](#onauthenticationrequest)
+  - [onStartupFinished](#onstartupfinished)
+  - [Start up](#start-up)
 
 `package.json`的配置项都可以在[插件清单](/references/extension-manifest)中找到.
 
@@ -149,6 +153,53 @@ VS Code需要恢复匹配到`viewType`的`webview`视图时触发.
 ```
 
 这会导致插件被激活. 调用`window.createWebviewPanel`时可以设置`viewType`, 你可能会需要其它的激活事件(比如: `onCommand`)来创建`webview`视图.
+
+## onCustomEditor
+---
+
+VS Code需要创建匹配到`viewType`的[ 自定义编辑器 ](../extension-guides/custom-editors.md)时触发。
+
+下面是一个`onCustomEditor`声明的例子：
+
+```json
+"activationEvents": [
+    "onCustomEditor:catCustoms.pawDraw"
+]
+```
+
+当VS Code需要用viewType: `catCustoms.pawDraw`恢复一个自定义编辑器时，会导致扩展被激活。viewType在[ `customEditors`发布内容配置 ](../extension-guides/custom-editors.md#发布内容配置)中设置，并通过`registerCustomEditorProvider`绑定到一个供应器。
+
+!> **注意**: 从VS Code 1.74.0开始，你的扩展所提供的自定义编辑器不需要相应的`onCustomEditor`激活事件声明来激活你的扩展。
+
+## onAuthenticationRequest
+---
+
+当一个扩展通过`authentication.getSession()`API和对应的`providerId`请求一个认证会话时，这个激活事件将被触发。
+
+下面是一个例子：
+
+```json
+"activationEvents": [
+    "onAuthenticationRequest:github"
+]
+```
+
+当VS Code需要检索类型为`github`的`AuthenticationSession`时，扩展将被激活。
+
+!> **注意**: 从VS Code 1.74.0开始，你的扩展提供的身份验证供应器不需要相应的`onAuthenticationRequest`激活事件声明来激活你的扩展。
+
+## onStartupFinished
+---
+
+在VS Code启动后一段时间被激活。它类似于[start up](#start-up)激活事件，但它不会减慢VS Code启动。目前，该事件在所有[start up](#start-up)激活的扩展完成激活后触发。
+
+```json
+...
+"activationEvents": [
+    "onStartupFinished"
+]
+...
+```
 
 ## Start up
 ---
