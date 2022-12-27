@@ -107,7 +107,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // 入口命令已经在package.json文件中定义好了，现在调用registerCommand方法
     // registerCommand中的参数必须与package.json中的command保持一致
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
+    let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
         // 把你的代码写在这里，每次命令执行时都会调用这里的代码
         // ...
         // 给用户显示一个消息提示
