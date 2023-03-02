@@ -25,7 +25,7 @@ yo code
 code ./helloworld
 ```
 
-完成后进入 VS Code，按下`F5`，你会立即看到一个**插件发开主机**窗口，其中就运行着插件。
+完成后进入 VS Code，按下`F5`，你会立即看到一个**插件发开宿主**窗口，其中就运行着插件。
 
 在命令面板(`Ctrl+Shift+P`)中输入`Hello World`命令。
 
