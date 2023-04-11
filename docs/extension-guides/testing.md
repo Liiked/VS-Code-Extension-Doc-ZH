@@ -2,13 +2,12 @@
 
 插件可通过测试 API 发现工作区中的测试用例并公布测试结果。用户可以从 **测试管理器** 视图、代码修饰图标、命令行中执行测试。有了这些新的API 之后，VS Code 支持了更加丰富的展示和差异，这是之前无法做到的。
 
-:::info
+?>
 译者注：**测试管理器** 视图目前并不是VS Code自带的，需要安装 [Test Explorer UI](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer) 插件才行。
-:::
 
-:::info
+
+!>
 **注意**：测试 API 仅在 1.59 以上的版本中才能使用
-:::
 
 ## 示例
 
@@ -224,9 +223,8 @@ async function runHandler(
 
 还有一点关于 `runHandler` 的补充：你可以给 `TestRunProfile` 设置 `configureHandler`。如果有这个属性的话，VS Code 会给用户提供配置*测试运行器*的 UI 界面，并且当用户操作 UI 时回调这个函数。然后，你的插件可以打开文件、展示 **快速选择** 或任意你的测试框架所需的内容。
 
-:::info
+?>
 VS Code 有意将**测试（test）配置**处理地不同于**调试(debug)**或**任务(task)配置**。传统编辑器或以 IDE 为中心的功能，都在 `.vscode` 这个特殊的文件夹中配置。不过，传统项目测试都是从命令行中执行的，大部分测试框架都有自己的配置策略。因此在 VS Code 中，为了避免重复配置，我们将其上升到让插件来处理此类问题。
-:::
 
 ### 测试输出
 
@@ -259,7 +257,7 @@ for (const test of getAllRunnableTests()) {
 
 在这种场景中，这些控制器一般需要将可选的 `name` 参数传递给 `createTestRun`，同时把 `persist` 参数设置为 `false`。在这里传递 `false` 是希望 VS Code 不要保留测试结果，因为这些结果可以通过外部来源重新加载。
 
-```ts
+```typescript
 const controller = vscode.tests.createTestController(
   'myCoverageFileTests',
   'Coverage File Tests'
