@@ -1,8 +1,8 @@
 # 虚拟工作区
 
-像 [GitHub Repositories]() 这样的插件会在 VS Code 后台中打开1个或多个 [文件系统供应器]()。当插件实现了文件系统供应器时，工作区的资源可能是完全**虚拟**的，它压根不位于本地磁盘。它实际可能在服务或云上，编辑行为也会在其之上运行。
+像 [GitHub Repositories](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub) 这样的插件会在 VS Code 后台中打开1个或多个 [文件系统供应器](./virtual-documents.md#文件系统api)。当插件实现了文件系统供应器时，工作区的资源可能是完全**虚拟**的，它压根不位于本地磁盘。它实际可能在服务或云上，编辑行为也会在其之上运行。
 
-这个配置叫做 **虚拟工作区**。当 VS Code 窗口打开一个虚拟工作区时，像其他的 [远程开发]() 窗口一样，在左下角显示*远程指示器*的位置上展示出来。
+这个配置叫做 **虚拟工作区**。当 VS Code 窗口打开一个虚拟工作区时，像其他的 [远程开发](https://code.visualstudio.com/docs/remote/remote-overview) 窗口一样，在左下角显示*远程指示器*的位置上展示出来。
 
 ![remote-indicator](https://code.visualstudio.com/assets/api/extension-guides/virtual-workspaces/remote-indicator.png)
 
@@ -10,7 +10,7 @@
 
 总之，用户希望虚拟工作区也有良好的浏览和编辑远程资源的体验，就需要运行尽可能多的插件。本篇指南会展示插件如何在虚拟工作区中测试，它们那些部分需要修改，并介绍 `virtualWorkspaces` 的功能属性。
 
-将插件修改为可在虚拟工作区中运行，也是 [VS Code for the Web]() 非常重要的第一步。Web 中的 VS Code 完全运行在浏览器中，它们的工作区由于采用了浏览器沙箱，因此也是虚拟的。你可以从 [Web 插件]() 中了解更多信息。
+将插件修改为可在虚拟工作区中运行，也是 [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) 非常重要的第一步。Web 中的 VS Code 完全运行在浏览器中，它们的工作区由于采用了浏览器沙箱，因此也是虚拟的。你可以从 [Web 插件](./web-extensions.md) 中了解更多信息。
 
 ## 我的插件受到影响了吗？
 
@@ -100,7 +100,7 @@ VS Code API 支持虚拟文件系统有一段时间了，你可以先看下 [文
 
 ### 禁用命令和视图配置
 
-通过 [when 子句]() 可控制可用的命令、视图还有其他配置。
+通过 [when 子句](../references/when-clause-contexts.md) 可控制可用的命令、视图还有其他配置。
 
 当工作区内的所有文件夹都是虚拟文件系统时，`virtualWorkspace` 为 `true` 。下例仅仅展示了 **命令面板** 中的 `npm.publish` 命令不在虚拟工作区中的配置方式
 

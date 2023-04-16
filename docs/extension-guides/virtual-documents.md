@@ -103,7 +103,7 @@ subscriptions.push(
 ```
 `contributes/commands`中的`cowsay.backwards`命令告诉编辑器*操作*出现在编辑器的标题菜单中（工具栏右上角），但如果只是这样简单的配置，每个编辑器就都会显示这个命令。然后我们的`when`语句就出场了，它描述了何时才显示这个操作。在这个例子中，文档的资源协议必须是`cowsay`，我们的命令才会生效。这个配置对默认显示全部命令的`commandPalette`菜单同样生效。
 
-![cowsay-bwd](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/virtual-documents/cowsay-bwd.png)
+![cowsay-bwd](https://code.visualstudio.com/assets/api/extension-guides/virtual-documents/cowsay-bwd.png)
 
 ### 事件的可见性
 

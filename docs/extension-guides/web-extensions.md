@@ -2,13 +2,13 @@
 
 VS Code 能以编辑器的形式运行于浏览器中。举个例子：如果你在 Github 上浏览仓库或者 PR 时，可按下 `.` 键 (句号) 打开 `github.dev` 的用户界面。当 VS Code 在 Web 中运行时，已安装的插件会在浏览器启动一个名为 'web extension host' 的插件宿主中运行。可在 web 插件宿主中运行的插件，被称之为“Web 插件”。
 
-Web 插件的项目结构和普通的插件一样，但它们的运行时不同，不要以 Node.js 运行时的插件模式运行同样的代码。Web 插件依然可以访问完整的 VS Code API，除了 Node.js API 和模块加载。Web 插件严格运行于浏览器沙箱中，因此它和普通的插件相比有一些[限制]()。
+Web 插件的项目结构和普通的插件一样，但它们的运行时不同，不要以 Node.js 运行时的插件模式运行同样的代码。Web 插件依然可以访问完整的 VS Code API，除了 Node.js API 和模块加载。Web 插件严格运行于浏览器沙箱中，因此它和普通的插件相比有一些[限制](#web-插件的主入口文件)。
 
 Web 插件的运行时也同样支持 VS Code 桌面版本。如果你打算启动一个 Web 插件，这个插件可以支持 [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) (包含 `vscode.dev` 和 `github.dev`) 、桌面端还有像 [GitHub Codespaces](https://code.visualstudio.com/docs/remote/codespaces) 服务。
 
 ## Web 插件解析
 
-Web 插件的文件目录结构就像[常规插件]()一样。插件清单(`package.json`)定义了插件源代码入口和插件配置点。
+Web 插件的文件目录结构就像[常规插件](../get-started/extension-anatomy.md)一样。插件清单(`package.json`)定义了插件源代码入口和插件配置点。
 
 对Web 插件来说，`browser` 字段是定义主入口文件的地方，而不是像普通插件那样定义在 `main` 属性中。
 
@@ -318,7 +318,7 @@ your url is: https://hungry-mole-48.loca.lt/
 
 ## Web 插件自动化测试
 
-像普通插件自动化测试一样，Web 插件也支持测试套件。在 [测试插件]() 章节中介绍了基本插件测试结构。
+像普通插件自动化测试一样，Web 插件也支持测试套件。在 [测试插件](../working-with-extensions/testing-extension.md) 章节中介绍了基本插件测试结构。
 
 [@vscode/test-web](https://github.com/microsoft/vscode-test-web) node 包等价于 [@vscode/test-electron](https://github.com/microsoft/vscode-test) (之前叫 `vscode-test`)。有了它之后，你就可以从命令行运行基于 Chromium、Firefox和Safari的测试了。
 
