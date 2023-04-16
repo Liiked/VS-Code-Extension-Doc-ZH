@@ -38,7 +38,7 @@
     * [自定义数据插件](/extension-guides/custom-data-extension.md)
     * [遥测](/extension-guides/telemetry.md)
 * ◼️ UX 指南 (WIP)
-  * [概述 WIP]()
+  * [概述 WIP](/ux-guidelines/README.md)
   * [活动栏 WIP]()
   * [侧边栏 WIP]()
   * [面板 WIP]()
