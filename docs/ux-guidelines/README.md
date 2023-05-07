@@ -15,6 +15,7 @@ VS Code 交互界面可以粗略地划分为两个主要概念：**容器** 和 
 ![architecture-containers](https://code.visualstudio.com/assets/api/ux-guidelines/examples/architecture-containers.png)
 
 ### 活动栏
+活动栏 是 VS Code 界面上的核心导航区。插件可以在活动栏配置子项，比如可以在次要侧边栏渲染视图的 视图容器
 
 ### 主要侧边栏
 
