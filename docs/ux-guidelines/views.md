@@ -39,7 +39,7 @@
 ![view-container-panel](https://code.visualstudio.com/assets/api/ux-guidelines/examples/view-container-panel.png)
 面板中的视图容器
 
-## 树容器
+## 树视图
 
 树视图是一类非常强大和灵活的视图。插件可以展示从简单的列表到深度嵌套的树任意内容。
 
@@ -56,8 +56,42 @@
 
 ## 欢迎视图
 
+当视图没有内容时，你可以给[用户添加指引](../references/contribution-points.md#contributesviewswelcome)，告诉他们如何使用你的插件。欢迎视图支持链接和图标。
+
+✔**️推荐**
+- 必要时才使用欢迎视图
+- 链接可用时尽量使用链接，而不是按钮
+- 主要操作才使用按钮
+- 链接的名称要清晰地表明其指向
+- 控制内容长度
+- 控制欢迎视图的数量
+- 控制视图中的按钮数量
+
+❌**不推荐**
+- 使用不必要的按钮
+- 用欢迎视图打广告
+- 使用原生的 “阅读更多” 作为链接标题
+
+![welcome-view](https://code.visualstudio.com/assets/api/ux-guidelines/examples/welcome-view.png)
+*这个例子展示了主要操作，以及文档中的额外链接*
+
 ## 带进度条的视图
+
+你也可以引用 *视图ID* 在视图中[展示进度条](https://code.visualstudio.com/api/references/vscode-api#ProgressLocation)
+
+![view-with-progress](https://code.visualstudio.com/assets/api/ux-guidelines/examples/view-with-progress.png)
 
 ## 视图操作
 
+视图可通过视图工具栏暴露[视图操作](../extension-guides/tree-view.md#视图操作)。但要注意不要添加太多操作以免引起心智负担和混淆。使用内容产品图标可让插件与原生UI融合在一起。当然，你也可以使用自定义的 SVG 图标。
+
+![view-toolbar](https://code.visualstudio.com/assets/api/ux-guidelines/examples/view-toolbar.png)
+
 ## 相关资源
+
+- [视图容器配置](../references/contribution-points.md#contributesviewscontainers)
+- [视图配置](../references/contribution-points.md#contributesviews)
+- [视图插件指南](../extension-guides/tree-view.md#视图操作)
+- [树视图插件示例](https://github.com/microsoft/vscode-extension-samples/tree/main/tree-view-sample)
+- [欢迎视图插件示例](https://github.com/microsoft/vscode-extension-samples/tree/main/welcome-view-content-sample)
+- [Webview 视图插件示例](https://github.com/microsoft/vscode-extension-samples/tree/main/webview-view-sample)

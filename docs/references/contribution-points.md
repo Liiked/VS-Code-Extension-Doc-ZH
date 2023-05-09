@@ -3,43 +3,44 @@
 发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
 - [发布内容配置](#发布内容配置)
-  - [## contributes.configuration](#-contributesconfiguration)
+  - [contributes.configuration](#contributesconfiguration)
       - [示例](#示例)
-  - [## contributes.configurationDefaults](#-contributesconfigurationdefaults)
+  - [contributes.configurationDefaults](#contributesconfigurationdefaults)
       - [示例](#示例-1)
-  - [## contributes.commands](#-contributescommands)
+  - [contributes.commands](#contributescommands)
       - [示例](#示例-2)
-  - [## contributes.menus](#-contributesmenus)
+  - [contributes.customEditors](#contributescustomeditors)
+  - [contributes.menus](#contributesmenus)
       - [示例](#示例-3)
       - [让菜单项只显示在命令面板中](#让菜单项只显示在命令面板中)
       - [分组排序](#分组排序)
       - [组内排序](#组内排序)
-  - [## contributes.keybindings](#-contributeskeybindings)
+  - [contributes.keybindings](#contributeskeybindings)
       - [示例](#示例-4)
-  - [## contributes.languages](#-contributeslanguages)
+  - [contributes.languages](#contributeslanguages)
       - [示例](#示例-5)
-  - [## contributes.debuggers](#-contributesdebuggers)
+  - [contributes.debuggers](#contributesdebuggers)
       - [示例](#示例-6)
-  - [## contributes.breakpoints](#-contributesbreakpoints)
-  - [## contributes.grammars](#-contributesgrammars)
+  - [contributes.breakpoints](#contributesbreakpoints)
+  - [contributes.grammars](#contributesgrammars)
       - [示例](#示例-7)
-  - [## contributes.themes](#-contributesthemes)
+  - [contributes.themes](#contributesthemes)
       - [示例](#示例-8)
-  - [## contributes.snippets](#-contributessnippets)
+  - [contributes.snippets](#contributessnippets)
       - [示例](#示例-9)
-  - [## contributes.jsonValidation](#-contributesjsonvalidation)
+  - [contributes.jsonValidation](#contributesjsonvalidation)
       - [示例](#示例-10)
-  - [## contributes.views](#-contributesviews)
+  - [contributes.views](#contributesviews)
       - [示例](#示例-11)
   - [contributes.viewsWelcome](#contributesviewswelcome)
-  - [## contributes.viewsContainers](#-contributesviewscontainers)
+  - [contributes.viewsContainers](#contributesviewscontainers)
       - [示例](#示例-12)
-  - [## contributes.problemMatchers](#-contributesproblemmatchers)
+  - [contributes.problemMatchers](#contributesproblemmatchers)
       - [示例](#示例-13)
-  - [## contributes.problemPatterns](#-contributesproblempatterns)
-  - [## contributes.taskDefinitions](#-contributestaskdefinitions)
-  - [## contributes.colors](#-contributescolors)
-  - [## contributes.typescriptServerPlugins](#-contributestypescriptserverplugins)
+  - [contributes.problemPatterns](#contributesproblempatterns)
+  - [contributes.taskDefinitions](#contributestaskdefinitions)
+  - [contributes.colors](#contributescolors)
+  - [contributes.typescriptServerPlugins](#contributestypescriptserverplugins)
   - [下一步](#下一步)
 
 ## contributes.configuration
@@ -119,6 +120,43 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ?> **提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
 
 ![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
+
+## contributes.customEditors
+
+`customEditors` 配置是你告诉 VS Code 自定义编辑器应如何提供的地方。比如 VS Code 需要知道你的自定义编辑器可在哪类文件中工作，以及如何在 UI 的任意位置标识你的自定义编辑器。
+
+下面是一个来自 [自定义编辑器插件示例](https://github.com/microsoft/vscode-extension-samples/tree/main/custom-editor-sample) 中的基本 `customEditors` 配置
+
+```json
+"contributes": {
+  "customEditors": [
+    {
+      "viewType": "catEdit.catScratch",
+      "displayName": "Cat Scratch",
+      "selector": [
+        {
+          "filenamePattern": "*.cscratch"
+        }
+      ],
+      "priority": "default"
+    }
+  ]
+}
+```
+
+`customEditors` 接受一个数组，所以你可以配置多个自定义编辑器。
+- `viewType` - 你的自定义编辑器的唯一标识
+    这是 VS Code 把 `package.json` 中的配置内容和你的自定义编辑器代码实现关联起来的方式。它必须是跨插件唯一的，所以不要用形如 `preview` 这样的原生 `viewType` 类型，务必确保唯一性，比如 `"viewType": "myAmazingExtension.svgPreview"`
+- `displayName` - 展示在 VS Code UI 上的自定义编辑器名称
+    这个名称会展示在 VS Code 界面上，比如 **View: Reopen with** 下拉框中。
+- `selector` - 指定那种文件会激活插件
+    `selector` 是一个包含一个或多个 glob 模式的数组。这些 glob 模式会匹配文件名称，以此决定是否应用自定义编辑器。一个 `filenamePattern` 如 `*.png` 配置了自定义编辑器对所有 PNG 文件生效。
+- `priority` -（可选）指定何时应用自定义编辑器
+    当打开一个资源时，`priority` 会控制应使用哪个自定义编辑器
+  - `"default"` - 尝试对每个匹配 `selector` 规则的文件应用自定义编辑器。如果一个文件绑定了多个自定义编辑器，那么用户需要选择他们想要使用的编辑器。
+  - `"option"` - 默认不使用自定义编辑器，而是让用户选择，或配置他们的默认编辑器。
+
+你可以在 [自定义编辑器](../extension-guides/custom-editors.md) 插件指南中查看更多内容。
 
 ## contributes.menus
 ---
