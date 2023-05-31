@@ -41,6 +41,8 @@
   - [contributes.taskDefinitions](#contributestaskdefinitions)
   - [contributes.colors](#contributescolors)
   - [contributes.typescriptServerPlugins](#contributestypescriptserverplugins)
+  - [contributes.walkthroughs](#contributeswalkthroughs)
+    - [完成事件](#完成事件)
   - [下一步](#下一步)
 
 ## contributes.configuration
@@ -765,6 +767,62 @@ let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
 ```
 
 Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
+
+## contributes.walkthroughs
+
+[示例插件](https://github.com/microsoft/vscode-extension-samples/tree/main/getting-started-sample)
+
+引导配置会出现在欢迎页中。当你的插件安装好之后，引导就会自动打开，非常便利地向用户介绍你的插件和其功能。
+
+标题、描述、ID和一些步骤组成了引导。你也可以使用 `when` 设置上下文键来控制引导的显式或是隐藏。比如，在 Linux 平台上的的引导可通过配置 `when:isLinux` 使之只展示在 Linux 机器上。
+
+引导中的每一步也都需要标题、描述、ID和其他媒体元素（图片或Markdown内容），还有一些可选的事件配置来选中步骤（下面的例子你就会看到）。步骤中的描述是 Markdown 格式的，支持`**bold**`、`__underlined__`、``code`` 和链接渲染。和引导本身一样，步骤也可使用 `when` 语句控制展示。
+
+```json
+{
+  "contributes": {
+    "walkthroughs": [
+      {
+        "id": "sample",
+        "title": "Sample",
+        "description": "A sample walkthrough",
+        "steps": [
+          {
+            "id": "runcommand",
+            "title": "Run Command",
+            "description": "This step will run a command and check off once it has been run.\n[Run Command](command:getting-started-sample.runCommand)",
+            "media": { "image": "media/image.png", "altText": "Empty image" },
+            "completionEvents": ["onCommand:getting-started-sample.runCommand"]
+          },
+          {
+            "id": "changesetting",
+            "title": "Change Setting",
+            "description": "This step will change a setting and check off when the setting has changed\n[Change Setting](command:getting-started-sample.changeSetting)",
+            "media": { "markdown": "media/markdown.md" },
+            "completionEvents": ["onSettingChanged:getting-started-sample.sampleSetting"]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+![walkthroughs](https://code.visualstudio.com/assets/api/references/contribution-points/walkthroughs.png)
+
+### 完成事件
+
+默认，如果不提供 `completionEvents` 事件，则在点击步骤的任何按钮选中该步骤。步骤无按钮时，该步骤则在引导打开时就选中。如果需要更精细的控制,可以提供 `completionEvents` 列表。
+
+可用的完成事件如下：
+- `onCommand:myCommand.id`: 运行命令时勾选步骤
+- `onSettingChanged:mySetting.id`: 已有设置修改时勾选步骤
+- `onContext:contextKeyExpression`: 当 `when` 中的上下文键表达式值为 true 时勾选步骤
+- `extensionInstalled:myExt.id`: 该插件已安装时勾选步骤
+- `onView:myView.id`: 该视图出现时勾选步骤
+- `onLink:https://...`: 该链接通过引导被打开时勾选步骤
+
+一旦某个步骤被勾选，那么直到用户显式地取消了该步骤的勾选或重置了相关进度（通过 **Getting Started: Reset Progress**），该步骤会一直保持勾选状态。
 
 ## 下一步
 

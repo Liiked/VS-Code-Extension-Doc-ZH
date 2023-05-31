@@ -50,7 +50,7 @@
   * [通知 WIP](/ux-guidelines/notifications.md)
   * [Webviews WIP](/ux-guidelines/webviews.md)
   * [上下文菜单 WIP](/ux-guidelines/context-menus.md)
-  * [引导 WIP]()
+  * [引导 WIP](/ux-guidelines/walkthroughs.md)
   * [设置 WIP]()
 * ◼️语言插件
     * [概述](/language-extensions/)
