@@ -51,7 +51,7 @@
   * [Webviews WIP](/ux-guidelines/webviews.md)
   * [上下文菜单 WIP](/ux-guidelines/context-menus.md)
   * [引导 WIP](/ux-guidelines/walkthroughs.md)
-  * [设置 WIP]()
+  * [设置 WIP](/ux-guidelines/settings.md)
 * ◼️语言插件
     * [概述](/language-extensions/)
     * [语法高亮](/language-extensions/syntax-highlight-guide.md)
@@ -72,7 +72,7 @@
     * [使用不稳定的API](/advanced-topics/using-proposed-api.md)
 * ️️◼️参考
     * [VS Code API](/references/vscode-api.md)
-    * [发布内容配置](/references/contribution-points.md)
+    * [配置点](/references/contribution-points.md)
     * [激活事件](/references/activation-events.md)
     * [插件清单](/references/extension-manifest.md)
     * [命令](/references/commands.md)
