@@ -1,6 +1,6 @@
 # 面板
 
-面板是另一个展示 [视图容器]() 的主要区域
+面板是另一个展示 [视图容器](../references/contribution-points.md#contributesviewscontainers) 的主要区域
 
 ✔**️推荐**
 
@@ -20,7 +20,7 @@
 
 ✔**️推荐**
 
-- 如果可以的话，最好使用现有的[产品图标]()
+- 如果可以的话，最好使用现有的[产品图标](../references/icons-in-labels.md#图标列表)
 - 提供清晰、有用的帮助提示
 
 ❌**不推荐**

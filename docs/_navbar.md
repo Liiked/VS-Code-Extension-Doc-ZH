@@ -50,6 +50,8 @@
         * [插件主机](/advanced-topics/extension-host.md)
         * [远程开发](/advanced-topics/remote-extensions.md)
         * [使用不稳定的API](/advanced-topics/using-proposed-api.md)
+        * [从 TSLint 迁移至 ESLint]()
+        * [Python 插件模板]()
     * ️️**参考**
         * [VS Code API](/references/vscode-api.md)
         * [配置点](/references/contribution-points.md)
@@ -60,7 +62,6 @@
         * [主题色彩](/references/theme-color.md)
         * [标签中的图标](/references/icons-in-labels.md)
         * [文档选择器](/references/document-selector.md)
-        * [插件开发准则](/references/extension-guidelines.md)
 * ️️参考
     * [VS Code API](/references/vscode-api.md)
     * [配置点](/references/contribution-points.md)
@@ -71,4 +72,3 @@
     * [主题色彩](/references/theme-color.md)
     * [标签中的图标](/references/icons-in-labels.md)
     * [文档选择器](/references/document-selector.md)
-    * [插件开发准则](/references/extension-guidelines.md)
