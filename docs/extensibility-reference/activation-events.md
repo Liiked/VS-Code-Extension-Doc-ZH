@@ -146,4 +146,4 @@
 学习更多VS Code扩展性模型，看看下列主题：
 
 * [插件清单](/docs/extensionAPI/extension-manifest.md) - VS Code package.json 插件清单文件参考
-* [发布内容配置点](/docs/extensionAPI/extension-points.md) - VS Code 发布内容配置点参考
+* [配置点](/docs/extensionAPI/extension-points.md) - VS Code 配置点参考

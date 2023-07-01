@@ -58,7 +58,7 @@
 - 请阅读[package.json插件清单](/extensibility-reference/extension-manifest.md)参考文档
 - 更多信息请参阅[package.json发布内容配置](/extensibility-reference/contribution-points.md)参考文档
 
-?> 译者注：为了便于理解，`contribution / contributes`在本教程中译为**发布内容配置/配置**，`contribution points`译为**发布内容配置点/配置点**。
+?> 译者注：为了便于理解，`contribution / contributes`在本教程中译为**配置**，`contribution points`译为**配置点/配置点**。
 
 **示例：基于TypeScript的pacakge.json**
 

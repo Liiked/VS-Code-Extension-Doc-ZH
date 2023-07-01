@@ -63,7 +63,7 @@ Web 插件的文件目录结构就像[常规插件](../get-started/extension-ana
 
 ![Extensions view](https://code.visualstudio.com/assets/api/extension-guides/web-extensions/extensions-view-item-disabled.png)
 
-插件只声明了发布内容配置点（仅声明 `contributes`，没有声明 `main` 或 `browser`）的也是 Web 插件。插件作者无需修改此类插件，它们也可以运行在 [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web)。这类声明式的插件包含主题、语法高亮和代码片段。
+插件只声明了配置点（仅声明 `contributes`，没有声明 `main` 或 `browser`）的也是 Web 插件。插件作者无需修改此类插件，它们也可以运行在 [VS Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web)。这类声明式的插件包含主题、语法高亮和代码片段。
 
 插件可以同时包含 `browser` 和 `main` 入口，这样就可以同时运行于浏览器和 Node.js 运行时中。[将当前插件更新为 Web 插件](#将当前插件更新为-web-插件) 小节中介绍了如何让插件同时兼容两种运行时。
 

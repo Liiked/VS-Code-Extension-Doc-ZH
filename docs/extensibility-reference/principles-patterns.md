@@ -126,6 +126,6 @@ VS Code不会在用户安装插件时，把你的依赖安装起来，所以你�
 
 [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的专有package.json文件参考
 
-[发布内容配置点](/extensibility-reference/contribution-points.md) - VS Code属性表参考
+[配置点](/extensibility-reference/contribution-points.md) - VS Code属性表参考
 
 [激活事件](/extensibility-reference/activation-events.md) - VS Code激活事件参考

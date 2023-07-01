@@ -1,6 +1,6 @@
-# 发布内容配置点
+# 配置点
 
-本篇会介绍`pacakge.json`[插件清单]()中各种不同的发布内容配置点。
+本篇会介绍`pacakge.json`[插件清单](/references/extension-manifest.md)中各种不同的配置点。
 
 * [`configuration`](extensibility-reference/contribution-points.md#contributesconfiguration)
 * [`commands`](extensibility-reference/contribution-points.md#contributescommands)
@@ -547,11 +547,11 @@ language-configuration.json
 * `Format:` 虽然图片格式的图标都是可以的，但建议使用SVG图标。
 * `States:` 所有图标状态继承下列样式：
 
-|State|Opacity|
-|---|---|
-|Default|60%|
-|Hover|100%|
-|Active|100%|
+| State   | Opacity |
+| ------- | ------- |
+| Default | 60%     |
+| Hover   | 100%    |
+| Active  | 100%    |
 
 ## contributes.problemMatchers
 ---

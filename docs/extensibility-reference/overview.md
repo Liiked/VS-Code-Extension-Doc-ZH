@@ -9,16 +9,16 @@
 本章文档将着重介绍下列主题：
 
 
-|  主题  |  描述  | 
-| ---- | ---- | 
-|  [package.json 插件配置清单](/extensibility-reference/extension-manifest.md) | 每个VS Code 插件根目录都配有一个`package.json`清单文件，这个文件提供插件概览和一些必须的字段 | 
-|  [发布内容配置点](/extensibility-reference/contribution-points.md) | 基于`package.json`的配置内容，你可以添加诸如：commands, themes, debuggers……的插件配置 | 
-|  [激活事件](/extensibility-reference/activation-events.md) | VS Code对插件执行懒加载机制。这篇文档提供了`package.json`中可用于激活的配置点，比如在特定文档打开时激活，命令触发时激活等等 | 
-|  [API vscode 命名空间](/extensibility-reference/vscode-api.md) | 查看完整的vscode命名空间API | 
-|  [API 复杂命令](/extensibility-reference/vscode-api-commands.md) | 查看VS Code中的复杂命令API | 
-|  [用于调试的API](/extensibility-reference/api-debugging.md) | 学习将调试器和VS Code配合使用的细节 | 
-|  [API 示例](/extension-authoring/samples.md) | 学习VS Code插件API的有关示例 | 
-|  [Markdown插件API](/extensibility-reference/api-markdown.md) | 学习VS Code插件API的有关示例 | 
+| 主题                                                                        | 描述                                                                                                                        |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [package.json 插件配置清单](/extensibility-reference/extension-manifest.md) | 每个VS Code 插件根目录都配有一个`package.json`清单文件，这个文件提供插件概览和一些必须的字段                                |
+| [配置点](/extensibility-reference/contribution-points.md)                   | 基于`package.json`的配置内容，你可以添加诸如：commands, themes, debuggers……的插件配置                                       |
+| [激活事件](/extensibility-reference/activation-events.md)                   | VS Code对插件执行懒加载机制。这篇文档提供了`package.json`中可用于激活的配置点，比如在特定文档打开时激活，命令触发时激活等等 |
+| [API vscode 命名空间](/extensibility-reference/vscode-api.md)               | 查看完整的vscode命名空间API                                                                                                 |
+| [API 复杂命令](/extensibility-reference/vscode-api-commands.md)             | 查看VS Code中的复杂命令API                                                                                                  |
+| [用于调试的API](/extensibility-reference/api-debugging.md)                  | 学习将调试器和VS Code配合使用的细节                                                                                         |
+| [API 示例](/extension-authoring/samples.md)                                 | 学习VS Code插件API的有关示例                                                                                                |
+| [Markdown插件API](/extensibility-reference/api-markdown.md)                 | 学习VS Code插件API的有关示例                                                                                                |
 
 ## 语言插件指引
 
