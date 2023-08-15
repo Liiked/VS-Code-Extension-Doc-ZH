@@ -10,15 +10,15 @@
 - [`customEditors`](#contributescustomeditors)
 - [`debuggers`](#contributesdebuggers)
 - [`grammars`](#contributesgrammars)
-- [`icons`]()
-- [`iconThemes`]()
-- [`jsonValidation`]()
-- [`keybindings`]()
-- [`languages`]()
-- [`menus`]()
-- [`problemMatchers`]()
-- [`problemPatterns`]()
-- [`productIconThemes`]()
+- [`icons`](#contributesicons)
+- [`iconThemes`](#contributesiconthemes)
+- [`jsonValidation`](#contributesjsonvalidation)
+- [`keybindings`](#contributeskeybindings)
+- [`languages`](#contributeslanguages)
+- [`menus`](#contributesmenus)
+- [`problemMatchers`](#contributesproblemmatchers)
+- [`problemPatterns`](#contributesproblempatterns)
+- [`productIconThemes`](#contributesproducticonthemes)
 - [`resourceLabelFormatters`]()
 - [`semanticTokenModifiers`]()
 - [`semanticTokenScopes`]()
@@ -198,223 +198,6 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 
 你可以在 [自定义编辑器](../extension-guides/custom-editors.md) 插件指南中查看更多内容。
 
-## contributes.menus
----
-
-为编辑器或者文件管理器设置命令的*菜单项*。菜单项至少包含1️⃣选中时调用的命令和2️⃣何时显示这个菜单项的时机。显示菜单的时机由`when`键定义，而对应的值语法需要参考键值绑定的[when语法](https://github.com/Microsoft/vscode-docs/blob/master/docs/getstarted/keybindings.md#when-clause-contexts)。
-
-`command`键则是必须的。可选的命令使用`alt`定义，当你按下ALT键时，菜单中会显示对应的菜单项。
-
-最后，`group`属性定义了菜单的分组。`navigation`值不同于普通的`group`值，一旦设置这个值就会总是显示在菜单的最顶端。
-
-当前插件创作者可以配置的菜单的地方有：
-
-* 全局命令面板 - `commandPalette`
-* 资源管理器上下文菜单 - `explorer/context`
-* 编辑器上下文菜单 - `editor/context`
-* 编辑器标题栏 - `editor/title`
-* 编辑器标题上下文菜单 - `editor/title/context`
-* 调试栈视图的上下文菜单 - `debug/callstack/context`
-* [SCM 标题菜单](extensibility-reference/api-scm.md#菜单) - `scm/title`
-* [SCM 资源组](extensibility-reference/api-scm.md#菜单) - `scm/resourceGroup/context`
-* [SCM 资源](extensibility-reference/api-scm.md#菜单) - `scm/resource/context`
-* [SCM 改变标题](extensibility-reference/api-scm.md#菜单) - `scm/change/title`
-* [视图的标题菜单](#contributesviews) - `view/title`
-* [视图项的菜单](#contributesviews) - `view/item/context`
-
-
-
-?>**注意：**当菜单中的命令被调用，VS Code会将当前选中资源作为参数传给调用的命令。比方说，资源管理器的菜单被触发，选中资源的URI会作为参数，编辑器中的菜单项被触发，则将当前文件的URI作为参数传入。
-
-关于*标题*还有一点要说，命令还可以定义图标，VS Code会显示在编辑器的标题菜单栏中。
-
-#### 示例
-
-```json
-"contributes": {
-    "menus": {
-        "editor/title": [{
-            "when": "resourceLangId == markdown",
-            "command": "markdown.showPreview",
-            "alt": "markdown.showPreviewToSide",
-            "group": "navigation"
-        }]
-    }
-}
-```
-![menus](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/menus.png)
-
-#### 让菜单项只显示在命令面板中
-
-注册的命令默认显示在**命令面板**中。要想控制命令的可见性，我们提供了一个`commandPalette`菜单配置，在这个配置中，你可以定义一个`when`控制是否在**命令菜单**中显示。
-
-下面的片段只在编辑器中选中了什么东西的时候才会在**命令面板**中显示出‘Hello World’：
-
-```json
-"commands": [{
-    "command": "extension.sayHello",
-    "title": "Hello World"
-}],
-"menus": {
-    "commandPalette": [{
-        "command": "extension.sayHello",
-        "when": "editorHasSelection"
-    }]
-}
-```
-
-#### 分组排序
-
-菜单项可以通过组来分类。根据下列默认规则，然后按照字母排序，
-
-**编辑器上下文菜单**默认有这些分组：
-
-- `navigation` - `navigation`组始终在最上方。
-- `1_modification` - 紧接上一个组，这个组包含可以修改你代码的命令。
-- `9_cutcopypaste` - 然后是基础编辑命令。
-- `z_commands` - 最后一个分组则是命令面板入口。
-
-![groupSorting](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/groupSorting.png)
-
-**资源管理器上下文菜单**默认有下列分组：
-
-* `navigation` -  在VS Code中导航的相关命令。`navigation`组始终在最上方。
-* `2_workspace` - 和工作区操作相关的命令。
-* `3_compare` - 比较文件和diff相关的命令。
-* `4_search` - 在搜索视图中和搜索相关的命令。
-* `5_cutcopypaste` - 和剪切、复制、粘贴文件相关的命令。
-* `7_modification` - 修改文件的相关命令。
-
-**编辑器标签菜单**默认有下列分组
-
-* 1_close - 和关闭编辑器相关的命令。
-* 3_preview - 和固定编辑器相关的命令。
-
-**编辑器标题菜单**默认有下列分组
-
-* 1_diff - diff编辑器相关的命令。
-* 3_open - 打开编辑器的相关命令。
-* 5_close - 和关闭编辑器相关的命令。
-
-#### 组内排序
-
-组内的菜单顺序取决于标题或者*序号属性*。菜单的组内顺序由`@<number>`加到`group`值的后面得以确定：
-
-```json
-"editor/title": [{
-    "when": "editorHasSelection",
-    "command": "extension.Command",
-    "group": "myGroup@1"
-}]
-```
-
-## contributes.keybindings
----
-
-这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中，你可以了解更加细节的东西。
-
-配置快捷键绑定会使*默认键盘快捷方式*中显示你的规则，每一处和命令相关的UI部分也会显示你添加的快捷键组合。
-
-?>**注意**因为VS Code支持Windows，macOS和Linux平台，而
-
-#### 示例
-Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayHello"`命令：
-```json
-"contributes": {
-    "keybindings": [{
-        "command": "extension.sayHello",
-        "key": "ctrl+f1",
-        "mac": "cmd+f1",
-        "when": "editorTextFocus"
-    }]
-}
-```
-![keybindings](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/keybindings.png)
-
-## contributes.languages
----
-
-配置一门语言，引入一门新的语言或者加强VS Code已有的语言支持。
-
-在这部分内容中，一个语言必须要有一个标识符（identifier）关联到文件上（查看 `TextDocument.getLanguageId()`）。
-
-VS Code提供三种文件应该关联哪种语言的方式。每种方式都可以可以“单独”加强：
-
-1. 插件的文件名
-2. 文件名
-3. 文件内的首行
-
-用户打开文件后，三种规则都会使用，然后确定语言。接着VS Code就会触发激活事件`onLanguage:${language}`（比如：下面的`onLanguage:python`例子）
-
-`aliases`属性包含着这门语言的可读性名称。这个列表的第一项会作为语言标签（在VS Code右下角状态栏显示）。
-
-`configuration`属性确定了语言配置文件的路径。路径是指相对插件文件夹的路径，通常是`./language-configuration.json`，这个文件是JSON格式的，包含着下列可配置属性：
-
-* `comments` - 定义了注释的符号
-  * `blockComment` - 用于标识块注释的起始和结束token。被'Toggle Block Comment'使用
-  * `lineComment` - 用于标识行注释的起始token。被'Add Line Comment'使用
-* `brackets` - 定义括号，同时也会影响括号内的代码缩进。进入新的一行时，被编辑器用来确定或是更正新的缩进距离
-* `autoClosingPairs` - 为*自动闭合功能*定义某个符号的开闭符（open and close symbols）。*开符号*输入后，编辑器会自动插入*闭符号*。使用`notIn`参数，关闭字符串或者注释中的*符号对*
-* `surroundingPairs` - 定义选中文本的开闭符号
-* `folding` - 定义编辑器中的代码应何时、应怎么样折叠
-  * `offSide` - 和一下个缩进块之间的代码块尾部的空行（用于基于缩进的语言，如Python or F#）
-  * `markers` - 使用正则自定义代码中的折叠区域标识符
-* `wordPattern` - 使用正则匹配编程语言中哪些词应该是单个词
-
-如果你的语言配置文件是`language-configuration.json`，或者以这样的字符串结尾的，VS Code就会提供校验和编辑支持。
-
-#### 示例
-```json
-...
-"contributes": {
-    "languages": [{
-        "id": "python",
-        "extensions": [ ".py" ],
-        "aliases": [ "Python", "py" ],
-        "filenames": [ ... ],
-        "firstLine": "^#!/.*\\bpython[0-9.-]*\\b",
-        "configuration": "./language-configuration.json"
-    }]
-}
-```
-
-language-configuration.json
-```json
-{
-    "comments": {
-        "lineComment": "//",
-        "blockComment": [ "/*", "*/" ]
-    },
-    "brackets": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"]
-    ],
-    "autoClosingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        { "open": "'", "close": "'", "notIn": ["string", "comment"] },
-        { "open": "/**", "close": " */", "notIn": ["string"] }
-    ],
-    "surroundingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["<", ">"],
-        ["'", "'"]
-    ],
-    "folding": {
-        "offSide": true,
-        "markers": {
-            "start": "^\\s*//#region",
-            "end": "^\\s*//#endregion"
-        }
-    },
-    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)"
-}
-```
-
 ## contributes.debuggers
 ---
 
@@ -514,6 +297,421 @@ language-configuration.json
 
 ![grammars](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/grammars.png)
 
+## contributes.icons
+
+使用默认图标和 ID 来配置新的图标。随后这个 图标 ID 就可在插件（或依赖该插件的其他插件）任意可使用 `ThemeIcon` 的地方通过 `new ThemeIcon("iconId")` 来使用新图标了，在 Markdown 字符中的配置是 `$(iconId)` 还有其他一些特定区域都可以配置。
+
+#### 示例
+```json
+{
+  "contributes": {
+    "icons": {
+      "distro-ubuntu": {
+        "description": "Ubuntu icon",
+        "default": {
+          "fontPath": "./distroicons.woff",
+          "fontCharacter": "\\E001"
+        }
+      },
+      "distro-fedora": {
+        "description": "Ubuntu icon",
+        "default": {
+          "fontPath": "./distroicons.woff",
+          "fontCharacter": "\\E002"
+        }
+      }
+    }
+  }
+}
+```
+
+## contributes.iconThemes
+
+为 VS Code 配置文件图标主题。文件图标指的是在文件名一侧用于指示文件类型的图标。
+
+你需要 ID、标签和文件图标定义文件的路径来完成配置。
+
+#### 示例
+```json
+{
+  "contributes": {
+    "iconThemes": [
+      {
+        "id": "my-cool-file-icons",
+        "label": "Cool File Icons",
+        "path": "./fileicons/cool-file-icon-theme.json"
+      }
+    ]
+  }
+}
+```
+![file-icon-themes](https://code.visualstudio.com/assets/api/references/contribution-points/file-icon-themes.png)
+
+通过 [文件图标主题指南](https://code.visualstudio.com/api/extension-guides/file-icon-theme) 查看更多关于创建文件图标的方法
+
+## contributes.jsonValidation
+---
+为`json`文件添加校验器。`url`值可以是本地路径也可以是插件中的模式文件（schema file），或者是远程服务器的URL比如：[json schema](http://schemastore.org/json)
+
+#### 示例
+```json
+"contributes": {
+    "jsonValidation": [{
+        "fileMatch": ".jshintrc",
+        "url": "http://json.schemastore.org/jshintrc"
+    }]
+}
+```
+
+## contributes.keybindings
+---
+
+这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中，你可以了解更加细节的东西。
+
+配置快捷键绑定会使*默认键盘快捷方式*中显示你的规则，每一处和命令相关的UI部分也会显示你添加的快捷键组合。
+
+?>**注意**因为VS Code支持Windows，macOS和Linux平台，而
+
+#### 示例
+Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayHello"`命令：
+```json
+"contributes": {
+    "keybindings": [{
+        "command": "extension.sayHello",
+        "key": "ctrl+f1",
+        "mac": "cmd+f1",
+        "when": "editorTextFocus"
+    }]
+}
+```
+![keybindings](https://code.visualstudio.com/assets/api/references/contribution-points/keybindings.png)
+
+## contributes.languages
+---
+
+配置一门语言，引入一门新的语言或者加强VS Code已有的语言支持。
+
+在这部分内容中，一个语言必须要有一个标识符（identifier）关联到文件上（查看 `TextDocument.getLanguageId()`）。
+
+VS Code提供三种文件应该关联哪种语言的方式。每种方式都可以可以“单独”加强：
+
+1. 插件的文件名
+2. 文件名
+3. 文件内的首行
+
+用户打开文件后，三种规则都会使用，然后确定语言。接着VS Code就会触发激活事件`onLanguage:${language}`（比如：下面的`onLanguage:python`例子）
+
+`aliases`属性包含着这门语言的可读性名称。这个列表的第一项会作为语言标签（在VS Code右下角状态栏显示）。
+
+`configuration`属性确定了语言配置文件的路径。路径是指相对插件文件夹的路径，通常是`./language-configuration.json`，这个文件是JSON格式的，包含着下列可配置属性：
+
+* `comments` - 定义了注释的符号
+  * `blockComment` - 用于标识块注释的起始和结束token。被'Toggle Block Comment'使用
+  * `lineComment` - 用于标识行注释的起始token。被'Add Line Comment'使用
+* `brackets` - 定义括号，同时也会影响括号内的代码缩进。进入新的一行时，被编辑器用来确定或是更正新的缩进距离
+* `autoClosingPairs` - 为*自动闭合功能*定义某个符号的开闭符（open and close symbols）。*开符号*输入后，编辑器会自动插入*闭符号*。使用`notIn`参数，关闭字符串或者注释中的*符号对*
+* `surroundingPairs` - 定义选中文本的开闭符号
+* `folding` - 定义编辑器中的代码应何时、应怎么样折叠
+  * `offSide` - 和一下个缩进块之间的代码块尾部的空行（用于基于缩进的语言，如Python or F#）
+  * `markers` - 使用正则自定义代码中的折叠区域标识符
+* `wordPattern` - 使用正则匹配编程语言中哪些词应该是单个词
+
+如果你的语言配置文件是`language-configuration.json`，或者以这样的字符串结尾的，VS Code就会提供校验和编辑支持。
+
+#### 示例
+```json
+...
+"contributes": {
+    "languages": [{
+        "id": "python",
+        "extensions": [ ".py" ],
+        "aliases": [ "Python", "py" ],
+        "filenames": [ ... ],
+        "firstLine": "^#!/.*\\bpython[0-9.-]*\\b",
+        "configuration": "./language-configuration.json"
+    }]
+}
+```
+
+language-configuration.json
+```json
+{
+    "comments": {
+        "lineComment": "//",
+        "blockComment": [ "/*", "*/" ]
+    },
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+        { "open": "/**", "close": " */", "notIn": ["string"] }
+    ],
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["<", ">"],
+        ["'", "'"]
+    ],
+    "folding": {
+        "offSide": true,
+        "markers": {
+            "start": "^\\s*//#region",
+            "end": "^\\s*//#endregion"
+        }
+    },
+    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)"
+}
+```
+
+## contributes.menus
+---
+
+为编辑器或者文件管理器设置命令的*菜单项*。菜单项至少包含1️⃣选中时调用的命令和2️⃣何时显示这个菜单项的时机。显示菜单的时机由`when`键定义，而对应的值语法需要参考键值绑定的[when语法](https://github.com/Microsoft/vscode-docs/blob/master/docs/getstarted/keybindings.md#when-clause-contexts)。
+
+`command`键则是必须的。可选的命令使用`alt`定义，当你按下ALT键时，菜单中会显示对应的菜单项。
+
+最后，`group`属性定义了菜单的分组。`navigation`值不同于普通的`group`值，一旦设置这个值就会总是显示在菜单的最顶端。
+
+?> 注意：菜单可使用 `when` 子句，命令使用 `enablement` 子句。`enablement` 会应用到所有菜单甚至键位绑定上，而 `when` 只能应用在单个菜单上。
+
+当前插件创作者可以配置的菜单的地方有：
+
+* 全局命令面板 - `commandPalette`
+* 资源管理器上下文菜单 - `explorer/context`
+* 编辑器上下文菜单 - `editor/context`
+* 编辑器标题栏 - `editor/title`
+* 编辑器标题上下文菜单 - `editor/title/context`
+* 调试栈视图的上下文菜单 - `debug/callstack/context`
+* [SCM 标题菜单](extensibility-reference/api-scm.md#菜单) - `scm/title`
+* [SCM 资源组](extensibility-reference/api-scm.md#菜单) - `scm/resourceGroup/context`
+* [SCM 资源](extensibility-reference/api-scm.md#菜单) - `scm/resource/context`
+* [SCM 改变标题](extensibility-reference/api-scm.md#菜单) - `scm/change/title`
+* [视图的标题菜单](#contributesviews) - `view/title`
+* [视图项的菜单](#contributesviews) - `view/item/context`
+// TODO: 待补充
+
+
+?>**注意：**当菜单中的命令被调用，VS Code会将当前选中资源作为参数传给调用的命令。比方说，资源管理器的菜单被触发，选中资源的URI会作为参数，编辑器中的菜单项被触发，则将当前文件的URI作为参数传入。
+
+关于*标题*还有一点要说，命令还可以定义图标，VS Code会显示在编辑器的标题菜单栏中。
+
+#### 示例
+菜单项
+```json
+"contributes": {
+    "menus": {
+        "editor/title": [{
+            "when": "resourceLangId == markdown",
+            "command": "markdown.showPreview",
+            "alt": "markdown.showPreviewToSide",
+            "group": "navigation"
+        }]
+    }
+}
+```
+![menus](https://code.visualstudio.com/assets/api/references/contribution-points/menus.png)
+
+子菜单项
+
+```json
+{
+  "contributes": {
+    "menus": {
+      "scm/title": [
+        {
+          "submenu": "git.commit",
+          "group": "2_main@1",
+          "when": "scmProvider == git"
+        }
+      ]
+    }
+  }
+}
+```
+
+![menus](https://code.visualstudio.com/assets/api/references/contribution-points/submenu.png)
+
+#### 特定环境中展示命令面板中的某些菜单
+
+注册的命令默认显示在**命令面板**中。要想控制命令的可见性，我们提供了一个`commandPalette`菜单配置，在这个配置中，你可以定义一个`when`控制是否在**命令菜单**中显示。
+
+下面的片段只在编辑器中选中了什么东西的时候才会在**命令面板**中显示出‘Hello World’：
+
+```json
+"commands": [{
+    "command": "extension.sayHello",
+    "title": "Hello World"
+}],
+"menus": {
+    "commandPalette": [{
+        "command": "extension.sayHello",
+        "when": "editorHasSelection"
+    }]
+}
+```
+
+#### 分组排序
+
+菜单项可以通过组来分类。根据下列默认规则，然后按照字母排序，
+
+**编辑器上下文菜单**默认有这些分组：
+
+- `navigation` - `navigation`组始终在最上方。
+- `1_modification` - 紧接上一个组，这个组包含可以修改你代码的命令。
+- `9_cutcopypaste` - 然后是基础编辑命令。
+- `z_commands` - 最后一个分组则是命令面板入口。
+
+![groupSorting](https://code.visualstudio.com/assets/api/references/contribution-points/groupSorting.png)
+
+**资源管理器上下文菜单**默认有下列分组：
+
+* `navigation` -  在VS Code中导航的相关命令。`navigation`组始终在最上方。
+* `2_workspace` - 和工作区操作相关的命令。
+* `3_compare` - 比较文件和diff相关的命令。
+* `4_search` - 在搜索视图中和搜索相关的命令。
+* `5_cutcopypaste` - 和剪切、复制、粘贴文件相关的命令。
+* `7_modification` - 修改文件的相关命令。
+
+**编辑器标签菜单**默认有下列分组
+
+* 1_close - 和关闭编辑器相关的命令。
+* 3_preview - 和固定编辑器相关的命令。
+
+**编辑器标题菜单**默认有下列分组
+
+* 1_diff - diff编辑器相关的命令。
+* 3_open - 打开编辑器的相关命令。
+* 5_close - 和关闭编辑器相关的命令。
+
+#### 组内排序
+
+组内的菜单顺序取决于标题或者*序号属性*。菜单的组内顺序由`@<number>`加到`group`值的后面得以确定：
+
+```json
+"editor/title": [{
+    "when": "editorHasSelection",
+    "command": "extension.Command",
+    "group": "myGroup@1"
+}]
+```
+
+## contributes.problemMatchers
+---
+配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：
+
+#### 示例
+```json
+"contributes": {
+    "problemMatchers": [
+        {
+            "name": "gcc",
+            "owner": "cpp",
+            "fileLocation": ["relative", "${workspaceFolder}"],
+            "pattern": {
+                "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "severity": 4,
+                "message": 5
+            }
+        }
+    ]
+}
+```
+这个问题定位器现在可以通过名称引用`$gcc`在`task.json`中使用了，示例如下：
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "gcc",
+            "args": ["-Wall", "helloWorld.c", "-o", "helloWorld"],
+            "problemMatcher": "$gcc"
+        }
+    ]
+}
+```
+
+更多内容请查看：[实现一个问题定位器](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher)
+
+## contributes.problemPatterns
+---
+配置可以在问题定位器（见上）中可以使用的问题模式的名称。
+
+## contributes.productIconThemes
+
+## contributes.resourceLabelFormatters
+
+## contributes.semanticTokenModifiers
+
+## contributes.semanticTokenScopes
+## contributes.semanticTokenTypes'
+
+## contributes.snippets
+---
+为语言添加代码片段。`language`属性必须是[语言标识符](https://code.visualstudio.com/docs/languages/identifiers)而`path`则必须是使用[VS Code代码片段格式](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax)的代码片段文件的相对路径。
+
+#### 示例
+下面是一个Go语言的代码片段：
+```json
+"contributes": {
+    "snippets": [{
+        "language": "go",
+        "path": "./snippets/go.json"
+    }]
+}
+```
+
+## contributes.submenus
+
+## contributes.taskDefinitions
+---
+配置和定义一个object结构，定义系统中唯一的*配置任务*。任务定义最少需要一个`type`属性，不过通常需要更多的属性配置。
+在package.json文件中，*一个展示脚本的任务*看起来是这样的：
+```json
+"taskDefinitions": [
+    {
+        "type": "npm",
+        "required": [
+            "script"
+        ],
+        "properties": {
+            "script": {
+                "type": "string",
+                "description": "The script to execute"
+            },
+            "path": {
+                "type": "string",
+                "description": "The path to the package.json file. If omitted the package.json in the root of the workspace folder is used."
+            }
+        }
+    }
+]
+```
+
+任务定义是JSON格式的，且包含`required`和`properties`两个属性。
+`type`属性定义了任务类型，如果上述例子变成：
+- `"type": "npm"`要求任务与npm任务相关联
+- `"required": [ "script" ]`其中`script`属性不可或缺。`path`属性变成可选。
+- `"properties": {...}`：定义了其他属性和他们的类型
+
+当插件真的创建了一个任务，它需要传入一个与package.json中任务配置对应的`TaskDefinition`。对于`npm`任务来说，pacakge.json中的脚本应该是这样的：
+```javascript
+let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
+```
+
+## contributes.terminal
+
 ## contributes.themes
 ---
 为VS Code添加TextMate主题。你必须添加一个label，指定这个主题是dark还是light的（以便VS Code根据你的主题调整界面），当然还需要加上目标文件路径（XML plist 格式）。
@@ -535,33 +733,33 @@ language-configuration.json
 
 查看[改变色彩主题](docs/extension-authoring/themes-snippets-colorizers.md)学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmTheme文件快速打包成VS Code插件。
 
-## contributes.snippets
----
-为语言添加代码片段。`language`属性必须是[语言标识符](https://code.visualstudio.com/docs/languages/identifiers)而`path`则必须是使用[VS Code代码片段格式](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax)的代码片段文件的相对路径。
 
-#### 示例
-下面是一个Go语言的代码片段：
+## contributes.typescriptServerPlugins
+---
+配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)：
+
 ```json
 "contributes": {
-    "snippets": [{
-        "language": "go",
-        "path": "./snippets/go.json"
-    }]
+   "typescriptServerPlugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
 }
 ```
-## contributes.jsonValidation
----
-为`json`文件添加校验器。`url`值可以是本地路径也可以是插件中的模式文件（schema file），或者是远程服务器的URL比如：[json schema](http://schemastore.org/json)
 
-#### 示例
+上述例子配置了[`typescript-styled-plugin`](https://github.com/Microsoft/typescript-styled-plugin)，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在`dependency`中列明：
+
 ```json
-"contributes": {
-    "jsonValidation": [{
-        "fileMatch": ".jshintrc",
-        "url": "http://json.schemastore.org/jshintrc"
-    }]
+{
+    "dependencies": {
+        "typescript-styled-plugin": "*"
+    }
 }
 ```
+
+Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
+
 
 ## contributes.views
 ---
@@ -662,115 +860,7 @@ language-configuration.json
 | Hover   | 100%    |
 | Active  | 100%    |
 
-## contributes.problemMatchers
----
-配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：
 
-#### 示例
-```json
-"contributes": {
-    "problemMatchers": [
-        {
-            "name": "gcc",
-            "owner": "cpp",
-            "fileLocation": ["relative", "${workspaceFolder}"],
-            "pattern": {
-                "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                "file": 1,
-                "line": 2,
-                "column": 3,
-                "severity": 4,
-                "message": 5
-            }
-        }
-    ]
-}
-```
-这个问题定位器现在可以通过名称引用`$gcc`在`task.json`中使用了，示例如下：
-
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build",
-            "command": "gcc",
-            "args": ["-Wall", "helloWorld.c", "-o", "helloWorld"],
-            "problemMatcher": "$gcc"
-        }
-    ]
-}
-```
-
-更多内容请查看：[实现一个问题定位器](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher)
-
-## contributes.problemPatterns
----
-配置可以在问题定位器（见上）中可以使用的问题模式的名称。
-
-## contributes.taskDefinitions
----
-配置和定义一个object结构，定义系统中唯一的*配置任务*。任务定义最少需要一个`type`属性，不过通常需要更多的属性配置。
-在package.json文件中，*一个展示脚本的任务*看起来是这样的：
-```json
-"taskDefinitions": [
-    {
-        "type": "npm",
-        "required": [
-            "script"
-        ],
-        "properties": {
-            "script": {
-                "type": "string",
-                "description": "The script to execute"
-            },
-            "path": {
-                "type": "string",
-                "description": "The path to the package.json file. If omitted the package.json in the root of the workspace folder is used."
-            }
-        }
-    }
-]
-```
-
-任务定义是JSON格式的，且包含`required`和`properties`两个属性。
-`type`属性定义了任务类型，如果上述例子变成：
-- `"type": "npm"`要求任务与npm任务相关联
-- `"required": [ "script" ]`其中`script`属性不可或缺。`path`属性变成可选。
-- `"properties": {...}`：定义了其他属性和他们的类型
-
-当插件真的创建了一个任务，它需要传入一个与package.json中任务配置对应的`TaskDefinition`。对于`npm`任务来说，pacakge.json中的脚本应该是这样的：
-```javascript
-let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
-```
-
-
-
-## contributes.typescriptServerPlugins
----
-配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)：
-
-```json
-"contributes": {
-   "typescriptServerPlugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
-    ]
-}
-```
-
-上述例子配置了[`typescript-styled-plugin`](https://github.com/Microsoft/typescript-styled-plugin)，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在`dependency`中列明：
-
-```json
-{
-    "dependencies": {
-        "typescript-styled-plugin": "*"
-    }
-}
-```
-
-Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。
 
 ## contributes.walkthroughs
 
