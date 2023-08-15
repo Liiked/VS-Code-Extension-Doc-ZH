@@ -2,6 +2,38 @@
 
 发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
+- [`breakpoints`](#contributesbreakpoints)
+- [`colors`](#contributescolors)
+- [`commands`](#contributescommands)
+- [`configuration`](#contributesconfiguration)
+- [`configurationDefaults`](#contributesconfigurationdefaults)
+- [`customEditors`](#contributescustomeditors)
+- [`debuggers`](#contributesdebuggers)
+- [`grammars`](#contributesgrammars)
+- [`icons`]()
+- [`iconThemes`]()
+- [`jsonValidation`]()
+- [`keybindings`]()
+- [`languages`]()
+- [`menus`]()
+- [`problemMatchers`]()
+- [`problemPatterns`]()
+- [`productIconThemes`]()
+- [`resourceLabelFormatters`]()
+- [`semanticTokenModifiers`]()
+- [`semanticTokenScopes`]()
+- [`semanticTokenTypes`]()
+- [`snippets`]()
+- [`submenus`]()
+- [`taskDefinitions`]()
+- [`terminal`]()
+- [`themes`]()
+- [`typescriptServerPlugins`]()
+- [`views`]()
+- [`viewsContainers`]()
+- [`viewsWelcome`]()
+- [`walkthroughs`]()
+
 ## contributes.breakpoints
 ---
 
