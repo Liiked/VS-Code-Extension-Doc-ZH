@@ -1,13 +1,16 @@
-# 发布内容配置
+# 配置点
 
 发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
-- [发布内容配置](#发布内容配置)
-  - [contributes.configuration](#contributesconfiguration)
-      - [示例](#示例)
-  - [contributes.configurationDefaults](#contributesconfigurationdefaults)
-      - [示例](#示例-1)
+- [配置点](#配置点)
+  - [contributes.breakpoints](#contributesbreakpoints)
+  - [contributes.colors](#contributescolors)
   - [contributes.commands](#contributescommands)
+      - [示例](#示例)
+    - [命令图标规格说明](#命令图标规格说明)
+  - [contributes.configuration](#contributesconfiguration)
+      - [示例](#示例-1)
+  - [contributes.configurationDefaults](#contributesconfigurationdefaults)
       - [示例](#示例-2)
   - [contributes.customEditors](#contributescustomeditors)
   - [contributes.menus](#contributesmenus)
@@ -21,7 +24,6 @@
       - [示例](#示例-5)
   - [contributes.debuggers](#contributesdebuggers)
       - [示例](#示例-6)
-  - [contributes.breakpoints](#contributesbreakpoints)
   - [contributes.grammars](#contributesgrammars)
       - [示例](#示例-7)
   - [contributes.themes](#contributesthemes)
@@ -39,11 +41,78 @@
       - [示例](#示例-13)
   - [contributes.problemPatterns](#contributesproblempatterns)
   - [contributes.taskDefinitions](#contributestaskdefinitions)
-  - [contributes.colors](#contributescolors)
   - [contributes.typescriptServerPlugins](#contributestypescriptserverplugins)
   - [contributes.walkthroughs](#contributeswalkthroughs)
     - [完成事件](#完成事件)
   - [下一步](#下一步)
+
+## contributes.breakpoints
+---
+
+通常调试器插件会有`contributes.breakpoints`入口，插件可以在这里面设置哪些语言可以设置断点。
+
+```json
+"contributes": {
+    "breakpoints": [
+        {
+            "language": "javascript"
+        },
+        {
+            "language": "javascriptreact"
+        }
+    ]
+}
+```
+
+## contributes.colors
+---
+这些色彩可用于状态栏的编辑器装饰器。定义之后，用户可以在`workspace.colorCustomization`设置中自定义颜色，用户的主题会覆盖这些色值。
+
+```json
+"contributes": {
+  "colors": [{
+      "id": "superstatus.error",
+      "description": "Color for error message in the status bar.",
+      "defaults": {
+          "dark": "errorForeground",
+          "light": "errorForeground",
+          "highContrast": "#010203"
+      }
+  }]
+}
+```
+
+## contributes.commands
+---
+设置命令标题和命令体，随后这个命令会显示在**命令面板**中。你也可以加上`category`前缀，在**命令面板**中会以分类显示。
+
+?>**注意：**当调用命令时（通过组合键或者在**命令面板**中调用），VS Code会触发激活事件`onCommand:${command}`。
+
+下面的示例是修改`markdown`语言的默认配置。
+
+#### 示例
+
+```json
+"contributes": {
+    "commands": [{
+        "command": "extension.sayHello",
+        "title": "Hello World",
+        "category": "Hello"
+    }]
+}
+```
+
+?> **提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
+
+![commands](https://code.visualstudio.com/assets/api/references/contribution-points/commands.png)
+
+### 命令图标规格说明
+
+- `大小`: 需为 16x16 像素大小，内部有 1 像素边距 (所以图片大小应是 14x14)，并且水平垂直居中
+- `颜色`: 需使用一种颜色
+- `格式`: 建议使用 SVG 格式，不过其他图片格式也是可以的
+
+![command-icons](https://code.visualstudio.com/assets/api/references/contribution-points/command-icons.png)
 
 ## contributes.configuration
 ---
@@ -78,14 +147,17 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 }
 ```
 
-![configuration](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/configuration.png)
+![configuration](https://code.visualstudio.com/assets/api/references/contribution-points/configuration.png)
 
 ## contributes.configurationDefaults
 ---
-为特定的语言配置编辑器的默认值，修改这个配置会覆盖编辑器已经为语言提供的默认配置。
-
-下面的示例是修改`markdown`语言的默认配置。
-
+覆盖其他配置的默认值。下面这个例子会覆盖 聚焦到变更文件时自动保存功能的默认值 `files.autoSave` 
+```json
+"configurationDefaults": {
+      "files.autoSave": "onFocusChange"
+}
+```
+你也可以为特定语言配置编辑器的默认值。下面的示例是修改`markdown`语言的默认配置：
 #### 示例
 
 ```json
@@ -99,29 +171,7 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 }
 ```
 
-## contributes.commands
----
-设置命令标题和命令体，随后这个命令会显示在**命令面板**中。你也可以加上`category`前缀，在**命令面板**中会以分类显示。
 
-?>**注意：**当调用命令时（通过组合键或者在**命令面板**中调用），VS Code会触发激活事件`onCommand:${command}`。
-
-下面的示例是修改`markdown`语言的默认配置。
-
-#### 示例
-
-```json
-"contributes": {
-    "commands": [{
-        "command": "extension.sayHello",
-        "title": "Hello World",
-        "category": "Hello"
-    }]
-}
-```
-
-?> **提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
-
-![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
 
 ## contributes.customEditors
 
@@ -450,24 +500,6 @@ language-configuration.json
 ```
 想要完整地学习`debugger`，移步至[调试器](/extension-authoring/example-debug-adapter.md)
 
-## contributes.breakpoints
----
-
-通常调试器插件会有`contributes.breakpoints`入口，插件可以在这里面设置哪些语言可以设置断点。
-
-```json
-"contributes": {
-    "breakpoints": [
-        {
-            "language": "javascript"
-        },
-        {
-            "language": "javascriptreact"
-        }
-    ]
-}
-```
-
 ## contributes.grammars
 ---
 为一门语言配置TextMate语法。你必须提供应用语法的`language`，TextMate的`scopeName`确定了语法和文件路径。
@@ -724,23 +756,7 @@ language-configuration.json
 let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
 ```
 
-## contributes.colors
----
-这些色彩可用于状态栏的编辑器装饰器。定义之后，用户可以在`workspace.colorCustomization`设置中自定义颜色，用户的主题会覆盖这些色值。
 
-```json
-"contributes": {
-  "colors": [{
-      "id": "superstatus.error",
-      "description": "Color for error message in the status bar.",
-      "defaults": {
-          "dark": "errorForeground",
-          "light": "errorForeground",
-          "highContrast": "#010203"
-      }
-  }]
-}
-```
 
 ## contributes.typescriptServerPlugins
 ---
