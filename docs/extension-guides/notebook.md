@@ -14,7 +14,7 @@
 
 一图胜千言：
 
-![结构概览](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/architecture-overview.png)
+![结构概览](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/architecture-overview.png)
 
 ## 内容供应器函数
 
@@ -115,7 +115,7 @@ class SampleProvider implements vscode.NotebookContentProvider {
 
 紧接着，启动你的插件并在插件窗口中打开后缀名为 `.notebook` 的 Jupyter 格式文件：
 
-![简单的供应商——ipynb](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/ipynb-simple-provider.png)
+![简单的供应商——ipynb](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/ipynb-simple-provider.png)
 
 现在，我们可以打开和编辑 Jupyter 格式的笔记本，并且以普通文本和 Markdown 的形式预览代码块。然而，在编辑的时候由于并不会自动并持续性的将内容写入到磁盘中，所以需要实现 `saveNotebook` 方法，上面的代码中也提到了这个方法。同时，如果要运行每个代码块，需要实现 `NotebookKernel` 方法。
 
@@ -201,7 +201,7 @@ async function executeCell(
 
 一些简单的输出格式，比如文本、错误、富文本（HTML，Markdown，JSON），由 VS Code 核心进程负责渲染；而一些增强型的输出格式，比如与应用相关的富文本输出类型，则由 [NotebookOutputRenderer](#输出渲染器) 负责渲染。插件可以自行渲染一些 “简单的” 增强型输出格式，比如添加 Markdown 对 LaTeX 的支持。
 
-![内核](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/kernel.png)
+![内核](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/kernel.png)
 
 ### 文本输出
 
@@ -214,7 +214,7 @@ async function executeCell(
 }
 ```
 
-![输出文本](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/text-output.png)
+![输出文本](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/text-output.png)
 
 ### 错误输出
 
@@ -229,7 +229,7 @@ async function executeCell(
 }
 ```
 
-![输出错误](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/error-output.png)
+![输出错误](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/error-output.png)
 
 ### 富文本输出
 
@@ -252,7 +252,7 @@ async function executeCell(
 }
 ```
 
-![输出富文本](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/rich-output.gif)
+![输出富文本](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/rich-output.gif)
 
 一般情况下，VS Code 可以渲染以下几种 MIME 类型：
 
@@ -342,7 +342,7 @@ notebookApi.onDidCreateOutput((evt) => {
 
 现在可以在输出代码块上通过运行 `ms-vscode.github-issue-notebook/github-issue` 来预览结果，如下图所示：
 
-![静态的渲染器示例](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/static-renderer-sample.png)
+![静态的渲染器示例](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/static-renderer-sample.png)
 
 如果在代码块的 DOM 容器外部有其它的元素，或者有一些异步任务，那么你可以在 `onWillDestroyOutput` 方法中进行释放。`onWillDestroyOutput`方法会在以下几个条件下执行：
 
@@ -416,7 +416,7 @@ const Issue: FunctionComponent<{ issue: GithubIssueWithComments }> = ({ issue })
 
 内核可以给渲染器提供额外的功能，比如添加一个预加载器，VS Code 会将预加载器里内容也装载到 iframe 里。这个加载项脚本可以通过其自身的 postMessage 接口来访问 `acquireVsCodeApi()`，你可以把它封装为 iframe 中的全局对象。
 
-![内核通讯](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/kernel-communication.png)
+![内核通讯](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/notebook/kernel-communication.png)
 
 举个例子，你可能会修改内核中的 `preloads` 来引用一个新文件，在这个文件里你创建了一个与插件主机通信的连接，并暴露了一个全局对象供渲染器使用，具体代码如下：
 

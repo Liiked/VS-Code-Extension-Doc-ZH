@@ -2,7 +2,7 @@
 
 VS Code 允许插件创作者通过扩展API去定义*源控制管理*特性（Source Control Management，SCM），VS Code整合了各式各样的SCM体系，而只给用户展现了一组小巧、强大的API接口，还是带用户界面的那种。
 
-![VS Code的SCM](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/main.png)
+![VS Code的SCM](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/scm-provider/main.png)
 
 
 VS Code自带一个源控制器：Git，它是源控制API的最佳实践。如果你想构建你自己的SCM供应器，那么这是[一个很好的起点](https://github.com/Microsoft/vscode/blob/master/extensions/git/src/repository.ts)。
@@ -122,7 +122,7 @@ async stageChange(uri: Uri, changes: LineChange[], index: number): Promise<void>
 
 `scm/sourceControl`菜单根据环境出现在源控制实例的边上。
 
-![源控制菜单](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/sourcecontrol-menu.png)
+![源控制菜单](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/scm-provider/sourcecontrol-menu.png)
 
 最后，`scm/change/title`菜单是和快速Diff功能相关联的，越新的文件越靠前，你可以针对特定的代码变动调用命令。
 
@@ -153,7 +153,7 @@ export interface SourceControl {
 
 VS Code支持显示**快速Diff**编辑器的高亮槽，点击这些槽会出现一个内部diff交互器，你可以在这里为上下文配置命令。
 
-![SCM快速Diff](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/scm-provider/quickdiff.png)
+![SCM快速Diff](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/scm-provider/quickdiff.png)
 
 这些高亮槽是VS Code自己计算出来的，你要做的就是根据给定的文件提供原始文件内容
 

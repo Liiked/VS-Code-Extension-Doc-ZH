@@ -62,7 +62,7 @@ yo code
 ```
 - 如果你像下图这样选择了自定义主题，则选择'Start fresh'
 
-![生成新主题](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/color-theme/yocode-colortheme.png)
+![生成新主题](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/color-theme/yocode-colortheme.png)
 
 - 把从设置中生成的主题文件复制到新的插件中
 - 如果你想使用现成的TextMate主题，那你就需要在插件生成的时候选择导入TextMate主题并打包。另外，如果你下载了一个主题，那么只要用`.tmTheme`链接替换`tokenColors`部分就可以了。
@@ -93,7 +93,7 @@ yo code
 
 通过**文件 > 首选项 > 颜色主题**，在下拉菜单里找到你的主题。然后通过移动<kbd>上下箭头</kbd>，预览你自己的主题。
 
-![选择我的主题](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/color-theme/mytheme.png)
+![选择我的主题](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/color-theme/mytheme.png)
 
 主题文件的改动，会实时同步到`插件开发主机`窗口。
 

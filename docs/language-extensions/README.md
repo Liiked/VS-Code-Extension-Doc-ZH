@@ -42,7 +42,7 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 
 下面是[编程式语言特性](/language-extensions/programmatic-language-features)的完整列表。
 
-![multi-ls](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/overview/multi-ls.png)
+![multi-ls](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/overview/multi-ls.png)
 
 ## 语言服务器协议（Language Server Protocol）
 ---
@@ -55,7 +55,7 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 
 - [语言服务器插件指南](/language-extensions/language-server-extension-guide)
 
-![multi-editor](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/overview/multi-editor.png)
+![multi-editor](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/overview/multi-editor.png)
 
 ## 特殊功能
 ---

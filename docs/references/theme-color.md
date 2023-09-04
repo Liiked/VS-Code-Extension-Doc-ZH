@@ -57,7 +57,7 @@
 
 按钮小组件的颜色，例如新窗口的资源管理器中的**打开文件夹**按钮。
 
-![按钮控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/button.png)
+![按钮控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/button.png)
 
 - `button.background`: 按钮背景色
 - `button.foreground`: 按钮前景色
@@ -70,7 +70,7 @@
 
 !> **注意**: macOS目前还不能用该控件
 
-![下拉列表控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/dropdown.png)
+![下拉列表控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/dropdown.png)
 
 - `dropdown.background`: 下拉列表背景色
 - `dropdown.listBackground`: 下拉列表背景色
@@ -82,7 +82,7 @@
 
 输入框控件颜色，例如搜索视图、搜索/替换对话框。
 
-![输入框控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/input.png)
+![输入框控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/input.png)
 
 - `input.background`: 输入框背景色
 - `input.border`: 输入框边框
@@ -177,23 +177,23 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 - `editorGroup.border`: 编辑器组之间的分隔颜色
 
-![编辑器组边框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/editorGroup-border.gif)
+![编辑器组边框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/editorGroup-border.gif)
 
 - `editorGroup.dropBackground`: 拖动编辑器时的背景颜色
 
-![编辑器组拖动背景色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/editorGroup-dropbackground.gif)
+![编辑器组拖动背景色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/editorGroup-dropbackground.gif)
 
 - `editorGroupHeader.noTabsBackground`: 禁用选项卡 (`"workbench.editor.showTabs": false`) 时编辑器组标题颜色
 
-![禁用选项卡时的编辑器组标题颜色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/editorgroupheader-notabsbackground.gif)
+![禁用选项卡时的编辑器组标题颜色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/editorgroupheader-notabsbackground.gif)
 
 - `editorGroupHeader.tabsBackground`: 启用选项卡时编辑器组标题的背景颜色
 
-![启用选项卡时编辑器组标题的背景颜色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/editorgroupheader-tabsbackground.gif)
+![启用选项卡时编辑器组标题的背景颜色](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/editorgroupheader-tabsbackground.gif)
 
 - `editorGroupHeader.tabsBorder`: 选项卡启用时编辑器组标题的边框颜色。
 
-![启用选项卡时编辑器组标题的边框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/editorgroupheader-tabsborder.gif)
+![启用选项卡时编辑器组标题的边框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/editorgroupheader-tabsborder.gif)
 
 - `editorGroup.emptyBackground`: 空编辑器组的背景色
 - `editorGroup.focusedEmptyBorder`: 编辑器组被聚焦时的边框颜色
@@ -234,7 +234,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 当选中多个字符时会显示选区颜色。同时，与所选文本相关的区域也会高亮显示。
 
-![选区高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/selectionhighlight.png)
+![选区高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/selectionhighlight.png)
 
 - `editor.selectionBackground`: 所选内容的背景色
 - `editor.selectionForeground`: 所选文本的前景色
@@ -244,7 +244,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 当光标出现在符号或单词中时需显示单词高亮，依据语言插件的实现情况，可提供与高亮单词所对应声明和引用的语法高亮效果，但是这个高亮效果需和只读、书写的情况下的高亮效果有所区分。如果文档的语法插件不提供此项功能，那么高亮效果应降级到单纯的单词高亮:
 
-![符号和单词高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/occurrences.png)
+![符号和单词高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/occurrences.png)
 
 - `editor.wordHighlightBackground`: 读取访问期间符号的背景色，例如读取变量时。颜色需带有透明度，以免遮挡底层样式
 - `editor.wordHighlightBorder`: 符号在进行读取访问操作时的边框颜色，例如读取变量
@@ -253,7 +253,7 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 搜索匹配项的颜色取决于搜索/替换对话框中的输入文字:
 
-![搜索匹配项](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/findmatches.png)
+![搜索匹配项](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/findmatches.png)
 
 - `editor.findMatchBackground`: 当前搜索匹配项的颜色
 - `editor.findMatchHighlightBackground`: 其他搜索匹配项的颜色。颜色需带有透明度，以免遮挡底层样式
@@ -264,26 +264,26 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 鼠标悬停时符号的颜色:
 
-![悬停高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/hoverhighlight.png)
+![悬停高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/hoverhighlight.png)
 
 - `editor.hoverHighlightBackground`: 在下面突出显示悬停的字词。颜色需带有透明度，以免遮挡底层样式
 
 当前行(光标所在行)只会显示背景高亮或者边框高亮(两者之一)
 
-![行高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/line.png)
+![行高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/line.png)
 
 - `editor.lineHighlightBackground`: 光标所在行高亮内容的背景颜色
 - `editor.lineHighlightBorder`: 光标所在行四周边框的背景颜色
 
 链接被点击时的颜色:
 
-![点击链接](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/link.png)
+![点击链接](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/link.png)
 
 - `editorLink.activeForeground`: 激活的链接的前景色
 
 选择搜索结果时的范围高亮:
 
-![范围高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/rangehighlight.png)
+![范围高亮](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/rangehighlight.png)
 
 - `editor.rangeHighlightBackground`: 限制搜索范围的颜色，用于快速打开、文件中的符号、搜索结果。颜色需带有透明度，以免遮挡底层样式
 - `editor.rangeHighlightBorder`: 限制搜索的范围的边框颜色
@@ -303,13 +303,13 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 
 CodeLens:
 
-![CodeLens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/codelens.png)
+![CodeLens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/codelens.png)
 
 - `editorCodeLens.foreground`: 编辑器 CodeLens 的前景色
 
 括号匹配:
 
-![括号匹配](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/bracket-colors.png)
+![括号匹配](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/bracket-colors.png)
 
 - `editorBracketMatch.background`: 匹配括号的背景色
 - `editorBracketMatch.border`: 匹配括号外框的颜色
@@ -399,7 +399,7 @@ CodeLens:
 
 速览窗口在编辑器内部，将引用和声明显示为视图
 
-![速览窗口](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/peek-view.png)
+![速览窗口](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/peek-view.png)
 
 - `peekView.border`: 速览视图边框和箭头颜色
 - `peekViewEditor.background`: 速览视图编辑器背景色
@@ -421,7 +421,7 @@ CodeLens:
 
 合并冲突装饰，当编辑器包含范围差异时显示
 
-![合并范围差异](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/merge-ranges.png)
+![合并范围差异](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/merge-ranges.png)
 
 - `merge.currentHeaderBackground`: 当前标题的背景颜色。颜色需带有透明度，以免遮挡底层样式
 - `merge.currentContentBackground`: 当前内容背景色。颜色需带有透明度，以免遮挡底层样式
@@ -494,11 +494,11 @@ CodeLens:
 
 通知横幅从窗口右下角弹出
 
-![通知横幅](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/notification-toast.png)
+![通知横幅](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/notification-toast.png)
 
 通知中心以带标题的列表显示
 
-![通知中心](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/notification-center.png)
+![通知中心](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/references/images/theme-color/notification-center.png)
 
 - `notificationCenter.border`: 通知中心的边框颜色
 - `notificationCenterHeader.foreground`: 通知中心头部的前景色

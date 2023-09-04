@@ -4,7 +4,7 @@ VS Code已经内置了一套通用的用户界面，插件作者能够通过VS C
 
 VS Code已经内置了一个[Node.js](https://nodejs.org/)调试器插件，它将成为你学习VS Code调试器特性的绝佳搭档。
 
-![VS Code调试功能](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-features.png)
+![VS Code调试功能](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debug-features.png)
 
 上面的截图展示了以下调试功能：
 
@@ -24,7 +24,7 @@ VS Code已经内置了一个[Node.js](https://nodejs.org/)调试器插件，它�
 
 VS Code基于抽象协议，实现了一个原生（非语言相关的）的调试器UI，它可以和任意后台调试程序通信。通常来讲，调试器不会实现这份协议，因此调试器中需要一些中间件去“适配”这个协议。这个中间件一般而言是一个独立和调试器通信的进程。
 
-![VS Code的调试架构](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch1.png)
+![VS Code的调试架构](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debug-arch1.png)
 
 我们将这个中间件称为**调试适配器（Debug Adapter）**（简写为**DA**），在VS Code和DA之间通信的抽象协议称之为**调试适配器协议(Debug Adapter Protocol)** (简写**DAP**)。调试适配器协议独立于VS Code，它有自己的[网站](https://microsoft.github.io/debug-adapter-protocol/)，你在上面可以找到相关的[介绍和概述](https://microsoft.github.io/debug-adapter-protocol/overview)，以及详细的[说明书](https://microsoft.github.io/debug-adapter-protocol/specification)，上面还列出了一些[已知实现和支持工具](https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/)，这份努力背后的故事和动机，我们都记录在了[博客](https://code.visualstudio.com/blogs/2018/08/07/debug-adapter-protocol-website#_why-the-need-for-decoupling-with-protocols)中。
 
@@ -34,7 +34,7 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 
 因此调试适配器的最小形式就是声明一个配置，对应调试适配器的实现，这个插件就是调试适配器的装载容器，而且不需要任何多余的代码。
 
-![VS Code调试架构-2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-arch2.png)
+![VS Code调试架构-2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debug-arch2.png)
 
 一个更贴近现实的调试器插件往往会添加很多配置，如下面的：
 - 调试器支持的语言。VS Code会为这些语言启用UI界面的断点功能
@@ -73,7 +73,7 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 
 至此，一个调试会话就开始了，你可以在`readme.md`文件中进行单步调试、打断点。如果某一行出现异常则会跳进该异常。
 
-![模拟运行调试工具](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/mock-debug.gif)
+![模拟运行调试工具](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/mock-debug.gif)
 
 在使用*模拟调试*之前，我们建议你卸载掉[预构建版本](https://marketplace.visualstudio.com/items?itemName=andreweinand.mock-debug)：
 
@@ -107,7 +107,7 @@ npm install
 
 代码编译完成后，带有"[Extension Development Host]"（中文环境下是"[扩展开发主机]"）VS Code新窗口会自动打开，Mock Debug插件就运行在调试模式中了。在这个窗口中，打开`mock test`项目，打开里面的`readme.md`，然后直接按下<kbd>F5</kbd>启动调试会话，现在你就可以调试了！
 
-![模拟调试会话](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-mock-session.png)
+![模拟调试会话](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debug-mock-session.png)
 
 因为的你插件运行在 *调试模式* 中，所以你能在`src/extension.ts`里面打断点，不过就如上文所说，这个插件关于*插件*本身的代码是没有多少的，最有意思的代码运行在调试适配器里，它是一个独立的进程。
 
@@ -115,7 +115,7 @@ npm install
 
 因为我们已经启动了一个调试会话，所以VS Code 调试器UI现在会进入 *多会话* 模式，在**调用栈（CALL STACK）**视图中你现在可以看到2个调试会话—— **Extension** 和 **Server** 。
 
-![调试插件和服务器](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debugger-extension-server.png)
+![调试插件和服务器](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debugger-extension-server.png)
 
 现在我们可以同时调试插件和DA（调试适配器）了。到我们目前这一步还有个更快的方式，启动调试时选择**Extension + Server**配置就会自动加载这两个会话。
 
@@ -283,7 +283,7 @@ npm install
 
 **initialConfigurations**定义了这个调试器的初始`launch.json`。当一个项目没有`launch.json`，然后用户打开了调试会话时，就会使用这个启动配置。然后VS Code会让用户选择一个调试环境，接着再创建对应的`launch.json`：
 
-![调试速选框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/debugger-extension/debug-init-config.png)
+![调试速选框](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/debugger-extension/debug-init-config.png)
 
 除了在`package.json`中静态定义`launch.json`的初始内容，你还可以使用`DebugConfigurationProvider`动态注入初始配置内容（详情见下[使用DebugConfigurationProvider](#使用DebugConfigurationProvider)）。
 

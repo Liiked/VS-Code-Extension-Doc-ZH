@@ -60,7 +60,7 @@ vscode.languages.registerHoverProvider('javascript', {
 
 诊断信息是提示代码问题的一种方式。
 
-![diagnostics](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/diagnostics.gif)
+![diagnostics](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/diagnostics.gif)
 
 ##### 语言服务器协议
 
@@ -114,7 +114,7 @@ function onChange() {
 
 代码补全可以给用户提供内容感知建议。
 
-![code-completion](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-completion.gif)
+![code-completion](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/code-completion.gif)
 
 ##### 语言服务器协议
 
@@ -167,7 +167,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 悬浮信息会展示在鼠标光标的下方，为用户提供符号/对象的相关信息，一般展示关于符号的类型和描述。
 
-![hovers](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/hovers.gif)
+![hovers](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/hovers.gif)
 
 ##### 语言服务器协议
 
@@ -217,7 +217,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 当用户输入函数和方法时，显示调用该方法的相关信息。
 
-![signature-help](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/signature-help.gif)
+![signature-help](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/signature-help.gif)
 
 ##### 语言服务器协议
 
@@ -270,7 +270,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户查看变量/函数/方法的定义。
 
-![goto-definition](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/goto-definition.gif)
+![goto-definition](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/goto-definition.gif)
 
 ##### 语言服务器协议
 
@@ -321,7 +321,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在当前编辑器直接查看变量/函数/方法的定义的源代码。
 
-![find-references](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/find-references.gif)
+![find-references](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/find-references.gif)
 
 ##### 语言服务器协议
 
@@ -373,7 +373,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在打开的编辑器中查看某个符号的全部匹配项。
 
-![document-highlights](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-highlights.gif)
+![document-highlights](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/document-highlights.gif)
 
 ##### 语言服务器协议
 
@@ -424,7 +424,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在打开的编辑器中快速跳转到任何符号定义。
 
-![document-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/document-symbols.gif)
+![document-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/document-symbols.gif)
 
 ##### 语言服务器协议
 
@@ -475,7 +475,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在打开的文件夹（工作区）中快速跳转到任何符号定义。
 
-![workspace-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/workspace-symbols.gif)
+![workspace-symbols](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/workspace-symbols.gif)
 
 ##### 语言服务器协议
 
@@ -526,7 +526,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户提供处理错误和警告的办法。如果有更正操作可用，就会在那个错误边上显示一个小灯泡。当用户点击灯泡的时候，会显示出操作列表。
 
-![quick-fixes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/quick-fixes.gif)
+![quick-fixes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/quick-fixes.gif)
 
 ##### 语言服务器协议
 
@@ -578,7 +578,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户弹出一个可以操作、包含上下文信息的分隔弹出框。
 
-![code-lens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/code-lens.gif)
+![code-lens](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/code-lens.gif)
 
 ##### 语言服务器协议
 
@@ -635,7 +635,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户在文件中预览和修改颜色。
 
-![color-decorators](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/color-decorators.png)
+![color-decorators](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/color-decorators.png)
 
 ##### 语言服务器协议
 
@@ -691,7 +691,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 提供整个文档的代码格式化支持。
 
-![format-document](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document.gif)
+![format-document](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/format-document.gif)
 
 ##### 语言服务器协议
 
@@ -741,7 +741,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 为用户选中区域提供代码格式化支持。
 
-![format-document-range](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-document-range.gif)
+![format-document-range](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/format-document-range.gif)
 
 ##### 语言服务器协议
 
@@ -795,7 +795,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 !> **注意：**用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着本功能。
 
-![format-on-type](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-on-type.gif)
+![format-on-type](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/format-on-type.gif)
 ##### 语言服务器协议
 
 为了响应请求`initialize`方法，语言服务器需要声明它能提供这项功能。服务器还得告诉客户端哪些字符需要被格式化，`moreTriggerCharacters`是可选的。
@@ -849,7 +849,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
 
 允许用户重命名符号，并更新对应符号的全部引用。
 
-![rename](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/rename.gif)
+![rename](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/language-extensions/images/language-support/rename.gif)
 
 ##### 语言服务器协议
 

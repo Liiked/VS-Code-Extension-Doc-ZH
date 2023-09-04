@@ -53,19 +53,19 @@ VS Code 插件市场的服务是[Visual Studio Team Services](https://visualstud
 
 下面的例子里，我们假设组织名为`vscode`，从你的组织主页（例如：`https://dev.azure.com/vscode` ）进入**安全（Security）**页面：
 
-![publishers1](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token1.png)
+![publishers1](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/working-with-extensions/images/publishing-extension/token1.png)
 
 选择 Personal Access Token，点击**New Token**创建一个新的 Personal Access Token
 
-![publishers2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token2.png)
+![publishers2](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/working-with-extensions/images/publishing-extension/token2.png)
 
 给 Personal Access Token 添加描述，过期时间等等，你最好把过期时间设置为 1 年，这样你接下就能方便很多，选择**custom defined（用户自定义）**范围，然后点击**Show all scopes(显示全部)**
 
-![publishers3](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token3.png)
+![publishers3](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/working-with-extensions/images/publishing-extension/token3.png)
 
 最后，在这个列表中找到**Marketplace**，并勾选**Acquire**和**Manage**
 
-![publishers4](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token4.png)
+![publishers4](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/working-with-extensions/images/publishing-extension/token4.png)
 
 点击**Create**，你就会看到新创建的 Personal Access Token 了，复制好，你接下来就会用到这个 token 来创建一个*发行方*了。
 
