@@ -91,7 +91,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 `vscode.window.createWebviewPanel`函数创建并在编辑区展示了一个webview，下图显示了如果你试着运行`catCoding.start`命令会显示的东西：
 
-![一个空的webview](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-no_content.png)
+![一个空的webview](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-no_content.png)
 
 我们的命令以正确的标题打开了一个新的webview面板，但是没有任何内容！要想把我们的猫加到这个面板里面，我们需要`webview.html`设置HTML内容。
 
@@ -135,7 +135,7 @@ function getWebviewContent() {
 
 如果你再次运行命令，应该能看到下图：
 
-![含有html内容的webview](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-html.png)
+![含有html内容的webview](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-html.png)
 
 大功告成！
 
@@ -197,7 +197,7 @@ function getWebviewContent(cat: keyof typeof cats) {
 }
 ```
 
-![更新webview内容](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-update.gif)
+![更新webview内容](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-update.gif)
 
 因为`webview.html`方法替换了整个webview内容，页面看起来像重新加载了一个iframe。记住：如果你在webview中使用了脚本，那就意味着`webview.html`的重置会使脚本状态重置。
 
@@ -287,13 +287,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 当webview面板被移动到了非激活标签上，它就隐藏起来了。但这时并不是销毁，当重新激活标签后，VS Code会从`webview.html`自动恢复webview的内容。
 
-![webview自动恢复内容](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-restore.gif)
+![webview自动恢复内容](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-restore.gif)
 
 `.visible`属性告诉你当前webview面板是否是可见的。
 
 插件也可以通过调用`reveal()`方法，程序性地将webview面板激活。这个方法可以接受一个用于放置面板的目标视图布局。一个面板一次只能显示在一个编辑布局中。调用`reveal()`或者拖动webview面板到新的编辑布局中去。
 
-![在标签页中移动webview视图](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-drag.gif)
+![在标签页中移动webview视图](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-drag.gif)
 
 现在更新我们的插件，一次只允许存在一个webview视图。如果面板处于非激活状态，那`catCoding.start`命令就把这个面板激活。
 
@@ -337,7 +337,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 下面是一个新插件的行为：
 
-![在单个面板中展示](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-single_panel.gif)
+![在单个面板中展示](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-single_panel.gif)
 
 不论何时，如果webview的可见性改变了，或者当webview移动到了新的视图布局中，就会触发`onDidChangeViewState`。我们的插件可以利用这个时间改变布局中的webview显示的猫：
 
@@ -390,19 +390,19 @@ function updateWebviewForCat(panel: vscode.WebviewPanel, catName: keyof typeof c
 }
 ```
 
-![响应onDidChangeViewState事件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-ondidchangeviewstate.gif)
+![响应onDidChangeViewState事件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-ondidchangeviewstate.gif)
 
 ### 检查和调试webviews
 
 在命令面板中输入**Developer: Toggle Developer Tools**能帮助你调试webview。运行命令之后会为当前可见的webview加载一个devtool：
 
-![Webview开发者工具](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/basics-developer_tools.png)
+![Webview开发者工具](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/basics-developer_tools.png)
 
 webview的内容是在webview文档中的一个iframe中的，用开发者工具检查和修改webview的DOM，在webview内调试脚本。
 
 如果你用了webview开发者工具的console，确保你在Console面板左上角的下拉框里选中了当前**激活窗体**环境：
 
-![选择激活窗体](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/debug-active-frame.png)
+![选择激活窗体](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/debug-active-frame.png)
 
 **激活窗体**环境是webview脚本执行的地方。
 
@@ -589,7 +589,7 @@ function getWebviewContent() {
 }
 ```
 
-![在webview中运行脚本](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/scripts-basic.gif)
+![在webview中运行脚本](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/scripts-basic.gif)
 
 哇！真是位高产的喵主子!
 
@@ -671,7 +671,7 @@ function getWebviewContent() {
         `;
 ```
 
-![向webview传递信息](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/scripts-extension_to_webview.gif)
+![向webview传递信息](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/scripts-extension_to_webview.gif)
 
 ### 将webview的信息传递到插件中
 
@@ -738,7 +738,7 @@ function getWebviewContent() {
 }
 ```
 
-![从webview向插件传递信息](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/scripts-webview_to_extension.gif)
+![从webview向插件传递信息](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/scripts-webview_to_extension.gif)
 
 出于安全性考虑，你必须保证VS Code API的私有性，也不会泄露到全局状态中去。
 
@@ -936,7 +936,7 @@ function getWebviewContent() {
 }
 ```
 
-![持久化保留](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/persistence-retrain.gif)
+![持久化保留](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/webview/persistence-retrain.gif)
 
 我们可以注意到计数器没有重置，webview隐藏之后就恢复了。而且不需要多余的代码！`retainContextWhenHidden`的行为就像浏览器一样，脚本和其他内容被暂时挂起，但是一旦webview可见之后就会立即恢复。但是在webview隐藏状态下，你还是不能给它发送消息的。
 

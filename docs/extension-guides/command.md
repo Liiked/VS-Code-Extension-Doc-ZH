@@ -146,7 +146,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 `commands`配置告诉VS Code你的插件提供了一个命令，而且允许你控制命令在UI中的显示。现在，我们的命令终于出现在*命令面板*中了：
 
-![命令面板](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/commands/palette.png)
+![命令面板](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/commands/palette.png)
 
 我们依旧需要使用`registerCommand`将真实的命令id绑定到函数上。也就是说，如果我们的插件没有激活，那么用户从*命令面板*中选择`myExtension.sayHello`也不会有任何效果。为了避免这种事，插件必须注册一个面向全部用户场景的命令`onCommand` `activiationEvent`：
 ```json

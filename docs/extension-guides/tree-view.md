@@ -7,7 +7,7 @@
 
 *视图容器*包含了一列*视图(views)*，这些*视图*又包含在内置的*视图容器*中。
 
-![view-container](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view-container.png)
+![view-container](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/tree-view/view-container.png)
 
 要想配置一个视图容器，你首先得注册`package.json`中的[`contributes.viewsContainers`](/references/contribution-points#contributesviewscontainers)。你还必须配置以下字段：
 
@@ -34,7 +34,7 @@
 
 *视图*是显示在视图容器中的UI片段。使用[`contributes.views`](/references/contribution-points#contributesviews)进行配置，你就可以将新的*视图*添加到内置或者你配置好的视图容器中了。
 
-![view](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view.png)
+![view](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/tree-view/view.png)
 
 要想配置一个*视图*，你首先得注册`package.json`中的[`contributes.views`](/references/vscode-api)。你必须给*视图*配置一个ID外加一个名称，你还可以配置*视图*出现的位置：
 
@@ -70,7 +70,7 @@
 
 使用`when`属性控制这些操作的展示。
 
-![view-actions](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view-actions.png)
+![view-actions](https://media.githubusercontent.com/media/Microsoft/vscode-docs/main/api/extension-guides/images/tree-view/view-actions.png)
 
 例如：
 ```json
