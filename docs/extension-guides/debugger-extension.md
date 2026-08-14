@@ -20,7 +20,6 @@ VS Code已经内置了一个[Node.js](https://nodejs.org/)调试器插件，它�
 本节将帮你创建一个任意调试器都可以和VS Code协作的调试器插件。
 
 ## VS Code 中的调试架构
----
 
 VS Code基于抽象协议，实现了一个原生（非语言相关的）的调试器UI，它可以和任意后台调试程序通信。通常来讲，调试器不会实现这份协议，因此调试器中需要一些中间件去“适配”这个协议。这个中间件一般而言是一个独立和调试器通信的进程。
 
@@ -46,7 +45,6 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 想要了解更多相关内容，请查看[contributes.breakpoints](/extensibility-reference/contribution-points#contributesbreakpoints)和[contributes.debuggers](/extensibility-reference/contribution-points#contributesdebuggers)。
 
 ## 模拟调试插件
----
 
 由于从头开始创建一个调试适配器太繁琐了，所以我们将从简单的DA(我们已经创建过的**入门级调试适配器**)开始。因为它不与真正的调试器进行通信，所以就叫它——*模拟调试*吧。
 
@@ -81,7 +79,6 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 - 卸载该插件并重启VS Code
 
 ## 开发环境配置模拟调试
----
 
 现在让我们下载Mock Debug的源码，然后用VS Code进行开发吧：
 
@@ -147,7 +144,6 @@ npm install
 更多内容请查看[这里](https://microsoft.github.io/debug-adapter-protocol/overview#How_it_works)。
 
 ## 剖析调试器插件的package.json
----
 
 除了提供调试适配的特定实现之外，调试器插件还需要一个配置各种各样和调试相关的`package.json`。
 
@@ -306,7 +302,6 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 
 
 ## 使用DebugConfigurationProvider
----
 
 如果你觉得`package.json`中和调试相关的发布内容配置不够你用，`DebugConfigurationProvider`可以动态控制调试插件下列方面的内容：
 
@@ -335,7 +330,6 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 :::
 
 ## 发布调试器插件
----
 
 通过下面的步骤将你的调试适配器发布到市场上：
 
@@ -343,7 +337,6 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 - 参考[发布插件](/working-with-extensions/publish-extension)部分然后将你的插件上传到市场上
 
 ## 开发调试器插件的其他方式
----
 
 如我们所见，开发一个调试插件涉及到*一个普通插件*再加上一个调试适配器，它们分别运行在不同的会话中。VS Code支持这样的实现，但是简单的办法是还是把*插件*和调试适配器用一个程序实现，这样你就可以在一个调试会话中同时调试了。
 

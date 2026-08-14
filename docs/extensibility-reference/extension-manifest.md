@@ -3,7 +3,6 @@
 每个VS Code插件需要根目录下的`package.json`文件。
 
 ## 字段
----
 
 名称 | 必须 | 类型 | 详细
 ---- |:--------:| ---- | -------
@@ -33,7 +32,6 @@
 你还可以参考[npm的`package.json`](https://docs.npmjs.com/files/package.json)
 
 ## 示例
----
 下面是一份完整的`package.json`示例
 
 
@@ -84,7 +82,6 @@
 ```
 
 ## 市场展示建议
----
 下面是一些让你的插件在[市场](https://marketplace.visualstudio.com/VSCode)上看起来狂拽酷帅吊炸天的小建议。
 
 使用`npm install -g vsce`安装最新的`vsce`。
@@ -155,7 +152,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 :::
 
 ## 使用认证过的标志
----
 出于安全考虑，我们只允许可信服务商提供的标志。
 我们允许来自下列URL前缀的标志：
 
@@ -190,7 +186,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 如果你想用其他标志，欢迎在我们的Github [issue](https://github.com/Microsoft/vscode/issues)页面提供建议。
 
 ## 整合插件配置内容
----
 `yo code`可以帮你轻松地打包TextMate 主题，着色器，代码片段和创建新插件。当你运行了生成器，每一次配置都会创建一个完整、独立的插件包。但是，将多个配置内容整合进一个插件会更方便。比如：你想要支持一门新的语言，你会希望同时提供语法高亮和代码片段，甚至调试支持。
 
 为了整合插件配置，编辑已有的`package.json`文件，然后添加新的配置内容，关联相关文件。
@@ -234,7 +229,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 :::
 
 ## 插件包
----
 你也可以将几个独立的插件打包成一个“插件包”。插件包是指一组可以无冲突安装的插件集合。然后你就可以很方便地把插件分享给其他人，或者为特定情境创建一组插件，比如帮助PHP工程师在VS Code中快速上手。
 
 一个插件包可以包含其他插件，或者直接将其打包到自身中。`package.json`中的`extensionDependencies`描述了这项依赖。
@@ -268,7 +262,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 插件包不应该有除了它内部打包之外的其他插件包，打包好的插件包应该是在整个包里面可以独立管理的。如果一个插件非常依赖另外一个插件，那么这个依赖性应该在`extensionDependencies`中声明。
 
 #### 插件卸载钩子
----
 如果你的插件在删除时需要做一些清理工作，你可以在package.json中的卸载钩子`vscode:uninstall`中注册一个`node`脚本。
 ```json
 {
@@ -283,7 +276,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 :::
 
 ## 使用 Node 模块
----
 下面有几个npmjs的Node.js 模块，可以帮你实现VS Code插件。你可以在插件的`dependencies`部分包含进去。
 
 - [vscode-nls](https://www.npmjs.com/package/vscode-nls) - 支持插件的国际化和本地化。

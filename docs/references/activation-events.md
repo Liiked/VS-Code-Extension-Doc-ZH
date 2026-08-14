@@ -21,7 +21,6 @@
 `package.json`的配置项都可以在[插件清单](/references/extension-manifest)中找到.
 
 ## onLanguage
----
 
 打开特定语言文件时激活事件和相关插件
 
@@ -46,7 +45,6 @@
 ```
 
 ## onCommand
----
 
 调用命令时激活
 
@@ -59,7 +57,6 @@
 ```
 
 ## onDebug
----
 
 调试会话(debug session)启动前激活
 
@@ -83,7 +80,6 @@
 **友情提示**: 如果调试插件比较轻量, 使用`onDebug`. 相反, 根据`DebugConfigurationProvider`实现的对应方法（`provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve`. 参阅[使用调试器插件](/extension-guides/debugger-extension#using-a-debugconfigurationprovider).
 
 ## workspaceContains
----
 
 文件夹打开后，且文件夹中至少包含一个符合glob模式的文件时触发.
 
@@ -94,7 +90,6 @@
 ```
 
 ## onFileSystem
----
 
 以协议（scheme）打开文件或文件夹时触发. 通常是`file`-协议，也可以用自定义的文件供应器函数替换掉，比如`ftp`、`ssh`.
 
@@ -107,7 +102,6 @@
 ```
 
 ## onView
----
 
 指定id的视图展开时触发:
 
@@ -120,7 +114,6 @@
 ```
 
 ## onUri
----
 
 插件的系统级URI打开时触发. 这个URI协议需要带上`vscode`或者 `vscode-insiders`协议. URI主机名必须是插件的唯一标识，剩余的URI是可选的. 
 
@@ -139,7 +132,6 @@
 - `vscode-insiders://vscode.git/init`(for VS Code Insiders)
 
 ## onWebviewPanel
----
 
 当相应`viewType`的`webview`恢复时触发. 
 
@@ -155,7 +147,6 @@
 VS Code 恢复 (restore) `viewType` 为 `catCoding` 的 webview 时会激活插件. 调用 `window.createWebviewPanel` 可以设置 `viewType`, 你可能会需要其它的激活事件(比如: `onCommand`)初始化你的插件，然后再创建`webview`视图. 
 
 ## onCustomEditor
----
 
 当相应 `viewType` 的 [自定义编辑器](/extension-guides/custom-editors) 被创建时触发. 
 
@@ -174,7 +165,6 @@ VS Code 恢复 (restore) `viewType` 为 `catCustoms.pawDraw` 的自定义编辑�
 :::
 
 ## onAuthenticationRequest
----
 
 当插件通过 `authentication.getSession()` API和相应的 `providerId` 请求认证会话时会激活插件. 
 
@@ -192,7 +182,6 @@ VS Code 恢复 (restore) `viewType` 为 `catCustoms.pawDraw` 的自定义编辑�
 :::
 
 ## onStartupFinished
----
 
 VS Code启动一段时间后才会激活插件. 它类似于 `*` 类激活事件，但它不会减慢VS Code启动. 目前，该事件在所有 `*` 类插件激活完成后触发. 
 
@@ -205,7 +194,6 @@ VS Code启动一段时间后才会激活插件. 它类似于 `*` 类激活事件
 ```
 
 ## Start up
----
 
 当VS Code启动时触发. 为了保证良好的用户体验，只在你的插件没有其他任何激活事件的前提下，添加这个激活事件. 
 

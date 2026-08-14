@@ -5,7 +5,6 @@
 本节介绍了插件应该怎样使用[Rakefiles](https://ruby.github.io/rake/)中的**自动检测任务**配置项，为最终用户提供任务。完整的源代码请参阅[这里](https://github.com/Microsoft/vscode-extension-samples/tree/master/task-provider-sample)。
 
 ## 定义任务
----
 
 想要定义一个系统级别的任务，插件需要通过properties定义任务，在下面叫做Rake的例子中，任务是这样定义的：
 ::: info
@@ -36,7 +35,6 @@
 上面代码里面，我们为`rake`*任务集*配置了一个**任务定义**。任务定义有两个属性`task`和`file`，`task`是Rake任务的名字，file指向了包含任务的文件。`task`属性是必须的，`file`则为可选。如果省略了`file`属性，则会使用工作区根目录下名为`RakeFile`的文件。
 
 ## 任务供应器函数
----
 
 和语言供应器函数相同，任务供应器使插件支持代码补全，一个插件可以只注册一个任务供应器函数然后执行所有可用的任务集合。使用`vscode.tasks`命名空间达成这一目标：
 ```typescript

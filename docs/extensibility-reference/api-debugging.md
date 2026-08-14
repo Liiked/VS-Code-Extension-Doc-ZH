@@ -19,7 +19,6 @@ VS Code 允许插件创作者制作新的**调试器插件**，或为已有的�
 下面是我们为调试器插件提供的最新的API。
 
 ## 调试器插件API
----
 
 所有供调试使用的插件API都在`vscode.debug`下的命名空间中，你可以在[vscode 命名空间API参考](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/vscode-api.md#debug)中查看。
 
@@ -64,7 +63,6 @@ VS Code 允许插件创作者制作新的**调试器插件**，或为已有的�
 :::
 
 ## 调试适配器协议（DAP - Debug Adapter Protocol）
----
 你可以在[vscode-debugadapter-node](https://github.com/Microsoft/vscode-debugadapter-node)仓库中找到JSON格式或者TypeScript定义的[调试适配器协议](https://microsoft.github.io/debug-adapter-protocol)规格说明书。这两个文件都详细地列出了每个协议的请求、响应和事件结构。这个协议在NPM库[vscode-debugprotocol](https://www.npmjs.com/package/vscode-debugprotocol)中也可以找到。
 
 我们已经实现了调试适配器协议的TypeScript和C#客户端版本，不过只有JavaScript/TypeScript的客户端库在NPM[vscode-debugadapter-node](https://github.com/Microsoft/vscode-debugadapter-node)中是可用的。C#的库可以在[Mono Debug](https://github.com/Microsoft/vscode-mono-debug/blob/master/src/DebugSession.cs)中找到。
@@ -79,7 +77,6 @@ GitHub项目 | 描述 | 实现语言
 [Mono Debug](https://github.com/Microsoft/vscode-mono-debug.git) | 一个供Mono使用的简单的C#调试器 | C#
 
 ## 一语道破——调试适配器协议
----
 我们快速地看一下VS Code和调试器间的互动，这应该能帮你快速地实现基于调试适配器协议的调试适配器。
 
 调试器会话启动，VS Code加载调试适配器，通过*stdin*和*stdout*进行通信。VS Code发送了一个**初始化**请求，然后用*行列值是0，1*的路径格式信息（原生或URI）配置好调试器。如果你的调试器是TypeScript或C#实现的`Debugsession`中派生出来的，你则不需要自行处理初始化请求。

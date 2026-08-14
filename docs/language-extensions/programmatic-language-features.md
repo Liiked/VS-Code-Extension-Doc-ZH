@@ -31,7 +31,6 @@ vscode.languages.registerHoverProvider('javascript', {
 深入指南，请移步至[语言服务器插件指南](/language-extensions/language-server-extension-guide)
 
 ## 语言功能列表
----
 
 | VS Code API                                                                                                                       | LSP method                                                                                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,7 +55,6 @@ vscode.languages.registerHoverProvider('javascript', {
 | [`registerFoldingRangeProvider`](https://code.visualstudio.com/api/references/vscode-api#languages.registerFoldingRangeProvider)                               | [FoldingRange](https://microsoft.github.io/language-server-protocol/specification#textDocument_foldingRange)                                                                                                                             |
 
 ## 提供诊断信息
----
 
 诊断信息是提示代码问题的一种方式。
 
@@ -111,7 +109,6 @@ function onChange() {
 > 不仅仅为打开的编辑器提供诊断，而是诊断当前打开的文件目录中的所有资源，不论文件是被打开还是关闭。
 
 ## 提供补全建议
----
 
 代码补全可以给用户提供内容感知建议。
 
@@ -164,7 +161,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 当用户挑选补全项时，动态计算补全项的相关信息，这条信息会浮现在补全项旁边。
 
 ## 显示悬浮提示
----
 
 悬浮信息会展示在鼠标光标的下方，为用户提供符号/对象的相关信息，一般展示关于符号的类型和描述。
 
@@ -214,7 +210,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 对方法名进行着色，就像你的源码一样
 
 ## 函数和方法签名
----
 
 当用户输入函数和方法时，显示调用该方法的相关信息。
 
@@ -267,7 +262,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 符号定义
----
 
 允许用户查看变量/函数/方法的定义。
 
@@ -318,7 +312,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 查找符号的全部引用
----
 
 允许用户在当前编辑器直接查看变量/函数/方法的定义的源代码。
 
@@ -370,7 +363,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 高亮匹配符号
----
 
 允许用户在打开的编辑器中查看某个符号的全部匹配项。
 
@@ -421,7 +413,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 显示当前文档中的符号定义
----
 
 允许用户在打开的编辑器中快速跳转到任何符号定义。
 
@@ -472,7 +463,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 显示文件夹中的符号定义
----
 
 允许用户在打开的文件夹（工作区）中快速跳转到任何符号定义。
 
@@ -523,7 +513,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 处理错误和警告
----
 
 为用户提供处理错误和警告的办法。如果有更正操作可用，就会在那个错误边上显示一个小灯泡。当用户点击灯泡的时候，会显示出操作列表。
 
@@ -575,7 +564,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 提供源码级别的操作，如重构、提取方法等。
 
 ## CodeLens - 为源代码提供更多操作
----
 
 为用户弹出一个可以操作、包含上下文信息的分隔弹出框。
 
@@ -632,7 +620,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 将Codelens结果绑定到响应`codeLens/resolve`的命令上。
 
 ## 颜色拾取器
----
 
 允许用户在文件中预览和修改颜色。
 
@@ -688,7 +675,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 格式化代码
----
 
 提供整个文档的代码格式化支持。
 
@@ -738,7 +724,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 你应该尽量减少代码格式化的影响。稍有不慎，诊断功能就可能失效。
 
 ## 格式化选中区域
----
 
 为用户选中区域提供代码格式化支持。
 
@@ -790,7 +775,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 你应该尽量减少代码格式化的影响。稍有不慎，诊断功能就可能失效。
 
 ## 随用户输入格式化代码
----
 
 支持用户输入时动态调整文本格式。
 ::: warning
@@ -847,7 +831,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 你应该尽量减少代码格式化的影响。稍有不慎，诊断功能就可能失效。
 
 ## 重命名符号
----
 
 允许用户重命名符号，并更新对应符号的全部引用。
 

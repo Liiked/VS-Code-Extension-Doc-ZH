@@ -4,7 +4,6 @@
 你需要安装Node.js，并配置好`$PATH`。Node.js安装好之后通常会包含npm——Node.js的包管理器，也就是我们马上要用来安装插件生成器的东西。
 
 ## 安装生成器
----
 在终端（windows环境下为cmd, powershell）输入
 ```bash
 npm install -g yo generator-code
@@ -22,7 +21,6 @@ yo code
 :::
 
 ## 生成器选项
----
 > Yeoman生成器能帮你创建一个新插件的骨架，也可以基于已有的TetMate配置文件创建一个开箱即用的语言、主题或者片段。
 
 #### 新插件（TypeScript）
@@ -66,7 +64,6 @@ yo code
 - 输入插件名称，得到同名项目文件夹
 
 ## 我的插件目录在哪？
----
 每个操作系统的插件目录都不一样，你可能会用到的。
 
 ``` bash
@@ -78,7 +75,6 @@ Linux ~/.vscode/extensions
 
 
 ## FAQ
----
 **问: 为什么`yo code`在我的windows 10上无法识别键盘方向键？**
 
 ![yo-workaround](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/yocode/yo-workaround.png)

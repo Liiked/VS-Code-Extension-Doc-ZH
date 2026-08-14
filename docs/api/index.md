@@ -7,7 +7,6 @@ VS Code内置了扩展能力，在插件API加持之下，VS Code几乎每一个
 - 代码示例和各个指南的位置，方便你快速入门。如果你只是想看看已经发布的插件，可移步至[VS Code插件市场](https://marketplace.visualstudio.com/vscode)
 
 ## 插件能做什么？
----
 
 下面我们看看使用插件API能做到些什么：
 - 改变VS Code的颜色和图标主题——[主题](/extension-capabilities/theming)
@@ -19,7 +18,6 @@ VS Code内置了扩展能力，在插件API加持之下，VS Code几乎每一个
 如果你想大概浏览一下所有的插件API，请参阅[插件功能概述](/extension-capabilities)。[插件指南](/extension-guides)列出了各种插件API使用的示例代码和指南。
 
 ## 如何构建插件？
----
 
 想要做出一个好插件需要花费不少精力，我们来看看这个教程的每个章节能为你做点什么：
 
@@ -39,7 +37,6 @@ VS Code 每个月更新一次，插件 API 也随着每个版本的发布而更�
 - [Proposed extension APIs](https://code.visualstudio.com/updates#_proposed-extension-apis) - 给即将到来的实验性 API 提供反馈
 
 ## 寻求帮助
----
 
 如果你在开发中遇到了问题，请尝试：
 - [ Stack Overflow](https://stackoverflow.com/questions/tagged/visual-studio-code)：其中有将近[12k](https://stackoverflow.com/questions/tagged/visual-studio-code)个打了`visual-studio-code`标签的问题，而且半数以上都已经有了答案，搜索你遇到的问题，提问，或者帮助其他人解决VS Code中遇到的问题。

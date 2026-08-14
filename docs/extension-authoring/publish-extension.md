@@ -5,14 +5,12 @@
 [vsce](https://github.com/Microsoft/vsce)是一个用于将插件发布到[市场](https://code.visualstudio.com/docs/editor/extension-gallery)上的命令行工具。
 
 ## 安装
----
 请确认本机已经安装了[Node.js](https://nodejs.org/)，然后运行：
 ```bash
 npm install -g vsce
 ```
 
 ## 使用
----
 然后你就可以在命令行里直接使用`vsce`了。下面是一个快速发布的示例（在你登录和打包好插件之后）:
 
 ```bash
@@ -24,7 +22,6 @@ Successfully published uuid@0.0.1!
 更多可用的命令参数，请使用`vsce --help`
 
 ## 发布教程
----
 ::: warning
 **注意：** 出于安全考虑，`vsce`不会发布包含用户提供SVG图片的插件。
 :::
@@ -142,7 +139,6 @@ vsce package
 如果你想发布一个使用这些API的插件，则设置版本依赖为`^1.9.0`，你的插件则只能安装在`>=1.9.0`的VS Code上，也就意味着所有当前的Insider版本都可以用得上，而稳定版只有在更新到`1.9.0`才能使用。
 
 ## 进阶用法
----
 
 #### 符合市场的插件
 

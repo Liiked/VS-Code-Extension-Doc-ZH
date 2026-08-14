@@ -12,7 +12,6 @@
 - API概念解释
 
 ## 指南和例子
----
 
 下面是一份指南和例子的表格，虽然每个指南都要有示例代码，但是一些示例目前暂时还没有与之匹配的指南。
 
@@ -33,7 +32,6 @@
 | [Vim Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/vim-sample)                         | N/A                                                                | [commands](https://code.visualstudio.com/api/references/vscode-api#commands)<br>[StatusBarItem](https://code.visualstudio.com/api/references/vscode-api#StatusBarItem)<br>[window.createStatusBarItem](https://code.visualstudio.com/api/references/vscode-api#window.createStatusBarItem)<br>[TextEditorCursorStyle](https://code.visualstudio.com/api/references/vscode-api#TextEditorCursorStyle)<br>[window.activeTextEditor](https://code.visualstudio.com/api/references/vscode-api#window.activeTextEditor)<br>[Position](https://code.visualstudio.com/api/references/vscode-api#Position)<br>[Range](https://code.visualstudio.com/api/references/vscode-api#Range)<br>[Selection](https://code.visualstudio.com/api/references/vscode-api#Selection)<br>[TextEditor](https://code.visualstudio.com/api/references/vscode-api#TextEditor)<br>[TextEditorRevealType](https://code.visualstudio.com/api/references/vscode-api#TextEditorRevealType)<br>[TextDocument](https://code.visualstudio.com/api/references/vscode-api#TextDocument) |
 
 ## 语言插件示例
----
 
 下面的部分是[语言插件](/language-extensions)相关示例：
 

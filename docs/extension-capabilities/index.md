@@ -8,7 +8,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
 不过，我们也会告诉你一些[限制](#限制)，为了避免插件影响到VS Code的性能和稳定性。比如：插件不可以修改VS Code UI底层的DOM。
 
 ## 常用功能
----
 
 [常用功能](/extension-capabilities/common-capabilities)是你在任何插件中都可能用到的核心功能。
 
@@ -22,7 +21,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
 - 使用进度API提示耗时较长的操作。
 
 ## 主题
----
 
 [主题](/extension-capabilities/theming)控制着VS Code的外观——编辑器中的源代码的颜色和VS Code UI颜色。如果你曾经想要把VS Code搞成绿色，想象自己在黑客帝国里写代码，或者想要追求极简性冷淡灰色风格，那么主题章节就是为你而来。
 
@@ -34,7 +32,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
  - 添加自定义图标
 
 ## 声明式添加语言特性
----
 
 [声明式语言特性](/language-extensions#声明式语言特性)添加了基础的编程语言编辑支持，如括号匹配、自动缩进和语法高亮。这些功能都可以通过声明配置而不用写任何代码就可以获得，更高级的语言特性如IntelliSense或调试，请看[编程式添加语言特性](#编程式添加语言特性)
 
@@ -47,7 +44,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
  - 将现有的 TextMate 语法迁移到VS Code中
 
 ## 编程式添加语言特性
----
 
 [编程式添加语言特性](/language-extensions#编程式语言特性)可以为编程语言添加更为丰富的特性，如：悬停提示、转跳定义、错误诊断、IntelliSense和CodeLens。这些语言特性暴露于[`vscode.languages.*`](https://code.visualstudio.com/api/references/vscode-api#languages)API。语言插件可以直接使用这些API，或是自己写一个语言服务器，通过[语言服务器库](https://github.com/Microsoft/vscode-languageserver-node)将它适配到VS Code。
 
@@ -62,7 +58,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
 - 为一门语言添加代码折叠、面包屑、轮廓支持
 
 ## 扩展工作台
----
 
 [扩展工作台](/extension-capabilities/extending-workbench)加强了 VS Code 工作台的UI，为资源管理侧边栏添加了新的右击行为，你甚至可以用 [TreeView](/extension-guides/tree-view)API构建自定义的资源管理侧边栏。如果你的插件需要完全自定义用户界面，那就使用[Webview API](/extension-guides/webview)和HTML，CSS，Javascript构建你自己的UI。
 
@@ -76,7 +71,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
  - 配置*源控制(git/svn等)*来源
 
 ## 调试
----
 
 你可以利用[调试](https://code.visualstudio.com/docs/editor/debugging)来制作[调试器插件](/extension-guides/debugger-extension)，这个插件需要将VS Code的调试UI连接到真实的调试器或者运行时上。
 
@@ -96,7 +90,6 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
  - 编程式管理断点
 
 ## 限制
----
 
 最后，我还对插件也提出了一些限制。
 

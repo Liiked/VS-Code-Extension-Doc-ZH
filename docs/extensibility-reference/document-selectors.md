@@ -7,7 +7,6 @@
 并不是所有文件都是储存在磁盘上的，比如一份刚刚创建的文件。除非特别指明，文档选择器通常会**应用**于所有文档类型。用[DocumentFilter](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DocumentFilter)的`scheme`属性将协议范围缩小，比如说，`{ scheme: 'file', language: 'typescript' }`是特用于储存在磁盘上的TypeScript文件的。
 
 ## 文档选择器
----
 VS Code插件 API结合了特定的语言特性，通过文档选择器的[DocumentSelector](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DocumentSelector)类型，可以支持如智能感知（IntelliSense）的特性，这是实现特定语言所支持特性的最为简单的机制。
 
 下面的片段注册了一个TypeScript文件的[HoverProvider](https://code.visualstudio.com/docs/extensionAPI/vscode-api#HoverProvider)，文档选择器以`typescript`作为语言标识符。
@@ -41,7 +40,6 @@ vscode.languages.registerHoverProvider({ scheme: 'untitled', language: 'typescri
 ```
 
 ## 文档协议
----
 文档的`scheme`常常不受人待见，但是它实际上提供了非常重要的信息。大部分文件都是储存在磁盘上的，插件创作者也常假设自己正在处理的文档也是存在磁盘上的。用一个简单的`typescript`选择器做个例子，其中的假设就是**Typescript在磁盘上**，不过大部分开发场景都过于宽松了，使用了诸如`{ scheme: 'file', language: 'typescript' }`显式的选择器。
 
 当插件特定依赖于从磁盘上读写时，这个问题显得尤为重要。请看下面的代码：
@@ -67,5 +65,4 @@ vscode.languages.registerHoverProvider({ scheme: 'file', language: 'typescript' 
 ```
 
 ## 总结
----
 文档通常都储存在文件系统中，但也有例外：未保存的新文件、Git使用的缓存文件、FTP上的远程文件等等。如果你的插件特性依赖于磁盘读取，那么你就要用文档选择器时应带上`file`协议。

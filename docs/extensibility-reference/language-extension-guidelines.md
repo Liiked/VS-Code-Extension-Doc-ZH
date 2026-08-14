@@ -14,7 +14,6 @@
 为了让你更方便地决定哪些特性应该先实现，哪些应该是之后用来改进代码的，我们按language server protocol的类名和方法的出现顺序一一展示在下面。每个指引下面都包含了**基础**支持和**进阶**实现。
 
 ## 基于**配置**的语言支持
----
 [语法高亮](#语法高亮)，[代码片段](#源代码片段)和[智能括号匹配](#智能括号匹配)可以通过声明配置而不需要任何插件代码直接实现。
 
 #### 语言标识符
@@ -22,7 +21,6 @@
 VS Code 通过语言标识符映射不同的语言配置和对应的语言实现。语言标识符是*小写字符串*表示的编程语言或文件类型。例如，Javascript的语言ID是`javascript`，而Markdown文件则是`markdown`。已经支持的语言标识符可以在[这里](https://code.visualstudio.com/docs/languages/identifiers)找到。
 
 ## 语法高亮
----
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/syntax-highlighting.png)
 
 想要支持语法高亮，插件需要在`package.json`中注册一个TextMate语法`.tmLanguage`。
@@ -56,7 +54,6 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 > 为语法提供术语、表达式解析，然后支持变量和函数引用等等的色彩支持。
 
 ## 源代码片段
----
 ![snippets](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/snippets.gif)
 
 有了代码片段之后，你可以用占位符的形式提供源代码片段模板。在插件的`package.json`中注册一个包含代码片段的文件。在[创建你自己的代码片段](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)章节中学习更多VS Code代码片段协议。
@@ -98,7 +95,6 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 > ```
 
 ## 智能括号匹配
----
 ![smart-editing](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/smart-editing.gif)
 
 在插件的`package.json`中进行配置
@@ -157,7 +153,6 @@ VS Code支持两种格式的语法文件——Plist（`.tmLanguage`）和JSON（
 > ```
 
 ## 编程语言支持
----
 
 除上面介绍的语言特性外，剩下的特性需要写一些插件代码去处理VS Code的请求。你可以通过[language server protocol](https://microsoft.github.io/language-server-protocol)将插件实现为独立的服务器，或者直接在插件的`active`方法内注册一个*供应器（provider）*。这两种方法在接下的篇章里面会分别以**通过语言服务器实现**和**直接实现**展示。
 
@@ -172,7 +167,6 @@ const GO_MODE: vscode.DocumentFilter = { language: 'go', scheme: 'file' };
 ```
 
 ## 显示悬浮提示（Hovers）
----
 *悬浮提示*提供了鼠标悬停处关于 符号/对象 的相关信息，显示的内容通常是符号的类型和描述。
 
 ![hovers](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/hovers.gif)
@@ -219,7 +213,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 按照你的主题对匹配的*method*进行着色
 
 ## 显示代码补全提示
----
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/code-completion.gif)
 
@@ -272,7 +265,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 为用户选择的代码补全项提供解析函数和其他信息，信息就显示在选中项的旁边。
 
 ## 提供诊断信息
----
 
 诊断信息是一种提示代码错误的常见方式。
 
@@ -326,7 +318,6 @@ function onChange() {
 > 不仅仅为打开的编辑器报告诊断信息，而是为项目文件夹的所有资源提供诊断，不论这些资源是不是在编辑器中打开。
 
 ## 为函数和方法提供帮助信息
----
 当用户输入函数或者方法时，显示将要调用的函数/方法的相关信息。
 
 ![signature-help](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/signature-help.gif)
@@ -374,7 +365,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 显示符号定义
----
 
 允许用户查看变量、函数、方法的定义。
 ![goto-definition](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/goto-definition.gif)
@@ -514,7 +504,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 显示文档中所有符号定义
----
 允许用户快速跳转到编辑器中的任何符号定义。
 
 ![document-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/document-symbols.gif)
@@ -559,7 +548,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 显示文档中所有符号定义
----
 允许用户快速跳转到打开的文件夹（工作区）中的任何符号定义。
 
 ![workspace-symbols](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/workspace-symbols.gif)
@@ -604,7 +592,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 无
 
 ## 修正错误和警告
----
 允许用户对错误或者警告进行更正。如果有可用的操作，就会有个灯泡💡出现在错误/警告旁边。当用户点击灯泡的时候，会出现可用的*代码操作*。
 
 ![quick-fixes](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/quick-fixes.gif)
@@ -650,7 +637,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 提供重构级别的源代码修改，如**提取方法**
 
 ## CodeLens —— 为上下文提供源代码信息
----
 在横屏弹出框中为用户提供可操作的、上下文级别的源代码。
 
 ![code-lens](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/code-lens.gif)
@@ -700,7 +686,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 将CodeLens结果绑定到`codeLens/resolve`上
 
 ## 符号重命名
----
 运行用户重命名符号，更新所有引用的符号。
 
 ![rename](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/rename.gif)
@@ -746,7 +731,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 返回工作区所有需要执行更改的编辑区，例如：跨文件查找引用了相关符号的编辑区。
 
 ## 在编辑器中格式化源代码
----
 为用户提供整个文档的格式化特性。
 
 ![format-document](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-document.gif)
@@ -790,7 +774,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
 
 ## 对选中行进行格式化
----
 为用户提供选中片段的格式化特性。
 
 ![format-document-range](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-document-range.gif)
@@ -836,7 +819,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
 
 ## 对用户输入自动格式化
----
 为用户提供输入时的实时格式化特性。
 
 ![format-document-type](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-on-type.gif)
@@ -888,7 +870,6 @@ export function activate(ctx: vscode.ExtensionContext): void {
 > 不管多小的文本区域都不要放过，尽可能地对文档进行格式化，这对诊断信息提示至关重要，不然可能导致代码错误位置不正确或者丢失报错标记。
 
 ## 显示取色器
----
 允许用户预览和修改文档中的颜色。
 
 ![color-decorators](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/color-decorators.png)

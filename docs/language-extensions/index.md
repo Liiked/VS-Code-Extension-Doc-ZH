@@ -7,7 +7,6 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 语言特性大致可以分为下面两种：
 
 ## 声明式语言特性
----
 
 定义在配置文件的语言功能称之为*编程式语言特性*，比如，[html](https://github.com/Microsoft/vscode/tree/master/extensions/html)，[css](https://github.com/Microsoft/vscode/tree/master/extensions/css)和[typescript-基础支持](https://github.com/Microsoft/vscode/tree/master/extensions/typescript-basics)插件都打包在了VS Code中，所以提供了下列声明式语言特性：
 
@@ -28,7 +27,6 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 
 
 ## 编程式语言特性
----
 
 编程式语言特性包括自动补全、错误检查和跳转到定义。这些功能一般通过*语言服务器*驱动，这个服务器会分析你的项目，然后提供对应的功能。最好的例子就是打包在VS Code中的[`typescript-language-features`](https://github.com/Microsoft/vscode/tree/master/extensions/typescript-language-features)插件，它利用[TypeScript Language Service](https://github.com/Microsoft/TypeScript/wiki/Using-the-Language-Service-API)提供了诸如下面罗列的编程式语言特性：
 
@@ -45,7 +43,6 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 ![multi-ls](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/overview/multi-ls.png)
 
 ## 语言服务器协议（Language Server Protocol）
----
 
 [语言服务器协议](https://microsoft.github.io/language-server-protocol/)将语言服务器（一个静态代码分析工具）和语言客户端（一般就是源代码）之间的通信进行了标准化，这样一来插件开发者就可以只写一次代码分析程序，然后在多个编辑器中重用了。
 
@@ -58,7 +55,6 @@ VS Code通过语言插件可以为各式各样的编程语言提供智能的编�
 ![multi-editor](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/overview/multi-editor.png)
 
 ## 特殊功能
----
 
 #### 多目录工作区支持
 

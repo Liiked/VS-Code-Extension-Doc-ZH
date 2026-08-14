@@ -7,7 +7,6 @@
 下面将分别介绍这两种类型。
 
 ## 工作台色彩
----
 
 创建工作台色彩最简单的方式就是使用现成的主题，然后开始定制。
 
@@ -26,7 +25,6 @@
 - [完整的主题色彩列表](/references/theme-color)
 
 ## 语法色彩
----
 
 新建语法高亮色彩有两种方式：
 - 直接使用社区现成的TextMate主题（`.tmTheme`文件）
@@ -50,7 +48,6 @@
 
 
 ## 创建新的色彩主题
----
 
 既然你已经用过`workbench.colorCustomizations`和`editor.tokenColorCustomizations`笨拙地修改过颜色，那么接下来我们可以见识见识大杀器了。
 
@@ -90,7 +87,6 @@ yo code
 
 
 ## 测试新的主题
----
 
 通过按<kbd>F5</kbd>打开一个插件主机开发窗口，来测试主题。
 
@@ -101,7 +97,6 @@ yo code
 主题文件的改动，会实时同步到`插件开发主机`窗口。
 
 ## 将主题发布到插件市场
----
 
 如果你想把主题分享给社区，通过[插件市场](https://code.visualstudio.com/docs/editor/extension-gallery)去发布它吧。用[vsce publishing tool](/working-with-extensions/publish-extension)打包你的主题然后发布到VS Code市场。
 ::: info
@@ -111,7 +106,6 @@ yo code
 要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](/references/extension-manifest#插件市场展示小贴士)。
 
 ## 添加新的色彩id
----
 
 [色彩配置点](/references/contribution-points#contributescolors)可以配置插件的*色彩id*，当在`workbench.colorCustomizations`和主题文件中使用代码补全时，这些色彩也会出现。用户可以在[插件配置](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义了什么颜色。
 

@@ -1,5 +1,4 @@
 # 语法高亮
----
 
 语法高亮决定源代码的颜色和样式，它主要负责关键字（如javascript中的`if`，`for`）、字符串、注释、变量名等等语法的着色工作。
 
@@ -11,7 +10,6 @@
 在本章开始之前，建议你先玩一下 [作用域检查器](#作用域检查器) 工具看看文件中的符号都长什么样子，他们都应用了哪些主题样式。用内置主题（比如 Dark+）查看一份 TypeScript 文件，你就能同时看到语义高亮和语法高亮了。
 
 ## 分词
----
 
 文本分词是指将文本打碎成一个个片段，并将每个片段根据符号类型（单词、标点等）进行分类。
 
@@ -316,7 +314,6 @@ $ npx js-yaml syntaxes/abc.tmLanguage.yaml > syntaxes/abc.tmLanguage.json
 
 
 ## 主题化
----
 
 主题化是把颜色和样式应用到**符号**的过程。色彩主题定义了主题化规则，但用户可以在*用户设置*中自定义主题化规则。
 
@@ -327,7 +324,6 @@ $ npx js-yaml syntaxes/abc.tmLanguage.yaml > syntaxes/abc.tmLanguage.json
 [色彩主题](/extension-guides/color-theme) 章节介绍了如何创建新的色彩主题，语义化分词的主题化则在[语义高亮](/language-extensions/semantic-highlight-guide)中。
 
 ## 作用域检查器
----
 
 VS Code自带的作用域检查器能帮你调试语法文件。它能显示当前位置*符号*作用域，以及应用在上面的主题规则和元信息。
 

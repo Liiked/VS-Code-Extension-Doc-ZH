@@ -1,5 +1,4 @@
 # 自定义编辑器 API
----
 
 自定义编辑器允许开发者创建完全定制化的可读写编辑器，它可以替代 VS Code 中标准的文本编辑器，编辑一些特殊类型的资源。比如说：
 - 预览资产(assests)文件，如直接在 VS Code 中查看3D 模型着色器
@@ -14,7 +13,6 @@
 不过，如果你觉得自己已经准备好构建一个很酷的自定义编辑器了，那么就让我们开始吧！确保你已经下载了 [自定义编辑器 示例](https://github.com/microsoft/vscode-extension-samples/tree/master/custom-editor-sample)，我们的教程将跟随这个示例和文档逐步介绍自定义编辑器的相关 API。
 
 ## 链接
----
 
 [自定义编辑器 示例](https://github.com/microsoft/vscode-extension-samples/tree/master/custom-editor-sample)
 
@@ -24,7 +22,6 @@
 - [`CustomTextEditorProvider`](https://code.visualstudio.com/api/references/vscode-api#CustomTextEditorProvider)
 
 ## 本 API 的基础
----
 
 自定义编辑器是特定类型资源文件的编辑视图，它会替换 VS Code 中的标准文本编辑器展示的位置。自定义编辑器分为两部分：用户可交互的**视图**和你的插件与底层资源文件进行交互的**文档模型**。
 
@@ -83,7 +80,6 @@
 你一定要记住 `onCustomEditor` 只会在 VS Code 需要创建自定义编辑器实例的时候才会调用，如果 VS Code 只是展示自定义编辑器的一些信息，比如**视图：使用...重新打开**命令——你的插件不会被激活。
 
 ## 自定义文本编辑器
----
 
 在自定义文本编辑器中，你可以控制文本文件的编辑功能。这类文件可以是纯文本文件、[CSV](https://en.wikipedia.org/wiki/Comma-separated_values)、JSON 或者 XML。自定义文本编辑器使用 VS Code 标准 [TextDocument](https://code.visualstudio.com/api/references/vscode-api#TextDocument) 作为文档模型。
 
@@ -142,7 +138,6 @@ VS Code 处理自定义文本编辑器视图（webview）的视图组件生命�
 最后，如果更新所有的 webview 开销太高，请考虑 [debouncing](https://davidwalsh.name/javascript-debounce-function) 到 webview 的更新操作。
 
 ## 自定义编辑器
----
 
 你可以使用 `CustomEditorProvider` 和 `CustomReadonlyEditorProvider` 创建二进制文件的自定义编辑器。通过这个 API，你可以完全掌控显示给用户的文件、如何编辑以及通过你的插件深入控制 `save` 操作和其他文件操作。如果你在为一个文本格式的文件构建编辑器，强烈建议你使用[`CustomTextEditor`](#自定义文本编辑器) ，在这种场景下，这个 API 实现起来更为简单。
 

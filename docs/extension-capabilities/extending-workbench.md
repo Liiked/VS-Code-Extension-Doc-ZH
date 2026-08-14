@@ -17,22 +17,18 @@ VS Code提供了各式各样的API让在工作台你添加自己的组件。比�
 - 状态栏：[VSCodeVim 插件](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) 添加了一个[状态栏项目](#状态栏项)
 
 ## 视图容器
----
 
 在[`contributes.viewsContainers`](/extensibility-reference/contribution-points#contributesviewscontainers)发布内容配置中，你可以添加新的视图容器在5个内置的视图容器中。学习更多[树视图](/extension-guides/tree-view)。
 
 ## 树视图
----
 
 在[`contributes.views`](/extensibility-reference/contribution-points#contributesviews)发布内容配置中，你可以添加在任何视图容器岁添加新的视图。学习更多[树视图](/extension-guides/tree-view)。
 
 ## Webview
----
 
 Webview是使用HTML/CSS/JS高度定制的视图。它们显示在编辑器区域中。详见[Webview指南](/extension-guides/webview)。
 
 ## 状态栏项
----
 
 插件可以创建自定义的[`StatusBarItem`](https://code.visualstudio.com/api/references/vscode-api#StatusBarItem)显示在状态栏中。状态栏项可以显示文本和图标，还可以在点击事件触发时运行命令。
 

@@ -7,7 +7,6 @@
 本节会介绍远程开发相关的知识，[VS Code远程开发 插件架构](#架构和插件类型)，在远程目录[测试插件](#测试和调试插件)，和[远程插件不能正常工作](#常见问题)的一些建议。大部分插件不需要改动就能适应远程开发环境，其他的插件也只要稍微改动一点就能适配远程开发了。
 
 ## 架构和插件类型
----
 
 为了使远程开发尽力透明化，便于理解，我们可以将插件分为两类：
 
@@ -21,7 +20,6 @@
 VS Code API 会自动运行在正确的机器上（不管是本地还是远程）。但是如果你的插件使用的api不是VS Code提供的——比如运行shell脚本的Node API——当运行在远程时可能不会正常工作，因此我们建议你在所有的环境中测试一下你的插件。
 
 ## 调试插件
----
 
 这个部分将说明如何在远程目录下测试和调试插件。在这之前，我们先看一下怎么使用本地[开发容器](https://code.visualstudio.com/docs/remote/containers)测试一个插件。本地测试容器是跨平台的，很容易部署，但是限制了访问文件系统的端口。由于只占用了非常小的OS空间，开发容器可以提供最为接近插件的真实运行环境。WSL，换句话说，就是一个典型的最小自治SSH主机。大部分场景下，你只要做小小的调整就可以解决问题了，相关主题查看[常见问题](#常见问题)。
 
@@ -91,7 +89,6 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 :::
 
 ## 安装开发版插件
----
 
 目前，VS Code自动在SSH主机、容器、WSL安装插件时会使用插件市场的版本(而不是你本机上当前安装的版本)。大部分时候这么做事合理的，但是我们现在可能需要一个未发布的版本来测试，所以你可以将插件打包成`VSIX`格式，然后打开已经连接到远程VS Code窗口中手动安装这个插件。
 
@@ -107,7 +104,6 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 :::
 
 ## 常见问题
----
 
 VS Code API 会根据项目自动运行在正确的环境上。记住这点，然后我们来看看几个API，它会帮助你避免一些意外问题。
 
@@ -410,7 +406,6 @@ export async function activate(context: vscode.ExtensionContext) {
 使用命令的更多细节，请参考[命令API指南](/extension-guides/command)
 
 ## 使用Webview API
----
 
 就像剪贴板API，[Webview API](/extension-guides/webview)也总是运行在本地环境，即使是 *工作区插件* 调用的。也就是说大部分基于webview的插件都可以正常工作，但是还有些注意事项需要交代一下。
 
@@ -544,7 +539,6 @@ panel.webview.html = `<!DOCTYPE html>
 现在不管是远程还是本地的请求，webview前往`localhost:3000`的流量都会走到Express.js web 服务器上了。
 
 ## 使用原生Node.js模块
----
 
 和插件打包（或动态引入的包）的原生node包会被[Electorn的`electron-rebuild`](https://electronjs.org/docs/tutorial/using-native-node-modules)重新编译。但是VS Code Server运行在一个标准的（非Electron）的Node.js中，因此可能造成远程二进制库失效问题。
 
@@ -557,7 +551,6 @@ panel.webview.html = `<!DOCTYPE html>
 使用VS Code的 **Help > Developer Tools**然后在控制台（console）中打印`process.versions.modules`可以找到VS Code使用的模块（modules）类型。如果你想要确保原生模块在各个Node.js环境中都能无缝运行，你可能把所有可能支持的平台（Electron Node.js, 官方Node.js Windows/Darwin/Linux的全部版本）相关的包全部引入。[node-tree-sitter](https://github.com/tree-sitter/node-tree-sitter/releases/tag/v0.14.0)包在这方面是个非常好的例子。
 
 ## 为非x86_64主机或Apline Linux容器提供支持
----
 
 如果你的插件只是用JavasSript/TypeScript写的，你的插件可能什么都不用做就能支持其他进程架构或基于`musl`的Apline Linux。
 
@@ -574,7 +567,6 @@ panel.webview.html = `<!DOCTYPE html>
 你要非常注意一些第三方包可能依赖了导致这个问题的源码包。所以有时候你需要联系npm包作者提供额外的编译版本。
 
 ## 避免使用Electron模块
----
 
 虽然依赖未暴露的内置Electron或者VS Code模块非常方便，但是你必须知道VS Code Server运作在标准的（非Electron）Node.js环境中，当插件运行在远程时就会丢失这些包。除了少数个例，比如[keytar](#保留密钥)，用了特殊的实现所以在所有环境中都能正常工作。
 
@@ -596,12 +588,10 @@ const fs = requireWithFallback('original-fs', 'fs');
 但是不论何时，你都应该避免这些问题。
 
 ## 已知问题
----
 
 目前我们还有些影响 工作区插件 功能的问题亟待解决。见[原文档 - 已知问题](https://code.visualstudio.com/api/advanced-topics/remote-extensions#known-issues)
 
 ## FAQ
----
 
 - 查看[提示和解决方法](https://code.visualstudio.com/docs/remote/troubleshooting)或者[FAQ](https://code.visualstudio.com/docs/remote/faq)
 - 在 [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode-remote)上查找答案

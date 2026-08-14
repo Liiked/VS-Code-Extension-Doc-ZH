@@ -3,7 +3,6 @@
 常用功能对你的插件来说非常重要，几乎所有的都会或多或少地用到这些功能，下面我们为你简单地介绍一下它们。
 
 ## 命令
----
 
 命令是VS Code 运作的核心。你可以打开*命令面板*执行，用快捷键执行，还可以在菜单中鼠标右键执行。
 
@@ -15,23 +14,19 @@
 
 
 ## 配置
----
 
 插件需要在[`contributes.configuration`](/references/contribution-points#contributesconfiguration)发布内容配置点中填写有关的配置，你可以[`workspace.getConfiguration`](https://code.visualstudio.com/api/references/vscode-api#workspace.getConfiguration)API中阅读有关内容。
 
 
 ## 键位绑定
----
 
 插件可以添加自定义键位映射，在[`contributes.keybindings`](/references/contribution-points#contributeskeybindings)和[键位绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中了解更多有关内容。
 
 ## 菜单
----
 
 插件可以自定义上下文菜单项，菜单会根据用户右击VS Code UI的不同位置而各不相同。查看更多[`contributes.menus`](/extensibility-reference/contribution-points#contributesmenus)发布内容配置。
 
 ## 数据储存
----
 
 VS Code中有三种数据储存方式：
 
@@ -43,7 +38,6 @@ VS Code中有三种数据储存方式：
 插件的执行上下文在`activate`函数中，详见[插件入口文件](/get-started/extension-anatomy#插件入口文件)。
 
 ## 显示通知
----
 
 几乎所有的插件都需要在某些时候为用户提示信息。VS Code提供了3个API来展示不同重要程度的信息：
 
@@ -52,22 +46,18 @@ VS Code中有三种数据储存方式：
 - [`window.showErrorMessage`](https://code.visualstudio.com/api/references/vscode-api#window.showErrorMessage)
 
 ## 快速选择
----
 
 使用[`vscode.QuickPick`](https://code.visualstudio.com/api/references/vscode-api#QuickPick)API，你可以轻松地收集用户输入或者为用户显示选择列表。[快速输入 示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/quickinput-sample)将详细解释这个API。
 
 ## 文件选择
----
 
 插件可以使用[`vscode.window.showOpenDialog`](https://code.visualstudio.com/api/references/vscode-api#vscode.window.showOpenDialog)API打开系统文件选择器，然后选择文件或是文件夹。
 
 ## 输出渠道
----
 
 *输出面板*显示了一组[`输出渠道`](https://code.visualstudio.com/api/references/vscode-api#OutputChannel)，以便于你查看日志。你可以使用[`window.createOutputChannel`](https://code.visualstudio.com/api/references/vscode-api#window.createOutputChannel)创建一个新的输出渠道。
 
 ## 进度API
----
 
 使用[`vscode.Progress`](https://code.visualstudio.com/api/references/vscode-api#Progress)将处理进度报告给用户。
 

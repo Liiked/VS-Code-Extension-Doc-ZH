@@ -6,7 +6,6 @@
 :::
 
 ## 类型
----
 
 变量声明的基础规则请自行参考JavaScript，JavaScript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[MDN](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#变量（variable）)。
 
@@ -180,7 +179,6 @@ create(undefined); // Error
 ```
 
 ## TypeScript类型表
----
 
 | 类型                     | 例子                                                      |
 | ------------------------ | --------------------------------------------------------- |
@@ -202,7 +200,6 @@ create(undefined); // Error
 | tuple                    | `x: [string, number] = ['name', 12]`                      |
 
 ## 类型断言
----
 
 有时候你会遇到这样的情况，你比TypeScript更了解某个值的具体信息。
 
@@ -227,7 +224,6 @@ let strLength: number = (someValue as string).length;
 :::
 
 ## 变量声明
----
 
 ### let声明
 
@@ -353,7 +349,6 @@ kitty.numLives--;
 除非你使用特殊的方法去避免，实际上const变量的内部状态是可修改的。
 
 ## 访问/设置对象的属性和方法
----
 
 我们在前面已经看过很多对象的例子了，而且JavaScript的各种衍生类型都是基于Object构造出来的，所以本小节介绍的内容也同时适用数组、元组等数据类型。
 
@@ -426,7 +421,6 @@ person.farewell()
 ```
 
 ## 变量解构
----
 
 ES2015的变量解构参照了名为[模式匹配](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)的设计模式，本质来说是一种便利的语法糖
 

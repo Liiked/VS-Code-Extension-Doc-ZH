@@ -43,7 +43,6 @@
   - [下一步](#下一步)
 
 ## contributes.configuration
----
 在configuration中配置的内容会暴露给用户，用户可以从“用户设置”和“工作区设置”中修改你暴露的选项。
 
 configuration是JSON格式的键值对，用户会在修改设置时获得对应的提示和更好的体验。
@@ -79,7 +78,6 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ![configuration](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/configuration.png)
 
 ## contributes.configurationDefaults
----
 为特定的语言配置编辑器的默认值，修改这个配置会覆盖编辑器已经为语言提供的默认配置。
 
 下面的示例是修改`markdown`语言的默认配置。
@@ -98,7 +96,6 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ```
 
 ## contributes.commands
----
 设置命令标题和命令体，随后这个命令会显示在**命令面板**中。你也可以加上`category`前缀，在**命令面板**中会以分类显示。
 ::: info
 **注意：**当调用命令时（通过组合键或者在**命令面板**中调用），VS Code会触发激活事件`onCommand:${command}`。
@@ -124,7 +121,6 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
 
 ## contributes.menus
----
 
 为编辑器或者文件管理器设置命令的*菜单项*。菜单项至少包含1️⃣选中时调用的命令和2️⃣何时显示这个菜单项的时机。显示菜单的时机由`when`键定义，而对应的值语法需要参考键值绑定的[when语法](https://github.com/Microsoft/vscode-docs/blob/master/docs/getstarted/keybindings.md#when-clause-contexts)。
 
@@ -233,7 +229,6 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ```
 
 ## contributes.keybindings
----
 
 这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中，你可以了解更加细节的东西。
 
@@ -257,7 +252,6 @@ Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayH
 ![keybindings](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/keybindings.png)
 
 ## contributes.languages
----
 
 配置一门语言，引入一门新的语言或者加强VS Code已有的语言支持。
 
@@ -341,7 +335,6 @@ language-configuration.json
 ```
 
 ## contributes.debuggers
----
 
 配置VS Code的调试器，调试器配置有下列属性：
 
@@ -414,7 +407,6 @@ language-configuration.json
 想要完整地学习`debugger`，移步至[调试器](/extension-authoring/example-debug-adapter)
 
 ## contributes.breakpoints
----
 
 通常调试器插件会有`contributes.breakpoints`入口，插件可以在这里面设置哪些语言可以设置断点。
 
@@ -432,7 +424,6 @@ language-configuration.json
 ```
 
 ## contributes.grammars
----
 为一门语言配置TextMate语法。你必须提供应用语法的`language`，TextMate的`scopeName`确定了语法和文件路径。
 ::: warning
 **注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
@@ -459,7 +450,6 @@ language-configuration.json
 ![grammars](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/grammars.png)
 
 ## contributes.themes
----
 为VS Code添加TextMate主题。你必须添加一个label，指定这个主题是dark还是light的（以便VS Code根据你的主题调整界面），当然还需要加上目标文件路径（XML plist 格式）。
 ::: warning
 **注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
@@ -481,7 +471,6 @@ language-configuration.json
 查看[改变色彩主题](/extension-authoring/themes-snippets-colorizers)学习使用[yo code插件生成器](/extension-authoring/extension-generator)将TextMate.tmTheme文件快速打包成VS Code插件。
 
 ## contributes.snippets
----
 为语言添加代码片段。`language`属性必须是[语言标识符](https://code.visualstudio.com/docs/languages/identifiers)而`path`则必须是使用[VS Code代码片段格式](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax)的代码片段文件的相对路径。
 
 #### 示例
@@ -495,7 +484,6 @@ language-configuration.json
 }
 ```
 ## contributes.jsonValidation
----
 为`json`文件添加校验器。`url`值可以是本地路径也可以是插件中的模式文件（schema file），或者是远程服务器的URL比如：[json schema](http://schemastore.org/json)
 
 #### 示例
@@ -509,7 +497,6 @@ language-configuration.json
 ```
 
 ## contributes.views
----
 为VS Code 添加视图。你需要为视图指定唯一标识和名称。可以配置的属性如下：
 
 * `explorer`: 活动栏中的资源管理视图容器。
@@ -562,7 +549,6 @@ language-configuration.json
 一个视图可以展示多条欢迎内容，当出现这类场景时，VS Code 内置的内容会优先呈现，然后是插件提供欢迎内容，最后是来自其他插件的内容。
 
 ## contributes.viewsContainers
----
 配置[自定义视图](/references/contribution-points#contributesviews)的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的`Package Explorer`视图容器应该如何配置。
 
 #### 示例
@@ -608,7 +594,6 @@ language-configuration.json
 | Active  | 100%    |
 
 ## contributes.problemMatchers
----
 配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：
 
 #### 示例
@@ -650,11 +635,9 @@ language-configuration.json
 更多内容请查看：[实现一个问题定位器](https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher)
 
 ## contributes.problemPatterns
----
 配置可以在问题定位器（见上）中可以使用的问题模式的名称。
 
 ## contributes.taskDefinitions
----
 配置和定义一个object结构，定义系统中唯一的*配置任务*。任务定义最少需要一个`type`属性，不过通常需要更多的属性配置。
 在package.json文件中，*一个展示脚本的任务*看起来是这样的：
 ```json
@@ -690,7 +673,6 @@ let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
 ```
 
 ## contributes.colors
----
 这些色彩可用于状态栏的编辑器装饰器。定义之后，用户可以在`workspace.colorCustomization`设置中自定义颜色，用户的主题会覆盖这些色值。
 
 ```json
@@ -708,7 +690,6 @@ let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
 ```
 
 ## contributes.typescriptServerPlugins
----
 配置VS Code的Javascript和Typescript支持的[Typescript 服务器插件](https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin)：
 
 ```json

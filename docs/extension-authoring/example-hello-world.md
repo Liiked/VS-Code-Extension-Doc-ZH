@@ -1,7 +1,6 @@
 # 示例：Hello World
 
 ## 你的第一个插件
----
 本节通过Hello World这个完整的项目手把手教你掌握VS Code扩展性概念。
 在本项目中，我们会给VS Code添加一个新的命令，虽然只是用来显示"Hello World"信息。在本节的最后，你将和编辑器编辑器互动，查找用户选中的文本。
 #### 预备工作
@@ -10,7 +9,6 @@
 #### 生成新插件
 请查看[生成插件-运行Yo](/extension-authoring/extension-generator#运行yo-code😎)
 ## 运行插件
----
 - 打开VS Code，选择`文件`>`打开文件夹`，选择你刚刚生成的项目目录
 - 点击`F5`或者`Debug`按钮，然后点击`开始`
 - 新的VS Code实例会运行在特殊环境中（`Extension Development Host`
@@ -19,7 +17,6 @@
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-hello-world/running.png)
 ## 插件的目录结构
----
 
 构建完毕之后，你的插件开发目录看起来应该是这样的
 ```
@@ -152,7 +149,6 @@ export function activate(context: vscode.ExtensionContext) {
 - `vsc-extension-quickstart.md` - 你的快速开始指南。
 - `test/extension.test.ts` - 把你的单元测试放在这里，看看和VS Code API有哪些出入。
 ## 插件激活过程
---- 
 我们刚刚已经了解了开发目录下的每个文件，现在我们看看你的插件是怎么运行起来的：
 1. 插件开发环境发现了这个插件，然后读取它的`package.json`
 2. 你按下`ctrl shift p`时，*命令面板*显示出已注册的命令列表
@@ -165,7 +161,6 @@ export function activate(context: vscode.ExtensionContext) {
 5. 调用`"extension.sayHello"`注册的函数
 6. 函数执行，显示出"Hello world"消息
 ## 调试插件
----
 直接在你的代码里打上断点就可以调试了，很简单吧。
 
 ![调试](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-hello-world/hitbp.png)
@@ -178,7 +173,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 查看更多关于插件[开发环境](/extension-authoring/developing-extensions)的东西。
 ## 小小的改造
----
 试着修改你的`extension.ts`（或者`extension.js`）中`extension.sayHello`的实现，我们把它改造成一个对选中文本计数的功能。
 ```typescript
 let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
@@ -204,16 +198,13 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
 
 ![文字计数](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-hello-world/selection-length.png)
 ## 在本地安装你的插件
----
 好了，现在你已经完成了一个运行在开发模式下的插件，为了让你的插件运行在所有VS Code实例中，你需要在本地插件目录下新建一个文件夹，然后复制过去：
 - Windows: `%USERPROFILE%\.vscode\extensions`
 - macOS/Linux: `$HOME\.vscode\extensions`
 
 ## 发布插件
----
 参阅[分享插件](/extension-authoring/publish-extension)
 ## 下一步
----
 在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](/extension-authoring/example-word-count)中你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件、显示文本字数。
 
 如果你想查看更多extension API的概述，看看这些主题吧：

@@ -9,7 +9,6 @@
 ![调用示意图](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/extensibility-architecture.png)
 
 ## 插件
----
 
 插件激活后会运行在我们的共享插件主机环境(shared extension host process)中，这种插件进程分离的设计确保VS Code能在繁杂的任务中不会宕机。
 

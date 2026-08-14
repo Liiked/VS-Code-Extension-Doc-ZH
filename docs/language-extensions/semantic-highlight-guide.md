@@ -1,5 +1,4 @@
 # 语义高亮指南
----
 
 语义高亮是对[语法高亮](/language-extensions/syntax-highlight-guide)的一种补充。VS Code 的主要分词引擎是 TextMate 语法器。TextMate 使用正则表达式，并根据词法规则将文件分割成一系列的符号。
 
@@ -21,7 +20,6 @@
 - 第 13 行：`getFoldingRanges` 着色为函数
 
 ## 语义分词供应器函数
----
 
 要实现语义高亮，插件需要使用文档的语言类型或文件名注册一个 `semantic token provider`。编辑器发现需要进行语义分词时，会向该供应器发起请求。
 
@@ -64,7 +62,6 @@ vscode.languages.registerDocumentSemanticTokensProvider(selector, provider, lege
 就如上例所示，这个供应器命名了类型和具体修改，这些东西随后就会被`SemanticTokensLegend`使用，`provide` api 将类型和具体修改作为下标返回给 legend。
 
 ## 语义分词种类
----
 
 下面是一些VS Code 预定义的标准**语义符号类型**和**语义符号修饰器**
 
@@ -136,7 +133,6 @@ vscode.languages.registerDocumentSemanticTokensProvider(selector, provider, lege
 已配置的类型，可以声明它的父级类型，并继承其所有样式规则。
 
 ## 主题化
----
 
 主题化是指将颜色和样式应用到 **符号** 的过程。色彩主题确定了主题化的规则，但是用户也可以通过用户设置来自定义主题规则。
 
@@ -161,7 +157,6 @@ vscode.languages.registerDocumentSemanticTokensProvider(selector, provider, lege
 如果没有匹配到任何规则，VS Code 会使用 [语义分词作用域映射](#语义分词作用域映射) 将当前语义符号解析为 TextMate 的作用域。然后这个作用域会根据TextMate 主题规则中的 `tokenColors` 进行匹配。
 
 ## 语义分词作用域映射
----
 
 为了使语义高亮在没有任何定义语义规则的主题中能够降级使用，VS Code 维护了一个映射表，将语义符号选择器映射到 TextMate 作用域。
 
@@ -225,7 +220,6 @@ vscode.languages.registerDocumentSemanticTokensProvider(selector, provider, lege
 ```
 
 ## 试试看
----
 
 我们有一份 [语义符号示例](https://github.com/microsoft/vscode-extension-samples/tree/master/semantic-tokens-sample) 展示了如何创建一个语义符号供应器函数。
 

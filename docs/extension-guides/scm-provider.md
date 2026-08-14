@@ -12,7 +12,6 @@ VS Code自带一个源控制器：Git，它是源控制API的最佳实践。如�
 如果你需要帮助，请查看[vscode命名空间API](https://code.visualstudio.com/api/references/vscode-api#scm)。
 
 ## 源控制模型
----
 `SourceControl`负责生产源控制模型的实体，它里面有`SourceControlResourceState`实例的**资源状态**，而资源状态又是`SourceControlResourceGroup`实例整理成**组**的。
 
 通过`vscode.scm.createSourceControl`创建一个新的*源控制器*。
@@ -74,7 +73,6 @@ workingTree.resourceStates = [
 源变动和最终产生的资源组会传递到源控制视图上。
 
 ## 源控制视图
----
 当源变动时，VS Code会生成源控制视图。源状态可通过`SourceControlResourceDecorations`自定义：
 
 ```typescript
@@ -149,7 +147,6 @@ export interface SourceControl {
 ```
 
 ## 快速Diff
----
 
 VS Code支持显示**快速Diff**编辑器的高亮槽，点击这些槽会出现一个内部diff交互器，你可以在这里为上下文配置命令。
 

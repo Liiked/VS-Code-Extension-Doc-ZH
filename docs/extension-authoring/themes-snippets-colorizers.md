@@ -3,7 +3,6 @@
 市面上TextMate的自定义文件非常多，VS Code提供了一套你可以轻松打包和复用的机制帮你轻松迁移。你可以在自己的插件里直接使用`.tmTheme`, `.tmSnippets`，和`.tmLanguage`文件，然后只要打包好插件你就可以传到插件市场上了。这个章节将教你使用TextMate文件，创建和分享你自己的主题、代码片段和着色器。
 
 ## 添加新的色彩主题
----
 
 色彩可视化工作在VS Code可以分成两种类型：
 - 在视图和编辑器中使用的工作台（Workbench）色彩，包括活动栏和状态栏。整个色彩列表[查看这里](https://code.visualstudio.com/docs/getstarted/theme-color-reference)。
@@ -84,7 +83,6 @@ TextMate语法通常产生的作用域名称可以[参考这里](https://www.sub
 ![检查作用域](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/themes-snippets-colorizers/inspect-scopes.png)
 
 ## 创建新的色彩主题
----
 - 打开**命令面板**输入**Developer: Generate Color Theme from Current Settings**
 - 使用VS Code的 [Yeoman](http://yeoman.io/) 插件生成器， [yo code](/extension-authoring/extension-generator)生成新的主题
 ``` npm install -g yo generator-code
@@ -118,7 +116,6 @@ yo code
 
 
 ## 测试新的主题
----
 
 想要测试新主题，把生成的主题文件夹复制到[你的`.vscode/extension`文件夹](/extension-authoring/extension-generator#我的插件目录在哪？)下，然后重启VS Code。
 
@@ -127,7 +124,6 @@ yo code
 ![选择我的主题](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/themes-snippets-colorizers/mytheme.png)
 
 ## 将主题发布到插件市场
----
 
 如果你想把主题分享给社区，通过[插件市场](https://github.com/Microsoft/vscode-docs/blob/master/docs/editor/extension-gallery.md)去发布它吧。用[vsce publishing tool](/extension-authoring/publish-extension)打包你的主题然后发布到VS Code市场。
 
@@ -137,12 +133,10 @@ yo code
 :::
 
 ## 添加新的色彩id
----
 
 [色彩配置点](/extensibility-reference/contribution-points#contributescolors)可以配置插件的*色彩id*，当在`workbench.colorCustomizations`和主题文件中使用代码补全时，这些色彩也会出现。用户可以在[插件配置](https://code.visualstudio.com/docs/editor/extension-gallery#_extensiondetails)选项卡中看到插件定义了什么颜色。
 
 ## 添加新的图标主题
----
 
 你能使用图标文件（最好是SVG）和字体图标创建自己的图标主题。作为示例，你可以参考一下2个内置主题：[Minimal](https://github.com/Microsoft/vscode/tree/master/extensions/theme-defaults)，[Seti](https://github.com/Microsoft/vscode/tree/master/extensions/theme-seti)
 
@@ -280,7 +274,6 @@ yo code
 ---
 
 ## 使用TextMate代码片段
----
 
 使用[yo code](/extension-authoring/extension-generator)插件生成器添加TextMate片段（.tmSnippets）。生成器中的`New Code Snippets`选项帮你生成包含多个.tmSnippets文件的目录，最终他们会被打包成VS Code代码片段插件。生成器也支持Sublime代码片段（.sublime-snippets）。
 
@@ -294,7 +287,6 @@ yo code
 ```
 
 ## 在市场中分享你的代码片段
----
 
 现在如果你测试过了代码片段的功能，打算发布到社区的话，可以跟寻下面的步骤。
 
@@ -341,7 +333,6 @@ yo code
 要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](/extensibility-reference/extension-manifest#市场展示建议)。
 
 ## 添加新的语言（着色器）
----
 
 使用[Yo code](/extension-authoring/extension-generator)生成器，从你VS Code中已经安装的语言中挑选一个类型生成插件，为这个语言添加语法高亮和括号匹配。
 
@@ -385,7 +376,6 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/themes-snippets-colorizers/antlanguage.png)
 
 ## 在市场中发布语言支持
----
 
 使用[vsce publishing tool](/extension-authoring/publish-extension)工具将你的插件发布到VS Code市场上。
 ::: info
@@ -393,7 +383,6 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 :::
 
 ## 添加你的语言支持插件(插件组合)
----
 
 当你给VS Code添加新语言的时候，如果能加上代码片段那就更好了。将多个[插件组合](/extensibility-reference/extension-manifest#整合插件配置内容)起来并不是难事，修改着色器插件清单`package.json`，添加`snippets`配置和snippets.json。
 
@@ -432,7 +421,6 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 ```
 
 ## 语言标识符
----
 
 在VS Code中，每个语言模型都有一个独一无二的语言标识符，除非用户特意查看设置不然这个标识符很少会被用户看到，比如说：当文件插件和语言关联起来的时候，用户查看设置就能看到。
 
@@ -478,7 +466,6 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 已经支持的语言标识符可以在[这里](https://code.visualstudio.com/docs/languages/identifiers)找到
 
 ## FAQ
----
 - **我可以自定义VS Code哪些部分的主题色？**
 
     VS Code 色彩主题影响编辑器的输入区域（文本前景色，背景色，文本选择，高亮线，三角符号和语法符号），还包括一些自定义UI（参见[创建一个主题]()，译者注：链接失效）。当配置一个主题的时候，你需要指明一个基准主题：light（`vs`），dark（`vs-dark`）和high contrast（`hc-black`）。这个基准主题会影响到工作区的所有区域，比如文件浏览区，基准主题不受插件定义和配置。

@@ -3,7 +3,6 @@
 本节将教你如何为VS Code添加*视图容器*和*树视图*的插件，示例插件的源代码请查看[https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample)。
 
 ## 视图容器
----
 
 *视图容器*包含了一列*视图(views)*，这些*视图*又包含在内置的*视图容器*中。
 
@@ -30,7 +29,6 @@
 ```
 
 ## 树视图
----
 
 *视图*是显示在视图容器中的UI片段。使用[`contributes.views`](/references/contribution-points#contributesviews)进行配置，你就可以将新的*视图*添加到内置或者你配置好的视图容器中了。
 
@@ -61,7 +59,6 @@
 当用户打开了对应的视图，VS Code会触发[`onView:${viewId}`](/references/activation-events#onview)事件(如上面例子中，这个事件写为`onView:nodeDependencies`)。你也可以通过配置`when`字段控制视图的展示。
 
 ## 视图的操作
----
 
 你可以配置*视图*下述位置的操作：
 
@@ -147,7 +144,6 @@
 ```
 
 ## 为树视图提供数据
----
 
 插件创作者需要注册[`TreeDataProvider`](https://code.visualstudio.com/api/references/vscode-api#TreeDataProvider)，以便动态生成*视图*中的数据。
 
@@ -158,7 +154,6 @@ vscode.window.registerTreeDataProvider('nodeDependencies', new DepNodeProvider()
 更多实现请参考[nodeDependencies.ts](https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample/src/nodeDependencies.ts)
 
 ## 动态创建树视图
----
 
 如果你想在*视图*中通过编程手段创建一些操作，你就不能再注册`window.registerTreeDataProvider`了，而是`window.createTreeView`，这样一来你就有权限提供你喜欢的视图操作了：
 

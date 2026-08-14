@@ -20,7 +20,6 @@
 就像你之前在[示例：Hello-world](/extension-authoring/example-hello-world)中做的一样，使用`F5`或者`Cmd + R`运行该项目。
 
 ## 更新状态栏
----
 将下列代码更新到`extension.ts`中。这段代码声明了一个`WordCounter`类用于控制文本计数并显示到状态栏中，我们依然用了"Hello World"这个命令来执行`updateWordCount`。
 
 ```typescript
@@ -107,7 +106,6 @@ class WordCounter {
 很棒，我们接下来做更cool的事情——实时更新字数。
 
 ## 订阅事件
----
 
 我们先来看看事件中的类方法：
 - `onDidChangeTextEditorSelection` - 鼠标位置变动时触发。
@@ -192,7 +190,6 @@ context.subscriptions.push(wordCounter);
 如果你在`active`函数上打了断点，你应该能看到markdown文件被打开时只触发了一次。`WordCountController`构造器运行之后，订阅了编辑器事件，这样我们整个插件就正常运行了。
 
 ## 自定义状态栏
----
 
 VS Code允许你定制状态栏的颜色、图标、提示文本等额外样式。如果你不清楚**状态栏**相关的API，你可以查看该类型的代码提示，你也可以通过`vscode.d.ts`VS Code扩展性API查看，这个文件就在你生成的项目文件夹里，在编辑器中打开`node_modules\vscode\vscode.d.ts`，你能看到完整的扩展性 API和注释。
 
@@ -209,7 +206,6 @@ this._statusBarItem.show();
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/wordcount-pencil.png)
 
 ## 释放插件资源
----
 
 现在，我们来深入了解一下VS Code是怎么通过[释放器（Disposables）](/extensibility-reference/principles-patterns#disposables（释放器）)控制资源的。
 
@@ -228,12 +224,10 @@ window.onDidChangeActiveTextEditor(this._onEvent, this, subscriptions);
 this._disposable = Disposable.from(...subscriptions);
 ```
 ##  在本地安装你的插件
----
 
 到目前为止，你的插件都还跑在插件开发模式中，要想让你的插件在正常的VS Code中运行起来将你的插件复制到`.vscode/extensions`目录下。
 
 ## 发布插件
----
 
 参阅[分享插件](/extension-authoring/publish-extension)
 

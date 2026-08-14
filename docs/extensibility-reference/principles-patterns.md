@@ -1,14 +1,12 @@
 # 扩展性原则和模式
 
 ## 扩展性实现
----
 
 VS Code有着非常丰富的扩展性模型和生产插件的方法。不过我们没有给插件作者提供直接操作底层UI DOM的方法。在VS Code开发中，我们会不断优化底层web技术的使用使其达到高可用、高响应的状态，我们会随着这些技术和产品的演进继续调整DOM的使用方式。为了维持其性能和兼容性，插件在独立的进程中运行同时阻止插件作者直接操作DOM，这样有助于保持不同编程语言实现的插件一致性，VS Code还为很多场景提供了一整套内置的UI组件，如IntelliSense，这样一来，插件开发者也就不需要重复造轮子了。
 
 这些规定乍看可能比较严格，我们也一直在寻找更好的方法改进我们的扩展性，增加插件的能力，期待聆听你的反馈和意见。
 
 ## 核心
----
 
 #### 插件独立 - 稳定性
 
@@ -48,7 +46,6 @@ VS Code会尽可能晚地加载插件，为了达到控制内存的目的，如�
 使用分离的进程有助于插件建立独立的边界，维持VS Code核心编辑器进程的稳定性，同时也有助于插件开发人员为特定的插件实现选择合适的编程语言。
 
 ## 扩展性模式
----
 
 扩展性API遵循下列模式。
 
@@ -98,12 +95,10 @@ subscription.dispose(); // 停止侦听
 举个栗子：`window.onDidChangeActiveTextEditor`中，激活的编辑器（ActiveTextEditor：`名词`）变动（change：`动词`）后（`onDid`）会触发事件。
 
 ## 严格null检查
----
 
 VS CodeAPI使用`undefined`和`null`的Typescript类型，同样也支持[严格null检查](https://github.com/Microsoft/TypeScript/pull/7140)。
 
 ## 在插件中使用Node.js模块
----
 
 就像一个node模块，你可以把依赖添加到`pacakge.json`中的`dependencies`字段中去，甚至把VS Code[专用的node模块包](https://code.visualstudio.com/docs/extensionAPI/extension-manifest#_useful-node-modules)加进去。
 
@@ -114,7 +109,6 @@ VS Code不会在用户安装插件时，把你的依赖安装起来，所以你�
 使用`.vscodeignore`文件排除掉已经在你插件依赖中的包。查看`vsce`发布工具，查看更多[相关细节](https://code.visualstudio.com/docs/extensions/publish-extension#_vscodeignore)。
 
 ## FAQ
----
 **问：我能在插件中使用原生Node.js模块吗？**
 
 答：如果你在Windows平台上开发了一个原生模块插件，当你发布插件时，Windows上的编译器会将原生依赖编译进去，这样一来，macOS或者Linux的用户就用不了插件了。

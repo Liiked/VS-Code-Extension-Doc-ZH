@@ -5,7 +5,6 @@ VS Code中的主题分为两类：
 - **图标主题**：文件类型/名称到图片之间的映射。文件图标显示于VS Code的资源管理侧边栏、快速打开列表和编辑器Tab等UI中。
 
 ## 色彩主题
----
 
 ![color-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/color-theme.png)
 
@@ -16,7 +15,6 @@ VS Code中的主题分为两类：
 创建主题详见[色彩主题指南](/extension-guides/color-theme)和[色彩主题 示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/theme-sample)
 
 ## 图标主题
----
 图标主题允许你：
 - 将图标ID映射至图片或者字体图标上。
 - 根据文件名或这个文件的语言类型关联上图标ID

@@ -21,7 +21,6 @@
 在[VS Code Extension Samples](https://github.com/Microsoft/vscode-extension-samples)里面有更多的VS Code 示例插件，你会发现示例基本上采用了最佳实践和最新的API。
 
 ## 文档
----
 
 想要了解VS Code扩展性模型，请参阅：
 - [原则和模式](/extensibility-reference/principles-patterns) - 包含扩展性的核心观念和模式

@@ -3,7 +3,6 @@
 命令会触发VS Code中注册的行为，如果你[配置过键位](https://code.visualstudio.com/docs/getstarted/keybindings)，那么你就处理过了命令。命令也是插件将功能暴露给用户的地方，它绑定了VS Code UI中的行为，并在内部处理了相关逻辑。
 
 ## 使用命令
----
 
 VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令](/references/commands)。许多插件将它们的核心功能暴露为*命令*的形式供用户或者其他插件使用。
 
@@ -108,7 +107,6 @@ export function activate(context: vscode.ExtensionContext) {
 ```
 
 ## 新建命令
----
 
 ### 注册一个命令
 

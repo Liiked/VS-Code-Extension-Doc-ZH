@@ -3,7 +3,6 @@
 通过VS Code的文本内容供应器API(text document content provider API)，你可以为任意来源的文件创建只读文档。本示例源码请查看[https://github.com/Microsoft/vscode-extension-samples/blob/master/virtual-document-sample/README.md](https://github.com/Microsoft/vscode-extension-samples/blob/master/virtual-document-sample/README.md)
 
 ## TextDocumentContentProvider
----
 
 这个API工作于uri协议之上，你需要声明一个*供应器函数(provider)*，然后这个函数还需要返回文本内容。供应器函数必须提供*协议(scheme)*，而且函数注册之后不可改变这个协议。一个供应器函数可以对应多个协议，而多个供应器函数也可以只注册一个协议。
 

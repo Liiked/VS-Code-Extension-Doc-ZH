@@ -3,7 +3,6 @@
 VS Code的UI在文件名称左边显示图标，插件配置的图标系列可以让用户自由选择他们喜爱的图标。
 
 ## 添加新的图标主题
----
 
 你能使用图标文件（最好是SVG）和字体图标创建自己的图标主题。作为示例，你可以参考一下2个内置主题：[Minimal](https://github.com/Microsoft/vscode/tree/master/extensions/theme-defaults)，[Seti](https://github.com/Microsoft/vscode/tree/master/extensions/theme-seti)
 

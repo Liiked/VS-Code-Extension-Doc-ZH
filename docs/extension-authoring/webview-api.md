@@ -4,7 +4,6 @@ webview API为开发者提供了完全自定义视图的能力，例如内置的
 可以把webview看成是VS Code中的`iframe`，它可以渲染几乎全部的HTML内容，它通过消息机制和插件通信。这样的自由度令我们的webview非常强劲并将插件的潜力提升到了新的高度。
 
 ## 我应该用webview吗？
----
 
 webview虽然很赞，但是我们应该节制地使用这个功能——比如当VS Code原生API不够用时。Webview重度依赖资源，所以它脱离插件的进程而单独运行在其他环境中。在VS Code中使用设计不良的webview会让用户抓狂。
 
@@ -16,7 +15,6 @@ webview虽然很赞，但是我们应该节制地使用这个功能——比如�
 请记住：不要因为能使用webview而滥用webview。相反，如果你有充足的理由和自信，那么本篇教程对你来说会非常有用，现在就让我们开始吧。
 
 ## Webviews API 基础
----
 
 为了解释webviewAPI，我们先构建一个简单的**Cat Coding**插件。这个插件会用一个webview显示猫写代码的gif。随着我们不断了解API，我们会不断地给插件添加功能，包括我们的猫写了多少行代码的计数跟踪器，如果猫猫写出了bug还会有一个提示弹出框。
 
@@ -327,7 +325,6 @@ webview的内容是在webview文档中的一个iframe中的，用开发者工具
 **激活窗体**环境是webview脚本执行的地方，另外，**Developer: Reload Webview**命令会刷新所有已激活的webview。如果你需要重置一个webview的状态，这个命令会非常有用，或者你想要读取硬盘内容的webview更新一下，也可以使用这个方法。
 
 ## 加载本地内容
----
 
 webview运行在独立的环境中，因此不能直接访问本地资源，这是出于安全性考虑的做法。这也意味着要想从你的插件中加载图片、样式等其他资源，或是从用户当前的工作区加载任何内容的话，你必须使用webview中的`vscode-resource:`协议。
 
@@ -426,7 +423,6 @@ code {
 }
 ```
 ## 脚本和信息传递
----
 
 既然webview就像iframe一样，也就是说它们也可以运行脚本，webview中的Javascript默认是禁用的，不过我们能用`enableScripts: true`打开它。
 
@@ -618,7 +614,6 @@ function getWebviewContent() {
 出于安全性考虑，你必须保证VS Code API的私有性，也不会泄露到全局状态中去。
 
 ## 安全性
----
 
 每一个你创建的webview都必须遵循这些基础的安全性最佳实践。
 
@@ -676,7 +671,6 @@ function getWebviewContent() {
 只依赖审查内容的安全性是不够的，你也要遵循其他安全性的最佳实践，尽可能减少潜在的内容注入。
 
 ## 持久性
----
 
 在webview的标准[生命周期](#生命周期)中，`createWebviewPanel`负责创建和销毁（用户关闭或者调用`.dispose()`方法）webview。而webview的内容再是在webview可见时创建的，在webview处于非激活状态时销毁。webview处于非激活标签中时，任何webview中的保留的状态都会丢失。
 

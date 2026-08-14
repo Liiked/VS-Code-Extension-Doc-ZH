@@ -9,7 +9,6 @@ let success = await commands.executeCommand('vscode.previewHtml', uri);
 ```
 
 ## 命令
----
 
 `vscode.executeWorkspaceSymbolProvider` - 执行工作区全部的符号供应函数（symbol provider）
 * _query_ - 搜索文本
@@ -257,7 +256,6 @@ let success = await commands.executeCommand('vscode.previewHtml', uri);
   * 'value': Number，要移动的位置或者绝对位置值
 
 ## 使用HTML Preview
----
 
 ### 样式
 
