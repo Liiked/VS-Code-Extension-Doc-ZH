@@ -8,8 +8,6 @@ VS Code 插件体积常常随着更新越来越大，它会产生很多文件，
 
 ## 使用 webpack
 
----
-
 webpack 这个开发工具可以在[npm](https://www.npmjs.com/)里找到，为了获取 webpack 和它的命令行界面，打开终端然后输入：
 
 ```bash
@@ -23,8 +21,6 @@ npm i --save-dev ts-loader
 ```
 
 ## 配置 webpack
-
----
 
 既然所有的工具都安装好了，我们现在可以开始配置 webpack 了。通常来说，你的项目目录中需要创建一个`webpack.config.js`文件，webpack 才能知道按什么规则打包你的插件。下面的配置示例是 VS Code 插件专用的，让我们来开这个头吧：
 
@@ -89,8 +85,6 @@ module.exports = config;
 
 ## 运行 webpack
 
----
-
 `webpack.config.js`文件创建好之后，webpack 就可以正式开始工作了。你可以从命令行中运行 webpack，不过为了避免重复工作用 npm script 会更有效率。
 
 将下列脚本复制到`package.json`的`scripts`中去：
@@ -107,13 +101,9 @@ module.exports = config;
 
 ## 运行插件
 
----
-
 运行插件之前，你需要将`package.json`中的`main`属性指向到构建文件上，也就是我们上面提到的[`"./dist/extension"`](https://github.com/Microsoft/vscode-references-view/blob/d649d01d369e338bbe70c86e03f28269cbf87027/package.json#L26)，改好之后我们就可以运行和测试插件了。关于调试配置，请注意更新`launch.json`中的`outFiles`属性。
 
 ## 测试
-
----
 
 插件开发者一般都会给插件源代码进行单元测试，但是有了完备的底层架构支持，插件的源代码可以不依赖测试，webpack 产生的构建文件中也不应该包含任何测试代码。如果需要运行单元测试，只需要简单地编译就好了。在上面的例子里，我们有一个`test-compile`脚本，它会把调用 Typescript 编译器将插件编译至`out`目录中。这样一来我们就有了 JS 文件，再使用下面的`launch.json`就足够应付测试了。
 
@@ -136,8 +126,6 @@ module.exports = config;
 
 ## 发布
 
----
-
 发布前你需要更新`.vscodeignore`文件。现在所有东西都打包到了`dist/extension.js`文件中，所以应该排除这个文件还有`out`文件夹（怕你漏了，特此提醒），以及最重要的`node_modules`文件夹。
 
 一般来说，`.vsignore`文件应该是这样的：
@@ -153,8 +141,6 @@ webpack.config.js
 
 ## 迁移插件
 
----
-
 用 webpack 迁移现有的插件是很容易的，整个过程就像我们上面的指南一样。真实的例子如 VS Code 的 References 视图就是从这个[pull request](https://github.com/Microsoft/vscode-references-view/pull/50)应用了 webpack 而来的。
 
 在里面，你可以看到：
@@ -167,8 +153,6 @@ webpack.config.js
 - 开始享受体积更小、安装更快的插件！
 
 ## 疑难解答
-
----
 
 #### 压缩
 

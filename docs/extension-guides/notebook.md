@@ -7,8 +7,6 @@
 
 ## 笔记本的构成
 
----
-
 一个笔记本由一系列代码块以及输出构成。代码块由 VS Code 核心进程负责渲染，它有两种类型，一种是 **Markdown 代码块**，另一种是**常规代码块**。输出的格式是多种多样的，比如普通文本、JSON、图片、HTML。其它的应用相关的数据以及交互式的小程序，由插件**自行**负责渲染。
 
 代码块的读写操作是由 `NotebookContentProvider` 控制的，`NotebookContentProvider` 从文件系统中读取数据并将其转化为代码块，同时将笔记本的改动同步给文件系统。`NotebookKernel` 处理来自代码块的内容，并输出各种各样的格式，包括纯文本、格式化文档或者交互式小程序。应用相关的输出格式和交互式小程序则由 `NotebookOutputRenderer` 渲染。
@@ -18,8 +16,6 @@
 ![结构概览](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/architecture-overview.png)
 
 ## 内容供应器函数
-
----
 
 [参考 NotebookContentProvider API](https://github.com/microsoft/vscode/blob/43184b2beda9edb613caadc2bab29ec50bad863f/src/vs/vscode.proposed.d.ts#L1792-L1805)
 
@@ -125,8 +121,6 @@ class SampleProvider implements vscode.NotebookContentProvider {
 
 ## 内核
 
----
-
 [参考 NotebookKernel API](https://github.com/microsoft/vscode/blob/43184b2beda9edb613caadc2bab29ec50bad863f/src/vs/vscode.proposed.d.ts#L1807-L1812)
 
 `NotebookKernel` 负责接收一个代码单元，并将其转化为一个或一组输出。
@@ -190,8 +184,6 @@ async function executeCell(
 ```
 
 ## 输出类型
-
----
 
 输出的类型必须得是以下这三种格式中的一个：
 
@@ -271,8 +263,6 @@ async function executeCell(
 如果你想渲染其它类型的 MIME，就需要为这个 MIME 注册一个 `NotebookOutputRenderer`。
 
 ## 输出渲染器
-
----
 
 输出渲染器负责接收并渲染 MIME 类型的输出数据，最终呈现的渲染结果可以是简单的 HTML，也可以是复杂的交互式应用程序。在本节，我们一起看看如何渲染一个关于 Github Issue 的视图。
 
@@ -483,8 +473,6 @@ export class MyKernelProvider extends vscode.NotebookKernelProvider {
 ```
 
 ## 调试支持
-
----
 
 对于一些实现了支持编程语言特性的笔记本内核，支持代码块的调试是很有必要的。可以通过以下几种方式来为内核添加调试支持：
 

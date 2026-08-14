@@ -4,8 +4,6 @@ VS Code 为你的插件提供了运行和调试的能力。测试会运行在一
 
 ## 概述
 
----
-
 _如果你原本使用`vscode`库进行测试，可以参考[从`vscode`迁移](#从-vscode-迁移)部分_
 
 如果你正在使用[yo code 生成器](https://github.com/Microsoft/vscode-generator-code)，那么生成的项目中应该已经包含了一些测试示例和指引。
@@ -21,8 +19,6 @@ _如果你原本使用`vscode`库进行测试，可以参考[从`vscode`迁移](
 - 测试脚本([src/test/suite/index.ts](https://github.com/microsoft/vscode-extension-samples/blob/master/helloworld-test-sample/src/test/suite/index.ts))
 
 ## 测试入口
-
----
 
 VS Code 提供了 2 个 CLI 参数来运行插件测试——`--extensionDevelopmentPath`和`--extensionTestsPath`。
 
@@ -74,8 +70,6 @@ main();
 你可以在[microsoft/vscode-test](https://github.com/microsoft/vscode-test)中找到更多用法。
 
 ## 测试脚本
-
----
 
 当你运行插件的集成测试时，`--extensionTestsPath`会指向**测试脚本**([src/test/suite/index.ts](https://github.com/microsoft/vscode-extension-samples/blob/master/helloworld-test-sample/src/test/suite/index.ts))，然后这个脚本会进一步运行测试套件。下面是`helloworld-test-sample`中的[测试脚本](https://github.com/microsoft/vscode-extension-samples/blob/master/helloworld-test-sample/src/test/suite/index.ts)，它使用了 Mocha 运行测试套件。你可以把这个文件视为测试的起点，你可以用[Mocha 的 API](https://mochajs.org/api/mocha)自定义启动时的配置，你也可以用其他任意喜欢的测试框架替代 Mocha。
 
@@ -145,8 +139,6 @@ suite("Extension Test Suite", () => {
 
 ## 调试测试文件
 
----
-
 调试测试文件和调试插件是一样的，我们看一个`launch.json`调试器配置的例子：
 
 ```json
@@ -173,8 +165,6 @@ suite("Extension Test Suite", () => {
 </video>
 
 ## 提示
-
----
 
 #### 使用 Insider 版本开发插件
 

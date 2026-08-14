@@ -4,8 +4,6 @@
 
 ## Azure Pipelines
 
----
-
 ![pipelines-logo](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/continuous-integration/pipelines-logo.png)
 
 你可以在[Azure DevOps](https://azure.microsoft.com/services/devops/)上创建免费的项目，它为你提供了代码托管、看板、构建和测试基础设施等等。最重要的是，你可以获得[10 个免费的并行任务](https://azure.microsoft.com/services/devops/pipelines/)容量，用于你构建项目，不论是在 Windows, macOS 还是 Linux 上。
@@ -61,8 +59,6 @@ steps:
 你可以启用持续构建——每当有 pull requests 进入特定分支的时候自动进行构建。相关内容请查看[构建管线触发器](https://docs.microsoft.com/azure/devops/pipelines/build/triggers)。
 
 ## Travis CI
-
----
 
 [vscode-test](https://github.com/microsoft/vscode-test)还包含了一份[Travis CI 构建文件](https://github.com/microsoft/vscode-test/blob/master/.travis.yml)，因为 Travis 上的环境变量定义和 Azure 所有不同，`xvfb`脚本也有些许不一样：
 
