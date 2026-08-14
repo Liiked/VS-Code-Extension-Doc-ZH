@@ -6,7 +6,7 @@ VS Code中的主题分为两类：
 
 ## 色彩主题
 
-![color-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/color-theme.png)
+![color-theme](https://code.visualstudio.com/assets/api/extension-capabilities/theming/file-icon-theme.png)
 
 如上图所示，色彩主题定义了2种映射：
 - `colors`控制UI组件的颜色
@@ -20,4 +20,4 @@ VS Code中的主题分为两类：
 - 根据文件名或这个文件的语言类型关联上图标ID
 
 [图标主题指南](/extension-guides/file-icon-theme)会详细探讨其中的细节。
-![file-icon-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/file-icon-theme.png)
+![file-icon-theme](https://code.visualstudio.com/assets/api/extension-capabilities/theming/file-icon-theme.png)

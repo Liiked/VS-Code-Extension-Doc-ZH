@@ -161,7 +161,7 @@ suite("Extension Test Suite", () => {
 ```
 
 <video loop muted playsinline controls>
-  <source src="https://code.visualstudio.com/api/working-with-extensions/testing-extension/debug.mp4" type="video/mp4">
+  <source src="https://code.visualstudio.com/assets/api/working-with-extensions/testing-extension/debug.mp4" type="video/mp4">
 </video>
 
 ## 提示
