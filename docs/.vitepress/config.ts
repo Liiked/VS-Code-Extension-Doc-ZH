@@ -62,6 +62,7 @@ export default defineConfig({
     sidebar: [
       {
         text: "预备知识",
+        collapsed: true,
         items: [
           { text: "非 JS 开发者的第一步", link: "/preknowledge/first-step" },
           { text: "变量和类型", link: "/preknowledge/variable-and-type" },
@@ -76,10 +77,12 @@ export default defineConfig({
       },
       {
         text: "概述",
+        collapsed: true,
         items: [{ text: "扩展性", link: "/api/" }],
       },
       {
         text: "第一步",
+        collapsed: true,
         items: [
           { text: "你的第一个插件", link: "/get-started/your-first-extension" },
           { text: "解析插件结构", link: "/get-started/extension-anatomy" },
@@ -88,6 +91,7 @@ export default defineConfig({
       },
       {
         text: "开发插件",
+        collapsed: true,
         items: [
           {
             text: "测试插件",
@@ -109,6 +113,7 @@ export default defineConfig({
       },
       {
         text: "插件功能",
+        collapsed: true,
         items: [
           { text: "概述", link: "/extension-capabilities/" },
           {
@@ -124,6 +129,7 @@ export default defineConfig({
       },
       {
         text: "插件指南",
+        collapsed: true,
         items: [
           { text: "概述", link: "/extension-guides/" },
           { text: "命令", link: "/extension-guides/command" },
@@ -153,6 +159,7 @@ export default defineConfig({
       },
       {
         text: "语言插件",
+        collapsed: true,
         items: [
           { text: "概述", link: "/language-extensions/" },
           {
@@ -181,6 +188,7 @@ export default defineConfig({
       },
       {
         text: "进阶主题",
+        collapsed: true,
         items: [
           { text: "插件主机", link: "/advanced-topics/extension-host" },
           { text: "远程开发", link: "/advanced-topics/remote-extensions" },
@@ -190,7 +198,7 @@ export default defineConfig({
           },
         ],
       },
-      { text: "参考", items: referenceItems },
+      { text: "参考", collapsed: true, items: referenceItems },
     ],
     search: {
       provider: "local",
