@@ -2,16 +2,16 @@
 
 在VS Code中，插件都是懒加载的，所以你得为VS Code提供插件激活的时机。 我们提供了下列激活时机：
 
-* [`onLanguage:${language}`](extensibility-reference/activation-events#activationeventsonlanguage)
-* [`onCommand:${command}`](extensibility-reference/activation-events#activationeventsoncommand)
-* [`onDebug`](extensibility-reference/activation-events#activationeventsondebug)
-* [`workspaceContains:${toplevelfilename}`](extensibility-reference/activation-events#activationeventsworkspacecontains)
-* [`onFileSystem:${scheme}`](extensibility-reference/activation-events#activationeventsonfilesystem)
-* [`onView:${viewId}`](extensibility-reference/activation-events#activationeventsonview)
-* [`onUri`](extensibility-reference/activation-events#activationeventsonuri)
-* [`*`](extensibility-reference/activation-events#activationevents)
+* [`onLanguage:${language}`](/extensibility-reference/activation-events#activationeventsonlanguage)
+* [`onCommand:${command}`](/extensibility-reference/activation-events#activationeventsoncommand)
+* [`onDebug`](/extensibility-reference/activation-events#activationeventsondebug)
+* [`workspaceContains:${toplevelfilename}`](/extensibility-reference/activation-events#activationeventsworkspacecontains)
+* [`onFileSystem:${scheme}`](/extensibility-reference/activation-events#activationeventsonfilesystem)
+* [`onView:${viewId}`](/extensibility-reference/activation-events#activationeventsonview)
+* [`onUri`](/extensibility-reference/activation-events#activationeventsonuri)
+* [`*`](/extensibility-reference/activation-events#activationevents)
 
-我们在[`package.json` 插件清单](extensibility-reference/extension-manifest.md)中提供了一个插件最少所需的激活事件。
+我们在[`package.json` 插件清单](/extensibility-reference/extension-manifest)中提供了一个插件最少所需的激活事件。
 
 ## activationEvents.onLanguage
 
@@ -25,7 +25,7 @@
 ...
 ```
 
-`onLanguage`只支持[语言标识符](/docs/languages/identifiers.md)中的值。
+`onLanguage`只支持[语言标识符](https://code.visualstudio.com/docs/languages/identifiers.md)中的值。
 
 在`activationEvents`数组中声明多个`onLanguage`入口实现多语言支持
 
@@ -69,7 +69,7 @@
 * `onDebugInitialConfigurations` 在`DebugConfigurationProvider`中的 `provideDebugConfigurations`方法之前触发。
 * `onDebugResolve:type` 在`DebugConfigurationProvider`的`resolveDebugConfiguration`方法之前触发。
 
-**首要原则：** 如果调试插件的激活事件比较轻量，那么就用`onDebug`。相反，根据`DebugConfigurationProvider`实现的对应方法（ `provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve` 。参见 [Debug Type specific Hooks](/docs/extensionAPI/api-debugging.md#debug-type-specific-hooks)。
+**首要原则：** 如果调试插件的激活事件比较轻量，那么就用`onDebug`。相反，根据`DebugConfigurationProvider`实现的对应方法（ `provideDebugConfigurations`或`resolveDebugConfiguration`），使用`onDebugInitialConfigurations`或`onDebugResolve` 。参见 [Debug Type specific Hooks](https://code.visualstudio.com/docs/extensionAPI/api-debugging.md#debug-type-specific-hooks)。
 
 ## activationEvents.workspaceContains
 
@@ -136,14 +136,16 @@
 ]
 ...
 ```
-
-!> **注意：** 一个插件如果侦听了多个激活事件，那么最好用`"*"`替换掉。
-
-!> **注意：** 插件**必须**从它的主模块中输出一个`activate()`函数，当任意的激活事件触发时，VS Code会**仅仅调用一次这个函数**。此外，插件也**应该** 导出一个`deactivate()`函数，当VS Code关闭时执行清理的任务。如果清理进程是异步的，插件的`deactivate()`**必须**返回一个Promise。如果这个清理任务是同步的，那么`deactivate()`可以返回`undefined`。
+::: warning
+**注意：** 一个插件如果侦听了多个激活事件，那么最好用`"*"`替换掉。
+:::
+::: warning
+**注意：** 插件**必须**从它的主模块中输出一个`activate()`函数，当任意的激活事件触发时，VS Code会**仅仅调用一次这个函数**。此外，插件也**应该** 导出一个`deactivate()`函数，当VS Code关闭时执行清理的任务。如果清理进程是异步的，插件的`deactivate()`**必须**返回一个Promise。如果这个清理任务是同步的，那么`deactivate()`可以返回`undefined`。
+:::
 
 ## 下一步
 
 学习更多VS Code扩展性模型，看看下列主题：
 
-* [插件清单](/docs/extensionAPI/extension-manifest.md) - VS Code package.json 插件清单文件参考
-* [发布内容配置点](/docs/extensionAPI/extension-points.md) - VS Code 发布内容配置点参考
+* [插件清单](https://code.visualstudio.com/docs/extensionAPI/extension-manifest.md) - VS Code package.json 插件清单文件参考
+* [发布内容配置点](https://code.visualstudio.com/docs/extensionAPI/extension-points.md) - VS Code 发布内容配置点参考

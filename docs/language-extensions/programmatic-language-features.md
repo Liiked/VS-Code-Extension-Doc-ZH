@@ -65,8 +65,9 @@ vscode.languages.registerHoverProvider('javascript', {
 ##### 语言服务器协议
 
 语言服务器需要向客户端发送`textDocument/publishDiagnostics`信息，这个信息中包含了诊断信息url的数组。
-
-!> **注意：**客户端不会主动向服务端请求信息，需要服务器将诊断信息推送到客户端。
+::: warning
+**注意：**客户端不会主动向服务端请求信息，需要服务器将诊断信息推送到客户端。
+:::
 
 ##### 直接实现
 
@@ -792,8 +793,9 @@ export function activate(ctx: vscode.ExtensionContext): void {
 ---
 
 支持用户输入时动态调整文本格式。
-
-!> **注意：**用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着本功能。
+::: warning
+**注意：**用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着本功能。
+:::
 
 ![format-on-type](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-support/format-on-type.gif)
 ##### 语言服务器协议

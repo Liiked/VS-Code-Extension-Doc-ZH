@@ -23,7 +23,7 @@
 ## 键位绑定
 ---
 
-插件可以添加自定义键位映射，在[`contributes.keybindings`](/references/contribution-points?id=contributeskeybindings)和[键位绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中了解更多有关内容。
+插件可以添加自定义键位映射，在[`contributes.keybindings`](/references/contribution-points#contributeskeybindings)和[键位绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中了解更多有关内容。
 
 ## 菜单
 ---

@@ -134,14 +134,15 @@ let success = await commands.executeCommand('vscode.previewHtml', uri);
 * _label_ - (可选) 字符串，显示为预览的标题
 * _options_ - (可选) 控制webivew环境的选项
 
-查看 [使用HTML预览](extensibility-reference/vscode-api-commands?id=使用html-preview)章节获取更多最佳实践和插件创作的信息。
+查看 [使用HTML预览](/extensibility-reference/vscode-api-commands#使用html-preview)章节获取更多最佳实践和插件创作的信息。
 
 `vscode.openFolder` - 在当前工作区打开文件夹，或者根据传入的参数打开新窗口
 
 * _uri_ - (可选) 要打开的文件夹或者工作区文件。如果不提供的话，会打开一个原生对话框窗口给用户选择。
 * _newWindow_ - (可选) 是否在新窗口中打开文件夹/工作区。默认在当前窗口打开。
-
-!> 注意：在当前窗口打开会关闭当前插件进程，然后根据新的文件夹/工作区启动新的插件进程，除非你配置了newWindow参数
+::: warning
+注意：在当前窗口打开会关闭当前插件进程，然后根据新的文件夹/工作区启动新的插件进程，除非你配置了newWindow参数
+:::
 
 `vscode.diff` - 在diff编辑器中打开选中的源文件以便比较他们的内容。
 

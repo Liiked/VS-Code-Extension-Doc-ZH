@@ -1,6 +1,6 @@
 # 插件功能
 
-VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。但是有的时候也很难找到对的[发布内容配置](/references/contribution-points.md)和[VS Code API](/references/vscode-api.md)。这章内容将插件的功能分成了几个部分，每个部分都将告诉你：
+VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。但是有的时候也很难找到对的[发布内容配置](/references/contribution-points)和[VS Code API](/references/vscode-api)。这章内容将插件的功能分成了几个部分，每个部分都将告诉你：
 - 插件可以使用的功能
 - 这些功能点的细节索引
 - 一些插件灵感
@@ -36,7 +36,7 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
 ## 声明式添加语言特性
 ---
 
-[声明式语言特性](/language-extensions/README#声明式语言特性)添加了基础的编程语言编辑支持，如括号匹配、自动缩进和语法高亮。这些功能都可以通过声明配置而不用写任何代码就可以获得，更高级的语言特性如IntelliSense或调试，请看[编程式添加语言特性](#编程式添加语言特性)
+[声明式语言特性](/language-extensions#声明式语言特性)添加了基础的编程语言编辑支持，如括号匹配、自动缩进和语法高亮。这些功能都可以通过声明配置而不用写任何代码就可以获得，更高级的语言特性如IntelliSense或调试，请看[编程式添加语言特性](#编程式添加语言特性)
 
 ##### 插件灵感
 
@@ -49,7 +49,7 @@ VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。�
 ## 编程式添加语言特性
 ---
 
-[编程式添加语言特性](/language-extensions/README#编程式语言特性)可以为编程语言添加更为丰富的特性，如：悬停提示、转跳定义、错误诊断、IntelliSense和CodeLens。这些语言特性暴露于[`vscode.languages.*`](https://code.visualstudio.com/api/references/vscode-api#languages)API。语言插件可以直接使用这些API，或是自己写一个语言服务器，通过[语言服务器库](https://github.com/Microsoft/vscode-languageserver-node)将它适配到VS Code。
+[编程式添加语言特性](/language-extensions#编程式语言特性)可以为编程语言添加更为丰富的特性，如：悬停提示、转跳定义、错误诊断、IntelliSense和CodeLens。这些语言特性暴露于[`vscode.languages.*`](https://code.visualstudio.com/api/references/vscode-api#languages)API。语言插件可以直接使用这些API，或是自己写一个语言服务器，通过[语言服务器库](https://github.com/Microsoft/vscode-languageserver-node)将它适配到VS Code。
 
 虽然我们提供了一个[语言特性](/language-extensions/programmatic-language-features)列表，但是并不阻碍你发挥想象，自由使用这些API。比方说，在行内显示额外信息，使用CodeLens和代码悬停是非常好的方式，而错误诊断可以高亮拼写或代码风格错误。
 

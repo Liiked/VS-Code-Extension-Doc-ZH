@@ -22,7 +22,7 @@
 
 我们提供了两个端到端的基础教程，供你快速入门：
 1. [Hello World](/extension-authoring/example-hello-world) - 生成一个本地运行的基础插件，了解插件的目录结构、配置文件，理解`激活`的触发机制。
-2. [Word Count](docs/extension-authoring/example-word-count) - 根据特定的文件类型更新状态栏，响应编辑器的文本操作，学习文件被删除时该如何处理。
+2. [Word Count](/extension-authoring/example-word-count) - 根据特定的文件类型更新状态栏，响应编辑器的文本操作，学习文件被删除时该如何处理。
 
 另外，首先建议你阅读一下[扩展性原则和模式](/extensibility-reference/principles-patterns)部分，能帮助你了解贯穿整个`extensibility API`的编程模式。
 

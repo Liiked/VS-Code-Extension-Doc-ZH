@@ -3,7 +3,7 @@
 
 当你听到VS Code支持了一门语言，你一般能想到语法高亮、代码补全，或者还有调试支持。能想到这么多很好，但是语言插件还可以承担更多的任务。
 
-通过适当地配置文件，语言插件可以语法高亮、代码片段和智能括号匹配，更多高级特性则可以通过VS Code的[扩展性API](/extensibility-reference/vscode-api.md)或者[语言服务器](/extension-authoring/example-language-server.md)来实现。
+通过适当地配置文件，语言插件可以语法高亮、代码片段和智能括号匹配，更多高级特性则可以通过VS Code的[扩展性API](/extensibility-reference/vscode-api)或者[语言服务器](/extension-authoring/example-language-server)来实现。
 
 语言服务器是一个使用[language server protocol](https://microsoft.github.io/language-server-protocol)通信的独立服务器。你能在适当的任务中使用适当的语言实现一个服务器，例如：你想支持一个非常棒的Python库，那你可能会想要用Python来实现你的语言服务器。如果你想要用Javascript或者Typescript实现语言服务器，那么直接用VS Code顶层的[npm modules](https://github.com/Microsoft/vscode-languageserver-node)构建即可。
 
@@ -840,8 +840,9 @@ export function activate(ctx: vscode.ExtensionContext): void {
 为用户提供输入时的实时格式化特性。
 
 ![format-document-type](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/format-on-type.gif)
-
-!> **注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
+::: warning
+**注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
+:::
 
 #### 通过语言服务器实现
 除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/onTypeFormatting`请求。你还需要告诉客户端哪些字符可以触发这个特性，`moreTriggerCharacters`是个可选项。
@@ -891,8 +892,9 @@ export function activate(ctx: vscode.ExtensionContext): void {
 允许用户预览和修改文档中的颜色。
 
 ![color-decorators](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensionAPI/images/language-support/color-decorators.png)
-
-!> **注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
+::: warning
+**注意**：用户[设置](https://code.visualstudio.com/docs/getstarted/settings)中的`editor.formatOnType`控制着这项功能。
+:::
 
 #### 通过语言服务器实现
 除了响应`initialize`方法外，语言服务器还要声明提供*用户输入格式化*特性。当然你的语言服务器还需要响应`textDocument/documentColor`和`textDocument/colorPresentation`请求。

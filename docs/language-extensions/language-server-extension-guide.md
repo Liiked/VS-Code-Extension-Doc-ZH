@@ -29,8 +29,9 @@
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
-
-?> **译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+::: info
+**译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+:::
 
 ## 实现你自己的语言服务器
 ---
@@ -198,8 +199,9 @@ export function deactivate(): Thenable<void> {
 
 ## 什么是'Language Server'
 ---
-
-?> **小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+::: info
+**小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+:::
 
 在这个例子中，服务器是Typescript实现的，由Node.js运行。因为VS Code自带Node.js运行时，所以你无需安装其他依赖，除非你对运行时有特别要求。
 
@@ -711,7 +713,7 @@ connection.onInitialize((params): InitializeResult => {
 为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
 - 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的[HTML](https://github.com/Microsoft/vscode-html-languageservice)/[CSS](https://github.com/Microsoft/vscode-css-languageservice)/[JSON](https://github.com/Microsoft/vscode-json-languageservice)语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -817,7 +819,7 @@ async function sleep(ms: number) {
 - 打开特定的文档，然后显示在文本编辑区
 - 休眠2秒，确保启动了语言服务器
 
-准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands.md)，然后对结果进行断言测试。
+准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands)，然后对结果进行断言测试。
 这还有一个关于诊断特性的测试实现，如果你感兴趣，可以查看这个文件`client/src/test/diagnostics.test.ts`
 
 ## 进阶主题

@@ -140,8 +140,9 @@ let success = await commands.executeCommand('vscode.openFolder', uri);
 
 - *uri* - 被打开的文件夹或工作区Uri. 如果未提供, 会打开一个询问提示框
 - *newWindow* - (可选的)是否在新窗口打开. 默认在本窗口
-
-!> **注意：** 在当前窗口打开, 如果未设置`newWindow = true`, 会在指定的工作区或者文件夹开启新的拓展主机进程, 并且关闭当前拓展主机进程.
+::: warning
+**注意：** 在当前窗口打开, 如果未设置`newWindow = true`, 会在指定的工作区或者文件夹开启新的拓展主机进程, 并且关闭当前拓展主机进程.
+:::
 
 `vscode.diff` - 在diff编辑器中打开指定资源以比较它们的内容
 

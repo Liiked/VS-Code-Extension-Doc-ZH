@@ -16,8 +16,9 @@
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
-
-?> **译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+::: info
+**译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+:::
 
 ## 实现你自己的语言服务器
 ---
@@ -25,7 +26,7 @@
 #### 概览
 
 在VS Code中，一个语言服务器有两个部分：
-- **语言客户端**：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的[VS Code 命名空间API](/extensibility-reference/vscode-api.md)。
+- **语言客户端**：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的[VS Code 命名空间API](/extensibility-reference/vscode-api)。
 - **语言服务端**：运行在单独进程中的语言分析工具。
 
 把语言服务器放在隔离进程中运行的好处简单来说有两个：
@@ -73,7 +74,7 @@
 
 我们先看看`/package.json`，这个文件描述了语言客户端的能力。里面有3个有趣的部分：
 
-首先看看[activationEvents](/extensibility-reference/activation-events.md)：
+首先看看[activationEvents](/extensibility-reference/activation-events)：
 ```json
 "activationEvents": [
     "onLanguage:plaintext"
@@ -82,7 +83,7 @@
 
 这个部分告诉VS Code只要打开纯文本文件之后就立刻激活插件（例如：打开一个`.txt`文件）
 
-下一步看看[configuration](/extensibility-reference/contribution-points.md#contributesconfiguration)部分：
+下一步看看[configuration](/extensibility-reference/contribution-points#contributesconfiguration)部分：
 
 ```json
 "configuration": {
@@ -502,7 +503,7 @@ ANY browser. ANY host. ANY OS. Open Source.
 ## 调试客户端和服务端
 ---
 
-调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后启动插件调试。（如何启动代码调试的部分，请参阅[开发插件](/extension-authoring/developing-extensions.md)）
+调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后启动插件调试。（如何启动代码调试的部分，请参阅[开发插件](/extension-authoring/developing-extensions)）
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-language-server/debugging-client.png)
 
@@ -687,7 +688,7 @@ connection.onInitialize((params): InitializeResult => {
 为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
 - 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的HTML/CSS/JSON语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行VS Code命令来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的Python插件就采用了这种测试方式。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行VS Code命令来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的Python插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -793,7 +794,7 @@ async function sleep(ms: number) {
 - 打开特定的文档，然后显示在文本编辑区
 - 休眠2秒，确保启动了语言服务器
 
-准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands.md)，然后对结果进行断言测试。
+准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands)，然后对结果进行断言测试。
 这还有一个关于诊断特性的测试实现，如果你感兴趣，可以查看这个文件`client/src/test/diagnostics.test.ts`
 
 ## 进阶主题

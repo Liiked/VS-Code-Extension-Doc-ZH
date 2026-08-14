@@ -157,7 +157,7 @@ VS Code 恢复 (restore) `viewType` 为 `catCoding` 的 webview 时会激活插�
 ## onCustomEditor
 ---
 
-当相应 `viewType` 的 [自定义编辑器](../extension-guides/custom-editors.md) 被创建时触发. 
+当相应 `viewType` 的 [自定义编辑器](/extension-guides/custom-editors) 被创建时触发. 
 
 
 下面是一个例子:
@@ -168,9 +168,10 @@ VS Code 恢复 (restore) `viewType` 为 `catCoding` 的 webview 时会激活插�
 ```
 
 VS Code 恢复 (restore) `viewType` 为 `catCustoms.pawDraw` 的自定义编辑器时会激活插件. 
-首先通过 [`自定义编辑器` 的发布内容配置](../extension-guides/custom-editors.md#发布内容配置) 设置 `viewType` ，然后为 `registerCustomEditorProvider` 提供一个 供应器函数. 
-
-!> **注意**: 从VS Code 1.74.0开始，包含自定义编辑器的插件，不再需要单独配置 `onCustomEditor` 事件来激活. 
+首先通过 [`自定义编辑器` 的发布内容配置](/extension-guides/custom-editors#发布内容配置) 设置 `viewType` ，然后为 `registerCustomEditorProvider` 提供一个 供应器函数. 
+::: warning
+**注意**: 从VS Code 1.74.0开始，包含自定义编辑器的插件，不再需要单独配置 `onCustomEditor` 事件来激活. 
+:::
 
 ## onAuthenticationRequest
 ---
@@ -186,8 +187,9 @@ VS Code 恢复 (restore) `viewType` 为 `catCustoms.pawDraw` 的自定义编辑�
 ```
 
 当 VS Code 需要获取类型为 `github` 的 `AuthenticationSession` 将激活插件. 
-
-!> **注意**: 从VS Code 1.74.0开始，包含认证程序的插件，不再需要单独配置 `onAuthenticationRequest` 事件来激活. 
+::: warning
+**注意**: 从VS Code 1.74.0开始，包含认证程序的插件，不再需要单独配置 `onAuthenticationRequest` 事件来激活. 
+:::
 
 ## onStartupFinished
 ---
@@ -214,7 +216,9 @@ VS Code启动一段时间后才会激活插件. 它类似于 `*` 类激活事件
 ]
 ...
 ```
-
-!> **注意**: 一个插件如果侦听了多个激活事件, 那么最好用`"*"`替换掉.
-
-!> **注意**: 插件**必须**从它的主模块中输出一个`activate()`函数，当任意的激活事件触发时，VS Code会**仅仅调用一次这个函数**. 此外，插件也**应该** 导出一个`deactivate()`函数，当VS Code关闭时执行清理的任务. 如果清理进程是异步的，插件的`deactivate()`**必须**返回一个Promise. 如果这个清理任务是同步的，那么`deactivate()`可以返回`undefined`. 
+::: warning
+**注意**: 一个插件如果侦听了多个激活事件, 那么最好用`"*"`替换掉.
+:::
+::: warning
+**注意**: 插件**必须**从它的主模块中输出一个`activate()`函数，当任意的激活事件触发时，VS Code会**仅仅调用一次这个函数**. 此外，插件也**应该** 导出一个`deactivate()`函数，当VS Code关闭时执行清理的任务. 如果清理进程是异步的，插件的`deactivate()`**必须**返回一个Promise. 如果这个清理任务是同步的，那么`deactivate()`可以返回`undefined`. 
+:::

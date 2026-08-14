@@ -182,8 +182,9 @@ Yeoman通过问问题的方式最后生成新的插件，对于创建语法插�
 回答了一大堆问题之后，Yeoman会创建一个新的插件，其结构如下：
 
 ![generated-new-language-extension](https://code.visualstudio.com/assets/api/language-extensions/syntax-highlighting/generated-new-language-extension.png)
-
-!> 注意：如果你只是配置一个VS Code中已有语言的语法，记得删掉生成的`package.json`中的`languages`配置。
+::: warning
+注意：如果你只是配置一个VS Code中已有语言的语法，记得删掉生成的`package.json`中的`languages`配置。
+:::
 
 #### 迁移现成的TextMate语法
 

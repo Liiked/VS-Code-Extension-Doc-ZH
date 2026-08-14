@@ -21,8 +21,9 @@ const myProvider = class implements vscode.TextDocumentContentProvider {
 	}
 };
 ```
-
-!> **注意**：我们的供应器函数不为虚拟文档创建uri——他的角色仅仅只是**根据uri返回对应的文本内容**。
+::: warning
+**注意**：我们的供应器函数不为虚拟文档创建uri——他的角色仅仅只是**根据uri返回对应的文本内容**。
+:::
 
 下面我们简单使用一个'cowsay'命令创建一个uri，然后编辑器就能显示了：
 

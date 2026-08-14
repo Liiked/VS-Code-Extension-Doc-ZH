@@ -11,8 +11,9 @@
 - 缩进规则
 
 [语言配置示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/language-configuration-sample)中配置JavaScript文件中的编辑功能。本篇指南会详细解释`language-configuration.json`中的内容：
-
-!> **注意**：如果你的语言配置文件以**`language-configuration.json`**结尾，那么VS Code会帮你添加代码补全和校验功能。
+::: warning
+**注意**：如果你的语言配置文件以**`language-configuration.json`**结尾，那么VS Code会帮你添加代码补全和校验功能。
+:::
 
 ```json
 {

@@ -1,12 +1,13 @@
 # 示例 Word Count
 
-如果你还没有接触过[你的第一个插件](/extension-authoring/example-hello-world.md)章节，我们建议你先去了解一下。
+如果你还没有接触过[你的第一个插件](/extension-authoring/example-hello-world)章节，我们建议你先去了解一下。
 
 本篇示例将会告诉你，如何制作一个Markdown辅助编辑工具。开始之前，我们先了解一下本篇你将接触到的插件功能：当编辑Makrdown文件时状态栏会显示编辑区字数，如果你编辑文档或者打开了另一个md文件字数也会随之改变。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-word-count/wordcountevent2.gif)
-
-?> 小贴士：如果你碰到了什么问题，可以在这里[下载完整的项目](https://github.com/microsoft/vscode-wordcount)进行调试
+::: info
+小贴士：如果你碰到了什么问题，可以在这里[下载完整的项目](https://github.com/microsoft/vscode-wordcount)进行调试
+:::
 
 ## 本节要点
 本章将通过三个部分让你了解vscode有关的概念：
@@ -14,9 +15,9 @@
 - [订阅事件](#订阅事件) - 通过编辑器事件更新*状态栏*
 - [释放插件资源](#释放插件资源) - 比如：释放事件订阅和UI回调函数
 
-如果你还不熟悉生成插件的步骤，请先了解之前的章节：[生成插件-运行Yo](/extension-authoring/extension-generator?id=运行yo-code😎)
+如果你还不熟悉生成插件的步骤，请先了解之前的章节：[生成插件-运行Yo](/extension-authoring/extension-generator#运行yo-code😎)
 
-就像你之前在[示例：Hello-world](/extension-authoring/example-hello-world.md)中做的一样，使用`F5`或者`Cmd + R`运行该项目。
+就像你之前在[示例：Hello-world](/extension-authoring/example-hello-world)中做的一样，使用`F5`或者`Cmd + R`运行该项目。
 
 ## 更新状态栏
 ---
@@ -113,8 +114,9 @@ class WordCounter {
 - `onDidChangeActiveTextEditor` - 激活编辑器（打开的编辑器）切换的时候触发。
 
 为了实现这个目标，我们给`extension.ts`添加一个新类，订阅上述事件然后让`WordCounter`更新字数。
-
-?>在实现时，你需要注意我们是如何把**消息订阅( subscription )**转换为**释放器( Disposables )**来管理的，它将监听并释放自己。
+::: info
+在实现时，你需要注意我们是如何把**消息订阅( subscription )**转换为**释放器( Disposables )**来管理的，它将监听并释放自己。
+:::
 
 根据下列代码，将`WordCounterController`类添加到`extension.ts`文件底部。
 ```typescript
@@ -209,7 +211,7 @@ this._statusBarItem.show();
 ## 释放插件资源
 ---
 
-现在，我们来深入了解一下VS Code是怎么通过[释放器（Disposables）](/extensibility-reference/principles-patterns?id=disposables（释放器）)控制资源的。
+现在，我们来深入了解一下VS Code是怎么通过[释放器（Disposables）](/extensibility-reference/principles-patterns#disposables（释放器）)控制资源的。
 
 当一个插件被激活，它会传入一个`ExtensionContext`对象， 这个对象有一个用于订阅释放器（Disposable）的`subscriptions`方法。插件将=释放器添加到这个订阅列表中，VS Code则会在插件关闭的时候释放这些对象。
 
@@ -233,16 +235,16 @@ this._disposable = Disposable.from(...subscriptions);
 ## 发布插件
 ---
 
-参阅[分享插件](/extension-authoring/publish-extension.md)
+参阅[分享插件](/extension-authoring/publish-extension)
 
 ## 下一步
 
-[插件生成器](/extension-authoring/extension-generator.md) - 学习Yo Code插件生成器的更多选项
+[插件生成器](/extension-authoring/extension-generator) - 学习Yo Code插件生成器的更多选项
 
-[Extenstion API](/extensibility-reference/overview.md) - 插件API概览
+[Extenstion API](/extensibility-reference/overview) - 插件API概览
 
-[发布插件](/extension-authoring/publish-extension.md) - 学会如何在应用市场发布一个公共插件
+[发布插件](/extension-authoring/publish-extension) - 学会如何在应用市场发布一个公共插件
 
-[编辑器 API](/extensibility-reference/vscode-api.md) - 学习更多有关文档, 文档编辑器和编辑的内容
+[编辑器 API](/extensibility-reference/vscode-api) - 学习更多有关文档, 文档编辑器和编辑的内容
 
-[更多插件示例](/extension-authoring/samples.md) - 在插件示例列表学习其他用法
+[更多插件示例](/extension-authoring/samples) - 在插件示例列表学习其他用法

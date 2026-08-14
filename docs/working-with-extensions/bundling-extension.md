@@ -186,5 +186,5 @@ webpack.config.js
 ## 下一步
 
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多 VS Code 插件市场的有关内容。
-- [测试插件](/working-with-extensions/testing-extension.md) - 测试插件，提高项目质量。
-- [持续集成](/working-with-extensions/continuous-integration.md) - 使用 Azure Pipeline 运行插件的 CI 构建。
+- [测试插件](/working-with-extensions/testing-extension) - 测试插件，提高项目质量。
+- [持续集成](/working-with-extensions/continuous-integration) - 使用 Azure Pipeline 运行插件的 CI 构建。

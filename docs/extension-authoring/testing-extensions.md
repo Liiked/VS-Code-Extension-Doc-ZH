@@ -4,9 +4,10 @@ VS Code可以运行和调试支持VS Code API的插件。这些测试会运行�
 
 ## Yo Code测试脚手架
 ---
-[yo code 生成器](/extension-authoring/extension-generator.md)基础插件项目包含了一些示例测试和必要的基础设施。
-
-!> **注意：**本篇假设你已经创建了一个Typescript插件（或Javascript插件），不然先参考[基础部分](extension-authoring/extension-generator)
+[yo code 生成器](/extension-authoring/extension-generator)基础插件项目包含了一些示例测试和必要的基础设施。
+::: warning
+**注意：**本篇假设你已经创建了一个Typescript插件（或Javascript插件），不然先参考[基础部分](/extension-authoring/extension-generator)
+:::
 
 打开一个插件项目目录，打开**调试**侧边栏选择`Extension Tests`配置。
 
@@ -123,7 +124,7 @@ script:
 
 ## 下一步
 
-- [发开插件](/extension-authoring/developing-extensions.md) - 学习更多调试插件的内容。
+- [发开插件](/extension-authoring/developing-extensions) - 学习更多调试插件的内容。
 - [vsce](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensions/publish-extension.md) - 使用VSCE命令行工具发布插件。
-- [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code插件配置清单参阅。
-- [扩展API](/extensibility-reference/vscode-api.md) - 学习更多VS Code扩展性API。
+- [插件配置清单](/extensibility-reference/extension-manifest) - VS Code插件配置清单参阅。
+- [扩展API](/extensibility-reference/vscode-api) - 学习更多VS Code扩展性API。

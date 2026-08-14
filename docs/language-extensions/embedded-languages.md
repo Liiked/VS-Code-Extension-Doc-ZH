@@ -47,8 +47,9 @@ HTML 语言服务器分析 HTML 文档，将其分解为**语言域**，然后�
 现在让我们在 [lsp-embedded-language-service](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-embedded-language-service) 示例中检验一下。
 
 ### 语言服务示例
-
-!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+::: warning
+注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+:::
 
 与 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample) 相同的是，本示例的客户端代码都是一样的。
 
@@ -162,8 +163,9 @@ export function getCSSMode(
 现在，我们来看看示例代码：
 
 ### 请求转发示例
-
-!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+::: warning
+注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+:::
 
 
 建立文档 URI 和它们对应虚拟文档的映射，根据这个映射提供对应的请求：

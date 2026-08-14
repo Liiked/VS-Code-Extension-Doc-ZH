@@ -7,8 +7,8 @@
 ---- |:--------:| ---- | -------
 `name` | Y | `string` | 插件的名称必须用全小写无空格的字母组成。
 `version` | Y | `string` | [SemVer](https://semver.org/)版本模式兼容。
-`publisher` | Y | `string` | [发行方名称](/extension-authoring/publish-extension.md#创建一个发行方)
-`engines` | Y | `object` | 一个至少包含`vscode`字段的对象，其值必须[兼容](/extension-authoring/publish-extension.md#VS-Code版本兼容性) VS Code版本。不可以是`*`。例如：`^0.10.5` 表明最小兼容`0.10.5`版本的VS Code。
+`publisher` | Y | `string` | [发行方名称](/extension-authoring/publish-extension#创建一个发行方)
+`engines` | Y | `object` | 一个至少包含`vscode`字段的对象，其值必须[兼容](/extension-authoring/publish-extension#VS-Code版本兼容性) VS Code版本。不可以是`*`。例如：`^0.10.5` 表明最小兼容`0.10.5`版本的VS Code。
 `license` | | `string` | 参考[npm's documentation](https://docs.npmjs.com/files/package.json#license)。如果你在插件根目录已经提供了`LICENSE`文件。那么`license`的值应该是`"SEE LICENSE IN <filename>"`。
 `displayName` | | `string`| 插件市场所显示的插件名称。
 `description` | | `string` | 简单地描述一下你的插件是做什么的。
@@ -17,15 +17,15 @@
 `galleryBanner` | | `object` | 根据你的icon格式化市场的头部显示。详情见下。
 `preview` | | `boolean` | 在市场中会显示Preview标记。
 `main` | | `string` | 你的插件入口
-[`contributes`](/extensibility-reference/contribution-points.md) | | `object` | 描述插件[发布内容](/extensibility-reference/contribution-points.md)的对象。
-[`activationEvents`](/extensibility-reference/activation-events.md) | | `array` | [激活事件](/extensibility-reference/activation-events.md)数组。
+[`contributes`](/extensibility-reference/contribution-points) | | `object` | 描述插件[发布内容](/extensibility-reference/contribution-points)的对象。
+[`activationEvents`](/extensibility-reference/activation-events) | | `array` | [激活事件](/extensibility-reference/activation-events)数组。
 `badges` | | `array` | 显示在插件市场页面侧边栏的[合法](#使用认证过的标志)标记。 每个标记都是一个对象，包含了3个属性：`url` 标记的图片URL，当用户点击标记和`description`时，会跳转到`href`。
 `markdown` | | `string` | 控制市场中使用的Markdown渲染引擎。可以是`github` (默认) 或 `standard`。
 `qna` | | `marketplace` (默认), `string`, `false` | 控制市场中的**Q & A** 链接。 设置成`marketplace`时，自动使用市场默认的Q & A网址。或者提供一个URL转跳到你的Q & A 地址。设置为`false`时禁用。
 `dependencies` | | `object` | Node.js 运行时依赖。等同于[npm's `dependencies`](https://docs.npmjs.com/files/package.json#dependencies).
 `devDependencies` | | `object` | Node.js 开发时依赖。 等同于[npm's `devDependencies`](https://docs.npmjs.com/files/package.json#devdependencies).
 `extensionDependencies` | | `array` | 插件依赖，由插件ID组成的数组。当主要插件安装完成后，其他插件会相应安装。插件ID的格式为 `${publisher}.${name}`。比如：`vscode.csharp`。
-`scripts` | | `object` | 等同于[npm的 `scripts`](https://docs.npmjs.com/misc/scripts)，不过有VS Code额外字段如[vscode:prepublish](/extension-authoring/publish-extension.md#预发布步骤)或[vscode:uninstall](#插件卸载钩子).
+`scripts` | | `object` | 等同于[npm的 `scripts`](https://docs.npmjs.com/misc/scripts)，不过有VS Code额外字段如[vscode:prepublish](/extension-authoring/publish-extension#预发布步骤)或[vscode:uninstall](#插件卸载钩子).
 `icon` | | `string` | icon的文件路径，最小 128x128 像素 (视网膜屏幕则需 256x256)。
 
 你还可以参考[npm的`package.json`](https://docs.npmjs.com/files/package.json)
@@ -93,7 +93,7 @@
 
 下面是两个栗子🌰：
 
-1. [Word Count](extension-authoring/example-word-count)
+1. [Word Count](/extension-authoring/example-word-count)
 2. [MD Tools](https://marketplace.visualstudio.com/items/seanmcbreen.MDTools)
 
 好的名字和描述是市场展示产品非常重要的部分。下述字符串用于VS Code文本搜索，带上关键字更容易被找到。
@@ -150,8 +150,9 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
     ],
 }
 ```
-
-?> **小贴士：** The [Extension Manifest Editor](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.extension-manifest-editor) 插件可以帮你预览预览你的插件中的`README.md` 和 `package.json`， 生成的预览就像你已经发布到插件市场了一样。
+::: info
+**小贴士：** The [Extension Manifest Editor](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.extension-manifest-editor) 插件可以帮你预览预览你的插件中的`README.md` 和 `package.json`， 生成的预览就像你已经发布到插件市场了一样。
+:::
 
 ### 使用认证过的徽章
 
@@ -243,8 +244,9 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 }
 ```
 注意插件的`categories`字段现在包含了`Programming Languages`和`Snippets`，以便用户在市场中找到这个插件。
-
-?> **小贴士：** 整合好的配置文件应该使用同样的标识符。在上述例子中，所有的标识符都用了"latex"。这样VS Code 才知道（语法）着色器和代码片段是为LaTeX语言准备的，当编辑LaTeX文件的时候才会激活插件。
+::: info
+**小贴士：** 整合好的配置文件应该使用同样的标识符。在上述例子中，所有的标识符都用了"latex"。这样VS Code 才知道（语法）着色器和代码片段是为LaTeX语言准备的，当编辑LaTeX文件的时候才会激活插件。
+:::
 
 ## 插件包
 ---
@@ -292,8 +294,9 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 }
 ```
 这个脚本会在插件完全卸载之后执行，也就是插件完全卸载之后——VS Code重载（关闭然后启动）之后执行。
-
-!> 注意：只支持Node.js脚本
+::: warning
+注意：只支持Node.js脚本
+:::
 
 下面有几个npmjs的Node.js 模块，可以帮你实现VS Code插件。你可以在插件的`dependencies`部分包含进去。
 
@@ -307,6 +310,6 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 ## 下一步
 学习更多VS Code扩展性模型，看看下面的话题：
 
-- [发布内容配置点](/extensibility-reference/contribution-points.md) - VS Code 发布内容配置点参考
-- [激活事件](/extensibility-reference/activation-events.md) - VS Code 激活事件参考
+- [发布内容配置点](/extensibility-reference/contribution-points) - VS Code 发布内容配置点参考
+- [激活事件](/extensibility-reference/activation-events) - VS Code 激活事件参考
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 阅读更多关于 VS Code 插件市场的内容

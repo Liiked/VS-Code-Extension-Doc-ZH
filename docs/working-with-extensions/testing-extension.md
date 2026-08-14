@@ -277,4 +277,4 @@ await runTests({
 
 ## 下一步
 
-- [持续集成](/working-with-extensions/continuous-integration.md)：将你的插件运行在持续集成服务中，比如 Azure Devops。
+- [持续集成](/working-with-extensions/continuous-integration)：将你的插件运行在持续集成服务中，比如 Azure Devops。

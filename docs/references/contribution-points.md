@@ -49,8 +49,9 @@
 configuration是JSON格式的键值对，用户会在修改设置时获得对应的提示和更好的体验。
 
 你可以用`vscode.workspace.getConfiguration('myExtension')`读取配置值。
-
-?> 小提示：配置`markdownDescription`比配置`description`更好，它能呈现Markdown格式的文档。
+::: info
+小提示：配置`markdownDescription`比配置`description`更好，它能呈现Markdown格式的文档。
+:::
 
 #### 示例
 
@@ -99,8 +100,9 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 ## contributes.commands
 ---
 设置命令标题和命令体，随后这个命令会显示在**命令面板**中。你也可以加上`category`前缀，在**命令面板**中会以分类显示。
-
-?>**注意：**当调用命令时（通过组合键或者在**命令面板**中调用），VS Code会触发激活事件`onCommand:${command}`。
+::: info
+**注意：**当调用命令时（通过组合键或者在**命令面板**中调用），VS Code会触发激活事件`onCommand:${command}`。
+:::
 
 下面的示例是修改`markdown`语言的默认配置。
 
@@ -115,8 +117,9 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
     }]
 }
 ```
-
-?> **提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
+::: info
+**提示**: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅[命令](/extension-guides/command)章节
+:::
 
 ![commands](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png)
 
@@ -137,16 +140,15 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 * 编辑器标题栏 - `editor/title`
 * 编辑器标题上下文菜单 - `editor/title/context`
 * 调试栈视图的上下文菜单 - `debug/callstack/context`
-* [SCM 标题菜单](extensibility-reference/api-scm.md#菜单) - `scm/title`
-* [SCM 资源组](extensibility-reference/api-scm.md#菜单) - `scm/resourceGroup/context`
-* [SCM 资源](extensibility-reference/api-scm.md#菜单) - `scm/resource/context`
-* [SCM 改变标题](extensibility-reference/api-scm.md#菜单) - `scm/change/title`
+* [SCM 标题菜单](/extensibility-reference/api-scm#菜单) - `scm/title`
+* [SCM 资源组](/extensibility-reference/api-scm#菜单) - `scm/resourceGroup/context`
+* [SCM 资源](/extensibility-reference/api-scm#菜单) - `scm/resource/context`
+* [SCM 改变标题](/extensibility-reference/api-scm#菜单) - `scm/change/title`
 * [视图的标题菜单](#contributesviews) - `view/title`
 * [视图项的菜单](#contributesviews) - `view/item/context`
-
-
-
-?>**注意：**当菜单中的命令被调用，VS Code会将当前选中资源作为参数传给调用的命令。比方说，资源管理器的菜单被触发，选中资源的URI会作为参数，编辑器中的菜单项被触发，则将当前文件的URI作为参数传入。
+::: info
+**注意：**当菜单中的命令被调用，VS Code会将当前选中资源作为参数传给调用的命令。比方说，资源管理器的菜单被触发，选中资源的URI会作为参数，编辑器中的菜单项被触发，则将当前文件的URI作为参数传入。
+:::
 
 关于*标题*还有一点要说，命令还可以定义图标，VS Code会显示在编辑器的标题菜单栏中。
 
@@ -236,8 +238,9 @@ configuration是JSON格式的键值对，用户会在修改设置时获得对应
 这个配置确定了用户输入按键组合时的触发规则。在[快捷键绑定](https://code.visualstudio.com/docs/getstarted/keybindings)中，你可以了解更加细节的东西。
 
 配置快捷键绑定会使*默认键盘快捷方式*中显示你的规则，每一处和命令相关的UI部分也会显示你添加的快捷键组合。
-
-?>**注意**因为VS Code支持Windows，macOS和Linux平台，而
+::: info
+**注意**因为VS Code支持Windows，macOS和Linux平台，而
+:::
 
 #### 示例
 Windows和Linux下使用`Ctrl+F1`，macOS下使用`Cmd+F1`调用`"extension.sayHello"`命令：
@@ -408,7 +411,7 @@ language-configuration.json
     }]
 }
 ```
-想要完整地学习`debugger`，移步至[调试器](/extension-authoring/example-debug-adapter.md)
+想要完整地学习`debugger`，移步至[调试器](/extension-authoring/example-debug-adapter)
 
 ## contributes.breakpoints
 ---
@@ -431,8 +434,9 @@ language-configuration.json
 ## contributes.grammars
 ---
 为一门语言配置TextMate语法。你必须提供应用语法的`language`，TextMate的`scopeName`确定了语法和文件路径。
-
-!>**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+::: warning
+**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+:::
 
 #### 示例
 
@@ -457,8 +461,9 @@ language-configuration.json
 ## contributes.themes
 ---
 为VS Code添加TextMate主题。你必须添加一个label，指定这个主题是dark还是light的（以便VS Code根据你的主题调整界面），当然还需要加上目标文件路径（XML plist 格式）。
-
-!>**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+::: warning
+**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。
+:::
 
 #### 示例
 
@@ -473,7 +478,7 @@ language-configuration.json
 ```
 ![themes](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/themes.png)
 
-查看[改变色彩主题](docs/extension-authoring/themes-snippets-colorizers.md)学习使用[yo code插件生成器](/extension-authoring/extension-generator.md)将TextMate.tmTheme文件快速打包成VS Code插件。
+查看[改变色彩主题](/extension-authoring/themes-snippets-colorizers)学习使用[yo code插件生成器](/extension-authoring/extension-generator)将TextMate.tmTheme文件快速打包成VS Code插件。
 
 ## contributes.snippets
 ---
@@ -732,7 +737,7 @@ Typescript 服务器插件可以被所有Javascript和Typescript文件加载，�
 
 学习更多VS Code的扩展性模型，试着查看下面的主题吧：
 
-- [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的package.json插件配置清单参考
-- [激活事件](/extensibility-reference/activation-events.md) - VS Code的激活事件参考
+- [插件配置清单](/extensibility-reference/extension-manifest) - VS Code的package.json插件配置清单参考
+- [激活事件](/extensibility-reference/activation-events) - VS Code的激活事件参考
 
 

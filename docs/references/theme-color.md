@@ -9,8 +9,9 @@
   }
 }
 ```
-
-!> **注意**: 如果你想用现成的颜色主题的话，通过**首选项: 颜色主题**的下拉菜单选取即可(<kbd>Ctrl+K Ctrl+T</kbd>)，参阅[色彩主题](https://code.visualstudio.com/docs/getstarted/themes)。
+::: warning
+**注意**: 如果你想用现成的颜色主题的话，通过**首选项: 颜色主题**的下拉菜单选取即可(<kbd>Ctrl+K Ctrl+T</kbd>)，参阅[色彩主题](https://code.visualstudio.com/docs/getstarted/themes)。
+:::
 
 ## 颜色格式
 ---
@@ -67,8 +68,9 @@
 ---
 
 下拉列表小部件颜色，例如集成终端和输出面板。
-
-!> **注意**: macOS目前还不能用该控件
+::: warning
+**注意**: macOS目前还不能用该控件
+:::
 
 ![下拉列表控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/dropdown.png)
 
@@ -489,8 +491,9 @@ CodeLens:
 
 ## 通知框色彩
 ---
-
-!> **注意**: 下列的色彩只适用于VS Code-1.21或更高版本
+::: warning
+**注意**: 下列的色彩只适用于VS Code-1.21或更高版本
+:::
 
 通知横幅从窗口右下角弹出
 
@@ -591,8 +594,9 @@ CodeLens:
 
 ## 设置编辑器色彩
 ---
-
-!> **注意**: 下列色彩配置只适用于**设置**编辑器界面，可以通过`首选项: 打开设置(UI)`命令打开。
+::: warning
+**注意**: 下列色彩配置只适用于**设置**编辑器界面，可以通过`首选项: 打开设置(UI)`命令打开。
+:::
 
 - `settings.headerForeground`: 小节标题与活动标题的前景色
 - `settings.modifiedItemIndicator`: 已修改设置指示器的颜色

@@ -1,8 +1,9 @@
 # VS Code API
 
 **VS Code API**是VS Code提供给插件使用的一系列Javascript API。
-
-!> 注意：VS Code API 变动较快，翻译版本的参与人员和精力有限无法保证实时跟进，有需要的小伙伴请自行参考[官方文档](https://code.visualstudio.com/api/references/vscode-api)，其中包含了完整而且是最新的VS Code API列表。
+::: warning
+注意：VS Code API 变动较快，翻译版本的参与人员和精力有限无法保证实时跟进，有需要的小伙伴请自行参考[官方文档](https://code.visualstudio.com/api/references/vscode-api)，其中包含了完整而且是最新的VS Code API列表。
+:::
 
 ## API模式
 ---

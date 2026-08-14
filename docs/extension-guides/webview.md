@@ -592,8 +592,9 @@ function getWebviewContent() {
 ![在webview中运行脚本](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/webview/scripts-basic.gif)
 
 哇！真是位高产的喵主子!
-
-!> webveiw的脚本能做到任何普通网页脚本能做到的事情，但是webview运行在自己的上下文中，脚本不能访问VS Code API。
+::: warning
+webveiw的脚本能做到任何普通网页脚本能做到的事情，但是webview运行在自己的上下文中，脚本不能访问VS Code API。
+:::
 
 ### 将插件的信息传递到webview
 
@@ -946,4 +947,4 @@ function getWebviewContent() {
 
 如果你想了解学习更多VS Code扩展性的内容，请查看下列主题：
 - [插件API](/) - 所有的VS Code插件API
-- [插件功能](/extension-capabilities/README) - 其它拓展VS Code功能的方式
+- [插件功能](/extension-capabilities) - 其它拓展VS Code功能的方式

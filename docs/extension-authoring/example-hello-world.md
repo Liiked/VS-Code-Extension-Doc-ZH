@@ -5,10 +5,10 @@
 本节通过Hello World这个完整的项目手把手教你掌握VS Code扩展性概念。
 在本项目中，我们会给VS Code添加一个新的命令，虽然只是用来显示"Hello World"信息。在本节的最后，你将和编辑器编辑器互动，查找用户选中的文本。
 #### 预备工作
-请查看[生成插件-预备工作](/extension-authoring/extension-generator?id=预先准备)
+请查看[生成插件-预备工作](/extension-authoring/extension-generator#预先准备)
 
 #### 生成新插件
-请查看[生成插件-运行Yo](/extension-authoring/extension-generator?id=运行yo-code😎)
+请查看[生成插件-运行Yo](/extension-authoring/extension-generator#运行yo-code😎)
 ## 运行插件
 ---
 - 打开VS Code，选择`文件`>`打开文件夹`，选择你刚刚生成的项目目录
@@ -55,10 +55,11 @@
 #### 插件清单：`package.json`
 - 每个VS Code插件都有`package.json`文件，文件内包含了这个插件功能和用处。
 - 当项目启动时，VS Code会立即读取这个文件中的每个`配置(contributes)`部分并作出响应。
-- 请阅读[package.json插件清单](/extensibility-reference/extension-manifest.md)参考文档
-- 更多信息请参阅[package.json发布内容配置](/extensibility-reference/contribution-points.md)参考文档
-
-?> 译者注：为了便于理解，`contribution / contributes`在本教程中译为**发布内容配置/配置**，`contribution points`译为**发布内容配置点/配置点**。
+- 请阅读[package.json插件清单](/extensibility-reference/extension-manifest)参考文档
+- 更多信息请参阅[package.json发布内容配置](/extensibility-reference/contribution-points)参考文档
+::: info
+译者注：为了便于理解，`contribution / contributes`在本教程中译为**发布内容配置/配置**，`contribution points`译为**发布内容配置点/配置点**。
+:::
 
 **示例：基于TypeScript的pacakge.json**
 
@@ -99,14 +100,17 @@
    }
 }
 ```
-!> 提示: 基于JavaScript的插件没有scripts部分，因为不需要编译。
+::: warning
+提示: 基于JavaScript的插件没有scripts部分，因为不需要编译。
+:::
 
 这份`package.json`文件说了什么呢？
 - **配置部分(contributes)**给*命令面板*定义了一个叫做`Hello world`的入口，它会调用'extension.sayHello'。
 - 当命令"extension.sayHello"调用时，执行`loaded`(激活事件)请求。
 - 在"`./out/extension.js`"中，存放着我们的主文件。
-
-!> 注意：VS Code **不会一启动就加载插件**。插件必须在`activationEvents`中描述它的启动时机，比如`loaded`事件。
+::: warning
+注意：VS Code **不会一启动就加载插件**。插件必须在`activationEvents`中描述它的启动时机，比如`loaded`事件。
+:::
 #### 生成的代码
 自动生成的代码存放在**extension.ts**（或者**extension.js**中）。
 ```typescript
@@ -136,8 +140,9 @@ export function activate(context: vscode.ExtensionContext) {
 - 每个插件都应该在主文件中注册一个`activate()`函数，因为这个函数只会调用一次。你只有`在package.json`中注册了`activationEvents`列表中的事件，激活事件才会被调用。
 - 如果插件使用了系统资源(如：生成进程），则需要从主文件中导出名为`deactive()`的函数去清理释放这些资源，VS Code会在关闭时调用这个方法。
 - 这个插件导入了VS Code API，然后注册了"extension.sayHello"命令和回调函数，执行后在VS Code中显示一条"Hello World!"消息。
-
-!> 注意： `package.json`的`contributes`部分给*命令面板*添加了一个调用入口。`extension.ts/.js`定义了`extension.sayHello`的实现。对于 Typescript类型的插件来说，生成的`out/extension.js`会在运行时加载。
+::: warning
+注意： `package.json`的`contributes`部分给*命令面板*添加了一个调用入口。`extension.ts/.js`定义了`extension.sayHello`的实现。对于 Typescript类型的插件来说，生成的`out/extension.js`会在运行时加载。
+:::
 #### 其他文件
 - `vscode/launch.json` 告诉VS Code启用插件开发模式。它也描述了`.vscode/tasks.json`中需要Typescript编译器的预加载任务。
 - `vscode/settings.json` 默认排除外部文件夹。你如果想隐藏一些文件，可以修改这个配置。
@@ -164,12 +169,14 @@ export function activate(context: vscode.ExtensionContext) {
 直接在你的代码里打上断点就可以调试了，很简单吧。
 
 ![调试](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-hello-world/hitbp.png)
+::: warning
+注意：VS Code具有解析sourcemap的能力，所以你可以直接在Typescript代码中调试。
+:::
+::: info
+小提示：调试控制台(Debug Console)能输出所有console打印的日志。
+:::
 
-!> 注意：VS Code具有解析sourcemap的能力，所以你可以直接在Typescript代码中调试。
-
-?>小提示：调试控制台(Debug Console)能输出所有console打印的日志。
-
-查看更多关于插件[开发环境](/extension-authoring/developing-extensions.md)的东西。
+查看更多关于插件[开发环境](/extension-authoring/developing-extensions)的东西。
 ## 小小的改造
 ---
 试着修改你的`extension.ts`（或者`extension.js`）中`extension.sayHello`的实现，我们把它改造成一个对选中文本计数的功能。
@@ -189,7 +196,9 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
     vscode.window.showInformationMessage('Selected characters: ' + text.length);
 });
 ```
-!> 当你修改了代码，你需要按<kbd>Ctrl + R</kbd>(macOS <kbd>Cmd + R</kbd>)重启Extension Development Host，或者直接按VS Code上面的重启按钮
+::: warning
+当你修改了代码，你需要按<kbd>Ctrl + R</kbd>(macOS <kbd>Cmd + R</kbd>)重启Extension Development Host，或者直接按VS Code上面的重启按钮
+:::
 
 新建一个文件，输入一些文本然后选中。当你运行**Hello World**命令，你应该能看到字符计数的消息框。
 
@@ -202,14 +211,14 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
 
 ## 发布插件
 ---
-参阅[分享插件](/extension-authoring/publish-extension.md)
+参阅[分享插件](/extension-authoring/publish-extension)
 ## 下一步
 ---
-在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](docs/extension-authoring/example-word-count.md)中你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件、显示文本字数。
+在本篇指引中，我们实现了一个小小的插件。在[示例-Word Count](/extension-authoring/example-word-count)中你能找到完整的例子，学习如何在Markdown文件中监听编辑器的文档变动事件、显示文本字数。
 
 如果你想查看更多extension API的概述，看看这些主题吧：
-- [Extension API 概览](/extensibility-reference/overview.md) - 了解完整的VS Code扩展性模型。
-- [API原则和模式](/extensibility-reference/principles-patterns.md) - VS Code的扩展性基于这些指导性原则和模式。
-- [发布内容配置](/extensibility-reference/contribution-points.md) - 各种各样的VS Code发布内容配置项
-- [激活事件](/extensibility-reference/activation-events.md) - VS Code激活事件参考
-- [更多插件示例](/extension-authoring/samples.md) - 看看我们的插件示例列表
+- [Extension API 概览](/extensibility-reference/overview) - 了解完整的VS Code扩展性模型。
+- [API原则和模式](/extensibility-reference/principles-patterns) - VS Code的扩展性基于这些指导性原则和模式。
+- [发布内容配置](/extensibility-reference/contribution-points) - 各种各样的VS Code发布内容配置项
+- [激活事件](/extensibility-reference/activation-events) - VS Code激活事件参考
+- [更多插件示例](/extension-authoring/samples) - 看看我们的插件示例列表

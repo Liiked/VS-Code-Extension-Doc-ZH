@@ -58,7 +58,7 @@
 }
 ```
 
-当用户打开了对应的视图，VS Code会触发[`onView:${viewId}`](/references/activation-events?id=onview)事件(如上面例子中，这个事件写为`onView:nodeDependencies`)。你也可以通过配置`when`字段控制视图的展示。
+当用户打开了对应的视图，VS Code会触发[`onView:${viewId}`](/references/activation-events#onview)事件(如上面例子中，这个事件写为`onView:nodeDependencies`)。你也可以通过配置`when`字段控制视图的展示。
 
 ## 视图的操作
 ---
@@ -127,8 +127,9 @@
   }
 }
 ```
-
-!> **注意**：如果你需要针对特定的条目显示特殊的操作，定义树视图项的`TreeItem.contextValue`，并且在`when`中使用表达式，视图项的值储存在表达式的`viewItem`中。
+::: warning
+**注意**：如果你需要针对特定的条目显示特殊的操作，定义树视图项的`TreeItem.contextValue`，并且在`when`中使用表达式，视图项的值储存在表达式的`viewItem`中。
+:::
 
 如：
 

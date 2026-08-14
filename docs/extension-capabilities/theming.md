@@ -21,5 +21,5 @@ VS Code中的主题分为两类：
 - 将图标ID映射至图片或者字体图标上。
 - 根据文件名或这个文件的语言类型关联上图标ID
 
-[图标主题指南](/extension-guides/icon-theme)会详细探讨其中的细节。
+[图标主题指南](/extension-guides/file-icon-theme)会详细探讨其中的细节。
 ![file-icon-theme](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-capabilities/images/theming/file-icon-theme.png)

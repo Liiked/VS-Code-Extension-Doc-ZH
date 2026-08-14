@@ -72,7 +72,7 @@ npm install
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/example-debuggers/debug-extension-server.png)
 
-现在我们可以调试2个插件了，同时模拟调试适配器。使用**Extension + Server**的启动配置文件可以更快到达这一步。我们在[下面](/extension-authoring/example-debug-adapter?id=可选方案：开发一个调试插件)提供了一个更为简单的调试**插件**和**调试适配器**的方案。
+现在我们可以调试2个插件了，同时模拟调试适配器。使用**Extension + Server**的启动配置文件可以更快到达这一步。我们在[下面](/extension-authoring/example-debug-adapter#可选方案：开发一个调试插件)提供了一个更为简单的调试**插件**和**调试适配器**的方案。
 
 那么回到正题，我们现在给`src/mockDebug.ts`的`launchRequest(...)`方法开头添加一个断点，最后在*启动配置*中添加`debugServer`和`4711`端口将mock debugger连接到调试适配服务器。
 
@@ -277,8 +277,9 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 对于高开销调试插件的更好办法是用粒度更细的激活事件：
 - `onDebugInitialConfigurations`：在`DebugConfigurationProvider`的`provideDebugConfigurations`调用前触发。
 - `onDebugResolve:type`：在`DebugConfigurationProvider`的`resolveDebugConfiguration`调用前触发。
-
-!> **首要准则**：如果插件的开销不大，就用`onDebug`。如果插件的开销比较高，根据`DebugConfigurationProvider`是否调用`provideDebugConfigurations`或`resolveDebugConfiguration`，在对应的`onDebugInitialConfigurations`或者`onDebugResolve`中处理。
+::: warning
+**首要准则**：如果插件的开销不大，就用`onDebug`。如果插件的开销比较高，根据`DebugConfigurationProvider`是否调用`provideDebugConfigurations`或`resolveDebugConfiguration`，在对应的`onDebugInitialConfigurations`或者`onDebugResolve`中处理。
+:::
 
 ## 发布你的调试适配器
 ---

@@ -22,8 +22,9 @@
 ```
 
 本篇的源代码在[https://github.com/Microsoft/vscode-extension-samples/tree/master/snippet-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/snippet-sample)
-
-?> 提示：在`package.json`中添加如下分类，用户才能轻松找到你的插件。
+::: info
+提示：在`package.json`中添加如下分类，用户才能轻松找到你的插件。
+:::
 
 ```json
 {

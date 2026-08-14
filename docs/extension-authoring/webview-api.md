@@ -474,8 +474,9 @@ function getWebviewContent() {
 ![scripts-basic](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/webview/scripts-basic.gif)
 
 哇！真是位高产的喵主子!
-
-!> webveiw的脚本能做到任何普通网页脚本能做到的事情，但是webview运行在自己的上下文中，脚本不能访问VS Code API。
+::: warning
+webveiw的脚本能做到任何普通网页脚本能做到的事情，但是webview运行在自己的上下文中，脚本不能访问VS Code API。
+:::
 
 #### 将插件的信息传递到webview
 
@@ -679,7 +680,7 @@ function getWebviewContent() {
 
 在webview的标准[生命周期](#生命周期)中，`createWebviewPanel`负责创建和销毁（用户关闭或者调用`.dispose()`方法）webview。而webview的内容再是在webview可见时创建的，在webview处于非激活状态时销毁。webview处于非激活标签中时，任何webview中的保留的状态都会丢失。
 
-所以最好减少webview中的状态，取而代之用[消息传递](/extension-authoring/webview-api?id=将webview的信息传递到插件中)储存状态。
+所以最好减少webview中的状态，取而代之用[消息传递](/extension-authoring/webview-api#将webview的信息传递到插件中)储存状态。
 
 #### getState和setState
 
@@ -794,5 +795,5 @@ function getWebviewContent() {
 ## 下一步
 
 如果你想了解学习更多VS Code扩展性的内容，请查看下列主题：
-- [扩展Visual Studio Code](/extensibility-reference/overview.md) - 其他扩展VS Code的方式
-- [其他插件示例](/extension-authoring/samples.md) - 我们的插件项目示例列表
+- [扩展Visual Studio Code](/extensibility-reference/overview) - 其他扩展VS Code的方式
+- [其他插件示例](/extension-authoring/samples) - 我们的插件项目示例列表

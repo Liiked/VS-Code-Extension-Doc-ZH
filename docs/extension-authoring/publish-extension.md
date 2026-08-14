@@ -25,13 +25,15 @@ Successfully published uuid@0.0.1!
 
 ## 发布教程
 ---
-!> **注意：** 出于安全考虑，`vsce`不会发布包含用户提供SVG图片的插件。
+::: warning
+**注意：** 出于安全考虑，`vsce`不会发布包含用户提供SVG图片的插件。
+:::
 
 发布工具会检查以下内容：
 - `pacakge.json`文件中的icon不可以是SVG。
-- `pacakge.json`中的标记不可以是SVG，除非来自于[可靠的图标来源](/extensibility-reference/extension-manifest.md#使用认证过的标志)
+- `pacakge.json`中的标记不可以是SVG，除非来自于[可靠的图标来源](/extensibility-reference/extension-manifest#使用认证过的标志)
 - `README.md`和`CHANGELOG.md`中的图片链接需要使用`https`协议
-- `README.md`和`CHANGELOG.md`中的图片不可以是SVG，除非来自[可靠的图标来源](/extensibility-reference/extension-manifest.md#使用认证过的标志)
+- `README.md`和`CHANGELOG.md`中的图片不可以是SVG，除非来自[可靠的图标来源](/extensibility-reference/extension-manifest#使用认证过的标志)
 
 ---
 
@@ -59,7 +61,7 @@ VS Code插件市场的服务是[Visual Studio Team Services](https://visualstudi
 
 #### 创建一个发行方
 
-**发行方**是VS Code市场有权发布插件的唯一标识，每个插件的[package.json](/extensibility-reference/extension-manifest.md)文件都包含着`publisher`字段。
+**发行方**是VS Code市场有权发布插件的唯一标识，每个插件的[package.json](/extensibility-reference/extension-manifest)文件都包含着`publisher`字段。
 
 现在我们已经有了[Personal Access Token](#获取Personal-Access-Token)，我们马上可以用`vsce`创建一个发行方：
 
@@ -67,8 +69,9 @@ VS Code插件市场的服务是[Visual Studio Team Services](https://visualstudi
 vsce create-publisher (publisher name)
 ```
 `vsce`会记住这个Personal Access Token，日后再用这个发行方的时候会自动带上。
-
-?> 注意：另外，你也可以在市场的发行方[管理页](https://marketplace.visualstudio.com/manage)中创建发行方，然后用这个账号登录`vsce`。
+::: info
+注意：另外，你也可以在市场的发行方[管理页](https://marketplace.visualstudio.com/manage)中创建发行方，然后用这个账号登录`vsce`。
+:::
 
 #### 发行方登录
 
@@ -106,7 +109,9 @@ vsce publish 2.0.1
 ```
 vsce unpublish (publisher name).(extension name)
 ```
-!> **注意：**当你下架插件的时候，市场会移除所有插件的历史统计数据，请在下架前再三考虑，最好还是更新插件吧。
+::: warning
+**注意：**当你下架插件的时候，市场会移除所有插件的历史统计数据，请在下架前再三考虑，最好还是更新插件吧。
+:::
 
 #### 插件打包
 你也可能只是想打包一下插件，而不是发布到商店里。用下列命令将插件打包到`.vsix`文件中：
@@ -166,8 +171,9 @@ vsce package
 !file.ts
 ```
 你应该忽略哪些不必在运行时用到的文件。例如：你的插件是用Typescript写的，那么你就应该忽略所有的`**/*.ts`文件。
-
-?> **注意：**在`devDependencies`列出的开发依赖会被自动忽略，你不必将他们加入到`.vscodeignore`中。
+::: info
+**注意：**在`devDependencies`列出的开发依赖会被自动忽略，你不必将他们加入到`.vscodeignore`中。
+:::
 
 ##### 预发布步骤
 
@@ -202,4 +208,4 @@ vsce package
 
 ## 下一步
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 学习更多VS Code公共插件市场。
-- [测试插件](/extension-authoring/testing-extensions.md) - 添加插件测试，提高插件质量。
+- [测试插件](/extension-authoring/testing-extensions) - 添加插件测试，提高插件质量。

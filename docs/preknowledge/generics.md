@@ -44,7 +44,7 @@ function identity<T>(arg: T): T {
 let output = identity<string>("myString");  // type of output will be 'string'
 ```
 
-这里我们明确的指定了`T`是`string`类型，并做为一个参数传给函数，使用了`<>`括起来而不是`()`。
+这里我们明确地指定了`T`是`string`类型，并作为一个参数传给函数，使用尖括号而不是圆括号。
 
 第二种方法更普遍。利用了*类型推论* -- 即编译器会根据传入的参数自动地帮助我们确定T的类型：
 
@@ -52,7 +52,7 @@ let output = identity<string>("myString");  // type of output will be 'string'
 let output = identity("myString");  // type of output will be 'string'
 ```
 
-注意我们没必要使用尖括号（`<>`）来明确地传入类型；编译器可以查看`myString`的值，然后把`T`设置为它的类型。 类型推论帮助我们保持代码精简和高可读性。如果编译器不能够自动地推断出类型的话，只能像上面那样明确的传入`T`的类型，在一些复杂的情况下，这是可能出现的。
+注意我们没必要使用尖括号来明确地传入类型；编译器可以查看`myString`的值，然后把`T`设置为它的类型。 类型推论帮助我们保持代码精简和高可读性。如果编译器不能够自动地推断出类型的话，只能像上面那样明确地传入`T`的类型，在一些复杂的情况下，这是可能出现的。
 
 ## 使用泛型变量
 ---
@@ -97,7 +97,7 @@ function loggingIdentity<T>(arg: Array<T>): Array<T> {
     return arg;
 }
 ```
-使用过其它语言的话，你可能对这种语法已经很熟悉了。 在下一节，会介绍如何创建自定义泛型像 Array<T>一样。
+使用过其它语言的话，你可能对这种语法已经很熟悉了。 在下一节，会介绍如何创建自定义泛型像 `Array&lt;T&gt;` 一样。
 
 ## 泛型类型
 ---
@@ -147,7 +147,7 @@ function identity<T>(arg: T): T {
 let myIdentity: GenericIdentityFn = identity;
 ```
 
-一个相似的例子，我们可能想把泛型参数当作整个接口的一个参数。 这样我们就能清楚的知道使用的具体是哪个泛型类型（比如： `Dictionary<string>而不只是Dictionary`）。 这样接口里的其它成员也能知道这个参数的类型了。
+一个相似的例子，我们可能想把泛型参数当作整个接口的一个参数。 这样我们就能清楚地知道使用的具体是哪个泛型类型（比如：`Dictionary&lt;string&gt;` 而不只是 Dictionary）。这样接口里的其它成员也能知道这个参数的类型了。
 
 ```typescript
 interface GenericIdentityFn<T> {

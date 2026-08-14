@@ -59,8 +59,9 @@ VS Code 允许插件创作者制作新的**调试器插件**，或为已有的�
 - `vscode.debug.breakpoints`提供了工作区所有的断点集合。用`instanceof`检查单个断点的具体对象类型。
 - `vscode.debug.onDidChangeBreakpoints`侦听断点的添加、移除、改变事件。
 - `SourceBreakpoints`和`FunctionBreakpoints`只能通过`addBreakpoints`和`removeBreakpoints`函数添加。
-
-!>注意：一开始获取断点可能是一个空数组，而随后则会触发`BreakpointsChangeEvent`事件并更新`vscode.debug.breakpoints`，在这个时间点你就能获得正确的集合。所以如果你需要正确的断点集合，不要忘了注册`BreakpointsChangeEvent`事件。
+::: warning
+注意：一开始获取断点可能是一个空数组，而随后则会触发`BreakpointsChangeEvent`事件并更新`vscode.debug.breakpoints`，在这个时间点你就能获得正确的集合。所以如果你需要正确的断点集合，不要忘了注册`BreakpointsChangeEvent`事件。
+:::
 
 ## 调试适配器协议（DAP - Debug Adapter Protocol）
 ---
@@ -119,7 +120,7 @@ VS Code调试界面支持多线程（如果你只用Node.js调试器的话可能
 ## 下一步
 学习更多VS Code扩展性模型，请参阅下列主题：
 
-* [示例：调试器](/extension-authoring/example-debug-adapter.md) - 查看一个可执行的'模拟'调试器示例。
-* [插件API概览](/extensibility-reference/vscode-api.md) - 学习完整的VS Code扩展性模型。
-* [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的package.json插件配置清单参阅
-* [发布内容配置](/extensibility-reference/contribution-points.md) - VS Code发布内容配置参阅
+* [示例：调试器](/extension-authoring/example-debug-adapter) - 查看一个可执行的'模拟'调试器示例。
+* [插件API概览](/extensibility-reference/vscode-api) - 学习完整的VS Code扩展性模型。
+* [插件配置清单](/extensibility-reference/extension-manifest) - VS Code的package.json插件配置清单参阅
+* [发布内容配置](/extensibility-reference/contribution-points) - VS Code发布内容配置参阅

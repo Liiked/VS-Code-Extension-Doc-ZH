@@ -112,14 +112,15 @@ yo code
 }
 ```
 - 为`.color-theme.json`色彩定义文件添加前缀，那么你在编辑文件时能获得悬浮提示、代码补全、色彩装饰器和色彩选择器。
-
-?> [ColorSublime](https://colorsublime.github.io/)有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
+::: info
+[ColorSublime](https://colorsublime.github.io/)有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
+:::
 
 
 ## 测试新的主题
 ---
 
-想要测试新主题，把生成的主题文件夹复制到[你的`.vscode/extension`文件夹](/extension-authoring/extension-generator.md#我的插件目录在哪？)下，然后重启VS Code。
+想要测试新主题，把生成的主题文件夹复制到[你的`.vscode/extension`文件夹](/extension-authoring/extension-generator#我的插件目录在哪？)下，然后重启VS Code。
 
 通过**文件>首选项>颜色主题**然后在下拉菜单里找到你的主题。修改了主题之后，最好重启一下VS Code，或者重载窗口。
 
@@ -128,16 +129,17 @@ yo code
 ## 将主题发布到插件市场
 ---
 
-如果你想把主题分享给社区，通过[插件市场](https://github.com/Microsoft/vscode-docs/blob/master/docs/editor/extension-gallery.md)去发布它吧。用[vsce publishing tool](/extension-authoring/publish-extension.md)打包你的主题然后发布到VS Code市场。
+如果你想把主题分享给社区，通过[插件市场](https://github.com/Microsoft/vscode-docs/blob/master/docs/editor/extension-gallery.md)去发布它吧。用[vsce publishing tool](/extension-authoring/publish-extension)打包你的主题然后发布到VS Code市场。
 
 要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-manifest.md#marketplace-presentation-tips)。
-
-?> 小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"theme"写到插件描述（extension description）中，然后把`Category`设置为`Theme`
+::: info
+小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"theme"写到插件描述（extension description）中，然后把`Category`设置为`Theme`
+:::
 
 ## 添加新的色彩id
 ---
 
-[色彩配置点](extensibility-reference/contribution-points.md#contributescolors)可以配置插件的*色彩id*，当在`workbench.colorCustomizations`和主题文件中使用代码补全时，这些色彩也会出现。用户可以在[插件配置](https://code.visualstudio.com/docs/editor/extension-gallery#_extensiondetails)选项卡中看到插件定义了什么颜色。
+[色彩配置点](/extensibility-reference/contribution-points#contributescolors)可以配置插件的*色彩id*，当在`workbench.colorCustomizations`和主题文件中使用代码补全时，这些色彩也会出现。用户可以在[插件配置](https://code.visualstudio.com/docs/editor/extension-gallery#_extensiondetails)选项卡中看到插件定义了什么颜色。
 
 ## 添加新的图标主题
 ---
@@ -189,7 +191,7 @@ yo code
 
 #### 关联文件
 
-图标能关联到文件夹，文件夹名称，文件，文件名称，文件插件，和[语言Id](extensibility-reference/contribution-points#contributeslanguages)。
+图标能关联到文件夹，文件夹名称，文件，文件名称，文件插件，和[语言Id](/extensibility-reference/contribution-points#contributeslanguages)。
 
 这些关联都能被提炼为诸如'light'和'highContrast'色彩主题。
 
@@ -228,7 +230,7 @@ yo code
 - `folderExpanded`展开的文件夹图标。这个图标是可选的，如果不设置就会使用`folder`定义好的图标。
 - `folderNames`特殊名称文件夹图标。这个键是用于文件夹名称的，不支持包含路径的名称，不支持匹配模式和通配符。大小写不敏感。
 - `folderNamesExpanded`展开的特殊名称文件夹图标。
-- `languageIds`语言类型图标。这个键将匹配在*语言配置点（contribution point）*配置的[语言id](extensibility-reference/contribution-points#contributeslanguages)。注意语言配置的'第一行'是不考虑在内的。
+- `languageIds`语言类型图标。这个键将匹配在*语言配置点（contribution point）*配置的[语言id](/extensibility-reference/contribution-points#contributeslanguages)。注意语言配置的'第一行'是不考虑在内的。
 - `fileExtensions`文件插件图标。根据文件插件的名称匹配。插件名称是文件名点号后面（不包含点号）。拥有多重点号的文件名称，如`lib.d.ts`会匹配多个模式——`d.ts`和`ts`。大小写敏感。
 - `fileNames`文件图标。这个键需要文件的全称进行匹配，不支持包含路径的名称，不支持模式和通配符。大小写敏感。`fileNames`是最高优先匹配。
 
@@ -280,7 +282,7 @@ yo code
 ## 使用TextMate代码片段
 ---
 
-使用[yo code](/extension-authoring/extension-generator.md)插件生成器添加TextMate片段（.tmSnippets）。生成器中的`New Code Snippets`选项帮你生成包含多个.tmSnippets文件的目录，最终他们会被打包成VS Code代码片段插件。生成器也支持Sublime代码片段（.sublime-snippets）。
+使用[yo code](/extension-authoring/extension-generator)插件生成器添加TextMate片段（.tmSnippets）。生成器中的`New Code Snippets`选项帮你生成包含多个.tmSnippets文件的目录，最终他们会被打包成VS Code代码片段插件。生成器也支持Sublime代码片段（.sublime-snippets）。
 
 最终生成器会产出两个文件：一个插件清单`package.json`——整合VS Code代码片段的元数据，和一个将源代码片段文件转换成VS Code代码片段格式的`sinppets.json`。
 
@@ -308,7 +310,7 @@ yo code
 
 其中，`(language).json`取决于代码片段的目标语言（如`markdown.json`是Markdown的代码片段）。
 
-为你的插件创建一个新文件夹，新建一个子目录`snippets`，然后把snippet文件复制进去。现在在插件目录下添加一个插件清单`package.json`文件。代码片段插件清单遵循[插件清单参阅](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-manifest.md)规则，请在[`snippets`配置点](/extensibility-reference/contribution-points.md#contributessnippets)配置。
+为你的插件创建一个新文件夹，新建一个子目录`snippets`，然后把snippet文件复制进去。现在在插件目录下添加一个插件清单`package.json`文件。代码片段插件清单遵循[插件清单参阅](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-manifest.md)规则，请在[`snippets`配置点](/extensibility-reference/contribution-points#contributessnippets)配置。
 
 下面是一个Markdown代码片段的`package.json`配置
 
@@ -332,15 +334,16 @@ yo code
 ```
 
 注意`snippets`需要和`language`关联起来。可以是VS Code内置的[支持语言](https://github.com/Microsoft/vscode-docs/blob/master/docs/languages/overview.md)类型，或者是由其他插件提供的语言。请确保`language`的值书写正确无误。
+::: info
+小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"snippet"写到插件描述（extension description）中，然后把`Category`设置为`snippet`
+:::
 
-?> 小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"snippet"写到插件描述（extension description）中，然后把`Category`设置为`snippet`
-
-要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](/extensibility-reference/extension-manifest.md#市场展示建议)。
+要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](/extensibility-reference/extension-manifest#市场展示建议)。
 
 ## 添加新的语言（着色器）
 ---
 
-使用[Yo code](docs/extension-authoring/extension-generator.md)生成器，从你VS Code中已经安装的语言中挑选一个类型生成插件，为这个语言添加语法高亮和括号匹配。
+使用[Yo code](/extension-authoring/extension-generator)生成器，从你VS Code中已经安装的语言中挑选一个类型生成插件，为这个语言添加语法高亮和括号匹配。
 
 **语言支持插件**的核心是一份描述着色器规则的TextMate[语言规格](https://manual.macromates.com/en/language_grammars)文件（.tmLanguage）。生成器也能从现成的TextMate语言规格文件中生成，当然你自己开个新的也成。
 
@@ -373,25 +376,26 @@ Yeoman能导入.tmLanguage或.pList文件。当插入URL或者文件地址时，
     ]
 }
 ```
-更多细节请查看[语言配置点文档](extensibility-reference/contribution-points.md#contributeslanguages)
+更多细节请查看[语言配置点文档](/extensibility-reference/contribution-points#contributeslanguages)
 
 Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug插件的信息。 
 
-想要在你稳定版的VS Code中使用这个插件，将整个输出文件夹复制到[你的.vscode/extensions文件夹](/extension-authoring/extension-generator.md#我的插件目录在哪？)中，然后重启VS Code。重启之后，在语言选择下拉框中就能查看你的新语言了。
+想要在你稳定版的VS Code中使用这个插件，将整个输出文件夹复制到[你的.vscode/extensions文件夹](/extension-authoring/extension-generator#我的插件目录在哪？)中，然后重启VS Code。重启之后，在语言选择下拉框中就能查看你的新语言了。
 
 ![](https://raw.githubusercontent.com/Microsoft/vscode-docs/master/docs/extensions/images/themes-snippets-colorizers/antlanguage.png)
 
 ## 在市场中发布语言支持
 ---
 
-使用[vsce publishing tool](/extension-authoring/publish-extension.md)工具将你的插件发布到VS Code市场上。
-
-?> 小贴士：想要用户轻松地找到你的语言支持，最好修改一下`package.json`，把关键字"language"或者"language support"写到插件描述（extension description）中，然后把`Category`设置为`Programming Languages`
+使用[vsce publishing tool](/extension-authoring/publish-extension)工具将你的插件发布到VS Code市场上。
+::: info
+小贴士：想要用户轻松地找到你的语言支持，最好修改一下`package.json`，把关键字"language"或者"language support"写到插件描述（extension description）中，然后把`Category`设置为`Programming Languages`
+:::
 
 ## 添加你的语言支持插件(插件组合)
 ---
 
-当你给VS Code添加新语言的时候，如果能加上代码片段那就更好了。将多个[插件组合](/extensibility-reference/extension-manifest.md#整合插件配置内容)起来并不是难事，修改着色器插件清单`package.json`，添加`snippets`配置和snippets.json。
+当你给VS Code添加新语言的时候，如果能加上代码片段那就更好了。将多个[插件组合](/extensibility-reference/extension-manifest#整合插件配置内容)起来并不是难事，修改着色器插件清单`package.json`，添加`snippets`配置和snippets.json。
 
 ```json
 {
@@ -437,8 +441,9 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
     "*.myphp": "php"
 }
 ```
-
-!>注意：语言标识符是大小写敏感的（'Markdown' != 'markdown'）
+::: warning
+注意：语言标识符是大小写敏感的（'Markdown' != 'markdown'）
+:::
 
 每个语言需要在发布内容配置点`languages`中定义它的*id*
 
@@ -554,7 +559,7 @@ Yeoman生成的`vsc-extension-quickstart.md`文件包含了如何运行和debug�
 
 如果你想要查看更多关于VS Code的扩展能力，请查阅下列主题：
 
-- [扩展vscode](/extension-authoring/overview.md) - 学习其他扩展VS Code的方式
-- [其他插件示例](/extension-authoring/samples.md) - 看看我们的示例插件项目
+- [扩展vscode](/extension-authoring/overview) - 学习其他扩展VS Code的方式
+- [其他插件示例](/extension-authoring/samples) - 看看我们的示例插件项目
 
 

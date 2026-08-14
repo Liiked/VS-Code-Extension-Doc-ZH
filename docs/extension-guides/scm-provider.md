@@ -164,8 +164,9 @@ export interface SourceControl {
 ```
 
 使用`QuickDiffProvider`，你的实现需要告诉VS Code——参数传入的给定资源`Uri`所对应的原始资源`Uri`。
-
-?> **提示**: 如果你想在给定`Uri`的情况下，为任意资源提供内容，那么你可以把**源控制API**和**[工作区命名空间的`registerTextDocumentContentProvider`方法](https://code.visualstudio.com/api/references/vscode-api#workspace)**结合起来使用。
+::: info
+**提示**: 如果你想在给定`Uri`的情况下，为任意资源提供内容，那么你可以把**源控制API**和**[工作区命名空间的`registerTextDocumentContentProvider`方法](https://code.visualstudio.com/api/references/vscode-api#workspace)**结合起来使用。
+:::
 
 ## 下一步
 

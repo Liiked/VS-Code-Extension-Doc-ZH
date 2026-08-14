@@ -151,8 +151,9 @@ VS Code 为元素是否处于可见和激活状态，设置了不同的上下文
 | `inSearchEditor`                   | 当焦点在搜索编辑器内时                                                                                                              |
 | **设置上下文**                     |
 | `config.editor.minimap.enabled`    | 当设置中的 `editor.minimap.enabled` 为 `true` 时                                                                                    |
-
-?> 注意：你可以使用`config.`前缀，使用任意用户或工作区设置中的值。
+::: info
+注意：你可以使用`config.`前缀，使用任意用户或工作区设置中的值。
+:::
 
 ## 激活/聚焦视图或面板相关的上下文变量
 
@@ -253,8 +254,9 @@ vscode.commands.executeCommand('setContext', 'ext.supportedFolders', {
 ![inspect-context-keys](https://code.visualstudio.com/assets/api/references/when-clause-contexts/inspect-context-keys.png)
 
 一系列可能包含 [自定义上下文变量](#添加自定义-when-子句上下文) 的键值对会展示出来。
-
-!> 注意：部分 VS Code 内部使用的上下文变量在未来可能会有所变化。
+::: warning
+注意：部分 VS Code 内部使用的上下文变量在未来可能会有所变化。
+:::
 
 
 

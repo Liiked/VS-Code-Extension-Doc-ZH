@@ -24,15 +24,16 @@ VS Code会尽可能晚地加载插件，为了达到控制内存的目的，如�
 
 #### Extension Manifest（插件配置清单）
 
-为了激活一个懒加载插件，VS Code需要一份插件的描述文件，`插件清单（extension manifest）`是一份添加了[VS Code特定字段](/extensibility-reference/extension-manifest.md)的`package.json`文件，其中包含了激活事件的配置位置。VS Code提供了一系列插件可以使用的`发布内容配置（contribution points）`。例如，想给VS Code添加一个指令，则需要你在名为`commands`的配置点中定义指令。一旦你在`package.json`中定义好了配置。VS Code 在启动时会读取、解析这个清单然后准备相应的UI界面。
+为了激活一个懒加载插件，VS Code需要一份插件的描述文件，`插件清单（extension manifest）`是一份添加了[VS Code特定字段](/extensibility-reference/extension-manifest)的`package.json`文件，其中包含了激活事件的配置位置。VS Code提供了一系列插件可以使用的`发布内容配置（contribution points）`。例如，想给VS Code添加一个指令，则需要你在名为`commands`的配置点中定义指令。一旦你在`package.json`中定义好了配置。VS Code 在启动时会读取、解析这个清单然后准备相应的UI界面。
+::: info
+**译者注**：定义在发布内容配置中的有些东西会暴露在用户的**配置**中，用户可以通过setting.json等文件修改你的插件行为，因此叫做这个略拗口的名字——发布内容配置。**配置点**则是构成发布内容配置的一个个键值对。
+:::
 
-?> **译者注**：定义在发布内容配置中的有些东西会暴露在用户的**配置**中，用户可以通过setting.json等文件修改你的插件行为，因此叫做这个略拗口的名字——发布内容配置。**配置点**则是构成发布内容配置的一个个键值对。
-
-查看更多的[package.json 发布内容配置](/extensibility-reference/contribution-points.md)
+查看更多的[package.json 发布内容配置](/extensibility-reference/contribution-points)
 
 #### 扩展性API
 
-查看[扩展性API](/extensibility-reference/vscode-api.md)取得更多细节。
+查看[扩展性API](/extensibility-reference/vscode-api)取得更多细节。
 
 为了修改和自定义UI，VS Code采用了强有力的Web技术（HTML，CSS）。你可以很轻松地给DOM添加节点，然后使用CSS定义它的样式。不过，这个技术也并非没有缺陷，尤其是在实现像VS Code这样复杂的应用时。
 
@@ -124,8 +125,8 @@ VS Code不会在用户安装插件时，把你的依赖安装起来，所以你�
 
 ## 下一步
 
-[插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code的专有package.json文件参考
+[插件配置清单](/extensibility-reference/extension-manifest) - VS Code的专有package.json文件参考
 
-[发布内容配置点](/extensibility-reference/contribution-points.md) - VS Code属性表参考
+[发布内容配置点](/extensibility-reference/contribution-points) - VS Code属性表参考
 
-[激活事件](/extensibility-reference/activation-events.md) - VS Code激活事件参考
+[激活事件](/extensibility-reference/activation-events) - VS Code激活事件参考

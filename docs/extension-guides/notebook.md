@@ -1,8 +1,9 @@
 # 笔记本 API
 
 笔记本 API 允许 Visual Studio Code 以笔记本的形式打开文件，执行笔记本代码单元，把笔记本的内容以多种丰富的并且可交互式的格式展现。在 Visual Studio Code 里面，你可以获得与 Jupyter、Google Colab 等流行的笔记本相似的书写体验。
-
-!> **注意：**笔记本相关的 API 目前还处于开发状态，所以目前只能在 [VS Code Insiders](https://github.com/microsoft/vscode-docs/blob/master/insiders) 版本内部使用，同时需要给你的插件项目添加 `vscode.proposed.d.ts` 文件。想了解更多的有关于试验性 API 的内容， 可以 [点这里](https://github.com/microsoft/vscode-docs/blob/master/api/advanced-topics/using-proposed-api)。
+::: warning
+**注意：**笔记本相关的 API 目前还处于开发状态，所以目前只能在 [VS Code Insiders](https://github.com/microsoft/vscode-docs/blob/master/insiders) 版本内部使用，同时需要给你的插件项目添加 `vscode.proposed.d.ts` 文件。想了解更多的有关于试验性 API 的内容， 可以 [点这里](https://github.com/microsoft/vscode-docs/blob/master/api/advanced-topics/using-proposed-api)。
+:::
 
 ## 笔记本的构成
 
@@ -118,8 +119,9 @@ class SampleProvider implements vscode.NotebookContentProvider {
 ![简单的供应商——ipynb](https://media.githubusercontent.com/media/microsoft/vscode-docs/master/api/extension-guides/images/notebook/ipynb-simple-provider.png)
 
 现在，我们可以打开和编辑 Jupyter 格式的笔记本，并且以普通文本和 Markdown 的形式预览代码块。然而，在编辑的时候由于并不会自动并持续性的将内容写入到磁盘中，所以需要实现 `saveNotebook` 方法，上面的代码中也提到了这个方法。同时，如果要运行每个代码块，需要实现 `NotebookKernel` 方法。
-
-!> **注意：**默认情况下，输出的 MIME 类型的顺序是通过笔记本提供的 `NotebookData#metadata.displayOrder` 属性来定义的，你也可以在 `openNotebook` 方法中自行设置。
+::: warning
+**注意：**默认情况下，输出的 MIME 类型的顺序是通过笔记本提供的 `NotebookData#metadata.displayOrder` 属性来定义的，你也可以在 `openNotebook` 方法中自行设置。
+:::
 
 ## 内核
 
@@ -486,7 +488,7 @@ export class MyKernelProvider extends vscode.NotebookKernelProvider {
 
 对于一些实现了支持编程语言特性的笔记本内核，支持代码块的调试是很有必要的。可以通过以下几种方式来为内核添加调试支持：
 
-- 可以利用笔记本内核实现一个 [调试器插件](/extension-guides/debugger-extension.md)
+- 可以利用笔记本内核实现一个 [调试器插件](/extension-guides/debugger-extension)
 - 直接实现一个 [调试器协议(DAP)](https://microsoft.github.io/debug-adapter-protocol/)
 - 通过代理，将协议转换为现有的笔记本调试器（查阅 ‘vscode-simple-jupyter-notebook’）
 

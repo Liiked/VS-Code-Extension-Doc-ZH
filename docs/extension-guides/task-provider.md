@@ -8,8 +8,9 @@
 ---
 
 想要定义一个系统级别的任务，插件需要通过properties定义任务，在下面叫做Rake的例子中，任务是这样定义的：
-
-?>**译者注：**rake是ruby实现的任务管理和自动构建工具，详细请参考[rake](https://rubygems.org/gems/rake/)
+::: info
+**译者注：**rake是ruby实现的任务管理和自动构建工具，详细请参考[rake](https://rubygems.org/gems/rake/)
+:::
 
 ```json
 "taskDefinitions": [

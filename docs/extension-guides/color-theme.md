@@ -81,9 +81,12 @@ yo code
     "tokenColors": "./Diner.tmTheme"
 }
 ```
-?> 为你的色彩文件添加`.color-theme.json`前缀，那么你在编辑这个文件时就能自动获得悬浮提示、代码补全、色彩装饰器和色彩选择器等功能了。
-
-?> [ColorSublime](https://colorsublime.github.io/)有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
+::: info
+为你的色彩文件添加`.color-theme.json`前缀，那么你在编辑这个文件时就能自动获得悬浮提示、代码补全、色彩装饰器和色彩选择器等功能了。
+:::
+::: info
+[ColorSublime](https://colorsublime.github.io/)有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：`"https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme"`
+:::
 
 
 ## 测试新的主题
@@ -101,8 +104,9 @@ yo code
 ---
 
 如果你想把主题分享给社区，通过[插件市场](https://code.visualstudio.com/docs/editor/extension-gallery)去发布它吧。用[vsce publishing tool](/working-with-extensions/publish-extension)打包你的主题然后发布到VS Code市场。
-
-?> 小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"theme"写到插件描述（extension description）中，然后把`Category`设置为`Theme`
+::: info
+小贴士：想要用户轻松地找到你的主题，最好修改一下`package.json`，把关键字"theme"写到插件描述（extension description）中，然后把`Category`设置为`Theme`
+:::
 
 要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下[插件市场展示小贴士](/references/extension-manifest#插件市场展示小贴士)。
 

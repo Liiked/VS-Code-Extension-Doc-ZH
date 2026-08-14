@@ -122,7 +122,7 @@ VS Code 处理自定义文本编辑器视图（webview）的视图组件生命�
 
 在自定义文本编辑器中的编辑形式是很多的，比如点击一个按钮，改动一些文本，拖动一些项目等等。不论用户何时编辑自定义文本编辑器中的内容，插件都需要更新 `TextDocument`。下面我们来看看 *猫猫草稿插件* 是怎么实现这个功能的：
 
-1. 用户点击webview中的 **添加草稿** 按钮。webview [会发送一条消息](/extension-guides/webview?id=脚本和信息传递) 给插件。
+1. 用户点击webview中的 **添加草稿** 按钮。webview [会发送一条消息](/extension-guides/webview#脚本和信息传递) 给插件。
 2. 插件接受到消息。然后插件更高效文档的内部模型（在猫猫草稿插件的例子里，就是会添加一个 JSON 的入口）。
 3. 插件创建一个 `WorkspaceEdit` 对 JSON 文档进行更新。这个编辑操作使用了 `vscode.workspace.applyEdit`。
 
@@ -259,4 +259,4 @@ vscode.workspace.fs.writeFile(fileUri, writeData);
 如果你想要学习更多 VS Code 插件能力的相关知识，请参考下面的主题：
 
 - [Extension API](https://code.visualstudio.com/api) - 学习完整的 VS Code 插件 API
-- [插件功能](/extension-capabilities/README) - 学习其他扩展 VS Code 的方法
+- [插件功能](/extension-capabilities) - 学习其他扩展 VS Code 的方法

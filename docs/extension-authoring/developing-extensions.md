@@ -11,9 +11,10 @@
 - 运行和调试插件
 - 发布插件
 
-我们建议你用脚手架生成基础文件，Yeoman的`yo code`命令可以完成这个工作，生成器能极大地提升你的开发体验，我们在[插件生成器](/extension-authoring/extension-generator.md)里面有详细的步骤。
-
-!> **注意**：以下部分假设你已经掌握了`yo code`Yeoman 插件生成器，和创建`launch.json`、`task.json`的基础知识。
+我们建议你用脚手架生成基础文件，Yeoman的`yo code`命令可以完成这个工作，生成器能极大地提升你的开发体验，我们在[插件生成器](/extension-authoring/extension-generator)里面有详细的步骤。
+::: warning
+**注意**：以下部分假设你已经掌握了`yo code`Yeoman 插件生成器，和创建`launch.json`、`task.json`的基础知识。
+:::
 
 ## 运行和调试插件
 ---
@@ -23,8 +24,8 @@
 
 根据插件的不同，你可能需要更多关于调试适配器或者语言服务器插件的相关教程：
 
-- [示例：语言服务器](/extension-authoring/example-language-server.md) - 学习如何实现一个语言服务器插件
-- [示例：调试器](/extension-authoring/developing-extensions.md) - 通过VS Code Debug Protocol接入调试器
+- [示例：语言服务器](/extension-authoring/example-language-server) - 学习如何实现一个语言服务器插件
+- [示例：调试器](/extension-authoring/developing-extensions) - 通过VS Code Debug Protocol接入调试器
 
 ## 编译Typescript
 如果你的插件是Typescript实现的，那你首先就要把代码编译成Javascript。
@@ -72,7 +73,9 @@
 ```json
 "preLaunchTask": "npm: watch"
 ```
-?> **注意：**Typescript编译器运行在watch模式下，所以任何文件变动都会自动编译
+::: info
+**注意：**Typescript编译器运行在watch模式下，所以任何文件变动都会自动编译
+:::
 
 ## 加载你的插件
 你的插件会加载在`插件开发环境`的新窗口中。用`extensionDevelopmentPath`命令行也可以达到同样的效果，这个选项告诉VS Code去哪里查找新的插件：
@@ -128,8 +131,9 @@ code --disable-extensions
 如果你安装的插件不能正常工作，第一步工作最好是先检查一下VS Code**开发者工具**的Console面板。插件作者可能在开发插件的时候已经添加了一些日志——VS Code 运行于Electron之上，所以你可以通过Chrome**开发者工具**获得有力的支持。
 
 通过**帮助**>**切换开发人员工具**（Windows/Linux：`Ctrl + Shift + I`，macOS：`Cmd + Shift + I`）打开**开发工具**然后选择**Console**标签。试着运行插件的功能，检查Console的输出。你可以使用`console.log`输出各类信息以及VS Code扩展环境抛出的详细异常。
-
-?> **开发者小贴士：**当你制作插件的时候，请为用户提供有用的日志信息，你给用户的信息越多，用户越能够独立地解决问题。好的日志也同样能帮你快速地找到真正的问题所在。
+::: info
+**开发者小贴士：**当你制作插件的时候，请为用户提供有用的日志信息，你给用户的信息越多，用户越能够独立地解决问题。好的日志也同样能帮你快速地找到真正的问题所在。
+:::
 
 #### 重装插件
 
@@ -160,7 +164,7 @@ code --disable-extensions
 
 ## 下一步
 
-- [测试你的插件](/extension-authoring/testing-extensions.md) - 学习如何写单元测试和集成测试。
-- [发布工具](/extension-authoring/publish-extension.md) - 用vsce命令行工具发布你的插件。
-- [插件配置清单](/extensibility-reference/extension-manifest.md) - VS Code插件清单文件参阅。
-- [插件API](/extensibility-reference/vscode-api.md) - 学习更多VS Code扩展性API。
+- [测试你的插件](/extension-authoring/testing-extensions) - 学习如何写单元测试和集成测试。
+- [发布工具](/extension-authoring/publish-extension) - 用vsce命令行工具发布你的插件。
+- [插件配置清单](/extensibility-reference/extension-manifest) - VS Code插件清单文件参阅。
+- [插件API](/extensibility-reference/vscode-api) - 学习更多VS Code扩展性API。
