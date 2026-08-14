@@ -59,15 +59,25 @@
   z-index: 10;
   bottom: 1.5rem;
   left: 0;
-  display: none;
   width: min(18rem, calc(100vw - 3rem));
-  padding: 0.75rem;
-  border: 1px solid var(--vp-c-brand-1);
+  padding: 1rem;
+  border: 2px solid var(--vp-c-brand-1);
   background: var(--vp-c-bg);
   box-shadow: var(--vp-shadow-3);
   color: var(--vp-c-text-1);
+  border-radius: 8px;
   font-size: 0.8125rem;
   line-height: 1.45;
+  background: rgb(255 255 255 / 14%);
+  backdrop-filter: blur(20px);
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 0s linear 160ms;
 }
 
 .term-tip__content > span,
@@ -77,5 +87,15 @@
 
 .term-tip:hover .term-tip__content,
 .term-tip:focus-within .term-tip__content {
-  display: block;
+  pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-tip__content {
+    transition: none;
+  }
 }
