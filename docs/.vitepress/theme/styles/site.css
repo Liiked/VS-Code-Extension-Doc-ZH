@@ -13,7 +13,7 @@
 }
 
 .VPDoc .content-container {
-  max-width: 800px;
+  max-width: 960px;
   letter-spacing: 0.025rem;
 }
 .VPDoc .content-container::selection {
@@ -22,6 +22,12 @@
 
 .VPDoc .content-container video {
   width: 100%;
+}
+
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    max-width: 960px !important;
+  }
 }
 
 .vp-doc ol {
