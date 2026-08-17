@@ -47,6 +47,6 @@ VS Code 用户可以使用 **Help: Report Issue...** 命令（`workbench.action.
 
 本节包含有助于你开发高质量 VS Code 插件的主题。例如，你可以学习：
 
-- 如何为插件添加[集成测试]()
-- 如何将插件[发布]()到 VS Code [市场](https://marketplace.visualstudio.com/)
-- 如何为插件设置[持续集成]()
+- 如何为插件添加[集成测试](/working-with-extensions/testing-extension)
+- 如何将插件[发布](/working-with-extensions/publish-extension)到 VS Code [市场](https://marketplace.visualstudio.com/)
+- 如何为插件设置[持续集成](/working-with-extensions/continuous-integration)

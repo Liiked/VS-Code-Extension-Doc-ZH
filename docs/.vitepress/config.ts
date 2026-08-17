@@ -233,7 +233,7 @@ export default defineConfig({
         items: [
           {
             text: "测试插件",
-            link: "/working-with-extensions/testing-extensions",
+            link: "/working-with-extensions/testing-extension",
           },
           {
             text: "发布插件",
