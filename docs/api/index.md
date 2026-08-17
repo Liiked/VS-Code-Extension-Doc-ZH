@@ -39,8 +39,9 @@ VS Code 每个月更新一次，插件 API 也随着每个版本的发布而更�
 ## 寻求帮助
 
 如果你在开发中遇到了问题，请尝试：
-- [ Stack Overflow](https://stackoverflow.com/questions/tagged/visual-studio-code)：其中有将近[12k](https://stackoverflow.com/questions/tagged/visual-studio-code)个打了`visual-studio-code`标签的问题，而且半数以上都已经有了答案，搜索你遇到的问题，提问，或者帮助其他人解决VS Code中遇到的问题。
+- [VS Code Discussions](https://github.com/microsoft/vscode-discussions): 讨论VS Code's 插件的GitHub 社区平台，你可以问问题、帮助其他伙伴、也可以寻求答案。
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode-extensions)：其中有[成千上万](https://stackoverflow.com/questions/tagged/visual-studio-code)个打了`vscode-extensions`标签的问题，而且半数以上都已经有了答案，搜索你遇到的问题，提问，或者帮助其他人解决VS Code中遇到的问题。
 
-- [Gitter频道](https://gitter.im/Microsoft/vscode)和[VS Code Dev Slack](https://join.slack.com/t/vscode-dev-community/shared_invite/enQtMjIxOTgxNDE3NzM0LWU5M2ZiZDU1YjBlMzdlZjA2YjBjYzRhYTM5NTgzMTAxMjdiNWU0ZmQzYWI3MWU5N2Q1YjBiYmQ4MzY0NDE1MzY)：插件开发人员的公共聊天室，VS Code项目组成员偶尔也会出现。
+- [VS Code Dev Slack](https://vscode-dev-community.slack.com/)：插件开发人员的公共聊天室，VS Code项目组成员偶尔也会出现。
 
 你若对本文档有任何建议，请在[Microsoft/vscode-docs](https://github.com/Microsoft/vscode-docs/issues)中创建issue。如果你的插件问题无法解决，或者对VS Code插件API有任何建议，请在[Microsoft/vscode](https://github.com/Microsoft/vscode/issues)中新建issue。
