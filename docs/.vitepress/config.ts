@@ -109,8 +109,49 @@ export default defineConfig({
         text: "插件指南",
         collapsed: true,
         items: [
-          { text: "概述", link: "/extension-guides/" },
-          { text: "AI", link: "/extension-guides/" },
+          { text: "概述", link: "/extension-guides" },
+          {
+            text: "AI",
+            collapsed: true,
+            items: [
+              {
+                text: "概述",
+                link: "/extension-guides/ai/ai-extensibility-overview",
+              },
+              {
+                text: "语言模型工具",
+                link: "/extension-guides/ai/tools",
+              },
+              {
+                text: "MCP 开发指南",
+                link: "/extension-guides/ai/mcp",
+              },
+              {
+                text: "Chat 参与者",
+                link: "/extension-guides/ai/chat",
+              },
+              {
+                text: "Chat 指南",
+                link: "/extension-guides/ai/chat-tutorial",
+              },
+              {
+                text: "语言模型",
+                link: "/extension-guides/ai/language-model",
+              },
+              {
+                text: "语言模型指南",
+                link: "/extension-guides/ai/language-model-tutorial",
+              },
+              {
+                text: "语言模型 Chat 供应器",
+                link: "/extension-guides/ai/language-model-chat-provider",
+              },
+              {
+                text: "Prompt TSX",
+                link: "/extension-guides/ai/prompt-tsx",
+              },
+            ],
+          },
           { text: "命令", link: "/extension-guides/command" },
           { text: "色彩主题", link: "/extension-guides/color-theme" },
           { text: "文件图标主题", link: "/extension-guides/file-icon-theme" },
