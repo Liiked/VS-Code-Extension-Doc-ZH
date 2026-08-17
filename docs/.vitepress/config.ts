@@ -139,7 +139,64 @@ export default defineConfig({
       {
         text: "交互指南",
         collapsed: true,
-        items: [],
+        items: [
+          {
+            text: "概述",
+            link: "/ux-guidelines",
+          },
+          {
+            text: "活动栏",
+            link: "/ux-guidelines/activity-bar",
+          },
+          {
+            text: "侧边栏",
+            link: "/ux-guidelines/sidebars",
+          },
+          {
+            text: "面板",
+            link: "/ux-guidelines/panels",
+          },
+          {
+            text: "状态栏",
+            link: "/ux-guidelines/statusbar",
+          },
+          {
+            text: "视图",
+            link: "/ux-guidelines/views",
+          },
+          {
+            text: "编辑器操作",
+            link: "/ux-guidelines/editor-actions",
+          },
+          {
+            text: "快速选择",
+            link: "/ux-guidelines/quick-picks",
+          },
+          {
+            text: "命令面板",
+            link: "/ux-guidelines/command-palette",
+          },
+          {
+            text: "通知",
+            link: "/ux-guidelines/notifications",
+          },
+          {
+            text: "Webviews",
+            link: "/ux-guidelines/webviews",
+          },
+          {
+            text: "上下文菜单",
+            link: "/ux-guidelines/context-menus",
+          },
+          {
+            text: "操作指南",
+            link: "/ux-guidelines/walkthroughs",
+          },
+          {
+            text: "设置",
+            link: "/ux-guidelines/settings",
+          },
+        ],
       },
       {
         text: "语言插件",
