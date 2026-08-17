@@ -53,9 +53,9 @@
 - 每个VS Code插件都有`package.json`文件，文件内包含了这个插件功能和用处。
 - 当项目启动时，VS Code会立即读取这个文件中的每个`配置(contributes)`部分并作出响应。
 - 请阅读[package.json插件清单](/extensibility-reference/extension-manifest)参考文档
-- 更多信息请参阅[package.json发布内容配置](/extensibility-reference/contribution-points)参考文档
+- 更多信息请参阅[package.json配置点](/extensibility-reference/contribution-points)参考文档
 ::: info
-译者注：为了便于理解，`contribution / contributes`在本教程中译为**发布内容配置/配置**，`contribution points`译为**发布内容配置点/配置点**。
+译者注：为了便于理解，`contribution / contributes`在本教程中译为**配置点/配置**，`contribution points`译为**配置点点/配置点**。
 :::
 
 **示例：基于TypeScript的pacakge.json**
@@ -210,6 +210,6 @@ let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
 如果你想查看更多extension API的概述，看看这些主题吧：
 - [Extension API 概览](/extensibility-reference/overview) - 了解完整的VS Code扩展性模型。
 - [API原则和模式](/extensibility-reference/principles-patterns) - VS Code的扩展性基于这些指导性原则和模式。
-- [发布内容配置](/extensibility-reference/contribution-points) - 各种各样的VS Code发布内容配置项
+- [配置点](/extensibility-reference/contribution-points) - 各种各样的VS Code配置点项
 - [激活事件](/extensibility-reference/activation-events) - VS Code激活事件参考
 - [更多插件示例](/extension-authoring/samples) - 看看我们的插件示例列表

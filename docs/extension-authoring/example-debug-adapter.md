@@ -49,7 +49,7 @@ npm install
 
 打开项目文件夹`vscode-mock-debug`，看看里面有什么：
 - `package.json` mock-debug插件的配置清单
-    - 列出了插件的发布内容配置点
+    - 列出了插件的配置点点
     - `complie`脚本用于编译Typescript到`out`文件夹中，`watch`则是侦听后续的源码变动
     - `vscode-debugprotocol`、`vscode-debugadapter` 、`vscode-debugadapter-testsupport`是NPM模块，简化了基于node的调试适配器开发工作
 - `src/mockRuntime.ts` 提供了简单API的虚拟运行时
@@ -186,7 +186,7 @@ npm install
 }
 ```
 
-现在我们看看调试插件所需的**发布内容配置（contributes）**部分。
+现在我们看看调试插件所需的**配置点（contributes）**部分。
 
 第一个是**breakpoints**内容配置点，它列出了支持设置断点的语言，没有这个配置点的话，我们就不能在Markdown文件里设置断点了。
 

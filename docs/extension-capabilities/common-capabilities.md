@@ -15,7 +15,7 @@
 
 ## 配置
 
-插件需要在[`contributes.configuration`](/references/contribution-points#contributesconfiguration)发布内容配置点中填写有关的配置，你可以[`workspace.getConfiguration`](https://code.visualstudio.com/api/references/vscode-api#workspace.getConfiguration)API中阅读有关内容。
+插件需要在[`contributes.configuration`](/references/contribution-points#contributesconfiguration)配置点点中填写有关的配置，你可以[`workspace.getConfiguration`](https://code.visualstudio.com/api/references/vscode-api#workspace.getConfiguration)API中阅读有关内容。
 
 
 ## 键位绑定
@@ -24,7 +24,7 @@
 
 ## 菜单
 
-插件可以自定义上下文菜单项，菜单会根据用户右击VS Code UI的不同位置而各不相同。查看更多[`contributes.menus`](/extensibility-reference/contribution-points#contributesmenus)发布内容配置。
+插件可以自定义上下文菜单项，菜单会根据用户右击VS Code UI的不同位置而各不相同。查看更多[`contributes.menus`](/extensibility-reference/contribution-points#contributesmenus)配置点。
 
 ## 数据储存
 

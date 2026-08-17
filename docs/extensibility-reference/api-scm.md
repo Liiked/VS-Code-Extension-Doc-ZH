@@ -158,4 +158,4 @@ export interface SourceControl {
 * [Git 插件](https://github.com/Microsoft/vscode/tree/master/extensions/git) - 学习Git插件实现
 * [插件API概览](/extensibility-reference/overview) - 学习全部的VS Code扩展性模型
 * [插件配置清单](/extensibility-reference/extension-manifest) - VS Code package.json插件配置清单参考
-* [发布内容配置点](/extensibility-reference/contribution-points) - VS Code发布内容配置点参考
+* [配置点点](/extensibility-reference/contribution-points) - VS Code配置点点参考

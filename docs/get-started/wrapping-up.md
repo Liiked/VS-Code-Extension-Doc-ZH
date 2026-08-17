@@ -11,7 +11,7 @@
 
 ## 插件功能
 
-在这一章中，我们把[VS Code API](/references/vscode-api)和[发布内容配置](/references/contribution-points)分成了不同类别，每个分类都是某一功能的简明教程。在这个章节你可以验证自己的插件灵感是否可行，或者从中找到新的创作想法。
+在这一章中，我们把[VS Code API](/references/vscode-api)和[配置点](/references/contribution-points)分成了不同类别，每个分类都是某一功能的简明教程。在这个章节你可以验证自己的插件灵感是否可行，或者从中找到新的创作想法。
 
 ## 指南和示例
 

@@ -5,7 +5,7 @@ const base = process.env.DOCS_BASE ?? "/VS-Code-Extension-Doc-ZH/";
 
 const referenceItems = [
   { text: "VS Code API", link: "/references/vscode-api" },
-  { text: "发布内容配置", link: "/references/contribution-points" },
+  { text: "配置点", link: "/references/contribution-points" },
   { text: "激活事件", link: "/references/activation-events" },
   { text: "插件清单", link: "/references/extension-manifest" },
   { text: "命令", link: "/references/commands" },

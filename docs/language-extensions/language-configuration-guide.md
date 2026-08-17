@@ -1,6 +1,6 @@
 # 语言配置
 
-通过[`contributes.languages`](/extensibility-reference/contribution-points#contributeslanguages)发布内容配置，你可以配置以下*声明式语言特性*：
+通过[`contributes.languages`](/extensibility-reference/contribution-points#contributeslanguages)配置点，你可以配置以下*声明式语言特性*：
 
 - 启用/关闭注释
 - 定义括号

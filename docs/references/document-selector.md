@@ -85,4 +85,4 @@ vscode.languages.registerHoverProvider(
 阅读下列文章来了解更多有关于VS Code可拓展模型的知识.
 
 - [插件清单](/references/extension-manifest) - VS Code的package.json(插件清单)文件配置相关
-- [发布内容配置](/references/contribution-points) - VS Code发布内容相关
+- [配置点](/references/contribution-points) - VS Code发布内容相关

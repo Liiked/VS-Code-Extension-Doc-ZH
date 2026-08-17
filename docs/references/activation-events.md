@@ -159,7 +159,7 @@ VS Code 恢复 (restore) `viewType` 为 `catCoding` 的 webview 时会激活插�
 ```
 
 VS Code 恢复 (restore) `viewType` 为 `catCustoms.pawDraw` 的自定义编辑器时会激活插件. 
-首先通过 [`自定义编辑器` 的发布内容配置](/extension-guides/custom-editors#发布内容配置) 设置 `viewType` ，然后为 `registerCustomEditorProvider` 提供一个 供应器函数. 
+首先通过 [`自定义编辑器` 的配置点](/extension-guides/custom-editors#配置点) 设置 `viewType` ，然后为 `registerCustomEditorProvider` 提供一个 供应器函数. 
 ::: warning
 **注意**: 从VS Code 1.74.0开始，包含自定义编辑器的插件，不再需要单独配置 `onCustomEditor` 事件来激活. 
 :::

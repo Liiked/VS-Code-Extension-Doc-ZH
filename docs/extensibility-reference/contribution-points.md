@@ -1,6 +1,6 @@
-# 发布内容配置点
+# 配置点点
 
-本篇会介绍`pacakge.json`[插件清单]()中各种不同的发布内容配置点。
+本篇会介绍`pacakge.json`[插件清单]()中各种不同的配置点点。
 
 * [`configuration`](/extensibility-reference/contribution-points#contributesconfiguration)
 * [`commands`](/extensibility-reference/contribution-points#contributescommands)
@@ -536,11 +536,11 @@ language-configuration.json
 * `Format:` 虽然图片格式的图标都是可以的，但建议使用SVG图标。
 * `States:` 所有图标状态继承下列样式：
 
-|State|Opacity|
-|---|---|
-|Default|60%|
-|Hover|100%|
-|Active|100%|
+| State   | Opacity |
+| ------- | ------- |
+| Default | 60%     |
+| Hover   | 100%    |
+| Active  | 100%    |
 
 ## contributes.problemMatchers
 配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：

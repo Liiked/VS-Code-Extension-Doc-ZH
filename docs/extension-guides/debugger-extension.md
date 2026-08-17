@@ -27,7 +27,7 @@ VS Code基于抽象协议，实现了一个原生（非语言相关的）的调�
 
 我们将这个中间件称为**调试适配器（Debug Adapter）**（简写为**DA**），在VS Code和DA之间通信的抽象协议称之为**调试适配器协议(Debug Adapter Protocol)** (简写**DAP**)。调试适配器协议独立于VS Code，它有自己的[网站](https://microsoft.github.io/debug-adapter-protocol/)，你在上面可以找到相关的[介绍和概述](https://microsoft.github.io/debug-adapter-protocol/overview)，以及详细的[说明书](https://microsoft.github.io/debug-adapter-protocol/specification)，上面还列出了一些[已知实现和支持工具](https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/)，这份努力背后的故事和动机，我们都记录在了[博客](https://code.visualstudio.com/blogs/2018/08/07/debug-adapter-protocol-website#_why-the-need-for-decoupling-with-protocols)中。
 
-因为调试适配器独立于VSCode，所以它可用在[其他开发工具](https://microsoft.github.io/debug-adapter-protocol/implementors/tools/)中，它们无需匹配VS Code的插件架构，而只需基于插件和*发布内容配置*即可。
+因为调试适配器独立于VSCode，所以它可用在[其他开发工具](https://microsoft.github.io/debug-adapter-protocol/implementors/tools/)中，它们无需匹配VS Code的插件架构，而只需基于插件和*配置点*即可。
 
 出于这个原因，VS Code提供了一个配置点`debuggers`，调试适配器在这里可以配置特定的调试类型（例如：Node.js调试器使用`node`）。用户只要启动了这个类型的调试适配器会话，VS Code就能加载注册好的调试适配器。
 
@@ -93,7 +93,7 @@ npm install
 我们的项目里面有什么呢？
 
 - `package.json`是mock-debug插件的配置清单：
-    - 里面是mock-debug插件的*发布内容配置*清单
+    - 里面是mock-debug插件的*配置点*清单
     - `compile`和`watch`脚本会将Typescript源码编译到`out`文件夹中，然后`watch`脚本会追踪源码每个细微的修改
     - `vscode-debugprotocol`，`vscode-debugadapter`和`vscode-debugadapter-testsupport`npm依赖包简化了基于node的调试适配器开发工作
 - `src/mockRuntime.ts`是一个**模拟的**运行时，仅仅包含一些简单的调试API
@@ -303,7 +303,7 @@ vscode.commands.registerCommand('extension.mock-debug.getProgramName', config =>
 
 ## 使用DebugConfigurationProvider
 
-如果你觉得`package.json`中和调试相关的发布内容配置不够你用，`DebugConfigurationProvider`可以动态控制调试插件下列方面的内容：
+如果你觉得`package.json`中和调试相关的配置点不够你用，`DebugConfigurationProvider`可以动态控制调试插件下列方面的内容：
 
 - 动态生成launch.json中的配置。比如：根据工作区的信息生成一些配置。
 - 在启动新的调试会话前，解析（或修改）加载配置。有了这个功能，你可以根据工作区的不同填入对应的配置默认值。

@@ -1,8 +1,8 @@
-# 发布内容配置
+# 配置点
 
-发布内容配置（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
+配置点（即VS Code为插件扩展提供的配置项）是`pacakge.json`[插件清单](https://code.visualstudio.com/api/references/extension-manifest)的`contributes`字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：
 
-- [发布内容配置](#发布内容配置)
+- [配置点](#配置点)
   - [## contributes.configuration](#-contributesconfiguration)
       - [示例](#示例)
   - [## contributes.configurationDefaults](#-contributesconfigurationdefaults)

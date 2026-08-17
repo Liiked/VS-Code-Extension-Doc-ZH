@@ -18,11 +18,11 @@ VS Code提供了各式各样的API让在工作台你添加自己的组件。比�
 
 ## 视图容器
 
-在[`contributes.viewsContainers`](/extensibility-reference/contribution-points#contributesviewscontainers)发布内容配置中，你可以添加新的视图容器在5个内置的视图容器中。学习更多[树视图](/extension-guides/tree-view)。
+在[`contributes.viewsContainers`](/extensibility-reference/contribution-points#contributesviewscontainers)配置点中，你可以添加新的视图容器在5个内置的视图容器中。学习更多[树视图](/extension-guides/tree-view)。
 
 ## 树视图
 
-在[`contributes.views`](/extensibility-reference/contribution-points#contributesviews)发布内容配置中，你可以添加在任何视图容器岁添加新的视图。学习更多[树视图](/extension-guides/tree-view)。
+在[`contributes.views`](/extensibility-reference/contribution-points#contributesviews)配置点中，你可以添加在任何视图容器岁添加新的视图。学习更多[树视图](/extension-guides/tree-view)。
 
 ## Webview
 

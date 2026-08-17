@@ -26,7 +26,7 @@ VS Code 允许插件创作者制作新的**调试器插件**，或为已有的�
 
 所有调试型的钩子都在`DebugConfigurationProvider`中。
 
-`registerDebugConfigurationProvider`注册了`DebugConfigurationProvider`，调试器类型本身是在[发布内容配置项`debugger`](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-points.md#contributesdebuggers)中配置的。
+`registerDebugConfigurationProvider`注册了`DebugConfigurationProvider`，调试器类型本身是在[配置点项`debugger`](https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-points.md#contributesdebuggers)中配置的。
 
 当前，你可以使用的钩子有：
 
@@ -69,12 +69,12 @@ VS Code 允许插件创作者制作新的**调试器插件**，或为已有的�
 
 下列调试器插件项目会教你如何实现调试适配器：
 
-GitHub项目 | 描述 | 实现语言
---- | --- | ---
-[Mock Debug](https://github.com/Microsoft/vscode-mock-debug.git) | 一个假的调试器 | TypeScript
-[Node Debug2](https://github.com/Microsoft/vscode-node-debug2.git) | 内建的基于CDP-based的Node.js调试器 |TypeScript
-[Node Debug](https://github.com/Microsoft/vscode-node-debug.git) | 内建的传统Node.js调试器 |TypeScript
-[Mono Debug](https://github.com/Microsoft/vscode-mono-debug.git) | 一个供Mono使用的简单的C#调试器 | C#
+| GitHub项目                                                         | 描述                               | 实现语言   |
+| ------------------------------------------------------------------ | ---------------------------------- | ---------- |
+| [Mock Debug](https://github.com/Microsoft/vscode-mock-debug.git)   | 一个假的调试器                     | TypeScript |
+| [Node Debug2](https://github.com/Microsoft/vscode-node-debug2.git) | 内建的基于CDP-based的Node.js调试器 | TypeScript |
+| [Node Debug](https://github.com/Microsoft/vscode-node-debug.git)   | 内建的传统Node.js调试器            | TypeScript |
+| [Mono Debug](https://github.com/Microsoft/vscode-mono-debug.git)   | 一个供Mono使用的简单的C#调试器     | C#         |
 
 ## 一语道破——调试适配器协议
 我们快速地看一下VS Code和调试器间的互动，这应该能帮你快速地实现基于调试适配器协议的调试适配器。
@@ -120,4 +120,4 @@ VS Code调试界面支持多线程（如果你只用Node.js调试器的话可能
 * [示例：调试器](/extension-authoring/example-debug-adapter) - 查看一个可执行的'模拟'调试器示例。
 * [插件API概览](/extensibility-reference/vscode-api) - 学习完整的VS Code扩展性模型。
 * [插件配置清单](/extensibility-reference/extension-manifest) - VS Code的package.json插件配置清单参阅
-* [发布内容配置](/extensibility-reference/contribution-points) - VS Code发布内容配置参阅
+* [配置点](/extensibility-reference/contribution-points) - VS Code配置点参阅

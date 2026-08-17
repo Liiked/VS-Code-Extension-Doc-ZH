@@ -43,7 +43,7 @@ VS Code使用[TextMate 语法](https://macromates.com/manual/en/language_grammar
 
 ### 配置基本语法
 
-VS Code支持JSON格式的TextMate语法。你可以在[发布内容配置](/references/contribution-points)里面的`grammers`进行配置。
+VS Code支持JSON格式的TextMate语法。你可以在[配置点](/references/contribution-points)里面的`grammers`进行配置。
 
 这个配置点可以配置的内容有：语言的id，顶层语法作用域的名称，语法文件的路径。下面是一个`abc`语言的语法配置文件：
 

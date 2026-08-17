@@ -41,9 +41,9 @@
 
 决定使用哪种类型的自定义编辑器很简单：如果你要处理文本格式的文件，使用`CustomTextEditorProvider`，二进制文件则使用`CustomEditorProvider`。
 
-### 发布内容配置
+### 配置点
 
-`customEditors` 的[发布内容配置](/references/contribution-points) 配置了你的自定义插件何时在VS Code 中运行，VS Code 需要知道你的自定义编辑器是处理哪类文件的，以及编辑器的 ID。
+`customEditors` 的[配置点](/references/contribution-points) 配置了你的自定义插件何时在VS Code 中运行，VS Code 需要知道你的自定义编辑器是处理哪类文件的，以及编辑器的 ID。
 
 下面是[自定义编辑器 示例](https://github.com/microsoft/vscode-extension-samples/tree/master/custom-editor-sample)中 `customEditor` 的基本配置：
 

@@ -1,6 +1,6 @@
 # 插件功能
 
-VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。但是有的时候也很难找到对的[发布内容配置](/references/contribution-points)和[VS Code API](/references/vscode-api)。这章内容将插件的功能分成了几个部分，每个部分都将告诉你：
+VS Code 提供了非常多的方法，供插件扩展VS Code本身的能力。但是有的时候也很难找到对的[配置点](/references/contribution-points)和[VS Code API](/references/vscode-api)。这章内容将插件的功能分成了几个部分，每个部分都将告诉你：
 - 插件可以使用的功能
 - 这些功能点的细节索引
 - 一些插件灵感

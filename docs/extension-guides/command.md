@@ -164,7 +164,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 默认情况下，所有*命令面板*中出现的命令都可以在`package.json`的`commands`部分中配置。不过，有些命令是场景相关的，比如在特定的语言的编辑器中，或者只有用户设置了某些选项时才展示。
 
-[`menus.commandPalette`](/references/contribution-points#contributesmenus)发布内容配置运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
+[`menus.commandPalette`](/references/contribution-points#contributesmenus)配置点运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
 ```json
 {
 	"contributes": {
