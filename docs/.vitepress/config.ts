@@ -93,7 +93,7 @@ export default defineConfig({
         text: "插件功能",
         collapsed: true,
         items: [
-          { text: "概述", link: "/extension-capabilities/" },
+          { text: "概述", link: "/extension-capabilities" },
           {
             text: "常用功能",
             link: "/extension-capabilities/common-capabilities",

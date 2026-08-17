@@ -32,10 +32,32 @@ VS Code中有三种数据储存方式：
 
 - [`ExtensionContext.workspaceState`](https://code.visualstudio.com/api/references/vscode-api#ExtensionContext.workspaceState)：键值对组成的工作区数据。当同一个工作区再次打开时会重新取出数据。
 - [`ExtensionContext.globalState`](https://code.visualstudio.com/api/references/vscode-api#ExtensionContext.globalState)：键值对组成的全局数据。当插件激活时会再次取出这些数据。
-- [`ExtensionContext.storagePath`](https://code.visualstudio.com/api/references/vscode-api#ExtensionContext.storagePath)：指向你的插件可以读写的本地文件夹的路径。如果你要储存比较大的数据，这是一个非常好的选择。
-- [`ExtensionContext.globalStoragePath`](https://code.visualstudio.com/api/references/vscode-api#ExtensionContext.globalStoragePath)：指向你的插件可以读写的本地存储的路径。如果你要存储所有工作区内的大文件，这时一个非常好的选择。
+- [`ExtensionContext.storageUri`](/api/references/vscode-api#ExtensionContext.storageUri)：指向本地目录的工作区专用存储 URI，插件对该目录拥有读写权限。如果需要存储只能由当前工作区访问的大型文件，这是一个合适的选择。
+- [`ExtensionContext.globalStorageUri`](/api/references/vscode-api#ExtensionContext.globalStorageUri)：指向本地目录的全局存储 URI，插件对该目录拥有读写权限。如果需要存储可供所有工作区访问的大型文件，这是一个合适的选择。
+- [`ExtensionContext.secrets`](/api/references/vscode-api#ExtensionContext.secrets)：用于存储密钥或其他敏感信息的全局存储，存储内容会被加密，且不会在不同设备之间同步。对于桌面版 VS Code，它使用 Electron 的 [safeStorage API](https://www.electronjs.org/docs/latest/api/safe-storage)；对于网页版 VS Code，它使用双密钥加密（Double Key Encryption，DKE）实现。
 
 插件的执行上下文在`activate`函数中，详见[插件入口文件](/get-started/extension-anatomy#插件入口文件)。
+
+### setKeysForSync 示例
+
+如果你的插件需要在不同设备之间保留部分用户状态，请使用 `vscode.ExtensionContext.globalState.setKeysForSync` 将该状态提供给[设置同步](https://code.visualstudio.com/docs/configure/settings-sync)。
+
+你可以使用以下模式：
+
+```TypeScript
+// 激活时
+const versionKey = 'shown.version';
+context.globalState.setKeysForSync([versionKey]);
+
+// 稍后显示页面时
+const currentVersion = context.extension.packageJSON.version;
+const lastVersionShown = context.globalState.get(versionKey);
+if (isHigher(currentVersion, lastVersionShown)) {
+    context.globalState.update(versionKey, currentVersion);
+}
+```
+
+通过共享已关闭或已查看标记，在不同设备之间共享状态可以避免用户多次看到欢迎页或更新页。
 
 ## 显示通知
 
@@ -51,7 +73,7 @@ VS Code中有三种数据储存方式：
 
 ## 文件选择
 
-插件可以使用[`vscode.window.showOpenDialog`](https://code.visualstudio.com/api/references/vscode-api#vscode.window.showOpenDialog)API打开系统文件选择器，然后选择文件或是文件夹。
+插件可以使用[`window.showOpenDialog`](https://code.visualstudio.com/api/references/vscode-api#vscode.window.showOpenDialog)API打开系统文件选择器，然后选择文件或是文件夹。
 
 ## 输出渠道
 
