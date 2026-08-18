@@ -24,3 +24,4 @@
 - [Extension Host](https://code.visualstudio.com/docs/extensionAPI/patterns-and-principles) 扩展主机：与VS Code主进程隔离的插件进程，插件运行的地方，开发者可在这个进程中调用VS Code提供的各类API。
 - [Language Servers](https://code.visualstudio.com/docs/extensions/overview#_language-servers) 语言服务器：插件模式中使用C/S结构的的服务器端，用于高消耗的特殊插件场景，如语言解析、智能提示等。与之相对，客户端则是普通的插件，两者通过VS Code 的API进行通信。
 - [Language Identifier](https://code.visualstudio.com/docs/languages/identifiers) 语言标识符：定义在配置点的特定标识/名称，便于后续引用该语言配置。通常为某种编程语言的通俗名称，如JavaScript的语言标识符是【javascript】，Python的语言标识符是【python】。
+- [Provider](https://en.wikipedia.org/wiki/Provider_model) 供应器：也叫提供者，一种微软主导的设计模式，类似于策略模式。主要用于服务的提供和注入，在 VS Code 插件开发中主要用于注册功能函数。

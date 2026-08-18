@@ -6,14 +6,13 @@ const base = process.env.DOCS_BASE ?? "/VS-Code-Extension-Doc-ZH/";
 const referenceItems = [
   { text: "VS Code API", link: "/references/vscode-api" },
   { text: "配置点", link: "/references/contribution-points" },
-  { text: "激活事件", link: "/references/activation-events" },
   { text: "插件清单", link: "/references/extension-manifest" },
-  { text: "命令", link: "/references/commands" },
+  { text: "激活事件", link: "/references/activation-events" },
+  { text: "内置命令", link: "/references/commands" },
   { text: "when 子句上下文", link: "/references/when-clause-contexts" },
   { text: "主题色彩", link: "/references/theme-color" },
-  { text: "标签中的图标", link: "/references/icons-in-labels" },
+  { text: "产品图标参考", link: "/references/icons-in-labels" },
   { text: "文档选择器", link: "/references/document-selector" },
-  { text: "插件开发准则", link: "/references/extension-guidelines" },
 ];
 
 export default defineConfig({
@@ -162,7 +161,11 @@ export default defineConfig({
           { text: "树视图", link: "/extension-guides/tree-view" },
           { text: "Webview", link: "/extension-guides/webview" },
           { text: "笔记本", link: "/extension-guides/notebook" },
+          { text: "自定义编辑器", link: "/extension-guides/custom-editors" },
           { text: "虚拟文档", link: "/extension-guides/virtual-documents" },
+          { text: "虚拟工作区", link: "/extension-guides/virtual-workspaces" },
+          { text: "Web 插件", link: "/extension-guides/web-extensions" },
+          { text: "工作区信任", link: "/extension-guides/workspace-trust" },
           { text: "任务", link: "/extension-guides/task-provider" },
           { text: "源控制", link: "/extension-guides/scm-provider" },
           { text: "调试器插件", link: "/extension-guides/debugger-extension" },
@@ -170,10 +173,17 @@ export default defineConfig({
             text: "Markdown 插件",
             link: "/extension-guides/markdown-extension",
           },
-          { text: "自定义编辑器", link: "/extension-guides/custom-editors" },
+          {
+            text: "测试型插件",
+            link: "/extension-guides/testing",
+          },
           {
             text: "自定义数据插件",
             link: "/extension-guides/custom-data-extension",
+          },
+          {
+            text: "遥测",
+            link: "/extension-guides/telemetry",
           },
         ],
       },
@@ -299,6 +309,14 @@ export default defineConfig({
           {
             text: "使用不稳定的 API",
             link: "/advanced-topics/using-proposed-api",
+          },
+          {
+            text: "从TSLint到ESLint",
+            link: "/advanced-topics/tslint-eslint-migration",
+          },
+          {
+            text: "Python 插件模板",
+            link: "/advanced-topics/python-extension-template",
           },
         ],
       },
