@@ -205,11 +205,11 @@ export default defineConfig({
           },
           {
             text: "面板",
-            link: "/ux-guidelines/panels",
+            link: "/ux-guidelines/panel",
           },
           {
             text: "状态栏",
-            link: "/ux-guidelines/statusbar",
+            link: "/ux-guidelines/status-bar",
           },
           {
             text: "视图",
@@ -240,7 +240,7 @@ export default defineConfig({
             link: "/ux-guidelines/context-menus",
           },
           {
-            text: "操作指南",
+            text: "入门向导",
             link: "/ux-guidelines/walkthroughs",
           },
           {
