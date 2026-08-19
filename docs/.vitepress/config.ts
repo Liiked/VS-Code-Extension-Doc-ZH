@@ -268,7 +268,7 @@ export default defineConfig({
             link: "/language-extensions/language-configuration-guide",
           },
           {
-            text: "程序性语言特性",
+            text: "编程式语言特性",
             link: "/language-extensions/programmatic-language-features",
           },
           {

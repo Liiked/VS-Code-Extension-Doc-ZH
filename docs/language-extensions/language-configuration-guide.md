@@ -12,7 +12,7 @@
 
 [语言配置示例](https://github.com/Microsoft/vscode-extension-samples/tree/master/language-configuration-sample)中配置JavaScript文件中的编辑功能。本篇指南会详细解释`language-configuration.json`中的内容：
 ::: warning
-**注意**：如果你的语言配置文件以**`language-configuration.json`**结尾，那么VS Code会帮你添加代码补全和校验功能。
+**注意**：如果你的语言配置文件以`language-configuration.json`结尾或就叫这个名称，那么VS Code会帮你添加代码补全和校验功能。
 :::
 
 ```json
@@ -69,6 +69,21 @@ VS Code提供了切换注释开关的命令：
 		"lineComment": "//",
 		"blockComment": ["/*", "*/"]
 	}
+}
+```
+`lineComment` 支持两种不同的后向兼容格式：
+- 用字符值表示简单的单行注释
+- 用对象来配置更多注释行的缩进
+
+```json
+{
+  "comments": {
+    "lineComment": {
+      "comment": "//",
+      "noIndent": true
+    },
+    "blockComment": ["/*", "*/"]
+  }
 }
 ```
 
@@ -206,3 +221,33 @@ if (true) {
 如果没有设置缩进规则，当行尾以开符号结尾时编辑器会左缩进，以闭合符号结尾时右缩进。这里的*开闭符号*由`brackets`定义。
 
 注意`editor.formatOnPaste`是由[DocumentRangeFormattingEditProvider](https://code.visualstudio.com/api/references/vscode-api#DocumentRangeFormattingEditProvider)控制，而不由自动缩进控制。
+
+## 回车键规则
+
+`onEnterRules` 定义了在编辑器中按下 <kbd>Enter</kbd> 时会执行的一系列规则。
+
+```json
+{
+  "onEnterRules": [{
+    "beforeText": "^\\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\\s*$",
+    "action": { "indent": "indent" }
+  }]
+}
+```
+
+按下 `kbstyle(Enter)` 时，会针对以下属性检查光标之前、之后或上一行的文本：
+
+- `beforeText`（必填）。匹配光标前文本（限定在当前行）的正则表达式。
+- `afterText`。匹配光标后文本（限定在当前行）的正则表达式。
+- `previousLineText`。匹配光标上一行文本的正则表达式。
+
+如果所有指定的属性都匹配，则该规则被视为匹配，并且不再评估后续的 `onEnterRules`。一个 `onEnterRule` 可以指定以下操作：
+
+- `indent`（必填）。`none, indent, outdent, indentOutdent` 之一。
+  - `none` 表示新行将继承当前行的缩进。
+  - `indent` 表示新行将相对于当前行缩进。
+  - `outdent` 表示新行将相对于当前行减少缩进。
+  - `indentOutdent` 表示将插入两个新行，第一个缩进，第二个减少缩进。
+- `appendText`。将附加到新行和缩进之后的字符串。
+- `removeText`。要从新行缩进中删除的字符数。
+

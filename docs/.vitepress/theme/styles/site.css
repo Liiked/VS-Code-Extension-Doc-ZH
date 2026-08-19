@@ -142,6 +142,14 @@
   transition-delay: 0s;
 }
 
+kbd {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 2px 6px;
+  box-shadow: 1px 1px 1px gray;
+  font-size: 0.8em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .term-tip__content {
     transition: none;

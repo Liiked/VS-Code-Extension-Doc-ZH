@@ -132,6 +132,25 @@ vscode.languages.registerDocumentSemanticTokensProvider(selector, provider, lege
 ```
 已配置的类型，可以声明它的父级类型，并继承其所有样式规则。
 
+## 启用语义高亮
+
+语义符号是计算出来的，是否高亮还取决于设置中的 `editor.semanticHighlighting.enabled` 是否开启。这个配置值有 `true`、`false` 和 `configuredByTheme`
+
+- `true` 和 `false` 会开关所有主题中的语义高亮
+- `configuredByTheme` 默认值，它会让每个主题自己空值是否打开语义高亮。VS Code (比如 "Dark+")内的所有主题默认都开启了语义高亮。
+
+语言插件可以通过 `package.json` 中的语言配置来覆盖默认语义高亮配置
+
+```json
+{
+  "configurationDefaults": {
+    "[languageId]": {
+      "editor.semanticHighlighting.enabled": true
+    }
+  }
+}
+```
+
 ## 主题化
 
 主题化是指将颜色和样式应用到 **符号** 的过程。色彩主题确定了主题化的规则，但是用户也可以通过用户设置来自定义主题规则。
