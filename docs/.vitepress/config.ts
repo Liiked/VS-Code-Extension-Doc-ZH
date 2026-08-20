@@ -44,6 +44,7 @@ export default defineConfig({
           { text: "第一步", link: "/get-started/your-first-extension" },
           { text: "插件功能", link: "/extension-capabilities/" },
           { text: "插件指南", link: "/extension-guides/" },
+          { text: "交互指南", link: "/ux-guidelines/" },
           { text: "语言插件", link: "/language-extensions/" },
           {
             text: "测试和发布",

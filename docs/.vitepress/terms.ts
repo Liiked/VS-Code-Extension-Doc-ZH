@@ -36,8 +36,14 @@ const termPattern = new RegExp(
 
 export function configureTerms(markdown: MarkdownRenderer) {
   markdown.core.ruler.after("inline", "terms", (state) => {
-    for (const token of state.tokens) {
+    for (let index = 0; index < state.tokens.length; index++) {
+      const token = state.tokens[index];
       if (token.type !== "inline" || !token.children) {
+        continue;
+      }
+
+      // 标题会被右侧大纲（aside）提取引用，替换会污染侧边子导航，因此只处理正文
+      if (state.tokens[index - 1]?.type === "heading_open") {
         continue;
       }
 
