@@ -38,6 +38,45 @@ VS Code 为元素是否处于可见和激活状态，设置了不同的上下文
 "when": "resourceFilename =~ /docker/"
 ```
 
+### 'in' 和 'not in'条件操作符
+
+`when`中的操作符`in` 允许在上下文变量中动态查找其他的上下文变量值。比如，给包含特定文件的文件夹添加一个特殊的菜单命令（或者无法静态得知的其他东西），你可以使用 `in` 操作符来实现。
+
+第一，确定需要支持的文件夹类型，比如是一个名称数组。然后，使用 `setContext` 命令把数组注入到上下文变量中：
+
+```typescript
+vscode.commands.executeCommand('setContext', 'ext.supportedFolders', [
+  'test',
+  'foo',
+  'bar'
+]);
+
+// 或者
+
+// 注意本例（使用了一个对象）, 具体值是无关紧要的只要键存在于对象中
+vscode.commands.executeCommand('setContext', 'ext.supportedFolders', {
+  test: true,
+  foo: 'anything',
+  bar: false
+});
+```
+
+然后在 `package.json` 中添加`explorer/context`菜单配置：
+
+```json
+// 注意，本例假设你已经定义了一个叫做ext.doSpecial的命令
+"menus": {
+  "explorer/context": [
+    {
+      "command": "ext.doSpecial",
+      "when": "explorerResourceIsFolder && resourceFilename in ext:supportedFolders"
+    }
+  ]
+}
+```
+
+在这个例子里，我们拿到 `resourceFilename` 的值（在本例中也就是文件夹的名字）然后检查它是否在 `ext:supportedFolders` 之中。如果存在的话，菜单就会展示出来。这个强大的操作符使得更复杂的条件分支得以实现，同时也支持了动态配置。
+
 ## 可用上下文变量
 
 下面是一些`when`子句中可以使用的上下文变量，这些值最终会被解析为布尔值 true/false。
@@ -115,6 +154,13 @@ VS Code 为元素是否处于可见和激活状态，设置了不同的上下文
 | `extension`                        | 插件 ID 匹配时，比如: `"extension == eamodio.gitlens"`.                                                                             |
 | `extensionStatus`                  | 插件安装时，比如: `"extensionStatus == installed"`.                                                                                 |
 | `extensionHasConfiguration`        | 插件存在配置时                                                                                                                      |
+| **测试上下文**                     |
+| `testId`                           | 当前测试项ID匹配时                                                                                                                  |
+| `controllerId`                     | 当前测试控制器ID匹配时                                                                                                              |
+| `testing.testItemHasUri`           | 当前测试项和URI关联时                                                                                                               |
+| **工作区上下文**                   |                                                                                                                                     |
+| `virtualWorkspace`                 | 当前工作区使用了虚拟文件系统时                                                                                                      |
+| `isWorkspaceTrusted`               | 当前工作区可信时                                                                                                                    |
 | **全局UI上下文**                   |
 | `notificationFocus`                | 键盘聚焦到通知窗口                                                                                                                  |
 | `notificationCenterVisible`        | 通知中心在 VS Code 右下角可见时                                                                                                     |
@@ -151,11 +197,43 @@ VS Code 为元素是否处于可见和激活状态，设置了不同的上下文
 | `inSearchEditor`                   | 当焦点在搜索编辑器内时                                                                                                              |
 | **设置上下文**                     |
 | `config.editor.minimap.enabled`    | 当设置中的 `editor.minimap.enabled` 为 `true` 时                                                                                    |
+
 ::: info
-注意：你可以使用`config.`前缀，使用任意用户或工作区设置中的值。
+注意：你可以使用任意用户或工作区设置中以`config.`前缀且可解析为布尔值的设置值
 :::
 
-## 激活/聚焦视图或面板相关的上下文变量
+## 可见/聚焦视图的when子句
+
+你可以用 when 子句检查 [视图](/api/ux-guidelines/views) 是否可见或者处于聚焦态
+
+| 上下文键名               | 何时为真                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `view.${viewId}.visible` | 当指定视图可见时为真<br>如: `"view.workbench.explorer.fileView.visible"`     |
+| `focusedView`            | 当指定视图聚焦时为真<br>如: `"focusedView == 'workbench.explorer.fileView'"` |
+
+View identifiers:
+
+* `workbench.explorer.fileView` - 资源文件管理器
+* `workbench.explorer.openEditorsView` - 打开编辑器
+* `outline` - 大纲视图
+* `timeline` - 时间线视图
+* `workbench.scm` - 源控制
+* `workbench.scm.repositories` - 源控制仓库
+* `workbench.debug.variablesView` - 变量
+* `workbench.debug.watchExpressionsView` - 观察
+* `workbench.debug.callStackView` - 调用栈
+* `workbench.debug.loadedScriptsView` - 已加载脚本
+* `workbench.debug.breakPointsView` - 断点
+* `workbench.debug.disassemblyView` - Disassembly
+* `workbench.views.extensions.installed` - 已安装插件
+* `extensions.recommendedList` - 推荐插件
+* `workbench.panel.markers.view` - 问题
+* `workbench.panel.output` - 输出
+* `workbench.panel.repl.view` - Debug 控制台
+* `terminal` - 集成终端
+* `workbench.panel.comments` - 评论
+
+## 可见视图容器的when子句
 
 你可以用 when 子句检查特定视图是否是可见的
 
@@ -165,24 +243,20 @@ VS Code 为元素是否处于可见和激活状态，设置了不同的上下文
 | activePanel   | 当面板可见时，比如`"activePanel == 'workbench.panel.explorer'"`  |
 | focusedView   | 当聚焦到视图时，比如`"focusedView == myViewsExplorerID"`         |
 
-视图标识：
+视图容器标识:
 
-* workbench.view.explorer - 资源文件管理器
-* workbench.view.search - 搜索
-* workbench.view.scm - 源控制
-* workbench.view.debug - 运行
-* workbench.view.extensions - 插件
+* `workbench.view.explorer` - 文件管理器
+* `workbench.view.search` - 搜索
+* `workbench.view.scm` - 源代码控制
+* `workbench.view.debug` - 运行调试器
+* `workbench.view.extensions` - 插件
+* `workbench.panel.markers` - 问题
+* `workbench.panel.output` - 输出
+* `workbench.panel.repl` - Debug 控制台
+* `terminal` - 集成终端
+* `workbench.panel.comments` - 评论
 
-面板标识:
-
-* workbench.panel.markers - 问题
-* workbench.panel.output - 输出
-* workbench.panel.repl - 调试控制台
-* terminal - 终端
-* workbench.panel.comments - 评论
-* workbench.view.search - 搜索， 当 `search.location` 设置到 `panel` 时
-
-如果你想要在特定视图或者面板聚焦时触发 when 子句，使用 `sideBarFocus` 或 `panelFocus` 与 `activeViewlet` 或 `activiewFocus` 进行组合。
+如果你想要只有特定视图容器聚焦时触发 when 子句，使用`sideBarFocus`、 `panelFocus`、 `auxiliaryBarFocus` 并组合上下文键(context key) `activeViewlet`、`activePanel`、`activeAuxiliary` 
 
 比如，下列 when 子句只会在文件资源管理器聚焦时才会为真
 
@@ -206,44 +280,7 @@ vscode.commands.executeCommand('setContext', 'myExtension.showMyCommand', true);
 vscode.commands.executeCommand('setContext', 'myExtension.numberOfCoolOpenThings', 4);
 ```
 
-## 'in' 条件操作符
 
-`when`中的操作符`in` 允许在上下文变量中动态查找其他的上下文变量值。比如，给包含特定文件的文件夹添加一个特殊的菜单命令（或者无法静态得知的其他东西），你可以使用 `in` 操作符来实现。
-
-第一，确定需要支持的文件夹类型，比如是一个名称数组。然后，使用 `setContext` 命令把数组注入到上下文变量中：
-
-```typescript
-vscode.commands.executeCommand('setContext', 'ext.supportedFolders', [
-  'test',
-  'foo',
-  'bar'
-]);
-
-// 或者
-
-// 注意本例（使用了一个对象）, 具体值是无关紧要的只要键存在于对象中
-vscode.commands.executeCommand('setContext', 'ext.supportedFolders', {
-  test: true,
-  foo: 'anything',
-  bar: false
-});
-```
-
-然后在 `package.json` 中添加`explorer/context`菜单配置：
-
-```json
-// 注意，本例假设你已经定义了一个叫做ext.doSpecial的命令
-"menus": {
-  "explorer/context": [
-    {
-      "command": "ext.doSpecial",
-      "when": "explorerResourceIsFolder && resourceFilename in ext:supportedFolders"
-    }
-  ]
-}
-```
-
-在这个例子里，我们拿到 `resourceFilename` 的值（在本例中也就是文件夹的名字）然后检查它是否在 `ext:supportedFolders` 之中。如果存在的话，菜单就会展示出来。这个强大的操作符使得更复杂的条件分支得以实现，同时也支持了动态配置。
 
 ## 查看上下文变量的工具
 

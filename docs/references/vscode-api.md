@@ -5,6 +5,10 @@
 注意：VS Code API 变动较快，翻译版本的参与人员和精力有限无法保证实时跟进，有需要的小伙伴请自行参考[官方文档](https://code.visualstudio.com/api/references/vscode-api)，其中包含了完整而且是最新的VS Code API列表。
 :::
 
+
+## API 命名空间和类
+本文档列出了VS Code 仓库中 [vscode.d.ts](https://github.com/microsoft/vscode/blob/main/src/vscode-dts/vscode.d.ts)  中的部分内容
+
 ## API模式
 
 以下将介绍我们在VS Code中经常使用的API模式。

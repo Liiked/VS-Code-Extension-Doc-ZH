@@ -2,30 +2,36 @@
 
 ## 配置字段
 
-| 名称                                                             | 必须  | 类型                                    | 详细                                                                                                                                                                                            |
-| ---------------------------------------------------------------- | :---: | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                                                           |   Y   | `string`                                | 插件的名称必须用全小写无空格的字母组成。                                                                                                                                                        |
-| `version`                                                        |   Y   | `string`                                | [SemVer](https://semver.org/)版本模式兼容。                                                                                                                                                     |
-| `publisher`                                                      |   Y   | `string`                                | [发行方名称](/extension-authoring/publish-extension#创建一个发行方)                                                                                                                             |
-| `engines`                                                        |   Y   | `object`                                | 一个至少包含`vscode`字段的对象，其值必须[兼容](/extension-authoring/publish-extension#VS-Code版本兼容性) VS Code版本。不可以是`*`。例如：`^0.10.5` 表明最小兼容`0.10.5`版本的VS Code。          |
-| `license`                                                        |       | `string`                                | 参考[npm's documentation](https://docs.npmjs.com/files/package.json#license)。如果你在插件根目录已经提供了`LICENSE`文件。那么`license`的值应该是`"SEE LICENSE IN <filename>"`。                 |
-| `displayName`                                                    |       | `string`                                | 插件市场所显示的插件名称。                                                                                                                                                                      |
-| `description`                                                    |       | `string`                                | 简单地描述一下你的插件是做什么的。                                                                                                                                                              |
-| `categories`                                                     |       | `string[]`                              | 你想要使用的插件分类，可选值有：`[Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs]`                     |
-| `keywords`                                                       |       | `array`                                 | **关键字**（数组），这样用户可以更方便地找到你的插件。到时候会和市场上的其他插件以**标签**筛选在一起。                                                                                          |
-| `galleryBanner`                                                  |       | `object`                                | 根据你的icon格式化市场的头部显示。详情见下。                                                                                                                                                    |
-| `preview`                                                        |       | `boolean`                               | 在市场中会显示Preview标记。                                                                                                                                                                     |
-| `main`                                                           |       | `string`                                | 你的插件入口                                                                                                                                                                                    |
-| [`contributes`](/extensibility-reference/contribution-points)    |       | `object`                                | 描述插件[发布内容](/extensibility-reference/contribution-points)的对象。                                                                                                                        |
-| [`activationEvents`](/extensibility-reference/activation-events) |       | `array`                                 | [激活事件](/extensibility-reference/activation-events)数组。                                                                                                                                    |
-| `badges`                                                         |       | `array`                                 | 显示在插件市场页面侧边栏的[合法](#使用认证过的标志)标记。 每个标记都是一个对象，包含了3个属性：`url` 标记的图片URL，当用户点击标记和`description`时，会跳转到`href`。                           |
-| `markdown`                                                       |       | `string`                                | 控制市场中使用的Markdown渲染引擎。可以是`github` (默认) 或 `standard`。                                                                                                                         |
-| `qna`                                                            |       | `marketplace` (默认), `string`, `false` | 控制市场中的**Q & A** 链接。 设置成`marketplace`时，自动使用市场默认的Q & A网址。或者提供一个URL转跳到你的Q & A 地址。设置为`false`时禁用。                                                     |
-| `dependencies`                                                   |       | `object`                                | Node.js 运行时依赖。等同于[npm's `dependencies`](https://docs.npmjs.com/files/package.json#dependencies).                                                                                       |
-| `devDependencies`                                                |       | `object`                                | Node.js 开发时依赖。 等同于[npm's `devDependencies`](https://docs.npmjs.com/files/package.json#devdependencies).                                                                                |
-| `extensionDependencies`                                          |       | `array`                                 | 插件依赖，由插件ID组成的数组。当主要插件安装完成后，其他插件会相应安装。插件ID的格式为 `${publisher}.${name}`。比如：`vscode.csharp`。                                                          |
-| `scripts`                                                        |       | `object`                                | 等同于[npm的 `scripts`](https://docs.npmjs.com/misc/scripts)，不过有VS Code额外字段如[vscode:prepublish](/extension-authoring/publish-extension#预发布步骤)或[vscode:uninstall](#插件卸载钩子). |
-| `icon`                                                           |       | `string`                                | icon的文件路径，最小 128x128 像素 (视网膜屏幕则需 256x256)。                                                                                                                                    |
+| 名称                                                             | 必须  | 类型                                    | 详细                                                                                                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------------------- | :---: | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                           |   Y   | `string`                                | 插件的名称必须用全小写无空格的字母组成。                                                                                                                                                                                                                                                                                                 |
+| `version`                                                        |   Y   | `string`                                | [SemVer](https://semver.org/)版本模式兼容。                                                                                                                                                                                                                                                                                              |
+| `publisher`                                                      |   Y   | `string`                                | [发行方名称](/extension-authoring/publish-extension#创建一个发行方)                                                                                                                                                                                                                                                                      |
+| `engines`                                                        |   Y   | `object`                                | 一个至少包含`vscode`字段的对象，其值必须[兼容](/extension-authoring/publish-extension#VS-Code版本兼容性) VS Code版本。不可以是`*`。例如：`^0.10.5` 表明最小兼容`0.10.5`版本的VS Code。                                                                                                                                                   |
+| `license`                                                        |       | `string`                                | 参考[npm's documentation](https://docs.npmjs.com/files/package.json#license)。如果你在插件根目录已经提供了`LICENSE`文件。那么`license`的值应该是`"SEE LICENSE IN <filename>"`。                                                                                                                                                          |
+| `displayName`                                                    |       | `string`                                | 插件市场所显示的插件名称。                                                                                                                                                                                                                                                                                                               |
+| `description`                                                    |       | `string`                                | 简单地描述一下你的插件是做什么的。                                                                                                                                                                                                                                                                                                       |
+| `categories`                                                     |       | `string[]`                              | 你想要使用的插件分类，可选值有：`[Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs]`                                                                                                                                                              |
+| `keywords`                                                       |       | `array`                                 | **关键字**（数组），这样用户可以更方便地找到你的插件。到时候会和市场上的其他插件以**标签**筛选在一起。                                                                                                                                                                                                                                   |
+| `galleryBanner`                                                  |       | `object`                                | 根据你的icon格式化市场的头部显示。详情见下。                                                                                                                                                                                                                                                                                             |
+| `preview`                                                        |       | `boolean`                               | 在市场中会显示Preview标记。                                                                                                                                                                                                                                                                                                              |
+| `main`                                                           |       | `string`                                | 你的插件入口                                                                                                                                                                                                                                                                                                                             |
+| `browser`                                                        |       | `string`                                | 你的[Web插件](/extension-guides/web-extensions)入口                                                                                                                                                                                                                                                                                      |
+| [`contributes`](/extensibility-reference/contribution-points)    |       | `object`                                | 描述插件[发布内容](/extensibility-reference/contribution-points)的对象。                                                                                                                                                                                                                                                                 |
+| [`activationEvents`](/extensibility-reference/activation-events) |       | `array`                                 | [激活事件](/extensibility-reference/activation-events)数组。                                                                                                                                                                                                                                                                             |
+| `badges`                                                         |       | `array`                                 | 显示在插件市场页面侧边栏的[合法](#使用认证过的标志)标记。 每个标记都是一个对象，包含了3个属性：`url` 标记的图片URL，当用户点击标记和`description`时，会跳转到`href`。                                                                                                                                                                    |
+| `markdown`                                                       |       | `string`                                | 控制市场中使用的Markdown渲染引擎。可以是`github` (默认) 或 `standard`。                                                                                                                                                                                                                                                                  |
+| `qna`                                                            |       | `marketplace` (默认), `string`, `false` | 控制市场中的**Q & A** 链接。 设置成`marketplace`时，自动使用市场默认的Q & A网址。或者提供一个URL转跳到你的Q & A 地址。设置为`false`时禁用。                                                                                                                                                                                              |
+| `sponsor`                                                        |       | `object`                                | 配置用户可以支持你插件的地; 包含 url 的对象，在 url 中配置可以支持你插件的地址址；                                                                                                                                                                                                                                                       |
+| `dependencies`                                                   |       | `object`                                | Node.js 运行时依赖。等同于[npm's `dependencies`](https://docs.npmjs.com/files/package.json#dependencies).                                                                                                                                                                                                                                |
+| `devDependencies`                                                |       | `object`                                | Node.js 开发时依赖。 等同于[npm's `devDependencies`](https://docs.npmjs.com/files/package.json#devdependencies).                                                                                                                                                                                                                         |
+| `extensionPack`                                                  |       | `array`                                 | 可以被打包安装的插件ID数组。插件ID必须是 `${publisher}.${name}` 格式，比如 `vscode.csharp`                                                                                                                                                                                                                                               |
+| `extensionDependencies`                                          |       | `array`                                 | 插件依赖，由插件ID组成的数组。当主要插件安装完成后，其他插件会相应安装。插件ID的格式为 `${publisher}.${name}`。比如：`vscode.csharp`。                                                                                                                                                                                                   |
+| `extensionKind`                                                  |       | `array`                                 | 标记插件在远程环境中应该如何运行的数组。值可以是 `ui`(运行在本地)，`workspace`（运行在远程容器中），也可同时配置，数组配置顺序即运行偏好。比如`[ui, workspace]`就是既可以运行在本地，也可以运行在远程，但是更偏向本地运行。查看[更多](https://code.visualstudio.com/api/advanced-topics/extension-host#preferred-extension-location)细节 |
+| `scripts`                                                        |       | `object`                                | 等同于[npm的 `scripts`](https://docs.npmjs.com/misc/scripts)，不过有VS Code额外字段如[vscode:prepublish](/extension-authoring/publish-extension#预发布步骤)或[vscode:uninstall](#插件卸载钩子).                                                                                                                                          |
+| `icon`                                                           |       | `string`                                | icon的文件路径，最小 128x128 像素 (视网膜屏幕则需 256x256)。                                                                                                                                                                                                                                                                             |
+| `pricing`                                                        |       | `string`                                | 插件价格信息，可用值Free, Trial。默认为 Free。查看[更多](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#extension-pricing-label)信息                                                                                                                                                                     |
+| `capabilities`                                                   |       | `object`                                | 在受限工作区内（[不受信任的工作区](/extension-guides/workspace-trust#static-declarations)，[虚拟工作区](/extension-guides/virtual-workspaces#signal-whether-your-extension-can-handle-virtual-workspaces)）可使用的插件能力。                                                                                                            |
 
 你还可以参考[npm的`package.json`](https://docs.npmjs.com/files/package.json)
 
@@ -36,47 +42,44 @@
 
 ```json
 {
-    "name": "wordcount",
-    "displayName": "Word Count",
-    "version": "0.1.0",
-    "publisher": "ms-vscode",
-    "description": "Markdown Word Count Example - reports out the number of words in a Markdown file.",
-    "author": {
-        "name": "seanmcbreen"
-    },
-    "categories": [
-        "Other"
-    ],
-    "icon": "images/icon.png",
-    "galleryBanner": {
-        "color": "#C80000",
-        "theme": "dark"
-    },
-    "activationEvents": [
-        "onLanguage:markdown"
-    ],
-    "engines": {
-        "vscode": "^1.0.0"
-    },
-    "main": "./out/extension",
-    "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
-    },
-    "devDependencies": {
-        "vscode": "0.10.x",
-        "typescript": "^1.6.2"
-    },
-    "license": "SEE LICENSE IN LICENSE.txt",
-    "bugs": {
-        "url": "https://github.com/Microsoft/vscode-wordcount/issues",
-        "email": "smcbreen@microsoft.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Microsoft/vscode-wordcount.git"
-    },
-    "homepage": "https://github.com/Microsoft/vscode-wordcount/blob/master/README.md"
+  "name": "wordcount",
+  "displayName": "Word Count",
+  "version": "0.1.0",
+  "publisher": "ms-vscode",
+  "description": "Markdown Word Count Example - reports out the number of words in a Markdown file.",
+  "author": {
+    "name": "sean"
+  },
+  "categories": ["Other"],
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#C80000",
+    "theme": "dark"
+  },
+  "pricing": "Free",
+  "activationEvents": ["onLanguage:markdown"],
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "main": "./out/extension",
+  "scripts": {
+    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^0.10.x",
+    "typescript": "^1.6.2"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/microsoft/vscode-wordcount/issues",
+    "email": "sean@contoso.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/vscode-wordcount.git"
+  },
+  "homepage": "https://github.com/microsoft/vscode-wordcount/blob/main/README.md"
 }
 ```
 
@@ -137,8 +140,9 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 | License      | `license`              |
 
 设置插件的`category`，`category`一样的插件会分类到一起以便用户查找和筛选。
-
-> **注意：**请使用有意义的分类值，允许的值有`[Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs]`。有语法高亮、代码补全功能的插件，请使用`Programming Languages`。`Language Packs`分类是为本地化保留的插件类别（例如：简体中文（本地化））。
+:::info
+ **注意：**请使用有意义的分类值，允许的值有`[Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs, Data Science, Machine Learning, Visualization, Notebooks, Education, Testing]`。有语法高亮、代码补全功能的插件，请使用`Programming Languages`。`Language Packs`分类是为本地化保留的插件类别（例如：简体中文（本地化））。
+:::
 
 ```json
 {
@@ -147,9 +151,7 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
     ],
 }
 ```
-::: info
-**小贴士：** The [Extension Manifest Editor](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.extension-manifest-editor) 插件可以帮你预览预览你的插件中的`README.md` 和 `package.json`， 生成的预览就像你已经发布到插件市场了一样。
-:::
+
 
 ### 使用认证过的徽章
 
@@ -210,33 +212,36 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 
 ```json
 {
-    "name": "language-latex",
-    "description": "LaTex Language Support",
-    "version": "0.0.1",
-    "publisher": "someone",
-    "engines": {
-        "vscode": "0.10.x"
-    },
-    "categories": [
-        "Programming Languages",
-        "Snippets"
+  "name": "language-latex",
+  "description": "LaTex Language Support",
+  "version": "0.0.1",
+  "publisher": "someone",
+  "engines": {
+    "vscode": "0.10.x"
+  },
+  "categories": ["Programming Languages", "Snippets"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "latex",
+        "aliases": ["LaTeX", "latex"],
+        "extensions": [".tex"]
+      }
     ],
-    "contributes": {
-        "languages": [{
-            "id": "latex",
-            "aliases": ["LaTeX", "latex"],
-            "extensions": [".tex"]
-        }],
-        "grammars": [{
-            "language": "latex",
-            "scopeName": "text.tex.latex",
-            "path": "./syntaxes/latex.tmLanguage.json"
-        }],
-        "snippets": [{
-            "language": "latex",
-            "path": "./snippets/snippets.json"
-        }]
-    }
+    "grammars": [
+      {
+        "language": "latex",
+        "scopeName": "text.tex.latex",
+        "path": "./syntaxes/latex.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "latex",
+        "path": "./snippets/snippets.json"
+      }
+    ]
+  }
 }
 ```
 注意插件的`categories`字段现在包含了`Programming Languages`和`Snippets`，以便用户在市场中找到这个插件。
@@ -278,7 +283,7 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 
 插件包不应该有除了它内部打包之外的其他插件包，打包好的插件包应该是在整个包里面可以独立管理的。如果一个插件非常依赖另外一个插件，那么这个依赖性应该在`extensionDependencies`中声明。
 
-#### 插件卸载钩子
+## 插件卸载钩子
 如果你的插件在删除时需要做一些清理工作，你可以在package.json中的卸载钩子`vscode:uninstall`中注册一个`node`脚本。
 ```json
 {
@@ -292,18 +297,22 @@ Icon和banner颜色会展示在市场页面头部，`theme`属性是指banner中
 注意：只支持Node.js脚本
 :::
 
+## 一些有用的 Node.js 模块
+
 下面有几个npmjs的Node.js 模块，可以帮你实现VS Code插件。你可以在插件的`dependencies`部分包含进去。
 
 - [vscode-nls](https://www.npmjs.com/package/vscode-nls) - 支持插件的国际化和本地化。
 - [vscode-uri](https://www.npmjs.com/package/vscode-uri) - 使用VS Code实现的URI。
 - [jsonc-parser](https://www.npmjs.com/package/jsonc-parser) - 允许带注释的JSON检查器。
 - [request-light](https://www.npmjs.com/package/request-light) - 带代理支持的轻量级Node.js请求库。
-- [vscode-extension](https://www.npmjs.com/package/vscode-extension-telemetry) - 提供VS Code 插件的持续遥测监控报告。
+- [vscode-extension-telemetry](https://www.npmjs.com/package/@vscode/extension-telemetry) - 提供VS Code 插件的持续遥测监控报告。
 - [vscode-languageclient](https://www.npmjs.com/package/vscode-languageclient) - 轻松地将语言服务器绑定到语言服务器协议上。
+
+
 
 ## 下一步
 学习更多VS Code扩展性模型，看看下面的话题：
 
-- [配置点点](/extensibility-reference/contribution-points) - VS Code 配置点点参考
+- [配置点](/extensibility-reference/contribution-points) - VS Code 配置点参考
 - [激活事件](/extensibility-reference/activation-events) - VS Code 激活事件参考
 - [插件市场](https://code.visualstudio.com/docs/editor/extension-gallery) - 阅读更多关于 VS Code 插件市场的内容
