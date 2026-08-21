@@ -13,5 +13,8 @@
   "devDependencies": {
     "cross-env": "^10.1.0",
     "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "gitalk": "^1.8.0"
   }
 }
