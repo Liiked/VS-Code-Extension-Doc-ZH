@@ -8,7 +8,6 @@
 - 手把手教你实现一个语言服务器[`Microsoft/vscode-languageserver-node`](https://github.com/Microsoft/vscode-languageserver-node)，你觉得啰嗦的话，也可以直接看[lsp-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample)源码。
 
 ## 为什么使用语言服务器？
----
 
 语言服务器是一种可以提升语言编辑体验的特殊VS Code插件。有了语言服务器，你可以实现如自动补全、错误检查（诊断）、转跳到定义等等其他VS Code[语言特性](/language-extensions/programmatic-language-features)。
 
@@ -22,18 +21,18 @@
 
 为了解决这些问题，微软提供了[语言服务器协议(Language Server Protocol)](https://microsoft.github.io/language-server-protocol)意图为语言插件和编辑器提供社区规范。这样一来，语言服务器就可以用任何一种语言来实现，用协议通讯也避免了插件在主进程中运行的高开销。而且任何LSP兼容的语言插件，都能和LSP兼容的代码编辑器整合起来，LSP是语言插件开发者和第三方编辑器的共赢方案。
 
-![lsp-languages-editors](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-languages-editors.png)
+![lsp-languages-editors](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-languages-editors.png)
 
 在本章，我们将：
 
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
+::: info
+**译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+:::
 
-?> **译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
-
-## 实现你自己的语言服务器
----
+## 实现一个语言服务器
 
 在VS Code中，一个语言服务器有两个部分：
 
@@ -47,12 +46,11 @@
 
 下面是一个运行了2个**语言服务器插件**的示意图。HTML语言客户端和PHP语言客户端是常见的VS Code插件。两个客户端都用LSP与各自对应的语言服务器进行通信——即使PHP语言服务器是用PHP写的，但是仍然能通过LSP与PHP语言客户端建立起通信。
 
-![lsp-illustration](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-illustration.png)
+![lsp-illustration](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-illustration.png)
 
 本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/)的基础之上。
 
-## 示例：一个简单的纯文本语言服务器
----
+### 示例：一个简单的纯文本语言服务器
 
 让我们首先实现一个简单的语言服务器插件吧，这个插件的功能是自动补全、诊断纯文本文件。我们会同时学习客户端/服务端的配置。
 如果你想直接上手代码：
@@ -63,7 +61,8 @@
 复制[Microsoft/vscode-extension-samples](https://github.com/Microsoft/vscode-extension-samples)然后打开示例：
 
 ```bash
-> cd lsp-sample
+> git clone https://github.com/microsoft/vscode-extension-samples.git
+> cd vscode-extension-samples/lsp-sample
 > npm install
 > npm run compile
 > code .
@@ -83,8 +82,7 @@
         └── server.ts // 语言服务器入口
 ```
 
-## 什么是'Language Client'
----
+### 什么是'Language Client'
 
 我们先看看`/package.json`，这个文件描述了语言客户端的能力。里面有3个有趣的部分：
 
@@ -120,9 +118,11 @@
 真正的语言客户端代码和对应的`package.json`在`/client`文件夹中。`package.json`最有趣的部分是`vscode`插件主机API和`vscode-languageclient`这两个依赖库。
 
 ```json
+"engines": {
+    "vscode": "^1.43.0"
+},
 "dependencies": {
-    "vscode": "^1.1.18",
-    "vscode-languageclient": "^4.1.4"
+    "vscode-languageclient": "^6.1.3"
 }
 ```
 
@@ -168,7 +168,7 @@ export function activate(context: ExtensionContext) {
 		// 注册纯文本服务器
 		documentSelector: [{ scheme: 'file', language: 'plaintext' }],
 		synchronize: {
-			// 当文件变动为'.clientrc'中那样时，统治服务器
+			// 当文件变动为'.clientrc'中那样时，通知服务器
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	};
@@ -193,10 +193,10 @@ export function deactivate(): Thenable<void> {
 
 ```
 
-## 什么是'Language Server'
----
-
-?> **小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+### 什么是'Language Server'
+::: info
+**小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+:::
 
 在这个例子中，服务器是Typescript实现的，由Node.js运行。因为VS Code自带Node.js运行时，所以你无需安装其他依赖，除非你对运行时有特别要求。
 
@@ -204,7 +204,8 @@ export function deactivate(): Thenable<void> {
 
 ```json
 "dependencies": {
-    "vscode-languageserver": "^4.1.3"
+    "vscode-languageserver": "^6.1.1",
+    "vscode-languageserver-textdocument": "^1.0.1"
 }
 ```
 这行依赖会下载`vscode-languageserver`库。
@@ -213,18 +214,21 @@ export function deactivate(): Thenable<void> {
 
 ```typescript
 import {
-	createConnection,
-	TextDocuments,
-	TextDocument,
-	Diagnostic,
-	DiagnosticSeverity,
-	ProposedFeatures,
-	InitializeParams,
-	DidChangeConfigurationNotification,
-	CompletionItem,
-	CompletionItemKind,
-	TextDocumentPositionParams
+  createConnection,
+  TextDocuments,
+  Diagnostic,
+  DiagnosticSeverity,
+  ProposedFeatures,
+  InitializeParams,
+  DidChangeConfigurationNotification,
+  CompletionItem,
+  CompletionItemKind,
+  TextDocumentPositionParams,
+  TextDocumentSyncKind,
+  InitializeResult
 } from 'vscode-languageserver';
+
+import { TextDocument } from 'vscode-languageserver-textdocument';
 
 // 创建一个服务器连接。使用Node的IPC作为传输方式。
 // 也包含所有的预览、建议等LSP特性
@@ -232,7 +236,7 @@ let connection = createConnection(ProposedFeatures.all);
 
 // 创建一个简单的文本管理器。
 // 文本管理器只支持全文本同步。
-let documents: TextDocuments = new TextDocuments();
+let documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability: boolean = false;
 let hasWorkspaceFolderCapability: boolean = false;
@@ -243,24 +247,37 @@ connection.onInitialize((params: InitializeParams) => {
 
 	// 客户端是否支持`workspace/configuration`请求?
 	// 如果不是的话，降级到使用全局设置
-	hasConfigurationCapability =
-		capabilities.workspace && !!capabilities.workspace.configuration;
-	hasWorkspaceFolderCapability =
-		capabilities.workspace && !!capabilities.workspace.workspaceFolders;
-	hasDiagnosticRelatedInformationCapability =
+	hasConfigurationCapability = !!(
+      capabilities.workspace && !!capabilities.workspace.configuration
+	);
+	hasWorkspaceFolderCapability = !!(
+		capabilities.workspace && !!capabilities.workspace.workspaceFolders
+	);
+	hasDiagnosticRelatedInformationCapability = !!(
 		capabilities.textDocument &&
 		capabilities.textDocument.publishDiagnostics &&
-		capabilities.textDocument.publishDiagnostics.relatedInformation;
+		capabilities.textDocument.publishDiagnostics.relatedInformation
+	);
 
-	return {
+	const result: InitializeResult = {
 		capabilities: {
-			textDocumentSync: documents.syncKind,
-			// 告诉客户端，服务器支持代码补全
+			textDocumentSync: TextDocumentSyncKind.Incremental,
+			// Tell the client that this server supports code completion.
 			completionProvider: {
 				resolveProvider: true
+			}
 		}
-	}
 	};
+
+	if (hasWorkspaceFolderCapability) {
+		result.capabilities.workspace = {
+			workspaceFolders: {
+				supported: true
+			}
+		};
+	}
+
+	return result;
 });
 
 connection.onInitialized(() => {
@@ -338,7 +355,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 	// 校验器如果检测到连续超过2个以上的大写字母则会报错
 	let text = textDocument.getText();
 	let pattern = /\b[A-Z]{2,}\b/g;
-	let m: RegExpExecArray;
+	let m: RegExpExecArray | null;
 
     let problems = 0;
 	let diagnostics: Diagnostic[] = [];
@@ -386,7 +403,7 @@ connection.onDidChangeWatchedFiles(_change => {
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
 	// 传入的变量包含了文本请求代码补全的位置。
-	// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
+	// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
 	return [
 		{
 			label: 'TypeScript',
@@ -416,26 +433,6 @@ connection.onCompletionResolve(
 	}
 );
 
-/*
-connection.onDidOpenTextDocument((params) => {
-	// A text document got opened in VSCode.
-	// params.uri uniquely identifies the document. For documents store on disk this is a file URI.
-	// params.text the initial full content of the document.
-	connection.console.log(`${params.textDocument.uri} opened.`);
-});
-connection.onDidChangeTextDocument((params) => {
-	// The content of a text document did change in VSCode.
-	// params.uri uniquely identifies the document.
-	// params.contentChanges describe the content changes to the document.
-	connection.console.log(`${params.textDocument.uri} changed: ${JSON.stringify(params.contentChanges)}`);
-});
-connection.onDidCloseTextDocument((params) => {
-	// A text document got closed in VSCode.
-	// params.uri uniquely identifies the document.
-	connection.console.log(`${params.textDocument.uri} closed.`);
-});
-*/
-
 // 让文档管理器监听文档的打开，变动和关闭事件。
 documents.listen(connection);
 
@@ -444,63 +441,62 @@ connection.listen();
 
 ```
 
-## 添加一个简单的语法校验器
----
+### 添加一个简单的语法校验器
 
 为了给服务器添加文本校验，我们给text document manager添加一个listener然后在文本变动时调用，接下来就交给服务器去判断调用校验器的最佳时机了。在我们的示例中，服务器的功能是校验纯文本然后给所有大写单词进行标记。对应的代码片段：
 
 ```typescript
-// 事件在文档第一次打开，或者内容变动时触发。
-documents.onDidChangeContent(async (change) => {
-	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
-	let settings = await getDocumentSettings(textDocument.uri);
+// 文本文件的内容改变时。文档首次打开或者文档内容修改时会触发这个事件。
+documents.onDidChangeContent(async change => {
+  let textDocument = change.document;
+  // 这个简单示例中，每次校验时我们都获取一次设置
+  let settings = await getDocumentSettings(textDocument.uri);
 
-	// 校验器如果检测到连续超过2个以上的大写字母则会报错
-	let text = textDocument.getText();
-	let pattern = /\b[A-Z]{2,}\b/g;
-	let m: RegExpExecArray;
+  // 校验器会检查所有的大写单词是否超过 2 个字母
+  let text = textDocument.getText();
+  let pattern = /\b[A-Z]{2,}\b/g;
+  let m: RegExpExecArray | null;
 
-	let problems = 0;
-	let diagnostics: Diagnostic[] = [];
-	while ((m = pattern.exec(text))) {
-		problems++;
-		let diagnosic: Diagnostic = {
-			severity: DiagnosticSeverity.Warning,
-			range: {
-				start: textDocument.positionAt(m.index),
-				end: textDocument.positionAt(m.index + m[0].length)
-			},
-			message: `${m[0]} is all uppercase.`,
-			source: 'ex'
-		};
-		if (hasDiagnosticRelatedInformationCapability) {
-			diagnosic.relatedInformation = [
-				{
-					location: {
-						uri: textDocument.uri,
-						range: Object.assign({}, diagnosic.range)
-					},
-					message: 'Spelling matters'
-				},
-				{
-					location: {
-						uri: textDocument.uri,
-						range: Object.assign({}, diagnosic.range)
-					},
-					message: 'Particularly for names'
-				}
-			];
-		}
-		diagnostics.push(diagnosic);
-	}
+  let problems = 0;
+  let diagnostics: Diagnostic[] = [];
+  while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
+    problems++;
+    let diagnostic: Diagnostic = {
+      severity: DiagnosticSeverity.Warning,
+      range: {
+        start: textDocument.positionAt(m.index),
+        end: textDocument.positionAt(m.index + m[0].length)
+      },
+      message: `${m[0]} is all uppercase.`,
+      source: 'ex'
+    };
+    if (hasDiagnosticRelatedInformationCapability) {
+      diagnostic.relatedInformation = [
+        {
+          location: {
+            uri: textDocument.uri,
+            range: Object.assign({}, diagnostic.range)
+          },
+          message: 'Spelling matters'
+        },
+        {
+          location: {
+            uri: textDocument.uri,
+            range: Object.assign({}, diagnostic.range)
+          },
+          message: 'Particularly for names'
+        }
+      ];
+    }
+    diagnostics.push(diagnostic);
+  }
 
-	// 将错误处理结果发送给VS Code
-	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-}
+  // 将诊断信息发送给 VS Code
+  connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+});
 ```
 
-## 诊断提示和小技巧
----
+### 诊断提示和小技巧
 
 - 如果出错的开始点和结束点在同一个位置，VS Code会在那个单词的位置上打上波浪线
 - 如果你想要把波浪线加到行未为止，就把`end position`设置为`Number.MAX_VALUE`
@@ -519,34 +515,31 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 `扩展开发主机`实例看起来像是这样：
 
-![validation](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validation.png)
+![validation](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validation.png)
 
-## 调试客户端和服务端
----
+### 调试客户端和服务端
 
 调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后按<kbd>F5</kbd>启动插件调试。
 
-![debugging-client](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-client.png)
+![debugging-client](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/debugging-client.png)
 
 因为服务器是由`LanguageClient`启动的，我们需要附加一个*调试器*给运行中的服务器。为了做到这一点，切换到**调试**侧边栏，选择加载配置`Attach to Server`然后按<kbd>F5</kbd>启动调试（要保证server已经启动哦，也就是上面一步），看起来会像这样：
 
-![debugging-server](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/debugging-server.png)
+![debugging-server](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/debugging-server.png)
 
-## 为语言服务器加上日志
----
+### 为语言服务器加上日志
 
 如果你是用`vscode-languageclient`实现的客户端，你可以配置`[langId].trace.server`指示客户端在`output(输出)`面板中显示通信日志。
 
 对于**Isp-sample**你能在`"languageServerExample.trace.server": "verbose"`进行配置。现在看看"Language Server Example"频道，你应该能看到这些日志：
 
-![lsp-log](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-log.png)
+![lsp-log](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-log.png)
 
 因为语言服务器通信会非常啰嗦（5s的正常使用会产生5000行日志），因此我们提供了一个可视化和可筛选的日志工具。你可以先从频道中保存所有的日志，然后在[语言服务器协议检查器](https://microsoft.github.io/language-server-protocol/inspector/)中加载。
 
-![lsp-inspector](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/lsp-inspector.png)
+![lsp-inspector](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-inspector.png)
 
-## 在服务器中设置Configuration
----
+### 在服务器中设置Configuration
 
 当我们写插件的客户端部分的时候，我们已经定义了一个控制最大问题报告数的配置。所以我们也可以在服务器中写一段读取客户端配置的代码：
 
@@ -623,7 +616,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
 ```typescript
 connection.onDidChangeConfiguration(change => {
 	if (hasConfigurationCapability) {
-		// Reset all cached document settings
+		// 重置所有文档设置的缓存
 		documentSettings.clear();
 	} else {
 		globalSettings = <ExampleSettings>(
@@ -638,10 +631,9 @@ connection.onDidChangeConfiguration(change => {
 
 再次启动客户端，然后把设置中的`maximum report`改为1，就能看到：
 
-![validationOneProblem](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/validationOneProblem.png)
+![validationOneProblem](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validationOneProblem.png)
 
-## 添加其他语言特性
----
+### 添加其他语言特性
 
 第一个有趣的东西是，语言服务器通常会实现成文档校验器，从这个点来说，即使一个linter也算一个语言服务器，所以VS Code中的linter通常都是作为语言服务器实现的（参照[eslint](https://github.com/Microsoft/vscode-eslint)和[jslint](https://github.com/Microsoft/vscode-jshint)）。但是语言服务器还能做得更多，他们能提供代码不全，查找所有匹配项或者转跳到定义。下面的代码展示了为服务器添加代码补全的功能，它提供了2个建议单词"TypeScript"和"JavaScript"。
 
@@ -650,7 +642,7 @@ connection.onDidChangeConfiguration(change => {
 connection.onCompletion(
 	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
 		// 传入的变量包含了文本请求代码补全的位置。
-		// 如果我们忽略了这个信息，那就只能提供同样的代码补全项了。
+		// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
 		return [
 			{
 				label: 'TypeScript',
@@ -702,15 +694,14 @@ connection.onInitialize((params): InitializeResult => {
 
 下面的截屏显示了运行在纯文本文件中的补全代码：
 
-![codeComplete](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/language-extensions/images/language-server-extension-guide/codeComplete.png)
+![codeComplete](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/codeComplete.png)
 
-## 测试语言服务器
----
+### 测试语言服务器
 
 为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
 - 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的[HTML](https://github.com/Microsoft/vscode-html-languageservice)/[CSS](https://github.com/Microsoft/vscode-css-languageservice)/[JSON](https://github.com/Microsoft/vscode-json-languageservice)语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -816,11 +807,10 @@ async function sleep(ms: number) {
 - 打开特定的文档，然后显示在文本编辑区
 - 休眠2秒，确保启动了语言服务器
 
-准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands.md)，然后对结果进行断言测试。
+准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands)，然后对结果进行断言测试。
 这还有一个关于诊断特性的测试实现，如果你感兴趣，可以查看这个文件`client/src/test/diagnostics.test.ts`
 
 ## 进阶主题
----
 
 到目前为止，本篇教程提供了：
 
@@ -853,8 +843,7 @@ async function sleep(ms: number) {
 - 语言服务器协议
 - 直接使用VS Code的可拓展性API
 
-## 增量文本同步更新
----
+### 增量文本同步更新
 
 在`vscode-languageserver`模块中，我们做了一个简单的`text document manager`同步VS Code和语言服务器。
 

@@ -1,0 +1,6 @@
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/.env.local
+ai_changelog.md
+*** Add File: e:\repo\VS-Code-Extension-Doc-ZH\docs\.vitepress\config.ts
