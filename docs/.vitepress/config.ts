@@ -35,6 +35,7 @@ export default defineConfig({
   },
   head: [["link", { rel: "icon", href: `${base}favicon.ico` }]],
   themeConfig: {
+    logo: "/favicon.ico",
     nav: [
       { text: "首页", link: "/" },
       {
