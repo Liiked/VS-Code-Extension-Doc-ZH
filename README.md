@@ -1,6 +1,6 @@
 # VS Code 插件开发文档
 
-![Maintenance](https://img.shields.io/maintenance/yes/2021?style=for-the-badge)
+![Maintenance](https://img.shields.io/maintenance/yes/2026?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/liiked/VS-Code-Extension-Doc-ZH?style=for-the-badge)
 
 
