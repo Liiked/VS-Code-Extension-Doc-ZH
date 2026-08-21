@@ -28,8 +28,10 @@ onMounted(() => {
 
 <template>
   <DefaultTheme.Layout>
-    <template #doc-after>
+    <template #doc-before>
       <OriginalDocumentLink :relative-path="page.relativePath" />
+    </template>
+    <template #doc-after>
       <GitalkComments />
     </template>
   </DefaultTheme.Layout>
