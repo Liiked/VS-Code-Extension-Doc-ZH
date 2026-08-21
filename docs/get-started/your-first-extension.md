@@ -33,7 +33,7 @@ yo code
 # ? Do you want to open the new folder with Visual Studio Code? Open with `code`
 ```
 
-完成后进入 VS Code，按下`F5`或者在命令面板(`Ctrl+Shift+P`)中执行命令`Debug: Start Debugging`，你会立即看到一个**插件发开主机**窗口，其中就运行着插件。
+完成后进入 VS Code，按下`F5`，你会立即看到一个**扩展开发宿主**窗口，其中就运行着插件。
 
 在命令面板(`Ctrl+Shift+P`)中输入`Hello World`命令。
 
