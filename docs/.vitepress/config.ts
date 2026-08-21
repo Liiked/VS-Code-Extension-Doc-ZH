@@ -43,7 +43,7 @@ export default defineConfig({
         items: [
           { text: "预备知识", link: "/preknowledge/first-step" },
           { text: "第一步", link: "/get-started/your-first-extension" },
-          { text: "插件功能", link: "/extension-capabilities/" },
+          { text: "插件功能", link: "/extension-capabilities/overview" },
           { text: "插件指南", link: "/extension-guides/" },
           { text: "交互指南", link: "/ux-guidelines/" },
           { text: "语言插件", link: "/language-extensions/" },
@@ -94,7 +94,7 @@ export default defineConfig({
         text: "插件功能",
         collapsed: true,
         items: [
-          { text: "概述", link: "/extension-capabilities" },
+          { text: "概述", link: "/extension-capabilities/overview" },
           {
             text: "常用功能",
             link: "/extension-capabilities/common-capabilities",
