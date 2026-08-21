@@ -8,7 +8,6 @@
 - 手把手教你实现一个语言服务器[`Microsoft/vscode-languageserver-node`](https://github.com/Microsoft/vscode-languageserver-node)，你觉得啰嗦的话，也可以直接看[lsp-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample)源码。
 
 ## 为什么使用语言服务器？
----
 
 语言服务器是一种可以提升语言编辑体验的特殊VS Code插件。有了语言服务器，你可以实现如自动补全、错误检查（诊断）、转跳到定义等等其他VS Code[语言特性](/language-extensions/programmatic-language-features)。
 
@@ -29,11 +28,11 @@
 - 根据[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)，学习如何在VS Code中新建一个语言服务器插件
 - 学习如何运行、调试、记录日志和测试语言服务器插件
 - 为你提供更多进阶的语言服务器
+::: info
+**译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
+:::
 
-?> **译者注**：本文及其他章节所涉及的**LSP**全为Language Server Protocol的缩写。**语言服务器协议**是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。
-
-## 实现你自己的语言服务器
----
+## 实现一个语言服务器
 
 在VS Code中，一个语言服务器有两个部分：
 
@@ -51,8 +50,7 @@
 
 本篇将指引你学习如何用我们的[Node SDK](https://github.com/Microsoft/vscode-languageserver-node)构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code[插件开发](/)的基础之上。
 
-## 示例：一个简单的纯文本语言服务器
----
+### 示例：一个简单的纯文本语言服务器
 
 让我们首先实现一个简单的语言服务器插件吧，这个插件的功能是自动补全、诊断纯文本文件。我们会同时学习客户端/服务端的配置。
 如果你想直接上手代码：
@@ -84,8 +82,7 @@
         └── server.ts // 语言服务器入口
 ```
 
-## 什么是'Language Client'
----
+### 什么是'Language Client'
 
 我们先看看`/package.json`，这个文件描述了语言客户端的能力。里面有3个有趣的部分：
 
@@ -196,10 +193,10 @@ export function deactivate(): Thenable<void> {
 
 ```
 
-## 什么是'Language Server'
----
-
-?> **小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+### 什么是'Language Server'
+::: info
+**小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个`server.ts`或者修改克隆的代码。
+:::
 
 在这个例子中，服务器是Typescript实现的，由Node.js运行。因为VS Code自带Node.js运行时，所以你无需安装其他依赖，除非你对运行时有特别要求。
 
@@ -444,8 +441,7 @@ connection.listen();
 
 ```
 
-## 添加一个简单的语法校验器
----
+### 添加一个简单的语法校验器
 
 为了给服务器添加文本校验，我们给text document manager添加一个listener然后在文本变动时调用，接下来就交给服务器去判断调用校验器的最佳时机了。在我们的示例中，服务器的功能是校验纯文本然后给所有大写单词进行标记。对应的代码片段：
 
@@ -500,8 +496,7 @@ documents.onDidChangeContent(async change => {
 });
 ```
 
-## 诊断提示和小技巧
----
+### 诊断提示和小技巧
 
 - 如果出错的开始点和结束点在同一个位置，VS Code会在那个单词的位置上打上波浪线
 - 如果你想要把波浪线加到行未为止，就把`end position`设置为`Number.MAX_VALUE`
@@ -522,8 +517,7 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 ![validation](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validation.png)
 
-## 调试客户端和服务端
----
+### 调试客户端和服务端
 
 调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后按<kbd>F5</kbd>启动插件调试。
 
@@ -533,8 +527,7 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 ![debugging-server](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/debugging-server.png)
 
-## 为语言服务器加上日志
----
+### 为语言服务器加上日志
 
 如果你是用`vscode-languageclient`实现的客户端，你可以配置`[langId].trace.server`指示客户端在`output(输出)`面板中显示通信日志。
 
@@ -546,8 +539,7 @@ ANY browser. ANY host. ANY OS. Open Source.
 
 ![lsp-inspector](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-inspector.png)
 
-## 在服务器中设置Configuration
----
+### 在服务器中设置Configuration
 
 当我们写插件的客户端部分的时候，我们已经定义了一个控制最大问题报告数的配置。所以我们也可以在服务器中写一段读取客户端配置的代码：
 
@@ -641,8 +633,7 @@ connection.onDidChangeConfiguration(change => {
 
 ![validationOneProblem](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validationOneProblem.png)
 
-## 添加其他语言特性
----
+### 添加其他语言特性
 
 第一个有趣的东西是，语言服务器通常会实现成文档校验器，从这个点来说，即使一个linter也算一个语言服务器，所以VS Code中的linter通常都是作为语言服务器实现的（参照[eslint](https://github.com/Microsoft/vscode-eslint)和[jslint](https://github.com/Microsoft/vscode-jshint)）。但是语言服务器还能做得更多，他们能提供代码不全，查找所有匹配项或者转跳到定义。下面的代码展示了为服务器添加代码补全的功能，它提供了2个建议单词"TypeScript"和"JavaScript"。
 
@@ -705,13 +696,12 @@ connection.onInitialize((params): InitializeResult => {
 
 ![codeComplete](https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/codeComplete.png)
 
-## 测试语言服务器
----
+### 测试语言服务器
 
 为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：
 
 - 单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的[HTML](https://github.com/Microsoft/vscode-html-languageservice)/[CSS](https://github.com/Microsoft/vscode-css-languageservice)/[JSON](https://github.com/Microsoft/vscode-json-languageservice)语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在[这里](https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts)查看更多使用npm协议模块的单元测试。
-- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions.md)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
+- 端到端测试：就像[VS Code 插件测试](/extension-authoring/testing-extensions)一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行[VS Code命令](/references/commands)来测试的，如果你配置了文件、设置和依赖（如`node_modules`）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的[Python](https://github.com/Microsoft/vscode-python)插件就采用了这种测试方式。
 
 你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。
 
@@ -817,11 +807,10 @@ async function sleep(ms: number) {
 - 打开特定的文档，然后显示在文本编辑区
 - 休眠2秒，确保启动了语言服务器
 
-准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands.md)，然后对结果进行断言测试。
+准备好之后，我们可以运行对应语言特性的[VS Code命令](/extensibility-reference/vscode-api-commands)，然后对结果进行断言测试。
 这还有一个关于诊断特性的测试实现，如果你感兴趣，可以查看这个文件`client/src/test/diagnostics.test.ts`
 
 ## 进阶主题
----
 
 到目前为止，本篇教程提供了：
 
@@ -854,8 +843,7 @@ async function sleep(ms: number) {
 - 语言服务器协议
 - 直接使用VS Code的可拓展性API
 
-## 增量文本同步更新
----
+### 增量文本同步更新
 
 在`vscode-languageserver`模块中，我们做了一个简单的`text document manager`同步VS Code和语言服务器。
 

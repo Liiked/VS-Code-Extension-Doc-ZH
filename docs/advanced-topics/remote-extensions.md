@@ -7,21 +7,19 @@
 本节会介绍远程开发相关的知识，[VS Code远程开发 插件架构](#架构和插件类型)，在远程目录[测试插件](#测试和调试插件)，和[远程插件不能正常工作](#常见问题)的一些建议。大部分插件不需要改动就能适应远程开发环境，其他的插件也只要稍微改动一点就能适配远程开发了。
 
 ## 架构和插件类型
----
 
 为了使远程开发尽力透明化，便于理解，我们可以将插件分为两类：
 
 - **UI 插件：** 这些插件可以配置VS Code的用户界面，而且只运行在用户的本地机器上。UI插件不能直接访问工作区的文件，或者在工作区的机器上运行脚本/工具。这类插件如：主题、代码片段、语言语法、快捷键映射。
 - **工作区插件：** 这类插件运行在工作区所在机器上。当运行在本地时，*工作区插件*运行在本地机器上；运行在远程项目或代码空间中时，工作区插件运行在远程机器上。工作区插件可以访问工作区的文件并提供富文本支持和多语言服务器，调试和其他复杂的操作（也包含被脚本/工具调起的文件）。不过工作区插件在自定义UI上稍有限制，你可以配置的UI组件有资源管理器，视图容器等其他UI组件。
 
-当一个用户安装了一个插件，VS Code会基于插件类型自动让插件安装到正确的环境：UI 插件运行在VS Code的[本地插件主机](/advanced-topics/extension-host.md)中，工作区插件则运行在一个非常小的**VS Code 服务器**的**远程插件主机**中。当你打开一个Windows Subsystem for Linux(WSL)、容器、或者远程SSH主机时这个服务会自动安装（更新）。VS Code还会自动管理这个服务的启停，所以用户根本意识不到它的存在。
+当一个用户安装了一个插件，VS Code会基于插件类型自动让插件安装到正确的环境：UI 插件运行在VS Code的[本地插件主机](/advanced-topics/extension-host)中，工作区插件则运行在一个非常小的**VS Code 服务器**的**远程插件主机**中。当你打开一个Windows Subsystem for Linux(WSL)、容器、或者远程SSH主机时这个服务会自动安装（更新）。VS Code还会自动管理这个服务的启停，所以用户根本意识不到它的存在。
 
 ![architecture](https://code.visualstudio.com/assets/api/advanced-topics/remote-extensions/architecture.png)
 
 VS Code API 会自动运行在正确的机器上（不管是本地还是远程）。但是如果你的插件使用的api不是VS Code提供的——比如运行shell脚本的Node API——当运行在远程时可能不会正常工作，因此我们建议你在所有的环境中测试一下你的插件。
 
 ## 调试插件
----
 
 这个部分将说明如何在远程目录下测试和调试插件。在这之前，我们先看一下怎么使用本地[开发容器](https://code.visualstudio.com/docs/remote/containers)测试一个插件。本地测试容器是跨平台的，很容易部署，但是限制了访问文件系统的端口。由于只占用了非常小的OS空间，开发容器可以提供最为接近插件的真实运行环境。WSL，换句话说，就是一个典型的最小自治SSH主机。大部分场景下，你只要做小小的调整就可以解决问题了，相关主题查看[常见问题](#常见问题)。
 
@@ -40,8 +38,9 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 4. 连接好之后，你可以用 **文件 > 打开.../ 打开文件夹...** 选择你插件所在的代码空间，或者使用命令面板的 **Git: Clone** 将代码复制下来，然后打开它。
 5. GitHub 代码空间基于云端环境，所以应该包含了大部分插件所需的预备依赖，你可以在 VS Code 终端窗口中安装任何所需依赖（比如使用 `yarn install` 或者 `apt-get`）
 6. 最后，按 `F5` 或者使用 **运行视图** ，在代码空间中加载插件
-
-!> 注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+::: warning
+注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+:::
 
 插件开发主机窗口启动后，会将插件运行在 代码空间 中，现在也同时可以使用调试了。
 
@@ -58,8 +57,9 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 4. 运行 **Remote-Containers: Reopen Folder in Container**，此时 VS Code 会初始化容器然后连接。现在你可以在容器中像在本地环境操作那样部署你的源代码了。
 5. 在 VS Code 终端窗口(**⌃⇧`**)中运行 `yarn install` 或者 `npm install`，配置好 Linux 中的开发环境。你也可以安装其他 OS 或者运行时依赖，但是你也需要把这些东西添加到 `.devcontainer/Dockerfile` 中去，这样你在重启容器的时候，配置就不会丢失了。
 6. 最后，按下 `F5` 或者使用 **运行窗口** 在容器中启动插件和调试。
-
-!> 注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+::: warning
+注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+:::
 
 ### 在 SSH 中调试
 
@@ -69,24 +69,26 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 2. 连接好之后，**文件 > 打开... / 打开文件夹...** 打开你插件源代码所在的远程目录。或者使用命令面板的 **Git: Clone** 将代码复制下来，然后打开它。
 3. 你可以在 VS Code 终端窗口中安装所需依赖（比如使用 `yarn install` 或者 `apt-get`）
 4. 最后，按下 `F5` 或者使用 **运行窗口** 在容器中启动插件和调试。
-
-!> 注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+::: warning
+注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+:::
 ### 在 WSL 中调试
 
 遵循以下步骤：
 
 1. 请先 [安装和配置 Remote-WSL 插件](https://code.visualstudio.com/docs/remote/ssh#_getting-started)，然后执行命令面板中的 **Remote-WSL: New Window**。
 2. 在新出现的窗口中，**文件 > 打开... / 打开文件夹...** 打开你插件源代码所在的远程目录。或者使用命令面板的 **Git: Clone** 将代码复制下来，然后打开它。
-
-?> 提示：如果你使用的是 Windows 系统，你可以在 `/mnt/c` 中克隆代码
+::: info
+提示：如果你使用的是 Windows 系统，你可以在 `/mnt/c` 中克隆代码
+:::
 
 3. 你可以在 VS Code 终端窗口中安装所需依赖（比如使用 `yarn install` 或者 `apt-get`），并确保 Linux 环境已经准备好了 Node 相关的依赖。
 4. 最后，按下 `F5` 或者使用 **运行窗口** 在容器中启动插件和调试。
-
-!> 注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+::: warning
+注意：你无法像窗口展示的那样，打开展示出来的插件源代码目录，但是你可以在代码空间中打开子目录或其他位置的目录。
+:::
 
 ## 安装开发版插件
----
 
 目前，VS Code自动在SSH主机、容器、WSL安装插件时会使用插件市场的版本(而不是你本机上当前安装的版本)。大部分时候这么做事合理的，但是我们现在可能需要一个未发布的版本来测试，所以你可以将插件打包成`VSIX`格式，然后打开已经连接到远程VS Code窗口中手动安装这个插件。
 
@@ -97,11 +99,11 @@ VS Code API 会自动运行在正确的机器上（不管是本地还是远程�
 3. 连接到 [代码空间](https://docs.github.com/github/developing-online-with-codespaces)、[开发容器](https://code.visualstudio.com/docs/remote/containers)、[SSH主机](https://code.visualstudio.com/docs/remote/ssh)或[WSL环境](https://code.visualstudio.com/docs/remote/wsl)
 4. 在你已经连接远程目录的项目中，使用命令 **Install from VSIX...**安装你打包好的插件
 5. 完成后重启
-
-?> **小提示：**安装完毕后，你可以使用 **Developer: Show Running Extensions**命令查看VS Code在本地运行插件还是在远程运行插件的。
+::: info
+**小提示：**安装完毕后，你可以使用 **Developer: Show Running Extensions**命令查看VS Code在本地运行插件还是在远程运行插件的。
+:::
 
 ## 常见问题
----
 
 VS Code API 会根据项目自动运行在正确的环境上。记住这点，然后我们来看看几个API，它会帮助你避免一些意外问题。
 
@@ -248,8 +250,9 @@ export function activate(context: vscode.ExtensionContext) {
 在本地的场景下，通过使用子进程或者`opn`包启动浏览器或者其他应用是完全可行的，但是一旦插件运行到了远程上，这就会导致应用加载错误。VS Code远程开发**部分**兼容了`opn`包使得现有插件可以正常运行。你可以使用URI调用这个包，VS Code会带上这个URL在客户端唤起默认应用。由于不是完整实现，有些配置是不支持的，也不会返回`child_process`对象。
 
 除了依赖第三方包，我们建议你使用`vscode.env.openExternal`方法在本地操作系统上启动默认应用打开对应的URI。而且`vscode.env.openExternal`**还支持自动端口转发**！你可以指向到远程的web server上，即使那个端口外部不可访问。
-
-!> 注意：当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+::: warning
+注意：当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+:::
 
 如何使用`vscode.env.openExternal`API：
 
@@ -275,8 +278,9 @@ export async function activate(context: vscode.ExtensionContext) {
 #### 转发 localhost
 
 [`vscode.env.openExternal` 中的 localhost 转发机制非常的有用](#在本地浏览器或者其他应用中打开些什么)，但是你也会有想要转发一些东西，但是又不想新开一个浏览器窗口或者应用的时候。现在就是`vscode.env.asExternalUri` 登场的时候了。
-
-!> 注意：当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+::: warning
+注意：当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+:::
 
 使用 `vscode.env.asExternalUri` API：
 
@@ -399,12 +403,11 @@ export async function activate(context: vscode.ExtensionContext) {
 }
 ```
 
-使用命令的更多细节，请参考[命令API指南](/extension-guides/command.md)
+使用命令的更多细节，请参考[命令API指南](/extension-guides/command)
 
 ## 使用Webview API
----
 
-就像剪贴板API，[Webview API](/extension-guides/webview.md)也总是运行在本地环境，即使是 *工作区插件* 调用的。也就是说大部分基于webview的插件都可以正常工作，但是还有些注意事项需要交代一下。
+就像剪贴板API，[Webview API](/extension-guides/webview)也总是运行在本地环境，即使是 *工作区插件* 调用的。也就是说大部分基于webview的插件都可以正常工作，但是还有些注意事项需要交代一下。
 
 #### 请使用 asWebviewUri
 
@@ -434,7 +437,7 @@ panel.webview.html = `<!DOCTYPE html>
 
 #### 为动态的 webview 内容使用消息传递
 
-VS Code 中，webview包含一个 [message passing](/extension-guides/webview?id=脚本和信息传递)API，你无需使用本地的 web 服务器，它就能帮你动态更新webview 的内容。通过这个 API，你可以直接在插件中操作，而不是直接操作 HTML。
+VS Code 中，webview包含一个 [message passing](/extension-guides/webview#脚本和信息传递)API，你无需使用本地的 web 服务器，它就能帮你动态更新webview 的内容。通过这个 API，你可以直接在插件中操作，而不是直接操作 HTML。
 
 这对于远程开发和云环境来说是个非常重要的安全模式。
 
@@ -446,11 +449,11 @@ VS Code 中，webview包含一个 [message passing](/extension-guides/webview?id
 
 ![webview to remote](https://code.visualstudio.com/assets/api/advanced-topics/remote-extensions/webview-problem.png)
 
-即使看起来能走的通，你也应该尽量不要做这种事，因为你的插件会变得更复杂。[消息传递](/extension-guides/webview?id=脚本和信息传递)可以做到同样的用户体验，而且不会有这些头疼的问题。
+即使看起来能走的通，你也应该尽量不要做这种事，因为你的插件会变得更复杂。[消息传递](/extension-guides/webview#脚本和信息传递)可以做到同样的用户体验，而且不会有这些头疼的问题。
 
 #### 从 webview 访问localhost
 
-如果你不用 使用 webview的[message passing](/extension-guides/webview?id=脚本和信息传递)，那么还有 2 种方法帮你解决远程开发和代码空间插件的问题。但因为 [MicrosoftDocs/vscodespaces#11](https://github.com/MicrosoftDocs/vscodespaces/issues/11)，这两种方法目前都无法支持云编辑器。
+如果你不用 使用 webview的[message passing](/extension-guides/webview#脚本和信息传递)，那么还有 2 种方法帮你解决远程开发和代码空间插件的问题。但因为 [MicrosoftDocs/vscodespaces#11](https://github.com/MicrosoftDocs/vscodespaces/issues/11)，这两种方法目前都无法支持云编辑器。
 
 这两种方式都允许 webview 内容通过特定信道路由到 VS Code 服务器上。比如，如果我们更新一下上面的图，我们就会得到：
 
@@ -459,8 +462,9 @@ VS Code 中，webview包含一个 [message passing](/extension-guides/webview?id
 **方法 1 - 使用 asExternalUri**
 
 VS Code 1.40 引入了 `vscode.env.asExternalUri`，插件可以通过程序式的方法将本地的 http 和 https 请求转发到远程。所以你也可以用这个API 把 webview 的请求转发到本地 web 服务器上。未来，如果你只需要在 iframe 中使用远程服务，你可以通过这个功能支持代码空间中的云编辑器，只是该功能当前因为 [MicrosoftDocs/vscodespaces#11](https://github.com/MicrosoftDocs/vscodespaces/issues/11)被屏蔽了。
-
-!> 注意: 除了上面的这些问题，当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+::: warning
+注意: 除了上面的这些问题，当前代码空间（云编辑器环境）中的转发机制仅支持 **http 和 https**。从转发页面或 JavaScript 代码发送的 Websocket 是无法工作的。不过远程开发和代码空间插件不受此影响，查看 [MicrosoftDocs/vscodespaces#19](https://github.com/MicrosoftDocs/vscodespaces/issues/19) 了解更多。
+:::
 
 使用 API 获取 iframe 完整的 URI，你还需要在 webview 中为这个功能启用 CSP。
 
@@ -535,7 +539,6 @@ panel.webview.html = `<!DOCTYPE html>
 现在不管是远程还是本地的请求，webview前往`localhost:3000`的流量都会走到Express.js web 服务器上了。
 
 ## 使用原生Node.js模块
----
 
 和插件打包（或动态引入的包）的原生node包会被[Electorn的`electron-rebuild`](https://electronjs.org/docs/tutorial/using-native-node-modules)重新编译。但是VS Code Server运行在一个标准的（非Electron）的Node.js中，因此可能造成远程二进制库失效问题。
 
@@ -548,7 +551,6 @@ panel.webview.html = `<!DOCTYPE html>
 使用VS Code的 **Help > Developer Tools**然后在控制台（console）中打印`process.versions.modules`可以找到VS Code使用的模块（modules）类型。如果你想要确保原生模块在各个Node.js环境中都能无缝运行，你可能把所有可能支持的平台（Electron Node.js, 官方Node.js Windows/Darwin/Linux的全部版本）相关的包全部引入。[node-tree-sitter](https://github.com/tree-sitter/node-tree-sitter/releases/tag/v0.14.0)包在这方面是个非常好的例子。
 
 ## 为非x86_64主机或Apline Linux容器提供支持
----
 
 如果你的插件只是用JavasSript/TypeScript写的，你的插件可能什么都不用做就能支持其他进程架构或基于`musl`的Apline Linux。
 
@@ -565,7 +567,6 @@ panel.webview.html = `<!DOCTYPE html>
 你要非常注意一些第三方包可能依赖了导致这个问题的源码包。所以有时候你需要联系npm包作者提供额外的编译版本。
 
 ## 避免使用Electron模块
----
 
 虽然依赖未暴露的内置Electron或者VS Code模块非常方便，但是你必须知道VS Code Server运作在标准的（非Electron）Node.js环境中，当插件运行在远程时就会丢失这些包。除了少数个例，比如[keytar](#保留密钥)，用了特殊的实现所以在所有环境中都能正常工作。
 
@@ -587,12 +588,14 @@ const fs = requireWithFallback('original-fs', 'fs');
 但是不论何时，你都应该避免这些问题。
 
 ## 已知问题
----
 
-目前我们还有些影响 工作区插件 功能的问题亟待解决。见[原文档 - 已知问题](https://code.visualstudio.com/api/advanced-topics/remote-extensions#known-issues)
+目前我们还有些影响 工作区插件 功能的问题亟待解决。下面是一些正在处理的问题：
+
+| 问题                           | 描述                                                                                                                                                                                                                                                                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 无法从工作区插件访问连接的设备 | 当插件在远程运行时，访问本地连接设备的插件将无法连接到这些设备。一种解决方法是创建一个配套的 UI 插件，其职责是访问所连接的设备，并提供远程插件也可以调用的命令。另一种方法是反向隧道（reverse tunneling），相关进展正在跟踪中，参见 [VS Code issue 仓库](https://github.com/microsoft/vscode/issues/100222)。 |
 
 ## FAQ
----
 
 - 查看[提示和解决方法](https://code.visualstudio.com/docs/remote/troubleshooting)或者[FAQ](https://code.visualstudio.com/docs/remote/faq)
 - 在 [Stack Overflow](https://stackoverflow.com/questions/tagged/vscode-remote)上查找答案

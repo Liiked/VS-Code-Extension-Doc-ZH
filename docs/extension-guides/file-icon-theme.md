@@ -3,7 +3,6 @@
 VS Code的UI在文件名称左边显示图标，插件配置的图标系列可以让用户自由选择他们喜爱的图标。
 
 ## 添加新的图标主题
----
 
 你能使用图标文件（最好是SVG）和字体图标创建自己的图标主题。作为示例，你可以参考一下2个内置主题：[Minimal](https://github.com/Microsoft/vscode/tree/master/extensions/theme-defaults)，[Seti](https://github.com/Microsoft/vscode/tree/master/extensions/theme-seti)
 
@@ -59,30 +58,31 @@ VS Code的UI在文件名称左边显示图标，插件配置的图标系列可�
 每个文件关联指向一个**图标定义**
 
 ```json
-"file": "_file_dark",
-"folder": "_folder_dark",
-"folderExpanded": "_folder_open_dark",
-"folderNames": {
-    ".vscode": "_vscode_folder",
-},
-"fileExtensions": {
-    "ini": "_ini_file",
-},
-"fileNames": {
-    "win.ini": "_win_ini_file",
-},
-"languageIds": {
+{
+  "file": "_file_dark",
+  "folder": "_folder_dark",
+  "folderExpanded": "_folder_open_dark",
+  "folderNames": {
+    ".vscode": "_vscode_folder"
+  },
+  "fileExtensions": {
     "ini": "_ini_file"
-},
-"light": {
+  },
+  "fileNames": {
+    "win.ini": "_win_ini_file"
+  },
+  "languageIds": {
+    "ini": "_ini_file"
+  },
+  "light": {
     "folderExpanded": "_folder_open_light",
     "folder": "_folder_light",
     "file": "_file_light",
     "fileExtensions": {
-        "ini": "_ini_file_light",
+      "ini": "_ini_file_light"
     }
-},
-"highContrast": {
+  },
+  "highContrast": {}
 }
 ```
 
@@ -97,7 +97,27 @@ VS Code的UI在文件名称左边显示图标，插件配置的图标系列可�
 - `fileExtensions`文件插件图标。根据文件插件的名称匹配。插件名称是文件名点号后面（不包含点号）。拥有多重点号的文件名称，如`lib.d.ts`会匹配多个模式——`d.ts`和`ts`。大小写敏感。
 - `fileNames`文件图标。这个键需要文件的全称进行匹配，不支持包含路径的名称，不支持模式和通配符。大小写敏感。`fileNames`是最高优先匹配。
 
-匹配优先级：`fileNames` > `fileExtensions` > `languageIds`
+(*) 部分属性键（`folderNames`、`folderNamesExpanded`、`fileExtensions`、`fileNames`）可以使用单个父路径片段作为前缀。只有当资源的直接父文件夹与父路径片段匹配时，才会使用该图标。这可以让特定文件夹（例如 `system`）中的资源呈现不同的外观：
+
+```json
+  "fileNames": {
+    "system/win.ini": "_win_ini_file"
+  },
+```
+
+`system/win.ini` 表示该关联匹配 `system` 文件夹中直接名为 `win.ini` 的文件。
+
+```json
+  "fileExtensions": {
+    "system/ini": "_ini_file"
+  },
+```
+
+`system/ini` 表示该关联匹配 `system` 文件夹中直接名为 `*.ini` 的文件。
+
+文件扩展名匹配优先于语言匹配，但弱于文件名匹配。带有父路径片段的匹配优于同类型中不带该片段的匹配。
+
+匹配优先级：`父级文件名匹配 > 文件名匹配 > 父级文件后缀匹配 > 文件后缀匹配 > 语言匹配...`
 
 `light`和`highContrast`部分的属性表和上面相同，只是会在对应的主题下覆盖原有图标配置。
 
@@ -139,3 +159,34 @@ VS Code的UI在文件名称左边显示图标，插件配置的图标系列可�
 ### 图标主题中的文件夹图标
 
 文件图标主题会告诉文件浏览器不要显示默认文件夹图标（倒三角或者横杠），这个模式可在配置中加入`"hidesExplorerArrows":true`覆盖默认VS Code的设置。
+
+### 语言的默认图标
+
+语言贡献者可以为语言定义一个图标。
+
+```jsonc
+{
+  "contributes": {
+    "languages": [
+      {
+        "id": "latex",
+        // ...
+        "icon": {
+          "light": "./icons/latex-light.png",
+          "dark": "./icons/latex-dark.png"
+        }
+      }
+    ]
+  }
+}
+```
+
+当文件图标主题仅为语言提供通用文件图标时，就会使用该图标。
+
+语言的默认图标仅在以下情况下显示：
+- 文件图标主题具有特定的文件图标。例如 `Minimal` 没有特定的文件图标，因此不会使用语言的默认图标。
+- 文件图标主题没有为给定语言、文件扩展名或文件名提供图标。
+- 文件图标主题没有定义 `"showLanguageModeIcons":false`。
+
+语言的默认图标在以下情况下总是显示：
+- 文件图标主题定义了 `"showLanguageModeIcons":true`。

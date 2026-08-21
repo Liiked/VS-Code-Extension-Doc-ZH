@@ -22,8 +22,9 @@
 ```
 
 本篇的源代码在[https://github.com/Microsoft/vscode-extension-samples/tree/master/snippet-sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/snippet-sample)
-
-?> 提示：在`package.json`中添加如下分类，用户才能轻松找到你的插件。
+::: info
+提示：在`package.json`中添加如下分类，用户才能轻松找到你的插件。
+:::
 
 ```json
 {
@@ -32,7 +33,6 @@
 ```
 
 ## 使用TextMate代码片段
----
 
 你也可以用[yo code](/get-started/your-first-extension)将TextMate代码片段（.tmSnippets）直接添加到插件里去。生成器中的可选项`New Code Snippets`会帮你指向.tmSnippets的目录，它们最后都会一起打包到VS Code 插件里。生成器甚至还支持Sublime代码片段（.sublime-snippets）。
 

@@ -3,7 +3,6 @@
 命令会触发VS Code中注册的行为，如果你[配置过键位](https://code.visualstudio.com/docs/getstarted/keybindings)，那么你就处理过了命令。命令也是插件将功能暴露给用户的地方，它绑定了VS Code UI中的行为，并在内部处理了相关逻辑。
 
 ## 使用命令
----
 
 VS Code内部含有大量和编辑器交互、控制UI、后台操作的[内置命令](/references/commands)。许多插件将它们的核心功能暴露为*命令*的形式供用户或者其他插件使用。
 
@@ -108,7 +107,6 @@ export function activate(context: vscode.ExtensionContext) {
 ```
 
 ## 新建命令
----
 
 ### 注册一个命令
 
@@ -146,15 +144,19 @@ export function activate(context: vscode.ExtensionContext) {
 
 `commands`配置告诉VS Code你的插件提供了一个命令，而且允许你控制命令在UI中的显示。现在，我们的命令终于出现在*命令面板*中了：
 
-![命令面板](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/commands/palette.png)
+![命令面板](https://code.visualstudio.com/assets/api/extension-guides/commands/palette.png)
 
 我们依旧需要使用`registerCommand`将真实的命令id绑定到函数上。也就是说，如果我们的插件没有激活，那么用户从*命令面板*中选择`myExtension.sayHello`也不会有任何效果。为了避免这种事，插件必须注册一个面向全部用户场景的命令`onCommand` `activiationEvent`：
+
+:::info
+VS Code 1.74.0 以上版本必须显式注册一个所有用户都可见的 `onCommand` `activationEvent`，这样插件才会激活，`registerCommand` 才会执行
+:::
+
 ```json
 {
 	"activationEvents": ["onCommand:myExtension.sayHello"]
 }
 ```
-现在当用户第一次调用`myExtension.sayHello`时，插件就会自动激活，`registerCommand`会将`myExtension.sayHello`绑定到正确的处理函数上。
 
 对于内部命令你不需要使用`onCommand`，但是下面的场景中你必须定义好激活事件：
 - 需要使用*命令面板*调用
@@ -166,7 +168,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 默认情况下，所有*命令面板*中出现的命令都可以在`package.json`的`commands`部分中配置。不过，有些命令是场景相关的，比如在特定的语言的编辑器中，或者只有用户设置了某些选项时才展示。
 
-[`menus.commandPalette`](/references/contribution-points#contributesmenus)发布内容配置运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
+[`menus.commandPalette`](/references/contribution-points#contributesmenus)配置点运行你限制命令出现在*命令面板*的时机。你需要配置命令ID和一条[when语句](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)：
 ```json
 {
 	"contributes": {
@@ -183,3 +185,35 @@ export function activate(context: vscode.ExtensionContext) {
 ```
 
 现在`myExtension.sayHello`命令只会出现在用户的Markdown文件中了。
+
+### 命令的启用
+
+命令通过 `enablement` 属性支持启用控制，其值是一个 [when 子句](/references/when-clause-contexts)。启用状态适用于所有菜单和已注册的键位绑定。
+
+:::info
+**注意**：`enablement` 与菜单项的 `when` 条件在语义上存在重叠。后者用于避免菜单全是禁用项。例如，用于分析 JavaScript 正则表达式的命令，应该**仅仅在**文件是 JavaScript 时显示，并且**仅当**光标位于正则表达式上时**启用**。`when` 子句通过控制该命令不在其他语言文件中显示来避免菜单杂乱。我们强烈建议菜单保持整洁，避免杂乱。
+:::
+
+最后，根据显示命令的菜单（如命令面板或上下文菜单）对启用状态的不同处理方式，以及命令面板的过滤，编辑器和资源管理器的上下文菜单会呈现启用/禁用项，。
+
+### 使用自定义 when 子句上下文
+
+如果你在编写自己的 VS Code 插件，需要使用 `when` 子句上下文来启用/禁用命令、菜单或视图，但现有 `when` 条件都无法满足需求，那么你可以添加自己的上下文。
+
+下面的第一个示例将键 `myExtension.showMyCommand` 设置为 true，你可以将其用于命令的启用控制或与 `when` 属性配合使用。第二个示例存储一个值，你可以配合 `when` 子句检查当前打开的有趣事物的数量是否大于 2。
+
+```js
+vscode.commands.executeCommand('setContext', 'myExtension.showMyCommand', true);
+
+vscode.commands.executeCommand('setContext', 'myExtension.numberOfCoolOpenThings', 2);
+```
+
+## 命名约定
+
+创建命令时，你应该遵循以下命名约定：
+
+- 命令标题
+  - 使用PascalCase，如(`HttpResponseMessage`)。除非介词是第一个或最后一个单词，否则不要将四个或更少字母的介词（如 on、to、in、of、with 和 for）大写。
+  - 以动词开头，描述将要执行的操作。
+  - 使用名词描述操作的目标。
+  - 避免在标题中使用 “command” 一词。

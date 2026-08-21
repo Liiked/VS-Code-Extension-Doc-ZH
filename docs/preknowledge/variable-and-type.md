@@ -1,11 +1,11 @@
 # 认识TypeScript-变量和类型
 
 本节将介绍基础的TypeScript变量以及它的类型系统，它本质上和JavaScript是一样的，不过东西会更多一点，对于非js开发者来说，你可能会遇到熟悉的“枚举”、“元组”类型，了解了这点，或许能让你安心并更快地掌握TS，但是这并不意味着你就可以高枕无忧了，虽然TS扩展了JS的类型能力，但它本质上依旧是一门弱类型语言，请在书写代码时遵循社区的最佳实践并保持谨慎。
-
-?> 本文参考社区翻译文档，详见[https://www.tslang.cn/docs/handbook/basic-types.html](https://www.tslang.cn/docs/handbook/basic-types.html)
+::: info
+本文参考社区翻译文档，详见[https://www.tslang.cn/docs/handbook/basic-types.html](https://www.tslang.cn/docs/handbook/basic-types.html)
+:::
 
 ## 类型
----
 
 变量声明的基础规则请自行参考JavaScript，JavaScript支持加分号和不加分号两种风格，方便起见，本章的所有示例代码都不会刻意添加分号，有关分号风格，请参阅[MDN](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/JavaScript_basics#变量（variable）)。
 
@@ -179,7 +179,6 @@ create(undefined); // Error
 ```
 
 ## TypeScript类型表
----
 
 | 类型                     | 例子                                                      |
 | ------------------------ | --------------------------------------------------------- |
@@ -201,7 +200,6 @@ create(undefined); // Error
 | tuple                    | `x: [string, number] = ['name', 12]`                      |
 
 ## 类型断言
----
 
 有时候你会遇到这样的情况，你比TypeScript更了解某个值的具体信息。
 
@@ -221,11 +219,11 @@ let someValue: any = "this is a string";
 
 let strLength: number = (someValue as string).length;
 ```
-
-!> 注意：本章全部采用了let，const关键字，以及你接下来可以见到的所有例子中，都不再使用var声明变量，为了避免var带来的副作用和影响，我们更提倡使用新的关键字。
+::: warning
+注意：本章全部采用了let，const关键字，以及你接下来可以见到的所有例子中，都不再使用var声明变量，为了避免var带来的副作用和影响，我们更提倡使用新的关键字。
+:::
 
 ## 变量声明
----
 
 ### let声明
 
@@ -351,7 +349,6 @@ kitty.numLives--;
 除非你使用特殊的方法去避免，实际上const变量的内部状态是可修改的。
 
 ## 访问/设置对象的属性和方法
----
 
 我们在前面已经看过很多对象的例子了，而且JavaScript的各种衍生类型都是基于Object构造出来的，所以本小节介绍的内容也同时适用数组、元组等数据类型。
 
@@ -424,7 +421,6 @@ person.farewell()
 ```
 
 ## 变量解构
----
 
 ES2015的变量解构参照了名为[模式匹配](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)的设计模式，本质来说是一种便利的语法糖
 
@@ -579,5 +575,5 @@ let search = { food: "rich", ...defaults };
 
 ## 下一步
 
-- [类](/preknowledge/class.md) - 进一步了解TypeScript所规定的类
-- [泛型和命名空间](/preknowledge/generics-and-modules.md) - 进一步了解TypeScript所规定的语法
+- [类](/preknowledge/class) - 进一步了解TypeScript所规定的类
+- [泛型和命名空间](/preknowledge/generics) - 进一步了解TypeScript所规定的语法

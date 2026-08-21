@@ -3,7 +3,6 @@
 通过VS Code的文本内容供应器API(text document content provider API)，你可以为任意来源的文件创建只读文档。本示例源码请查看[https://github.com/Microsoft/vscode-extension-samples/blob/master/virtual-document-sample/README.md](https://github.com/Microsoft/vscode-extension-samples/blob/master/virtual-document-sample/README.md)
 
 ## TextDocumentContentProvider
----
 
 这个API工作于uri协议之上，你需要声明一个*供应器函数(provider)*，然后这个函数还需要返回文本内容。供应器函数必须提供*协议(scheme)*，而且函数注册之后不可改变这个协议。一个供应器函数可以对应多个协议，而多个供应器函数也可以只注册一个协议。
 
@@ -21,8 +20,9 @@ const myProvider = class implements vscode.TextDocumentContentProvider {
 	}
 };
 ```
-
-!> **注意**：我们的供应器函数不为虚拟文档创建uri——他的角色仅仅只是**根据uri返回对应的文本内容**。
+::: warning
+**注意**：我们的供应器函数不为虚拟文档创建uri——他的角色仅仅只是**根据uri返回对应的文本内容**。
+:::
 
 下面我们简单使用一个'cowsay'命令创建一个uri，然后编辑器就能显示了：
 
@@ -103,7 +103,7 @@ subscriptions.push(
 ```
 `contributes/commands`中的`cowsay.backwards`命令告诉编辑器*操作*出现在编辑器的标题菜单中（工具栏右上角），但如果只是这样简单的配置，每个编辑器就都会显示这个命令。然后我们的`when`语句就出场了，它描述了何时才显示这个操作。在这个例子中，文档的资源协议必须是`cowsay`，我们的命令才会生效。这个配置对默认显示全部命令的`commandPalette`菜单同样生效。
 
-![cowsay-bwd](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/virtual-documents/cowsay-bwd.png)
+![cowsay-bwd](https://code.visualstudio.com/assets/api/extension-guides/virtual-documents/cowsay-bwd.png)
 
 ### 事件的可见性
 

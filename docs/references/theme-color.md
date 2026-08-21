@@ -9,11 +9,11 @@
   }
 }
 ```
-
-!> **注意**: 如果你想用现成的颜色主题的话，通过**首选项: 颜色主题**的下拉菜单选取即可(<kbd>Ctrl+K Ctrl+T</kbd>)，参阅[色彩主题](https://code.visualstudio.com/docs/getstarted/themes)。
+::: warning
+**注意**: 如果你想用现成的颜色主题的话，通过**首选项: 颜色主题**的下拉菜单选取即可(<kbd>Ctrl+K Ctrl+T</kbd>)，参阅[色彩主题](https://code.visualstudio.com/docs/getstarted/themes)。
+:::
 
 ## 颜色格式
----
 
 可以使用RGBA来定义色值。同样，也支持十六进制表示法: `#RGB`，`#RGBA`，`#RRGGBB`，`#RRGGBBAA`。R(红)，G(绿)，B(蓝)，A(阿尔法)是一个十六进制字符(0-9，a-f，A-F)。`#RRGGBB`和`#RRGGBBAA`分别可以简写为`#RGB`和`#RGBA`。比如，`#ee3355ff`和`#e35f`是一样的效果。
 
@@ -22,7 +22,6 @@
 一些颜色应该设置成透明的，以免遮挡其他注释的视线。查看颜色描述来了解哪些颜色应该使用这个规则。
 
 ## 对比色
----
 
 一般用于高对比度的主题。通过给UI项添加额外的边框来增强对比度。
 
@@ -30,7 +29,6 @@
 - `contrastBorder`: 在元素周围额外的一层边框，用来提高对比度从而区别其他元素
 
 ## 基色
----
 
 - `focusBorder`: 焦点元素的整体边框颜色。此颜色仅在不被其他组件覆盖时适用
 - `foreground`: 整体前景色。此颜色仅在不被组件覆盖时适用
@@ -40,7 +38,6 @@
 - `errorForeground`: 错误信息的全局前景色。此颜色仅在不被组件覆盖时适用
 
 ## 文本颜色
----
 
 文本文档中的颜色，比如欢迎页
 
@@ -53,7 +50,6 @@
 - `textSeparator.foreground`: 文字分隔符的颜色
 
 ## 按钮控件
----
 
 按钮小组件的颜色，例如新窗口的资源管理器中的**打开文件夹**按钮。
 
@@ -64,11 +60,11 @@
 - `button.hoverBackground`: 鼠标悬停时按钮的背景颜色
 
 ## 下拉列表控件
----
 
 下拉列表小部件颜色，例如集成终端和输出面板。
-
-!> **注意**: macOS目前还不能用该控件
+::: warning
+**注意**: macOS目前还不能用该控件
+:::
 
 ![下拉列表控件](https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/theme-color/dropdown.png)
 
@@ -78,7 +74,6 @@
 - `dropdown.foreground`: 下拉列表前景色
 
 ## 输入框控件
----
 
 输入框控件颜色，例如搜索视图、搜索/替换对话框。
 
@@ -100,7 +95,6 @@
 - `inputValidation.warningBorder`: 严重性为警告时输入验证的边框颜色
 
 ## 滚动条控件
----
 
 - `scrollbar.shadow`: 视图滚动后，滚动条的阴影
 - `scrollbarSlider.activeBackground`: 点击滚动条滑块后的背景色
@@ -108,7 +102,6 @@
 - `scrollbarSlider.hoverBackground`: 鼠标悬停滚动条滑块时的背景色
 
 ## 徽章
----
 
 Badge 是小型的信息标签，如表示搜索结果数量的标签
 
@@ -116,12 +109,10 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `badge.background`: Badge背景色
 
 ## 进度条
----
 
 - `progressBar.background`: 表示长时间操作的进度条的背景色
 
 ## 列表和树
----
 
 列表和树的色彩，例如资源管理器。激活的列表/树具有键盘焦点，反之则没有。
 
@@ -144,7 +135,6 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `listFilterWidget.noMatchesOutline`: 当没有匹配项时，列表和树中类型筛选器小组件的轮廓颜色
 
 ## 活动栏
----
 
 活动栏可显示在最左侧或最右侧，供用户快速切换侧边栏视图
 
@@ -157,7 +147,6 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `activityBarBadge.foreground`: 活动通知徽章前景色
 
 ## 侧边栏
----
 
 侧边栏是资源管理器和搜索等视图的容器。
 
@@ -171,7 +160,6 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `sideBarSectionHeader.border`: 侧边栏节标题的边框颜色
 
 ## 编辑器组 & 选项卡
----
 
 编辑器组是多个编辑器的容器，一个编辑器组可以包含多个编辑器。一个选项卡是一个编辑器的容器。可以在一个编辑器组里面打开多个选项卡。
 
@@ -219,7 +207,6 @@ Badge 是小型的信息标签，如表示搜索结果数量的标签
 - `editorPane.background`: 居中编辑器布局中左侧与右侧编辑器窗格的背景色
 
 ## 编辑器色彩
----
 
 编辑器里面最重要的字符符号颜色主要是语法高亮。可以在色彩主题中或者使用`editor.tokenColorCustomizations`配置。参阅[定制色彩主题](https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme)以了解更新色彩主题和可用的标记类型
 
@@ -356,7 +343,6 @@ CodeLens:
 - `editorGutter.deletedBackground`: 编辑器导航线中被删除行的背景颜色
 
 ## 差异编辑器色彩
----
 
 已插入或者移除的文字的颜色，使用背景色或者边框色(两者选其一)
 
@@ -367,7 +353,6 @@ CodeLens:
 - `diffEditor.border`: 两个文本编辑器之间的边框颜色
 
 ## 编辑器小部件色彩
----
 
 编辑器组件在其内容的前面。例如(查找/替换)对话框、建议组件、编辑器悬浮提示框
 
@@ -395,7 +380,6 @@ CodeLens:
 - `editorMarkerNavigationInfo.background`: 编辑器标记导航小组件信息颜色
 
 ## 速览窗口色彩
----
 
 速览窗口在编辑器内部，将引用和声明显示为视图
 
@@ -417,7 +401,6 @@ CodeLens:
 - `peekViewTitleLabel.foreground`: 速览视图标题颜色
 
 ## 合并冲突
----
 
 合并冲突装饰，当编辑器包含范围差异时显示
 
@@ -435,7 +418,6 @@ CodeLens:
 - `editorOverviewRuler.commonContentForeground`: 共同祖先内容的缩略图标尺前景色
 
 ## 面板色彩
----
 
 面板显示在编辑器区域下方，包含输出和集成终端等视图
 
@@ -447,7 +429,6 @@ CodeLens:
 - `panelTitle.inactiveForeground`: 非活动面板的标题颜色
 
 ## 状态栏色彩
----
 
 状态栏显示在工作区底部
 
@@ -466,7 +447,6 @@ CodeLens:
 - `statusBarItem.prominentHoverBackground`: 鼠标悬停过程中状态栏突出显示项的背景颜色，突出显示项比状态栏中的其他条目更醒目以表明其重要性。在命令面板中更改`切换 Tab 键是否移动焦点`可查看示例
 
 ## 标题栏色彩
----
 
 - `titleBar.activeBackground`: 窗口处于活动状态时的标题栏背景色
 - `titleBar.activeForeground`: 窗口处于活动状态时的标题栏前景色
@@ -475,7 +455,6 @@ CodeLens:
 - `titleBar.border`: 标题栏边框颜色
 
 ## 菜单栏色彩
----
 
 - `menubar.selectionForeground`: 菜单栏中选定菜单项的前景色
 - `menubar.selectionBackground`: 菜单栏中选定菜单项的背景色
@@ -488,9 +467,9 @@ CodeLens:
 - `menu.separatorBackground`: 菜单中分隔线的颜色
 
 ## 通知框色彩
----
-
-!> **注意**: 下列的色彩只适用于VS Code-1.21或更高版本
+::: warning
+**注意**: 下列的色彩只适用于VS Code-1.21或更高版本
+:::
 
 通知横幅从窗口右下角弹出
 
@@ -524,20 +503,17 @@ CodeLens:
 - `notification.warningForeground`
 
 ## 插件栏
----
 
 - `extensionButton.prominentForeground`: 扩展中突出操作的按钮前景色(比如 **安装**按钮)
 - `extensionButton.prominentBackground`: 扩展中突出操作的按钮背景色
 - `extensionButton.prominentHoverBackground`: 鼠标悬停时插件中突出操作的按钮的颜色
 
 ## 快速选取器
----
 
 - `pickerGroup.border`: 快速选取(快速打开)器分组边框的颜色
 - `pickerGroup.foreground`: 快速选取(快速打开)器分组标签的颜色
 
 ## 集成终端色彩
----
 
 - `terminal.background`: 终端视口的背景颜色
 - `terminal.border`: 分隔终端中拆分窗格的边框的颜色。默认为 panel.border 的颜色
@@ -563,7 +539,6 @@ CodeLens:
 - `terminalCursor.foreground`: 终端光标的前景色
 
 ## 调试
----
 
 - `debugToolBar.background`: 调试工具栏背景颜色
 - `debugToolBar.border`: 调试工具栏边框颜色
@@ -571,7 +546,6 @@ CodeLens:
 - `editor.focusedStackFrameHighlightBackground`: 堆栈帧中焦点一行的高亮背景色
 
 ## 欢迎界面
----
 
 - `welcomePage.background`: 欢迎页面的背景色
 - `welcomePage.buttonBackground`: 欢迎页按钮的背景色
@@ -579,7 +553,6 @@ CodeLens:
 - `walkThrough.embeddedEditorBackground`: 嵌入于交互式操场中的编辑器的背景颜色
 
 ## Git色彩
----
 
 - `gitDecoration.addedResourceForeground`: 新增的Git资源的前景色。用于显示文件标签和源代码管理
 - `gitDecoration.modifiedResourceForeground`: 修改过的Git资源的前景色。用于显示文件标签和源代码管理
@@ -590,9 +563,9 @@ CodeLens:
 - `gitDecoration.submoduleResourceForeground`: 子模块资源的前景色
 
 ## 设置编辑器色彩
----
-
-!> **注意**: 下列色彩配置只适用于**设置**编辑器界面，可以通过`首选项: 打开设置(UI)`命令打开。
+::: warning
+**注意**: 下列色彩配置只适用于**设置**编辑器界面，可以通过`首选项: 打开设置(UI)`命令打开。
+:::
 
 - `settings.headerForeground`: 小节标题与活动标题的前景色
 - `settings.modifiedItemIndicator`: 已修改设置指示器的颜色
@@ -611,7 +584,6 @@ CodeLens:
 - `settings.numberInputBorder`: 数字输入框的边框颜色
 
 ## 面包屑导航
----
 
 面包屑导航的色彩主题:
 
@@ -622,7 +594,6 @@ CodeLens:
 - `breadcrumbPicker.background`: 导航路径项选择器的背景色
 
 ## 代码片段
----
 
 代码片段的色彩主题:
 
@@ -631,9 +602,151 @@ CodeLens:
 - `editor.snippetFinalTabstopHighlightBackground`: 代码片段中最后的 Tab 位的高亮背景色
 - `editor.snippetFinalTabstopHighlightBorder`: 代码片段中最后的 Tab 位的高亮边框颜色
 
-也可以根据[发布内容的颜色配置项](/references/contribution-points#contributescolors)，使用插件来发布色彩id(Ids)。当在`workbench.colorCustomizations`配置项中使用代码补全或者编辑色彩主题文件时，这些色彩也会出现。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
+## 符号图标色彩
+
+大纲视图、面包屑导航和代码提示小部件中出现的符号图标的主题色彩：
+
+- `symbolIcon.arrayForeground`: 数组符号的前景色。
+- `symbolIcon.booleanForeground`: 布尔符号的前景色。
+- `symbolIcon.classForeground`: 类符号的前景色。
+- `symbolIcon.colorForeground`: 颜色符号的前景色。
+- `symbolIcon.constantForeground`: 常量符号的前景色。
+- `symbolIcon.constructorForeground`: 构造函数符号的前景色。
+- `symbolIcon.enumeratorForeground`: 枚举器符号的前景色。
+- `symbolIcon.enumeratorMemberForeground`: 枚举成员符号的前景色。
+- `symbolIcon.eventForeground`: 事件符号的前景色。
+- `symbolIcon.fieldForeground`: 字段符号的前景色。
+- `symbolIcon.fileForeground`: 文件符号的前景色。
+- `symbolIcon.folderForeground`: 文件夹符号的前景色。
+- `symbolIcon.functionForeground`: 函数符号的前景色。
+- `symbolIcon.interfaceForeground`: 接口符号的前景色。
+- `symbolIcon.keyForeground`: 键符号的前景色。
+- `symbolIcon.keywordForeground`: 关键字符号的前景色。
+- `symbolIcon.methodForeground`: 方法符号的前景色。
+- `symbolIcon.moduleForeground`: 模块符号的前景色。
+- `symbolIcon.namespaceForeground`: 命名空间符号的前景色。
+- `symbolIcon.nullForeground`: 空值符号的前景色。
+- `symbolIcon.numberForeground`: 数字符号的前景色。
+- `symbolIcon.objectForeground`: 对象符号的前景色。
+- `symbolIcon.operatorForeground`: 运算符符号的前景色。
+- `symbolIcon.packageForeground`: 包符号的前景色。
+- `symbolIcon.propertyForeground`: 属性符号的前景色。
+- `symbolIcon.referenceForeground`: 引用符号的前景色。
+- `symbolIcon.snippetForeground`: 代码片段符号的前景色。
+- `symbolIcon.stringForeground`: 字符串符号的前景色。
+- `symbolIcon.structForeground`: 结构体符号的前景色。
+- `symbolIcon.textForeground`: 文本符号的前景色。
+- `symbolIcon.typeParameterForeground`: 类型参数符号的前景色。
+- `symbolIcon.unitForeground`: 单位符号的前景色。
+- `symbolIcon.variableForeground`: 变量符号的前景色。
+
+## 调试图标色彩
+
+- `debugIcon.breakpointForeground`: 断点的图标颜色。
+- `debugIcon.breakpointDisabledForeground`: 已禁用断点的图标颜色。
+- `debugIcon.breakpointUnverifiedForeground`: 未验证断点的图标颜色。
+- `debugIcon.breakpointCurrentStackframeForeground`: 当前断点堆栈帧的图标颜色。
+- `debugIcon.breakpointStackframeForeground`: 所有断点堆栈帧的图标颜色。
+- `debugIcon.startForeground`: 开始调试的调试工具栏图标。
+- `debugIcon.pauseForeground`: 暂停的调试工具栏图标。
+- `debugIcon.stopForeground`: 停止的调试工具栏图标。
+- `debugIcon.disconnectForeground`: 断开的调试工具栏图标。
+- `debugIcon.restartForeground`: 重启的调试工具栏图标。
+- `debugIcon.stepOverForeground`: 单步跳过的调试工具栏图标。
+- `debugIcon.stepIntoForeground`: 单步进入的调试工具栏图标。
+- `debugIcon.stepOutForeground`: 单步跳出的调试工具栏图标。
+- `debugIcon.continueForeground`: 继续的调试工具栏图标。
+- `debugIcon.stepBackForeground`: 单步返回的调试工具栏图标。
+
+- `debugConsole.infoForeground`: 调试 REPL 控制台中信息消息的前景色。
+- `debugConsole.warningForeground`: 调试 REPL 控制台中警告消息的前景色。
+- `debugConsole.errorForeground`: 调试 REPL 控制台中错误消息的前景色。
+- `debugConsole.sourceForeground`: 调试 REPL 控制台中源文件名的前景色。
+- `debugConsoleInputIcon.foreground`: 调试控制台输入标记图标的前景色。
+
+## 笔记本色彩
+
+- `notebook.editorBackground`: 笔记本背景色。
+- `notebook.cellBorderColor`: 笔记本单元格的边框颜色。
+- `notebook.cellHoverBackground`: 单元格被悬停时单元格的背景颜色。
+- `notebook.cellInsertionIndicator`: 笔记本单元格插入指示器的颜色。
+- `notebook.cellStatusBarItemHoverBackground`: 笔记本单元格状态栏条目的背景颜色。
+- `notebook.cellToolbarSeparator`: 单元格底部工具栏中分隔符的颜色。
+- `notebook.cellEditorBackground`: 笔记本单元格编辑器背景的颜色。
+- `notebook.focusedCellBackground`: 单元格被聚焦时单元格的背景颜色。
+- `notebook.focusedCellBorder`: 单元格被聚焦时单元格焦点指示器边框的颜色。
+- `notebook.focusedEditorBorder`: 笔记本单元格编辑器边框的颜色。
+- `notebook.inactiveFocusedCellBorder`: 当主焦点位于编辑器外部、单元格被聚焦时单元格顶部和底部边框的颜色。
+- `notebook.inactiveSelectedCellBorder`: 选中多个单元格时单元格边框的颜色。
+- `notebook.outputContainerBackgroundColor`: 笔记本输出容器背景的颜色。
+- `notebook.outputContainerBorderColor`: 笔记本输出容器的边框颜色。
+- `notebook.selectedCellBackground`: 单元格被选中时单元格的背景颜色。
+- `notebook.selectedCellBorder`: 单元格被选中但未聚焦时单元格顶部和底部边框的颜色。
+- `notebook.symbolHighlightBackground`: 高亮单元格的背景颜色。
+- `notebookScrollbarSlider.activeBackground`: 点击时笔记本滚动条滑块的背景色。
+- `notebookScrollbarSlider.background`: 笔记本滚动条滑块的背景色。
+- `notebookScrollbarSlider.hoverBackground`: 悬停时笔记本滚动条滑块的背景色。
+- `notebookStatusErrorIcon.foreground`: 单元格状态栏中笔记本单元格的错误图标颜色。
+- `notebookStatusRunningIcon.foreground`: 单元格状态栏中笔记本单元格的运行中图标颜色。
+- `notebookStatusSuccessIcon.foreground`: 单元格状态栏中笔记本单元格的成功图标颜色。
+- `notebookEditorOverviewRuler.runningCellForeground`: 笔记本编辑器概述标尺中运行中单元格装饰的颜色。
+
+## 图表色彩
+
+- `charts.foreground`: 图表中文本的对比色。
+- `charts.lines`: 图表中线条的颜色。
+- `charts.red`: 图表中红色元素的颜色。
+- `charts.blue`: 图表中蓝色元素的颜色。
+- `charts.yellow`: 图表中黄色元素的颜色。
+- `charts.orange`: 图表中橙色元素的颜色。
+- `charts.green`: 图表中绿色元素的颜色。
+- `charts.purple`: 图表中紫色元素的颜色。
+- `chart.line`: 图表的线条颜色。
+- `chart.axis`: 图表的坐标轴颜色。
+- `chart.guide`: 图表的辅助线。
+
+## 端口色彩
+
+- `ports.iconRunningProcessForeground`: 具有关联运行进程的端口的图标颜色。
+
+## 评论视图色彩
+
+- `commentsView.resolvedIcon`: 已解决评论的图标颜色。
+- `commentsView.unresolvedIcon`: 未解决评论的图标颜色。
+
+## 操作栏色彩
+
+- `actionBar.toggledBackground`: 操作栏中已切换操作项的背景颜色。
+
+## 简单查找小部件色彩
+
+- `simpleFindWidget.sashBorder`: 拆分条边框的边框颜色。
+
+## 仪表色彩
+
+- `gauge.background`: 仪表背景颜色。
+- `gauge.foreground`: 仪表前景颜色。
+- `gauge.border`: 仪表边框颜色。
+- `gauge.warningBackground`: 仪表警告背景颜色。
+- `gauge.warningForeground`: 仪表警告前景颜色。
+- `gauge.errorBackground`: 仪表错误背景颜色。
+- `gauge.errorForeground`: 仪表错误前景颜色。
+
+## Markdown
+
+- `markdownAlert.note.foreground`: markdown 中注意（note）警报的前景色。
+- `markdownAlert.tip.foreground`: markdown 中提示（tip）警报的前景色。
+- `markdownAlert.important.foreground`: markdown 中重要（important）警报的前景色。
+- `markdownAlert.warning.foreground`: markdown 中警告（warning）警报的前景色。
+- `markdownAlert.caution.foreground`: markdown 中小心（caution）警报的前景色。
+
+## 代理会话色彩
+- `agentSessionReadIndicator.foreground`: 代理会话中读取指示器的前景色。
+- `agentSessionSelectedBadge.border`: 所选代理会话条目中徽章的边框颜色。
+- `agentSessionSelectedUnfocusedBadge.border`: 视图未聚焦时所选代理会话条目中徽章的边框颜色。
+- `agentStatusIndicator.background`: 标题栏中代理状态指示器的背景颜色。
+- `aiCustomizationManagement.sashBorder`: Chat 定制管理编辑器拆分视图拆分条边框的颜色。
 
 ## 配置插件中的色彩
----
 
-也可以根据[发布内容的颜色配置项]((/references/contribution-points#contributescolors)，使用插件来发布色彩id。当在`workbench.colorCustomizations`当编辑`workbench.colorCustomizations`和主题颜色文件时，这些色彩会出现在代码补全中。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。
+也可以根据[发布内容的颜色配置项](/references/contribution-points#contributes.colors)，使用插件来发布色彩 id（Ids）。当编辑`workbench.colorCustomizations`和主题颜色文件时，这些色彩会出现在代码补全中。用户可以在[插件发布](https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details)选项卡中看到插件定义的色彩。

@@ -3,9 +3,8 @@
 Markdown插件可以帮你扩展和加强VS Code内置的Markdown预览，包括改变预览的样式、添加新的Markdown语法。
 
 ## 用CSS改变Markdown预览样式
----
 
-配置CSS可以改变markdown预览的布局和样式，在你的插件`pacakge.json`中注册`markdown.previewStyles`[发布内容配置](/references/contribution-points)即可：
+配置CSS可以改变markdown预览的布局和样式，在你的插件`pacakge.json`中注册`markdown.previewStyles`[配置点](/references/contribution-points)即可：
 
 ```json
 "contributes": {
@@ -22,7 +21,6 @@ Markdown插件可以帮你扩展和加强VS Code内置的Markdown预览，包括
 [Markdown Preview GitHub Styling](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)是一个如何将Markdown预览变成像GitHub渲染风格的好例子，在GitHub上去查看[源码](https://github.com/mjbvz/vscode-github-markdown-preview-style)吧
 
 ## 使用markdown-it插件添加新语法
----
 
 VS Code Markdown预览支持[CommonMark规格](https://spec.commonmark.org/)，插件可以通过一个[markdown-it插件](https://github.com/markdown-it/markdown-it#syntax-extensions)添加新的Markdown语法。
 
@@ -64,7 +62,6 @@ Markdown预览第一次显示时，配置了markdown-it的插件会变成懒加�
 - [现成的markdown-it插件](https://www.npmjs.com/browse/keyword/markdown-it-plugin)
 
 ## 用脚本添加进阶功能
----
 
 对于进阶特性，在插件中配置可运行的脚本：
 

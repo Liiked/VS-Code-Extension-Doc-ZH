@@ -1,5 +1,4 @@
 # 嵌入语言
----
 
 VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器](/language-extensions/language-server-extension-guide) 中看到的那样，语言服务器可以支持任何编程语言。但要支持嵌入的语言，我们还要做更多工作。
 
@@ -28,7 +27,6 @@ VS Code 为编程语言提供了丰富的功能。就如你在 [语言服务器]
 - CSS 语法诊断（仅在**语言服务**实现中可用）
 
 ## 语言服务
----
 
 **语言服务**是实现了[程序性语言功能](https://code.visualstudio.com/api/language-extensions/programmatic-language-features)的库。**语言服务器**可嵌入到语言服务中，解决嵌入语言的各类问题。
 
@@ -47,8 +45,9 @@ HTML 语言服务器分析 HTML 文档，将其分解为**语言域**，然后�
 现在让我们在 [lsp-embedded-language-service](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-embedded-language-service) 示例中检验一下。
 
 ### 语言服务示例
-
-!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+::: warning
+注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+:::
 
 与 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample) 相同的是，本示例的客户端代码都是一样的。
 
@@ -131,7 +130,6 @@ export function getCSSMode(
 别急，我们马上来实现 `请求转发` 解决上面的问题。
 
 ## 请求转发
----
 
 简单来说，请求转发和语言服务的工作机制是类似的。请求转发方法，也接收语言服务器的请求，计算虚拟文档，然后返回结果。
 
@@ -162,8 +160,9 @@ export function getCSSMode(
 现在，我们来看看示例代码：
 
 ### 请求转发示例
-
-!> 注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+::: warning
+注意: 本示例假设你已经掌握了 [程序性语言特性](https://code.visualstudio.com/api/language-extensions/programmatic-language-features) 和 [语言服务器](/language-extensions/language-server-extension-guide) 这2章内容。本示例构建于 [lsp-sample](https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-sample)
+:::
 
 
 建立文档 URI 和它们对应虚拟文档的映射，根据这个映射提供对应的请求：
@@ -218,7 +217,6 @@ let clientOptions: LanguageClientOptions = {
 ```
 
 ## 潜在问题
----
 
 当实现嵌入语言服务器的时候，我们会遇到很多问题，到目前为止，我们也没有找到完美的方案，所以当你遇到下面的问题，可别说我们没有事先说过。
 
@@ -243,22 +241,21 @@ VS Code 的 HTML 支持提供了 HTML、CSS 和 JavaScript特性。虽然 HTML �
 在这个例子里，语言服务器在处理`</`时应该转义为`<\/`才行。
 
 ## 总结
----
 
 我们的这两种方法各有千秋。
 
 语言服务：
-- + 可获完全掌控语言服务器和用户体验
-- + 无需依赖其他语言服务器。所有代码都在一个仓库内完成
-- + 语言服务器可被所有 [LSP-兼容的代码编辑器](https://microsoft.github.io/language-server-protocol/implementors/tools/) 重用
-- - 可能很难嵌入用其他语言实现的语言服务
-- - 需要持续维护语言服务依赖来获得新的特性
+- `+` 可获完全掌控语言服务器和用户体验
+- `+` 无需依赖其他语言服务器。所有代码都在一个仓库内完成
+- `+` 语言服务器可被所有 [LSP-兼容的代码编辑器](https://microsoft.github.io/language-server-protocol/implementors/tools/) 重用
+- `-` 可能很难嵌入用其他语言实现的语言服务
+- `-` 需要持续维护语言服务依赖来获得新的特性
 
 请求转发：
-- + 避免**嵌入语言服务**与**语言服务器**的非同构的问题（比如，在 Razor 语言服务器嵌入的 C# 编译器去支持 C#）
-- + 无需维护上游的语言服务器来获取新功能
-- + 无需诊断上游语言服务器的错误
-- - 由于缺乏控制，很难和其他语言服务器分享状态信息
-- - 多语言特性可能很难实现（比如，当书写 `<div class="foo">` 中的 `.foo`时提供 CSS 补全）
+- `+` 避免**嵌入语言服务**与**语言服务器**的非同构的问题（比如，在 Razor 语言服务器嵌入的 C# 编译器去支持 C#）
+- `+` 无需维护上游的语言服务器来获取新功能
+- `+` 无需诊断上游语言服务器的错误
+- `-` 由于缺乏控制，很难和其他语言服务器分享状态信息
+- `-` 多语言特性可能很难实现（比如，当书写 `<div class="foo">` 中的 `.foo`时提供 CSS 补全）
 
 总体来说，我们还是更推荐用嵌入**语言服务**构建嵌入语言服务器，因为这个方法更能掌控用户体验，而且这个服务器还可被任何 LSP 兼容的编辑器复用。但是如果你的场景比较简单，无需上下文、依赖语言服务器的状态或者没有能力打包一个 Node.js 库，那么你也可以考虑使用请求转发的方式。
